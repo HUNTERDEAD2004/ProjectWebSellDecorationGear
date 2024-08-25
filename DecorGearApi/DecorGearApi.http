@@ -1,0 +1,6 @@
+@DecorGearApi_HostAddress = http://localhost:5240
+
+GET {{DecorGearApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
