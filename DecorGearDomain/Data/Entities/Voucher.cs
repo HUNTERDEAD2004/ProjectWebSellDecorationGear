@@ -1,4 +1,5 @@
 ﻿using DecorGearDomain.Data.Base;
+using DecorGearDomain.Enum;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -18,6 +19,8 @@ namespace DecorGearDomain.Data.Entities
         [Required(ErrorMessage = "Vui lòng nhập phần trăm giảm giá")]
         [Range(0, 100, ErrorMessage = ("Phần trăm giảm giá không hợp lệ"))]
         public int VoucherPercent { get; set; }
+
+        public EntityStatus Status { get; set; }
 
         // Khóa ngoại
 

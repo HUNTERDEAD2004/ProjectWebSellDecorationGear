@@ -1,4 +1,5 @@
 ﻿using DecorGearDomain.Data.Base;
+using DecorGearDomain.Enum;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -19,7 +20,7 @@ namespace DecorGearDomain.Data.Entities
         [Range(0, 100, ErrorMessage =("Phần trăm giảm giá không hợp lệ"))]
         public int SalePercent { get; set; }
 
-        public int Status { get; set; }
+        public EntityStatus Status { get; set; }
 
         // Khóa ngoại
 
