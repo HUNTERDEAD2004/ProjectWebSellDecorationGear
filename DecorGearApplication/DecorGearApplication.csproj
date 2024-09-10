@@ -7,8 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interface\" />
-    <Folder Include="DataTransferObj\" />
+    <ProjectReference Include="..\DecorGearDomain\DecorGearDomain.csproj" />
   </ItemGroup>
 
 </Project>
