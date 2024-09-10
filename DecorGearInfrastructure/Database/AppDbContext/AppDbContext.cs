@@ -29,7 +29,6 @@ namespace DecorGearInfrastructure.Database.AppDbContext
         public virtual DbSet<SubCategory> SubCategories {  get; set; }  
         public virtual DbSet<User> Users {  get; set; }  
         public virtual DbSet<Voucher> Vouchers {  get; set; }
-        public virtual DbSet<Example> Examples { get; set; }
         #endregion
 
         public AppDbContext()
