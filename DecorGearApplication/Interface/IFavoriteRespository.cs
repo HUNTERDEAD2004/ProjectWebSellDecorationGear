@@ -1,0 +1,21 @@
+﻿using DecorGearApplication.DataTransferObj;
+using DecorGearApplication.DataTransferObj.Brand;
+using DecorGearApplication.DataTransferObj.Category;
+using DecorGearApplication.DataTransferObj.Favorite;
+using DecorGearDomain.Enum;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DecorGearApplication.Interface
+{
+    internal interface IFavoriteRespository
+    {
+        Task<List<FavoriteDto>> GetAllCategory(CancellationToken cancellationToken);
+        Task<FavoriteDto> GetCategoryById(ViewFavoriteRequest request, CancellationToken cancellationToken);
+        Task<ErrorMessage> CreateFavorite(CreateFavoriteRequest request, CancellationToken cancellationToken);
+        Task<bool> DeleteFavorite(DeleteFavoriteRequest request, CancellationToken cancellationToken);
+    }
+}

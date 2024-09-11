@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DecorGearApplication.DataTransferObj.Favorite
+namespace DecorGearApplication.DataTransferObj.FeedBack
 {
-    public class DeleteFavoriteRequest
+    public class DeleteFeedBackRequest
     {
-        public int FavoriteID { get; set; }
+        public int FeedBackID { get; set; }
 
         public string UserID { get; set; }
     }
