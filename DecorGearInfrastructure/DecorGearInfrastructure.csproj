@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DecorGearApplication\DecorGearApplication.csproj" />
     <ProjectReference Include="..\DecorGearDomain\DecorGearDomain.csproj" />
   </ItemGroup>
 

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DecorGearApplication.Interface
 {
-    internal interface IMouseRespository
+    public interface IMouseRespository
     {
         Task<List<MouseDetailsDto>> GetAllKeyBoarMouse(CancellationToken cancellationToken);
         Task<MouseDetailsDto> GetMouseById(ViewMouseRequest request, CancellationToken cancellationToken);

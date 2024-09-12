@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DecorGearApplication.Interface
 {
-    internal interface IKeyboardRespository
+    public interface IKeyboardRespository
     {
         Task<List<KeyBoardDetailsDto>> GetAllKeyBoard(CancellationToken cancellationToken);
         Task<KeyBoardDetailsDto> GetKeyBoardById(ViewKeyBoardsRequest request, CancellationToken cancellationToken);

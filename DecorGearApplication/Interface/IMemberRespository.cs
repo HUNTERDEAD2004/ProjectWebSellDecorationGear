@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DecorGearApplication.Interface
 {
-    internal interface IMemberRespository
+    public interface IMemberRespository
     {
         Task<ErrorMessage> Register(Member member, CancellationToken cancellationToken);
 

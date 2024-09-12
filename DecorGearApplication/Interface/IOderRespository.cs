@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DecorGearApplication.Interface
 {
-    internal interface IOderRespository
+    public interface IOderRespository
     {
         Task<List<OderDto>> GetAllOder(CancellationToken cancellationToken);
         Task<OderDto> GetKeyOderById(ViewOrderRequest request, CancellationToken cancellationToken);

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DecorGearApplication.Interface
 {
-    internal interface ISubCategoryRespository
+    public interface ISubCategoryRespository
     {
         Task<List<SubCategoryDto>> GetAllSubCategory(CancellationToken cancellationToken);
         Task<SubCategoryDto> GetSubCategoryeById(ViewSubCategoryRequest request, CancellationToken cancellationToken);

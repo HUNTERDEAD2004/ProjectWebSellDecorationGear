@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DecorGearApplication.Interface
 {
-    internal interface IFeedBackRespository
+    public interface IFeedBackRespository
     {
         Task<List<FeedBackDto>> GetAllFeedBack(CancellationToken cancellationToken);
         Task<FeedBackDto> GetFeedBackById(ViewFeedBackRequest request, CancellationToken cancellationToken);

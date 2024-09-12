@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DecorGearApplication.Interface
 {
-    internal interface ICartDetailRespository
+    public interface ICartDetailRespository
     {
         Task<List<CartDetailDto>> GetAllCartDetai(CancellationToken cancellationToken);
         Task<CartDetailDto> GetCartDetailById (ViewCartRequest request, CancellationToken cancellationToken);
