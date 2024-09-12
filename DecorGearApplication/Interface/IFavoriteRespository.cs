@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DecorGearApplication.Interface
 {
-    internal interface IFavoriteRespository
+    public interface IFavoriteRespository
     {
         Task<List<FavoriteDto>> GetAllCategory(CancellationToken cancellationToken);
         Task<FavoriteDto> GetCategoryById(ViewFavoriteRequest request, CancellationToken cancellationToken);

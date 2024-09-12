@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DecorGearApplication.Interface
 {
-    internal interface IImageListRespository
+    public interface IImageListRespository
     {
         Task<List<ImageListDto>> GetAllImage(CancellationToken cancellationToken);
         Task<ImageListDto> GetImageById(ViewImageListRequest request, CancellationToken cancellationToken);

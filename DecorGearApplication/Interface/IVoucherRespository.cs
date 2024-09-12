@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace DecorGearApplication.Interface
 {
-    internal interface IVoucherRespository
+    public interface IVoucherRespository
     {
         Task<List<VoucherDto>> GetAllVoucher(CancellationToken cancellationToken);
         Task<VoucherDto> GetKeyVoucherById(ViewVoucherRequest request, CancellationToken cancellationToken);
-        Task<ErrorMessage> CreateVoucher(CreateVoucherRequest request, CancellationToken cancellationToken);
-        Task<ErrorMessage> UpdateVoucher(UpdateVoucherRequest request, CancellationToken cancellationToken);
+        Task<ErrorMessage> CreateVoucher (CreateVoucherRequest request, CancellationToken cancellationToken);
+        Task<ErrorMessage> UpdateVoucher (UpdateVoucherRequest request, CancellationToken cancellationToken);
         Task<bool> DeleteVoucher(DeleteVoucherRequest request, CancellationToken cancellationToken);
     }
 }

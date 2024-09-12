@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DecorGearApplication.Interface
 {
-    internal interface IRoleRespository
+    public interface IRoleRespository
     {
         Task<PaginationResponse<RoleDto>> GetAllAsync(ViewRoleRequest request, CancellationToken cancellationToken);
         Task<bool> CreateAsync(Role request, CancellationToken cancellationToken);

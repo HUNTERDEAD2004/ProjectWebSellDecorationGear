@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DecorGearApplication.Interface
 {
-    internal interface IProductRespository
+    public interface IProductRespository
     {
         Task<List<ProductDto>> GetAllProduct(CancellationToken cancellationToken);
         Task<ProductDto> GetKeyProductById(ViewProductRequest request, CancellationToken cancellationToken);

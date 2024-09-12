@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace DecorGearApplication.Interface
 {
-    internal interface ICartRespository
+    public interface ICartRespository
     {
         Task<List<CartDto>> GetAllCart(CancellationToken cancellationToken);
         Task<CartDto> GetCartById(int id, CancellationToken cancellationToken);

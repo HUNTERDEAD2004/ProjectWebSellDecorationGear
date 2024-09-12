@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DecorGearApplication.DataTransferObj.Voucher
 {
-    internal class UpdateVoucherRequest
+    public class UpdateVoucherRequest
     {
         public int VoucherID { get; set; }
 

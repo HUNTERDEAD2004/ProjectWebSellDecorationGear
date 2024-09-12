@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DecorGearApplication.Interface
 {
-    internal interface IUserRespository
+    public interface IUserRespository
     {
         Task<ErrorMessage> Register(User user, CancellationToken cancellationToken);
         Task<List<UserDto>> GetAllUsers(CancellationToken cancellationToken);

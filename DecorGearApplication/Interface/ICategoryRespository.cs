@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DecorGearApplication.Interface
 {
-    internal interface ICategoryRespository
+    public interface ICategoryRespository
     {
         Task<List<CategoryDto>> GetAllCategory(CancellationToken cancellationToken);
         Task<CategoryDto> GetCategoryById(ViewCategoryRequest request, CancellationToken cancellationToken);
