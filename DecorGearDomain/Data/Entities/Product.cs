@@ -12,19 +12,19 @@ namespace DecorGearDomain.Data.Entities
     public class Product : EntityBase
     {
         [Required]
-        public string ProductID { get; set; } // ID = 2 chự cái đầu của 2 chữ đầu của sản phầm + số thứ tự
+        public string ProductID { get; set; } // ID = 2 chự cái đầu của hãng + kèm tên đặc biệt của sản phẩm + số thứ tự
 
         [Required(ErrorMessage ="Vui lòng nhập tên")]
         public string ProductName { get; set; }
 
         [Required(ErrorMessage ="Vui lòng nhập giá tiền ")]
-        public decimal Price { get; set; }
+        public double Price { get; set; }
 
-        public string View {  get; set; }
+        public int View {  get; set; }
 
-        public string Quantity { get; set; }
+        public int Quantity { get; set; }
 
-        public string Weight { get; set; }
+        public double Weight { get; set; }
 
         public string Description { get; set; }
 

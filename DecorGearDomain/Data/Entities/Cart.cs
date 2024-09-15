@@ -11,7 +11,7 @@ namespace DecorGearDomain.Data.Entities
 {
     public class Cart : EntityBase
     {
-        public int CartID { get; set; }
+        public string CartID { get; set; }
 
         [Required]
         public string UserID { get; set; }
