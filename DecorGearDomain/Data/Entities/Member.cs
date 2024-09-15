@@ -13,8 +13,7 @@ namespace DecorGearDomain.Data.Entities
     {
         public int MemberID { get; set; }
 
-        [Required]
-        public string? UserID { get; set; } // có thể có hoặc không 
+        public string UserID { get; set; } 
         
         public int Points { get; set; }
 

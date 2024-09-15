@@ -23,8 +23,8 @@ namespace DecorGearDomain.Data.Entities
         public string Layout {  get; set; } // bố cục phím 
         public string Case {  get; set; }   // vỏ ngoài 
         public string Switch { get; set; } // trục phím
-        public string? SwitchLife { get; set; } // tuổi thọ trục (số lần nhấn)
-        public string? BatteryCapacity { get; set; } // dung lượng pin
+        public int? SwitchLife { get; set; } // tuổi thọ trục (số lần nhấn)
+        public int? BatteryCapacity { get; set; } // dung lượng pin
         public string? Led {  get; set; }
         public string? KeycapMaterial { get; set; } // chất liệu keycap
         public string? SwitchMaterial { get; set; } // chất liệu switch

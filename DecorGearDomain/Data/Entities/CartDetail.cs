@@ -17,7 +17,7 @@ namespace DecorGearDomain.Data.Entities
         public string ProductID { get; set; }
 
         [Required]
-        public int CartID { get; set; }
+        public string CartID { get; set; }
 
         public int? OrderID { get; set; }
         
