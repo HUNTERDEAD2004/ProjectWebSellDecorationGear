@@ -16,15 +16,15 @@ namespace DecorGearDomain.Data.Entities
 
         public int totalQuantity { get; set; }
 
-        public decimal totalPrice { get; set; } 
+        public double totalPrice { get; set; } 
 
         public OrderStatus Status { get; set; } 
 
         public string paymentMethod { get; set; }
 
-        public float size { get; set; }
+        public string size { get; set; }
 
-        public float weight { get; set; }
+        public double weight { get; set; }
 
         public DateTime OrderDate { get; set; } // ngày đặt hàng
 
