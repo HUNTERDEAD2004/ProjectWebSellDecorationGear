@@ -19,13 +19,13 @@ namespace DecorGearDomain.Data.Entities
         [Required]
         public string CartID { get; set; }
 
-        public int? OrderID { get; set; }
+        public int OrderID { get; set; }
         
         public int Quantity { get; set; }
 
-        public decimal UnitPrice { get; set; }
+        public double UnitPrice { get; set; }
 
-        public decimal TotalPrice { get; set; }
+        public double TotalPrice { get; set; }
 
         // Khóa ngoại
 

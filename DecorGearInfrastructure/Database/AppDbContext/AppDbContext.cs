@@ -165,9 +165,9 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 new CartDetail
                 {
                     CartDetailID = 1, 
-                    ProductID = "P001", 
+                    ProductID = "AULAF75", 
                     CartID = "C001", 
-                    OrderID = null, 
+                    OrderID = 1, 
                     Quantity = 2, 
                     UnitPrice = 50, 
                     TotalPrice = 100
@@ -175,9 +175,9 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 new CartDetail
                 {
                     CartDetailID = 2, 
-                    ProductID = "P002", 
+                    ProductID = "RZVMNP1", 
                     CartID = "C002", 
-                    OrderID = 1001, 
+                    OrderID = 2, 
                     Quantity = 3, 
                     UnitPrice = 40, 
                     TotalPrice = 120  
@@ -185,9 +185,9 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 new CartDetail
                 {                  
                    CartDetailID = 3, 
-                   ProductID = "P003", 
+                   ProductID = "RZDAV3", 
                    CartID = "C002", 
-                   OrderID = null, 
+                   OrderID = 2, 
                    Quantity = 1, 
                    UnitPrice = 75, 
                    TotalPrice = 75
@@ -298,19 +298,19 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 { 
                     FavoriteID = 1, 
                     UserID = "U001", 
-                    ProductID = "P001" 
+                    ProductID = "RZVMNP1"
                 },
                 new Favorite 
                 { 
                     FavoriteID = 2, 
                     UserID = "U002", 
-                    ProductID = "P002" 
+                    ProductID = "RZDAV3"
                 },
                 new Favorite 
                 { 
                     FavoriteID = 3, 
-                    UserID = "U003", 
-                    ProductID = "P003" 
+                    UserID = "U001", 
+                    ProductID = "AULAF75"
                 }
             };
 
@@ -323,21 +323,21 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 { 
                     FeedBackID = 1, 
                     UserID = "U001", 
-                    ProductID = "P001", 
+                    ProductID = "RZVMNP1", 
                     Comment = "Sản phẩm rất tốt!" 
                 },
                 new FeedBack 
                 { 
                     FeedBackID = 2, 
                     UserID = "U002", 
-                    ProductID = "P002", 
+                    ProductID = "RZDAV3", 
                     Comment = "Chất lượng bình thường." 
                 },
                 new FeedBack 
                 { 
                     FeedBackID = 3, 
-                    UserID = "U003", 
-                    ProductID = "P003", 
+                    UserID = "U001", 
+                    ProductID = "AULAF75", 
                     Comment = "Giao hàng nhanh, sản phẩm đẹp." 
                 }
             };
@@ -350,8 +350,8 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 new KeyboardDetail
                 {
                     KeyboardDetailID = "KD001",
-                    ProductID = "P001",
-                    Layout = "ANSI",
+                    ProductID = "AULAF75",
+                    Layout = "80%",
                     Case = "Nhôm",
                     Switch = "Cherry MX Red",
                     SwitchLife = 50000000,
@@ -366,8 +366,8 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 new KeyboardDetail
                 {
                     KeyboardDetailID = "KD002",
-                    ProductID = "P002",
-                    Layout = "ISO",
+                    ProductID = "AULAF75",
+                    Layout = "75%",
                     Case = "Nhựa",
                     Switch = "Gateron Brown",
                     SwitchLife = 60000000,
@@ -389,7 +389,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 new MouseDetail
                 {
                     MouseDetailID = "MD001",
-                    ProductID = "P001",
+                    ProductID = "RZDAV3",
                     Color = "Đen",
                     DPI = 16000,
                     Connectivity = "USB",
@@ -404,7 +404,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 new MouseDetail
                 {
                     MouseDetailID = "MD002",
-                    ProductID = "P002",
+                    ProductID = "RZDAV3",
                     Color = "Trắng",
                     DPI = 12000,
                     Connectivity = "Bluetooth",
@@ -456,7 +456,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     MemberID=2, 
                     UserID="U002", 
                     Points=200, 
-                    ExpiryDate=DateTime.Parse("6/30/2025")
+                    ExpiryDate=DateTime.Parse("26/3/2025")
                 }
             };
 
@@ -503,6 +503,39 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             };
 
             modelBuilder.Entity<Voucher>().HasData(VoucherData);
+
+            //Seed OderData
+            var OrderData = new List<Order>
+            {
+                new Order 
+                { 
+                    OderID=1, 
+                    UserID="U001", 
+                    VoucherID=1, 
+                    totalQuantity=5, 
+                    totalPrice=500.00, 
+                    Status=OrderStatus.OrderConfirmed, 
+                    paymentMethod="Credit Card", 
+                    size="L", 
+                    weight=1.5,
+                    OrderDate=DateTime.Parse("16/09/2024")
+                },
+                new Order 
+                { 
+                    OderID=2, 
+                    UserID="U002", 
+                    VoucherID=null, 
+                    totalQuantity=3, 
+                    totalPrice=300.00, 
+                    Status=OrderStatus.Paid, 
+                    paymentMethod="Cash", 
+                    size="LF", 
+                    weight=2.0, 
+                    OrderDate=DateTime.Parse("17/09/2024")
+                }
+            };
+
+            modelBuilder.Entity<Order>().HasData(OrderData);
 
             base.OnModelCreating(modelBuilder);          
         }

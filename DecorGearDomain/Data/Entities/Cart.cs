@@ -18,7 +18,7 @@ namespace DecorGearDomain.Data.Entities
 
         public int TotalQuantity { get; set; }
 
-        public decimal TotalAmount { get; set; }
+        public double TotalAmount { get; set; }
 
         // Khóa ngoại
 

@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/DecorGearInfrastructure/Migrations/AppDbContextModelSnapshot.cs
+/DecorGearInfrastructure/Migrations/20240916053218_DecoGMigration.cs
+/DecorGearInfrastructure/Migrations/20240916053218_DecoGMigration.Designer.cs
