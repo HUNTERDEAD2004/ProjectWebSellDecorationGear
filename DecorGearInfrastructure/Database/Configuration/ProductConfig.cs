@@ -27,6 +27,10 @@ namespace DecorGearInfrastructure.Database.Configuration
                             .WithMany(p => p.Products)
                             .HasForeignKey(a => a.SubCategoryID)
                             .OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(a => a.Order)
+                            .WithMany(p => p.Products)
+                            .HasForeignKey(a => a.OrderID)
+                            .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
