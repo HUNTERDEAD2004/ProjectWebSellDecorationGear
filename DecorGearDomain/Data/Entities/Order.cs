@@ -7,7 +7,7 @@ namespace DecorGearDomain.Data.Entities
 {
     public class Order : EntityBase
     {
-        public int OderID { get; set; }
+        public int OrderID { get; set; }
 
         [Required]
         public string UserID { get; set; }
