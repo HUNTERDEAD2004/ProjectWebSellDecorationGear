@@ -257,6 +257,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Size = "Trung bình",
                     SaleID = 1,
                     BrandID = "B002",
+                    OrderID=1,
                     SubCategoryID = 4
                 },
                 new Product
@@ -271,6 +272,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Size="Trung bình",
                     SaleID=null,
                     BrandID="B002",
+                    OrderID=1,
                     SubCategoryID=4
                 },
                 new Product
@@ -284,7 +286,8 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Description="Một chiếc bàn phím cơ mỳ ăn liền với 3mode hotswap tầm giá 1 củ mà bạn không nên bỏ qua", 
                     Size="75%", 
                     SaleID=2, 
-                    BrandID="B005", 
+                    BrandID="B005",
+                    OrderID=1,
                     SubCategoryID=2
                 }
             };
@@ -509,7 +512,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new Order 
                 { 
-                    OderID=1, 
+                    OrderID=1, 
                     UserID="U001", 
                     VoucherID=1, 
                     totalQuantity=5, 
@@ -522,7 +525,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 },
                 new Order 
                 { 
-                    OderID=2, 
+                    OrderID=2, 
                     UserID="U002", 
                     VoucherID=null, 
                     totalQuantity=3, 
