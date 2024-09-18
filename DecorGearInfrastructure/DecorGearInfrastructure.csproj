@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Implement\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.ExpressionMapping" Version="7.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
@@ -28,6 +24,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DecorGearDomain\DecorGearDomain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Implement\" />
   </ItemGroup>
 
 </Project>
