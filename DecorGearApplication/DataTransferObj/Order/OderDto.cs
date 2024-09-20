@@ -21,7 +21,7 @@ namespace DecorGearApplication.DataTransferObj.Order
 
         public string paymentMethod { get; set; }
 
-        public float size { get; set; }
+        public string size { get; set; }
 
         public float weight { get; set; }
 

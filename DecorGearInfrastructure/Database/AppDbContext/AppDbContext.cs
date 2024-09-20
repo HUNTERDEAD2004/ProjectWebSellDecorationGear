@@ -45,7 +45,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=DESKTOPD-DELLIN\\SQLEXPRESS;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("Data Source=MG-PC602\\SQLEXPRESS;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -459,7 +459,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     MemberID=2, 
                     UserID="U002", 
                     Points=200, 
-                    ExpiryDate=DateTime.Parse("26/3/2025")
+                    ExpiryDate=DateTime.Parse("10/3/2025")
                 }
             };
 
@@ -521,7 +521,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     paymentMethod="Credit Card", 
                     size="L", 
                     weight=1.5,
-                    OrderDate=DateTime.Parse("16/09/2024")
+                    OrderDate=DateTime.Parse("1/09/2024")
                 },
                 new Order 
                 { 
@@ -534,7 +534,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     paymentMethod="Cash", 
                     size="LF", 
                     weight=2.0, 
-                    OrderDate=DateTime.Parse("17/09/2024")
+                    OrderDate=DateTime.Parse("1/09/2024")
                 }
             };
 
