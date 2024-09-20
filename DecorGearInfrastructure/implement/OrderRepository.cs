@@ -1,5 +1,6 @@
 ﻿using DecorGearApplication.DataTransferObj.Order;
 using DecorGearApplication.Interface;
+using DecorGearDomain.Data.Entities;
 using DecorGearDomain.Enum;
 using DecorGearInfrastructure.Database.AppDbContext;
 using Microsoft.EntityFrameworkCore;
@@ -16,16 +17,28 @@ namespace DecorGearInfrastructure.implement
         private readonly AppDbContext _dbcontext;
         public OrderRepository(AppDbContext dbContext)
         {
-                _dbcontext = dbContext;
+            _dbcontext = dbContext;
         }
         public Task<ErrorMessage> CreateOder(CreateOrderRequest request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> DeleteOder(DeleteOrderRequest request, CancellationToken cancellationToken)
+        public async Task<bool> DeleteOder(DeleteOrderRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+             var order = await _dbcontext.Orders // Bao gồm chi tiết giỏ hàng nếu cần
+                                   .Include(o => o.CartDetails) 
+                                   .FirstOrDefaultAsync(o => o.OrderID == request.OderID, cancellationToken);
+            if (order == null)
+            {
+                return false;
+            }
+            else 
+            { 
+                _dbcontext.Orders .Remove(order);
+                await _dbcontext.SaveChangesAsync();    
+                return true;
+            }
         }
 
         public async Task<IEnumerable<OderDto>> GetAllOder(CancellationToken cancellationToken)
@@ -42,7 +55,7 @@ namespace DecorGearInfrastructure.implement
                 size = o.size,
                 weight = (float)o.weight,
                 OrderDate = o.OrderDate
-            }).ToList();   
+            }).ToList();
         }
 
         public async Task<OderDto> GetKeyOderById(ViewOrderRequest request, CancellationToken cancellationToken)
@@ -52,7 +65,7 @@ namespace DecorGearInfrastructure.implement
 
             if (order == null)
             {
-                return null; 
+                return null;
             }
 
             return new OderDto
@@ -60,7 +73,7 @@ namespace DecorGearInfrastructure.implement
                 OderID = order.OrderID,
                 UserID = order.UserID,
                 totalQuantity = order.totalQuantity,
-                totalPrice =(decimal)order.totalPrice,
+                totalPrice = (decimal)order.totalPrice,
                 paymentMethod = order.paymentMethod,
                 size = order.size,
                 weight = (float)order.weight,

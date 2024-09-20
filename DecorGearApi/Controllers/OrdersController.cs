@@ -19,19 +19,19 @@ namespace DecorGearApi.Controllers
     public class OrdersController : ControllerBase
     {
         private IOderRespository _orderRepo;
-        
+
 
         public OrdersController(IOderRespository oderRespository)
         {
-           _orderRepo = oderRespository;
+            _orderRepo = oderRespository;
         }
 
         // GET: api/Orders
         [HttpGet]
         public async Task<ActionResult<IEnumerable<OderDto>>> GetAllOrders(CancellationToken cancellationToken)
         {
-            var orders = await _orderRepo.GetAllOder(cancellationToken); 
-            return Ok(orders); 
+            var orders = await _orderRepo.GetAllOder(cancellationToken);
+            return Ok(orders);
         }
 
         // GET: api/Orders/5
@@ -47,6 +47,20 @@ namespace DecorGearApi.Controllers
             }
 
             return Ok(order);
-        }        
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteOrder(int id, CancellationToken cancellationToken)
+        {
+            var request = new DeleteOrderRequest { OderID = id };
+            var result = await _orderRepo.DeleteOder(request, cancellationToken);
+
+            if (!result)
+            {
+                return NotFound(); // Không tìm thấy đơn hàng
+            }
+
+            return NoContent(); // Trả về 204 No Content
+        }
     }
 }

@@ -1,6 +1,7 @@
 using DecorGearApplication.Interface;
 using DecorGearInfrastructure.Database.AppDbContext;
 using DecorGearInfrastructure.implement;
+using DecorGearInfrastructure.Implement;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,7 +22,8 @@ namespace DecorGearApi
             {
                 option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnect"));
             });
-            builder.Services.AddScoped<IOderRespository, OrderRepository>();
+            builder.Services.AddScoped<IOderRespository,  OrderRepository>();
+            builder.Services.AddScoped<ICartDetailRespository, CartRepository>();
             var app = builder.Build();
 
             
