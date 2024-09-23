@@ -11,7 +11,7 @@ namespace DecorGearDomain.Data.Entities
     public class Brand : EntityBase
     {
         [Required]
-        public string BrandID { get; set; }
+        public int BrandID { get; set; }
 
         [Required(ErrorMessage = " Vui lòng nhập tên")]
         public string BrandName { get; set; }

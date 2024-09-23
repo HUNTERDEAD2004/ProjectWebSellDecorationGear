@@ -11,15 +11,10 @@ namespace DecorGearDomain.Data.Entities
 {
     public class Cart : EntityBase
     {
-        public string CartID { get; set; }
+        public int CartID { get; set; }
 
         [Required]
         public string UserID { get; set; }
-
-        public int TotalQuantity { get; set; }
-
-        public double TotalAmount { get; set; }
-
         // Khóa ngoại
 
         // 1 - n

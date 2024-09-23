@@ -25,7 +25,6 @@ namespace DecorGearDomain.Data.Entities
         // Khóa ngoại
 
         // 1 - n
-        public virtual ICollection<CartDetail> CartDetails { get; set; } = new List<CartDetail>();
 
         public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
     }

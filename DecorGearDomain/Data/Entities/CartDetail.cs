@@ -17,7 +17,7 @@ namespace DecorGearDomain.Data.Entities
         public string ProductID { get; set; }
 
         [Required]
-        public string CartID { get; set; }
+        public int CartID { get; set; }
 
         public int OrderID { get; set; }
         
@@ -25,13 +25,9 @@ namespace DecorGearDomain.Data.Entities
 
         public double UnitPrice { get; set; }
 
-        public double TotalPrice { get; set; }
-
         // Khóa ngoại
 
         // n - 1
-
-        public virtual Order Order { get; set; }
 
         public virtual Product Product { get; set; }  // Mỗi CartDetail liên kết với một Product
 
