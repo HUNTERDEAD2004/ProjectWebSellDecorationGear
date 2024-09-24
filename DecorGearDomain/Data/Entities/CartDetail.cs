@@ -11,6 +11,7 @@ namespace DecorGearDomain.Data.Entities
 {
     public class CartDetail : EntityBase
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CartDetailID { get; set; }
 
         [Required]

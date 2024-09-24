@@ -11,6 +11,7 @@ namespace DecorGearDomain.Data.Entities
 {
     public class Member : EntityBase
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MemberID { get; set; }
 
         public string UserID { get; set; } 

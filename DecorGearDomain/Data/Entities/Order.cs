@@ -7,6 +7,7 @@ namespace DecorGearDomain.Data.Entities
 {
     public class Order : EntityBase
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OrderID { get; set; }
 
         [Required]

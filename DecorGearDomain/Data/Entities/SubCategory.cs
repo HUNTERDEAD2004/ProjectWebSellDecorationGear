@@ -12,6 +12,7 @@ namespace DecorGearDomain.Data.Entities
 {
     public class SubCategory : EntityBase
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int SubCategoryID { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập tên")]
