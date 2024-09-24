@@ -13,6 +13,7 @@ namespace DecorGearDomain.Data.Entities
 {
     public class KeyboardDetail : EntityBase
     {
+        
         public string KeyboardDetailID { get; set; }
 
         [Required]
