@@ -13,18 +13,17 @@ namespace DecorGearDomain.Data.Entities
     {
         public int CartDetailID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "ProductID không được để trống.")]
         public string ProductID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "CartID không được để trống.")]
         public int CartID { get; set; }
-
         public int? OrderID { get; set; }
-        
+        [Required]
         public int Quantity { get; set; }
-
+        [Required]
         public decimal UnitPrice { get; set; }
-
+        [Required]
         public decimal TotalPrice { get; set; }
 
         // Khóa ngoại
