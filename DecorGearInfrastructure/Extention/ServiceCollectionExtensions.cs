@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using DecorGearApplication.Interface;
+using DecorGearInfrastructure.Database.AppDbContext;
+using DecorGearInfrastructure.implement;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -12,7 +15,12 @@ namespace DecorGearInfrastructure.Extention
     {
         public static IServiceCollection AddEventBus(this IServiceCollection services, IConfiguration configuration)
         {
-            //services.AddTransient<IExampleRepository, ExampleRepository>();
+            services.AddTransient<IProductRespository, ProductRespository>();
+            services.AddTransient<IBrandRespository, BrandRespository>();
+            services.AddTransient<ISaleRespository, SaleRespository>();
+            services.AddTransient<IImageListRespository, ImageListRespository>();
+
+            services.AddTransient<AppDbContext>();
 
             return services;
         }

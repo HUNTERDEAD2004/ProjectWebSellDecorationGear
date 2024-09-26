@@ -14,7 +14,7 @@ namespace DecorGearApplication.Interface
         Task<List<ProductDto>> GetAllProduct(CancellationToken cancellationToken);
         Task<ProductDto> GetKeyProductById(ViewProductRequest request, CancellationToken cancellationToken);
         Task<ErrorMessage> CreateProduct(CreateProductRequest request, CancellationToken cancellationToken);
-        Task<ErrorMessage> UpdateProduct(UpdateProductRequest request, CancellationToken cancellationToken);
+        Task<ErrorMessage> UpdateProduct(ProductDto request, CancellationToken cancellationToken);
         Task<bool> DeleteProduct(DeleteProductRequest request, CancellationToken cancellationToken);
     }
 }

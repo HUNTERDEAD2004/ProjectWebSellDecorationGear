@@ -37,7 +37,7 @@ namespace DecorGearDomain.Data.Entities
 
         public int SubCategoryID { get; set; }
 
-        public int OrderID { get; set; }
+        public int? OrderID { get; set; }
 
         // Khóa ngoại
 

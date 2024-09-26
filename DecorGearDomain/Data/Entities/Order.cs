@@ -7,10 +7,10 @@ namespace DecorGearDomain.Data.Entities
 {
     public class Order : EntityBase
     {
-        public int OrderID { get; set; }
+        public int OrderID { get; set; }  
 
         [Required]
-        public string UserID { get; set; }
+        public string UserID { get; set; }  
 
         public int? VoucherID { get; set; } // 1 oder có tối đa 1 voucher ( có thể có hoặc không nên đẻ ? )
 
