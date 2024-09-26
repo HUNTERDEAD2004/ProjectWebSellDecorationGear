@@ -11,6 +11,7 @@ namespace DecorGearDomain.Data.Entities
 {
     public class Voucher : EntityBase
     {
+        [Required(ErrorMessage = "Vui lòng không được để trống")]
         public int VoucherID { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập tên")]
@@ -19,7 +20,7 @@ namespace DecorGearDomain.Data.Entities
         [Required(ErrorMessage = "Vui lòng nhập phần trăm giảm giá")]
         [Range(0, 100, ErrorMessage = ("Phần trăm giảm giá không hợp lệ"))]
         public int VoucherPercent { get; set; }
-
+        [StringLength(100, ErrorMessage = "Không được vượt quá 100 ký tự")]
         public EntityStatus Status { get; set; }
 
         // Khóa ngoại

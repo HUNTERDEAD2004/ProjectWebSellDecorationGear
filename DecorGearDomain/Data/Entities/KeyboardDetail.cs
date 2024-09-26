@@ -13,23 +13,33 @@ namespace DecorGearDomain.Data.Entities
 {
     public class KeyboardDetail : EntityBase
     {
+        [Required(ErrorMessage = "Không được để trống")]
         public string KeyboardDetailID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Không được để trống")]
         public string ProductID { get; set; }
-        
-
+        [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
         // thuộc tính
         public string Layout {  get; set; } // bố cục phím 
+        [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
         public string Case {  get; set; }   // vỏ ngoài 
+        [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
         public string Switch { get; set; } // trục phím
+        [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
         public string? SwitchLife { get; set; } // tuổi thọ trục (số lần nhấn)
+        [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
         public string? BatteryCapacity { get; set; } // dung lượng pin
+        [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
         public string? Led {  get; set; }
+        [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
         public string? KeycapMaterial { get; set; } // chất liệu keycap
+        [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
         public string? SwitchMaterial { get; set; } // chất liệu switch
+        [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
         public string? SS { get; set; } // (software support) phần mềm hỗ trợ
+        [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
         public string? Stabilizes { get; set; } // Phụ kiện cân bằng keycap
+        [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
         public string? PCB { get; set; } // bảng mạch
 
         //Khóa ngoại 

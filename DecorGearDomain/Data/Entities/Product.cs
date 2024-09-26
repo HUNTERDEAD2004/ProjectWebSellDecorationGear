@@ -11,28 +11,34 @@ namespace DecorGearDomain.Data.Entities
 {
     public class Product : EntityBase
     {
-        [Required]
+        [Required(ErrorMessage = "Không được để trống")]
         public string ProductID { get; set; } // ID = 2 chự cái đầu của 2 chữ đầu của sản phầm + số thứ tự
 
         [Required(ErrorMessage ="Vui lòng nhập tên")]
+        [StringLength(255, ErrorMessage = "Không vượt quá 255 ký tự")]
         public string ProductName { get; set; }
 
         [Required(ErrorMessage ="Vui lòng nhập giá tiền ")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "Giá phải lớn hơn 0")]
         public decimal Price { get; set; }
-
+        [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
         public string View {  get; set; }
-
+        [Required(ErrorMessage = "Không được để trống.")]
+        [Range(0, int.MaxValue, ErrorMessage = "Phải là số nguyên dương")]
         public string Quantity { get; set; }
-
+        [Required(ErrorMessage = "Không được để trống.")]
+        [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
         public string Weight { get; set; }
-
+        [Required(ErrorMessage = "Không được để trống.")]
+        [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
         public string Description { get; set; }
-
+        [Required(ErrorMessage = "Không được để trống")]
+        [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
         public string Size { get; set; }
 
         public int? SaleID { get; set; }  // có thể có hoặc không
-        
-        [Required]
+
+        [Required(ErrorMessage = "Không được để trống")]
         public string BrandID { get; set; }
 
         public int SubCategoryID { get; set; }

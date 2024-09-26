@@ -11,13 +11,14 @@ namespace DecorGearDomain.Data.Entities
 {
     public class ImageList : EntityBase
     {
+        [Required(ErrorMessage = "Không được để trống")]
         public int ImageListID { get; set; }
-        
-        [Required]
+
+        [Required(ErrorMessage = "Không được để trống")]
         public string ProductID { get; set; }
         
-        public List<string> ImagePath { get; set; }  
-
+        public List<string> ImagePath { get; set; }
+        [StringLength(500, ErrorMessage = "Không được vượt quá 500 ký tự")]
         public string Description { get; set; }
 
         //Khóa ngoại

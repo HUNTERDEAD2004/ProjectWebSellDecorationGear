@@ -13,9 +13,10 @@ namespace DecorGearDomain.Data.Entities
 {
     public class User : EntityBase
     {
-        [Required]
-        public string UserID { get; set; }  
-
+        [Required(ErrorMessage = "Vui lòng không được để trống")]
+        public string UserID { get; set; }
+        [Required(ErrorMessage = "Vui lòng nhập tên")]
+        [StringLength(255, ErrorMessage = "Không được vượt quá 255 ký tự")]
         public string Name { get; set; }
 
         public string PhoneNumber { get; set; }
@@ -23,15 +24,16 @@ namespace DecorGearDomain.Data.Entities
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập tên")]
+        [StringLength(255, ErrorMessage = "Không được vượt quá 255 ký tự")]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập mật khẩu")]
         public string Password { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng không được để trống")]
         public string RoleID { get; set; }
-        
+        [StringLength(100, ErrorMessage = "Không được vượt quá 100 ký tự")]
         public UserStatus Status { get; set; }
 
         // Khóa ngoại
