@@ -9,19 +9,19 @@ using System.Threading.Tasks;
 
 namespace DecorGearInfrastructure.Database.Configuration
 {
-    public class OderConfig : IEntityTypeConfiguration<Order>
+    public class OrderDetailConfig : IEntityTypeConfiguration<OrderDetail>
     {
-        public void Configure(EntityTypeBuilder<Order> builder)
+        public void Configure(EntityTypeBuilder<OrderDetail> builder)
         {
             builder.ToTable("Order");
-            builder.HasKey(x => x.OrderID);
-            builder.HasOne(a => a.Voucher)
-                        .WithMany(p => p.Orders)
-                        .HasForeignKey(a => a.VoucherID)
+            builder.HasKey(x => x.OrderDetailID);
+            builder.HasOne(a => a.Product)
+                        .WithMany(p => p.OrderDetails)
+                        .HasForeignKey(a => a.OrderID)
                         .OnDelete(DeleteBehavior.Restrict);
-            builder.HasOne(a => a.User)
-                        .WithMany(p => p.Orders)
-                        .HasForeignKey(a => a.UserID)
+            builder.HasOne(a => a.Order)
+                        .WithMany(p => p.OrderDetails)
+                        .HasForeignKey(a => a.OrderID)
                         .OnDelete(DeleteBehavior.Restrict);
         }
     }

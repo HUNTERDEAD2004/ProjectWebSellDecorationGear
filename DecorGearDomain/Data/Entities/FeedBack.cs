@@ -11,14 +11,15 @@ namespace DecorGearDomain.Data.Entities
 {
     public class FeedBack : EntityBase
     {
-        public int FeedBackID { get; set; }
+        public Guid FeedBackID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Không được để trống")]
         public string UserID { get; set; }
-        
-        [Required]
+
+        [Required(ErrorMessage = "Không được để trống")]
         public string ProductID { get; set; }
 
+        [StringLength(500, ErrorMessage = "Bình luận không được vượt quá 500 ký tự")]
         public string Comment { get; set; }
 
         //Khóa ngoại
