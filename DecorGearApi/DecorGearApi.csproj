@@ -4,10 +4,19 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>27fbce96-a47b-4c73-ba17-fde2cb170bb8</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DecorGearApplication\DecorGearApplication.csproj" />
+    <ProjectReference Include="..\DecorGearDomain\DecorGearDomain.csproj" />
+    <ProjectReference Include="..\DecorGearInfrastructure\DecorGearInfrastructure.csproj" />
   </ItemGroup>
 
 </Project>

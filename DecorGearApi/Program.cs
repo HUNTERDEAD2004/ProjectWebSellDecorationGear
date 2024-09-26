@@ -1,36 +1,184 @@
 
-namespace DecorGearApi
+using DecorGearApplication.Interface;
+using DecorGearDomain.Data.Entities;
+using DecorGearInfrastructure.Database.AppDbContext;
+using DecorGearInfrastructure.Extention;
+using DecorGearInfrastructure.Extention.AutoMapperProfile;
+using DecorGearInfrastructure.implement;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using System.Security.Cryptography.Xml;
+using System.Text;
+
+public class Program
 {
-    public class Program
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
+
+        const string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+        var builder = WebApplication.CreateBuilder(args);
+
+
+        // Register DbContext with the service container
+        // builder.Services.AddDbContext<AppDbContext>(options =>
+        //    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+        // Add services to the container
+        builder.Services.AddControllers();
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
+
+        // Register other services
+        // builder.Services.AddScoped<IUserRespository, UserRepository>();
+        // builder.Services.AddScoped<ITokenRespotitory, TokenRepository>();
+        // builder.Services.AddScoped<IHashRespository, HashRepository>();
+        // builder.Services.AddScoped<IProductRespository, ProductRespository>();
+
+        builder.Services.AddApplication();
+        builder.Services.AddEventBus(builder.Configuration);
+        //builder.Services.AddAutoMapper(typeof(UserProfile));
+
+        // Configure CORS
+        builder.Services.AddCors(options =>
         {
-            var builder = WebApplication.CreateBuilder(args);
+            options.AddPolicy(name: "_myAllowSpecificOrigins",
+                              policy =>
+                              {
+                                  policy.AllowAnyOrigin()
+                                        .AllowAnyHeader()
+                                        .AllowAnyMethod();
+                              });
+        });
 
-            // Add services to the container.
+        // Authenticator swagger
+        // builder.Services.AddSwaggerGen(d =>
+        // {
+        //    d.AddSecurityDefinition("Bearer",
+        //        new OpenApiSecurityScheme
+        //        {
+        //            Description = "JWT Authorization header using the Bearer scheme ",
+        //            Name = "Authorization",
+        //            In = ParameterLocation.Header,
+        //            Type = SecuritySchemeType.ApiKey,
+        //            Scheme = "Bearer"
+        //        });
 
-            builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+        //    d.AddSecurityRequirement(new OpenApiSecurityRequirement
+        //    {
+        //        {
+        //            new OpenApiSecurityScheme
+        //            {
+        //                 Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer"}
+        //            },
+        //            Array.Empty<string>()
+        //        }
+        //    });
+        // });
 
-            var app = builder.Build();
+        // Configure Authentication and JWT Bearer
+        // builder.Services.AddAuthentication(options =>
+        // {
+        //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        // })
+        //    .AddJwtBearer(options =>
+        //    {
+        //        var secretKey = builder.Configuration["JWT:Secret"];
+        //        var issuer = builder.Configuration["JWT:Issuer"];
+        //        var audience = builder.Configuration["JWT:Audience"];
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+        //        if (string.IsNullOrEmpty(secretKey))
+        //        {
+        //            throw new ArgumentNullException("JWT:Secret", "The JWT secret key cannot be null or empty.");
+        //        }
 
-            app.UseHttpsRedirection();
+        //        options.TokenValidationParameters = new TokenValidationParameters
+        //        {
+        //            ValidateIssuer = true,
+        //            ValidateAudience = true,
+        //            ValidateLifetime = true,
+        //            ValidateIssuerSigningKey = true,
+        //            ValidIssuer = issuer,
+        //            ValidAudience = audience,
+        //            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
+        //        };
+        // });
 
-            app.UseAuthorization();
+        //builder.Services.AddTransient<UserRepository>();
+        //builder.Services.AddTransient<TokenRepository>();
+        //builder.Services.AddTransient<HashRepository>();
 
 
-            app.MapControllers();
+        var app = builder.Build();
 
-            app.Run();
+        // Configure the HTTP request pipeline.
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
         }
+
+        app.UseHttpsRedirection();
+        app.UseCors("*");
+        app.UseAuthentication();
+        app.UseAuthorization();
+        // app.UseMiddleware<TokenMiddleware>();
+        app.MapControllers();
+
+        app.Run();
     }
 }
+
+//namespace DecorGearApi
+//{
+//    public class Program
+//    {
+//        public static void Main(string[] args)
+//        {
+//            const string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+//            var builder = WebApplication.CreateBuilder(args);
+
+//            // Add services to the container.
+
+//            builder.Services.AddControllers();
+//            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+//            builder.Services.AddEndpointsApiExplorer();
+//            builder.Services.AddSwaggerGen();
+//            builder.Services.AddAutoMapper();
+//            builder.Services.AddApplication();
+//            builder.Services.AddEventBus(builder.Configuration); //use automapper
+//            builder.Services.AddCors(options =>////
+//            {
+//                options.AddPolicy("AllowLocalhost",
+//                    builder =>
+//                    {
+//                        builder.AllowAnyOrigin()
+//                               .AllowAnyMethod()
+//                               .AllowAnyHeader();
+//                    });
+//            });
+
+//            var app = builder.Build();
+
+//            // Configure the HTTP request pipeline.
+//            if (app.Environment.IsDevelopment())
+//            {
+//                app.UseSwagger();
+//                app.UseSwaggerUI();
+//            }
+
+//            app.UseHttpsRedirection();
+
+//            app.UseAuthorization();
+
+
+//            app.MapControllers();
+
+//            app.Run();
+//        }
+//    }
+//}
