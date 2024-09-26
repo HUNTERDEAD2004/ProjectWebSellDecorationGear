@@ -11,6 +11,26 @@ namespace DecorGearInfrastructure.implement
 {
     public class ImageListRespository : IImageListRespository
     {
+        //public bool ValidateImagePath(string path)
+        //{
+        //    // Kiểm tra xem đường dẫn có phải là đường dẫn tuyệt đối
+        //    if (!Path.IsPathRooted(path))
+        //    {
+        //        throw new ArgumentException("Đường dẫn ảnh phải là đường dẫn tuyệt đối.");
+        //    }
+
+        //    // Kiểm tra định dạng của đường dẫn (ví dụ: chỉ chấp nhận .jpg và .png)
+        //    string extension = Path.GetExtension(path);
+        //    if (string.IsNullOrEmpty(extension) ||
+        //        (extension != ".jpg" && extension != ".png"))
+        //    {
+        //        throw new ArgumentException("Định dạng ảnh không hợp lệ. Chỉ chấp nhận .jpg và .png.");
+        //    }
+
+        //    // Đường dẫn hợp lệ
+        //    return true;
+        //}
+
         public Task<ErrorMessage> CreateImage(CreateImageRequest request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();

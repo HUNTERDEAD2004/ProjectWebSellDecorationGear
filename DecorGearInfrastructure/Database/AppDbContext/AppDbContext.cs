@@ -26,6 +26,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
         public virtual DbSet<Member> Members { get; set; }
         public virtual DbSet<MouseDetail> MouseDetails { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Sale> Sales { get; set; }
@@ -104,12 +105,12 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new Role
                 {
-                    RoleID = "R001",
+                    RoleID = Guid.Parse("a8c899ec-6d9d-4f5e-bd52-93f8ccd5fe2c"),
                     RoleName = "Admin"
                 },
                 new Role
                 {
-                    RoleID = "R002",
+                    RoleID = Guid.Parse("b718035b-4570-49be-88bb-ff109e5a2a19"),
                     RoleName = "User"
                 }
             };
@@ -126,7 +127,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Email = "john@example.com",
                     UserName = "admin1",
                     Password = "hashedadminpassword",  // You should hash passwords securely!
-                    RoleID = "R001",  // Admin Role
+                    RoleID = Guid.Parse("a8c899ec-6d9d-4f5e-bd52-93f8ccd5fe2c"),  // Admin Role
                     Status = UserStatus.Active
                 },
                 new User
@@ -137,7 +138,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Email = "jane@example.com",
                     UserName = "admin2",
                     Password = "hashedadminpassword",  // You should hash passwords securely!
-                    RoleID = "R001",  // Admin Role
+                    RoleID = Guid.Parse("b718035b-4570-49be-88bb-ff109e5a2a19"),  // Admin Role
                     Status = UserStatus.Active
                 }
             };
@@ -150,11 +151,11 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new Cart
                 {
-                    CartID="C001", UserID="U001", TotalQuantity=5, TotalAmount=100
+                    CartID="C001", UserID="U001"
                 },
                 new Cart
                 {
-                   CartID = "C002", UserID = "U002", TotalQuantity = 3, TotalAmount = 75
+                   CartID = "C002", UserID = "U002"
                 },
             };
 
@@ -165,30 +166,27 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new CartDetail
                 {
-                    CartDetailID = 1, 
+                    CartDetailID = Guid.NewGuid(), 
                     ProductID = "AULAF75", 
                     CartID = "C001", 
-                    OrderID = 1, 
                     Quantity = 2, 
                     UnitPrice = 50, 
                     TotalPrice = 100
                 },
                 new CartDetail
                 {
-                    CartDetailID = 2, 
+                    CartDetailID = Guid.NewGuid(), 
                     ProductID = "RZVMNP1", 
                     CartID = "C002", 
-                    OrderID = 2, 
                     Quantity = 3, 
                     UnitPrice = 40, 
                     TotalPrice = 120  
                 },
                 new CartDetail
                 {                  
-                   CartDetailID = 3, 
+                   CartDetailID = Guid.NewGuid(), 
                    ProductID = "RZDAV3", 
                    CartID = "C002", 
-                   OrderID = 2, 
                    Quantity = 1, 
                    UnitPrice = 75, 
                    TotalPrice = 75
@@ -202,11 +200,11 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new Category
                 {
-                   CategoryID =  1, CategoryName = "Chuột"
+                   CategoryID =  "Category1", CategoryName = "Chuột"
                 },
                 new Category
                 {
-                   CategoryID =  2, CategoryName = "Bàn Phím"
+                   CategoryID =  "Category2", CategoryName = "Bàn Phím"
                 }
             };
 
@@ -217,26 +215,26 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new SubCategory
                 {
-                   SubCategoryID = 1, 
-                    CategoryID =  1, 
+                   SubCategoryID = "SubCategory1", 
+                    CategoryID =  "Category1", 
                     SubCategoryName = "Chuột Logitech"
                 },
                 new SubCategory
                 {
-                   SubCategoryID = 2, 
-                    CategoryID =  2, 
+                   SubCategoryID = "SubCategory2", 
+                    CategoryID =  "Category2", 
                     SubCategoryName = "Bàn Phím Aula"
                 },
                 new SubCategory
                 {
-                   SubCategoryID = 3, 
-                    CategoryID =  2, 
+                   SubCategoryID = "SubCategory3", 
+                    CategoryID =  "Category2", 
                     SubCategoryName = "Bàn Phím Xing-Meng"
                 },
                 new SubCategory
                 {
-                   SubCategoryID = 4, 
-                    CategoryID =  1, 
+                   SubCategoryID = "SubCategory4", 
+                    CategoryID =  "Category1", 
                     SubCategoryName = "Chuột Razer"
                 }
             };
@@ -256,10 +254,9 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Weight = 500,
                     Description = "chiếc chuột siêu bổ rẻ ",
                     Size = "Trung bình",
-                    SaleID = 1,
+                    SaleID = "SALEMUAHE2024",
                     BrandID = "B002",
-                    OrderID=1,
-                    SubCategoryID = 4
+                    SubCategoryID = "SubCategory4"
                 },
                 new Product
                 {
@@ -273,8 +270,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Size="Trung bình",
                     SaleID=null,
                     BrandID="B002",
-                    OrderID=1,
-                    SubCategoryID=4
+                    SubCategoryID="SubCategory4"
                 },
                 new Product
                 {
@@ -286,10 +282,9 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Weight=400, 
                     Description="Một chiếc bàn phím cơ mỳ ăn liền với 3mode hotswap tầm giá 1 củ mà bạn không nên bỏ qua", 
                     Size="75%", 
-                    SaleID=2, 
+                    SaleID="SALEWEB2024", 
                     BrandID="B005",
-                    OrderID=1,
-                    SubCategoryID=2
+                    SubCategoryID="SubCategory2"
                 }
             };
 
@@ -300,19 +295,19 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new Favorite 
                 { 
-                    FavoriteID = 1, 
+                    FavoriteID = Guid.NewGuid(), 
                     UserID = "U001", 
                     ProductID = "RZVMNP1"
                 },
                 new Favorite 
                 { 
-                    FavoriteID = 2, 
+                    FavoriteID = Guid.NewGuid(), 
                     UserID = "U002", 
                     ProductID = "RZDAV3"
                 },
                 new Favorite 
                 { 
-                    FavoriteID = 3, 
+                    FavoriteID = Guid.NewGuid(), 
                     UserID = "U001", 
                     ProductID = "AULAF75"
                 }
@@ -325,21 +320,21 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new FeedBack 
                 { 
-                    FeedBackID = 1, 
+                    FeedBackID = Guid.NewGuid(), 
                     UserID = "U001", 
                     ProductID = "RZVMNP1", 
                     Comment = "Sản phẩm rất tốt!" 
                 },
                 new FeedBack 
                 { 
-                    FeedBackID = 2, 
+                    FeedBackID = Guid.NewGuid(), 
                     UserID = "U002", 
                     ProductID = "RZDAV3", 
                     Comment = "Chất lượng bình thường." 
                 },
                 new FeedBack 
                 { 
-                    FeedBackID = 3, 
+                    FeedBackID = Guid.NewGuid(), 
                     UserID = "U001", 
                     ProductID = "AULAF75", 
                     Comment = "Giao hàng nhanh, sản phẩm đẹp." 
@@ -429,14 +424,14 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new ImageList
                 {
-                    ImageListID = 1,
+                    ImageListID = Guid.NewGuid(),
                     ProductID = "AULAF75",
                     ImagePath=["/images/aulaf75_img1.jpg", "/images/aulaf75_img2.jpg", "/images/aulaf75_img3.jpg"],
                     Description = "Hình ảnh của sản phẩm aulaf75"
                 },
                 new ImageList
                 {
-                    ImageListID=2, 
+                    ImageListID= Guid.NewGuid(), 
                     ProductID="RZDAV3", 
                     ImagePath=["/images/rzdav3_img.jpg", "/images/rzdav3_img2.jpg"], 
                     Description="Hình ảnh của sản phẩm razer deadth addzer v3"
@@ -450,14 +445,14 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new Member
                 {
-                    MemberID=1,
+                    MemberID= Guid.NewGuid(),
                     UserID="U001",
                     Points=100,
                     ExpiryDate=DateTime.Parse("11/12/2024")
                 },
                 new Member 
                 { 
-                    MemberID=2, 
+                    MemberID= Guid.NewGuid(), 
                     UserID="U002", 
                     Points=200, 
                     ExpiryDate=DateTime.Parse("26/3/2025")
@@ -471,14 +466,14 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new Sale
                 {
-                    SaleID=1,
+                    SaleID="SALEMUAHE2024",
                     SaleName="Giảm giá mùa hè",
                     SalePercent=100,
                     Status = EntityStatus.Active
                 },
                 new Sale
                 {
-                    SaleID=2,
+                    SaleID="SALEWEB2024",
                     SaleName="Giảm giá cuối năm",
                     SalePercent=200,
                     Status = EntityStatus.Inactive
@@ -492,14 +487,14 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new Voucher
                 {
-                    VoucherID=1,
+                    VoucherID="VOU30",
                     VoucherName="Giảm giá 30%",
                     VoucherPercent=30,
                     Status = EntityStatus.Active
                 },
                 new Voucher
                 {
-                    VoucherID=2,
+                    VoucherID="VOU50",
                     VoucherName="Giảm giá 50%",
                     VoucherPercent=50,
                     Status = EntityStatus.Inactive
@@ -513,28 +508,24 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new Order 
                 { 
-                    OrderID=1, 
+                    OrderID=Guid.NewGuid(), 
                     UserID="U001", 
-                    VoucherID=1, 
+                    VoucherID="VOU30", 
                     totalQuantity=5, 
                     totalPrice=500.00, 
                     Status=OrderStatus.OrderConfirmed, 
                     paymentMethod="Credit Card", 
-                    size="L", 
-                    weight=1.5,
                     OrderDate=DateTime.Parse("16/09/2024")
                 },
                 new Order 
                 { 
-                    OrderID=2, 
+                    OrderID=Guid.NewGuid(), 
                     UserID="U002", 
                     VoucherID=null, 
                     totalQuantity=3, 
                     totalPrice=300.00, 
                     Status=OrderStatus.Paid, 
                     paymentMethod="Cash", 
-                    size="LF", 
-                    weight=2.0, 
                     OrderDate=DateTime.Parse("17/09/2024")
                 }
             };

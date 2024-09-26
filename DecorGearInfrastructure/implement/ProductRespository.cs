@@ -108,10 +108,9 @@ namespace DecorGearInfrastructure.implement
                     Weight = request.Weight,
                     Description = request.Description,
                     Size = request.Size,
-                    SaleID = request.SaleID,
+                    SaleID = Convert.ToString(request.SaleID),
                     BrandID = request.BrandID,
-                    SubCategoryID = request.SubCategoryID,
-                    OrderID = request.OrderID
+                    SubCategoryID = Convert.ToString(request.SubCategoryID),
                 };
 
                 _appDbContext.Products.Update(updateProduct);

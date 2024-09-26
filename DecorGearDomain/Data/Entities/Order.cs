@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.CompilerServices;
 using DecorGearDomain.Data.Base;
 using DecorGearDomain.Enum;
 
@@ -7,33 +8,36 @@ namespace DecorGearDomain.Data.Entities
 {
     public class Order : EntityBase
     {
-        public int OrderID { get; set; }  
+        public Guid OrderID { get; set; }
 
-        [Required]
-        public string UserID { get; set; }  
+        [Required(ErrorMessage = "Không được để trống")]
+        public string UserID { get; set; }
 
-        public int? VoucherID { get; set; } // 1 oder có tối đa 1 voucher ( có thể có hoặc không nên đẻ ? )
+        [StringLength(100, ErrorMessage = "Không được vượt quá 100 ký tự")]
+        public string? VoucherID { get; set; } // 1 oder có tối đa 1 voucher ( có thể có hoặc không nên đẻ ? )
 
-        public int totalQuantity { get; set; } 
+        [Required(ErrorMessage = "Không được để trống")]
+        [Range(1, int.MaxValue, ErrorMessage = "Số lượng phải lớn hơn 0")]
+        public int totalQuantity { get; set; }
 
+        [Required(ErrorMessage = "Không được để trống")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "Tổng giá phải là giá trị dương")]
         public double totalPrice { get; set; }
 
-        public string size { get; set; }
+        [Range(1, 5, ErrorMessage = "Vui lòng lựa chọn từ 1 - 5 <(Hoàn thành:1) (Hoãn:2) (Hủy:3) (Đang vận chuyển:4) (Đã giao hàng:5)> ")]
+        public OrderStatus Status { get; set; }
 
-        public double weight { get; set; }
-
-        public OrderStatus Status { get; set; } 
-
+        [Required(ErrorMessage = "Không được để trống")]
+        [StringLength(100, ErrorMessage = "Không được vượt quá 100 ký tự")]
         public string paymentMethod { get; set; }
 
-        public DateTime OrderDate { get; set; } // ngày đặt hàng
+        [Required(ErrorMessage = "Không được để trống")]
+        public DateTime OrderDate { get; set; } // ngày giao hàng
 
         // Khóa ngoại
 
         // 1 - n
-        public virtual ICollection<CartDetail> CartDetails { get; set; } = new List<CartDetail>();
-
-        public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
 
         // n - 1
         public virtual Voucher Voucher { get; set; }

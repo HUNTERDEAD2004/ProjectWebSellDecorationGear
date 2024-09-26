@@ -11,12 +11,12 @@ namespace DecorGearDomain.Data.Entities
 {
     public class Favorite : EntityBase
     {
-        public int FavoriteID { get; set; }
+        public Guid FavoriteID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "UserID không được để trống")]
         public string UserID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Không được để trống")]
         public string ProductID { get; set; }
 
         // Khóa ngoại

@@ -12,12 +12,15 @@ namespace DecorGearDomain.Data.Entities
 {
     public class SubCategory : EntityBase
     {
-        public int SubCategoryID { get; set; }
+        [Required(ErrorMessage = "Vui lòng không được để trống")]
+        public string SubCategoryID { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập tên")]
+        [StringLength(255, ErrorMessage = "Không được vượt quá 255 ký tự")]
         public string SubCategoryName { get; set; }
 
-        public int CategoryID { get; set; }
+        [Required(ErrorMessage = "Vui lòng không được để trống")]
+        public string CategoryID { get; set; }
 
         // Khóa ngoại
 
