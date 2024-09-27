@@ -37,7 +37,6 @@ namespace DecorGearDomain.Data.Entities
 
         public int SubCategoryID { get; set; }
 
-        public int OrderID { get; set; }
 
         // Khóa ngoại
 
@@ -57,6 +56,5 @@ namespace DecorGearDomain.Data.Entities
 
         public virtual SubCategory SubCategory { get; set; }
 
-        public virtual Order Order { get; set; }
     }
 }

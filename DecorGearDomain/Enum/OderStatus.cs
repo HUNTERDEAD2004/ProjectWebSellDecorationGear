@@ -8,6 +8,7 @@ namespace DecorGearDomain.Enum
 {
     public enum OrderStatus
     {
+        Chuathanhtoan,
         OrderConfirmed, // Hoàn thành
         Paid, // Hoãn
         Canceled, // Hủy

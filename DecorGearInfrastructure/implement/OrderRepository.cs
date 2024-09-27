@@ -19,16 +19,41 @@ namespace DecorGearInfrastructure.implement
         {
             _dbcontext = dbContext;
         }
-        public Task<ErrorMessage> CreateOder(CreateOrderRequest request, CancellationToken cancellationToken)
+        public async Task<ErrorMessage> CreateOder(CreateOrderRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            if (request == null)
+            {
+                return ErrorMessage.Null;
+            }
+            else 
+            {
+                var newOder = new Order
+                {
+                    UserID = request.UserID,
+                    VoucherID = request.VoucherID,
+                    totalQuantity = request.totalQuantity,
+                    totalPrice = (double)request.totalPrice,
+                    paymentMethod = request.paymentMethod,
+                    size = request.size.ToString(),
+                    weight = request.weight,
+                    OrderDate = request.OrderDate
+                };
+                await _dbcontext.Orders.AddAsync(newOder, cancellationToken);
+                try
+                {
+                    await _dbcontext.SaveChangesAsync();
+                    return ErrorMessage.Successfull;
+                }
+                catch (Exception)
+                {
+                    return ErrorMessage.Failed;
+                }
+            }
         }
 
         public async Task<bool> DeleteOder(DeleteOrderRequest request, CancellationToken cancellationToken)
         {
-             var order = await _dbcontext.Orders // Bao gồm chi tiết giỏ hàng nếu cần
-                                   .Include(o => o.CartDetails) 
-                                   .FirstOrDefaultAsync(o => o.OrderID == request.OderID, cancellationToken);
+             var order = await _dbcontext.Orders.FirstOrDefaultAsync(o => o.OrderID == request.OderID, cancellationToken);
             if (order == null)
             {
                 return false;
@@ -54,14 +79,14 @@ namespace DecorGearInfrastructure.implement
                 paymentMethod = o.paymentMethod,
                 size = o.size,
                 weight = (float)o.weight,
-                OrderDate = o.OrderDate
+                OrderDate = o.OrderDate,
+                Status = o.Status,
             }).ToList();
         }
 
         public async Task<OderDto> GetKeyOderById(ViewOrderRequest request, CancellationToken cancellationToken)
         {
-            var order = await _dbcontext.Orders
-         .FirstOrDefaultAsync(o => o.OrderID == request.OderID, cancellationToken);
+            var order = await _dbcontext.Orders.FirstOrDefaultAsync(o => o.OrderID == request.OderID, cancellationToken);
 
             if (order == null)
             {
@@ -77,13 +102,32 @@ namespace DecorGearInfrastructure.implement
                 paymentMethod = order.paymentMethod,
                 size = order.size,
                 weight = (float)order.weight,
-                OrderDate = order.OrderDate
+                OrderDate = order.OrderDate,
+                Status = order.Status,
             };
         }
 
-        public Task<ErrorMessage> UpdateOder(UpdateOrderRequest request, CancellationToken cancellationToken)
+        public async Task<ErrorMessage> UpdateOder(OderDto request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var updateOrder = await _dbcontext.Orders.FirstOrDefaultAsync(o => o.OrderID == request.OderID, cancellationToken);
+            if(updateOrder == null)
+            {
+                return ErrorMessage.Failed;
+            }
+            else
+            {
+                updateOrder.UserID = request.UserID;
+                updateOrder.VoucherID = request.VoucherID;
+                updateOrder.totalQuantity = request.totalQuantity;
+                updateOrder.totalPrice = (double)request.totalPrice;
+                updateOrder.paymentMethod = request.paymentMethod;
+                updateOrder.size = request.size.ToString();
+                updateOrder.weight = request.weight;
+                updateOrder.OrderDate = request.OrderDate;
+                updateOrder.Status = request.Status;
+                await _dbcontext.SaveChangesAsync();    
+                return ErrorMessage.Successfull;
+            }
         }
     }
 }

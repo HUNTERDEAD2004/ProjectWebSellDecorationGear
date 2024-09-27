@@ -17,17 +17,7 @@ namespace DecorGearInfrastructure.Implement
             throw new NotImplementedException();
         }
 
-        public Task<bool> DeleteUser(DeleteCartDetailRequest request, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<CartDetailDto>> GetAllCartDetai(CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<CartDetailDto> GetCartDetailById(ViewCartRequest request, CancellationToken cancellationToken)
+        public Task<List<CartDetailDto>> GetAllProductInCart(CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DecorGearDomain.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,6 @@ namespace DecorGearApplication.DataTransferObj.Order
 {
     public class UpdateOrderRequest
     {
-        public int OderID { get; set; }
-
         public string UserID { get; set; }
 
         public int totalQuantity { get; set; }
@@ -23,5 +22,7 @@ namespace DecorGearApplication.DataTransferObj.Order
         public float weight { get; set; }
 
         public DateTime OrderDate { get; set; }
+        public int? VoucherID { get; set; }
+        public OrderStatus Status { get; set; }
     }
 }

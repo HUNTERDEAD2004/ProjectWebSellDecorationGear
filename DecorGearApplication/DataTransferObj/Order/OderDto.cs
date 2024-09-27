@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DecorGearDomain.Enum;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -26,5 +27,6 @@ namespace DecorGearApplication.DataTransferObj.Order
         public float weight { get; set; }
 
         public DateTime OrderDate { get; set; }
+        public OrderStatus Status { get; set; }
     }
 }

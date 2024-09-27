@@ -46,7 +46,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=PHUC\\SQLEXPRESS;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("Data Source=MG-PC602\\SQLEXPRESS;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -257,7 +257,6 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Size = "Trung bình",
                     SaleID = 1,
                     BrandID = 2,
-                    OrderID=1,
                     SubCategoryID = 4
                 },
                 new Product
@@ -272,7 +271,6 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Size="Trung bình",
                     SaleID=null,
                     BrandID= 2,
-                    OrderID=1,
                     SubCategoryID=4
                 },
                 new Product
@@ -287,7 +285,6 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Size="75%", 
                     SaleID=2, 
                     BrandID=5,
-                    OrderID=1,
                     SubCategoryID=2
                 }
             };
@@ -539,6 +536,27 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             };
 
             modelBuilder.Entity<Order>().HasData(OrderData);
+
+            var OderDetail = new List<OrderDetail>
+            {
+                new OrderDetail
+                {
+                    OrderDetailId =1, 
+                    OrderID=2,  
+                    ProductID = "AULAF75",
+                    Quantity = 3,
+                    UnitPrice = 1000000,
+                },
+                new OrderDetail
+                {
+                    OrderDetailId =2,
+                    OrderID=2,
+                    ProductID = "RZDAV3",
+                    Quantity = 1,
+                    UnitPrice = (decimal) 405.8,
+                }
+            };
+            modelBuilder.Entity<OrderDetail>().HasData(OderDetail);
 
             base.OnModelCreating(modelBuilder);          
         }

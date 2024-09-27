@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using DecorGearDomain.Data.Entities;
-using DecorGearInfrastructure.Database.AppDbContext;
+﻿using Microsoft.AspNetCore.Mvc;
 using DecorGearApplication.Interface;
-using DecorGearInfrastructure.implement;
-using System.Threading;
 using DecorGearApplication.DataTransferObj.Order;
+using DecorGearDomain.Enum;
 
 namespace DecorGearApi.Controllers
 {
@@ -19,7 +10,6 @@ namespace DecorGearApi.Controllers
     public class OrdersController : ControllerBase
     {
         private IOderRespository _orderRepo;
-
 
         public OrdersController(IOderRespository oderRespository)
         {
@@ -57,10 +47,65 @@ namespace DecorGearApi.Controllers
 
             if (!result)
             {
-                return NotFound(); // Không tìm thấy đơn hàng
+                return NotFound();
             }
 
-            return NoContent(); // Trả về 204 No Content
+            return NoContent();
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateOrder([FromBody] CreateOrderRequest request, CancellationToken cancellationToken)
+        {
+            if (request == null)
+            {
+                return BadRequest("Invalid order request.");
+            }
+
+            var result = await _orderRepo.CreateOder(request, cancellationToken);
+
+            if (result == ErrorMessage.Successfull)
+            {
+                return CreatedAtAction(nameof(CreateOrder), null); 
+            }
+            else if (result == ErrorMessage.Null || result == ErrorMessage.Failed)
+            {
+                return BadRequest("Failed to create order."); 
+            }
+
+            return StatusCode(500, "Internal server error."); 
+        }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutOder([FromBody] UpdateOrderRequest request, int id,  CancellationToken cancellationToken)
+        {
+            if (request == null)
+            {
+                return BadRequest("Invalid order request.");
+            }
+            else {
+                var existingOrder = await _orderRepo.GetKeyOderById(new ViewOrderRequest { OderID = id }, cancellationToken);
+
+                if (existingOrder == null)
+                {
+                    return NotFound("Order not found.");
+                }
+                else
+                {
+                    existingOrder.totalQuantity = request.totalQuantity;
+                    existingOrder.totalPrice = request.totalPrice;
+                    existingOrder.paymentMethod = request.paymentMethod;
+                    existingOrder.size = request.size.ToString();
+                    existingOrder.weight = request.weight;
+                    existingOrder.Status = request.Status;
+                    var result = await _orderRepo.UpdateOder(existingOrder, cancellationToken);
+
+                    if (result == ErrorMessage.Successfull)
+                    {
+                        return NoContent();
+                    }
+                    else {
+                        return BadRequest("Failed to update order.");
+                    }
+                }
+            }
         }
     }
 }

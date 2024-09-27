@@ -24,6 +24,7 @@ namespace DecorGearApi
             });
             builder.Services.AddScoped<IOderRespository,  OrderRepository>();
             builder.Services.AddScoped<ICartDetailRespository, CartRepository>();
+            builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
             var app = builder.Build();
 
             
