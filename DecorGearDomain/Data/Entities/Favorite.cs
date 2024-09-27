@@ -11,6 +11,7 @@ namespace DecorGearDomain.Data.Entities
 {
     public class Favorite : EntityBase
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int FavoriteID { get; set; }
 
         [Required]

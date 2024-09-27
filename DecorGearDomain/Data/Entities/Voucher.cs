@@ -3,6 +3,7 @@ using DecorGearDomain.Enum;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace DecorGearDomain.Data.Entities
 {
     public class Voucher : EntityBase
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int VoucherID { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập tên")]
@@ -25,7 +27,6 @@ namespace DecorGearDomain.Data.Entities
         // Khóa ngoại
 
         // 1 - n
-        public virtual ICollection<CartDetail> CartDetails { get; set; } = new List<CartDetail>();
 
         public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
     }

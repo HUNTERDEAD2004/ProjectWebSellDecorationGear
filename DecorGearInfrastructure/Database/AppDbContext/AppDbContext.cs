@@ -32,6 +32,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
         public virtual DbSet<SubCategory> SubCategories { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Voucher> Vouchers { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         #endregion
 
         public AppDbContext()
@@ -45,7 +46,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=MG-PC602\\SQLEXPRESS;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("Data Source=PHUC\\SQLEXPRESS;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -61,37 +62,37 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new Brand()
                 {
-                    BrandID = "B001",
+                    BrandID = 1,
                     BrandName = "Logitech",
                     Description = "Chuyên sản phẩm gaming cao cấp"
                 },
                 new Brand()
                  {
-                     BrandID = "B002",
+                     BrandID = 2,
                      BrandName = "Razer",
                      Description = "Chuyên sản phẩm gaming cao cấp"
                 },
                 new Brand()
                 {
-                    BrandID = "B003",
+                    BrandID = 3,
                     BrandName = "Xing-Meng",
                     Description = "Bàn Phím cơ"
                 },
                 new Brand()
                 {
-                    BrandID = "B004",
+                    BrandID = 4,
                     BrandName = "Fl-esport",
                     Description = "Bàn Phím cơ"
                 },
                 new Brand()
                 {
-                    BrandID = "B005",
+                    BrandID = 5,
                     BrandName = "Aula",
                     Description = "Bàn Phím cơ"
                 },
                 new Brand()
                 {
-                    BrandID = "B006",
+                    BrandID = 6,
                     BrandName = "Zowie",
                     Description = "Chuột gaming"
                 }
@@ -103,16 +104,18 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new Role
                 {
-                    RoleID = "R001",
+                    RoleID = Guid.Parse("e3ac98c7-890b-4f02-8fae-2d2ddda6c3a8"),
                     RoleName = "Admin"
                 },
                 new Role
                 {
-                    RoleID = "R002",
+                    RoleID = Guid.Parse("a4bb2c7b-1abc-49ed-baa4-3b72d6579f92"),
                     RoleName = "User"
                 }
             };
             modelBuilder.Entity<Role>().HasData(roleData);
+            
+           
 
             // Seed users
             var userData = new List<User>
@@ -125,7 +128,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Email = "john@example.com",
                     UserName = "admin1",
                     Password = "hashedadminpassword",  // You should hash passwords securely!
-                    RoleID = "R001",  // Admin Role
+                    RoleID = Guid.Parse("e3ac98c7-890b-4f02-8fae-2d2ddda6c3a8"),  // Admin Role
                     Status = UserStatus.Active
                 },
                 new User
@@ -136,7 +139,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Email = "jane@example.com",
                     UserName = "admin2",
                     Password = "hashedadminpassword",  // You should hash passwords securely!
-                    RoleID = "R001",  // Admin Role
+                    RoleID = Guid.Parse("e3ac98c7-890b-4f02-8fae-2d2ddda6c3a8"),  // Admin Role
                     Status = UserStatus.Active
                 }
             };
@@ -149,11 +152,11 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new Cart
                 {
-                    CartID="C001", UserID="U001", TotalQuantity=5, TotalAmount=100
+                    CartID=1, UserID="U001"
                 },
                 new Cart
                 {
-                   CartID = "C002", UserID = "U002", TotalQuantity = 3, TotalAmount = 75
+                   CartID = 2, UserID = "U002"
                 },
             };
 
@@ -166,31 +169,28 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 {
                     CartDetailID = 1, 
                     ProductID = "AULAF75", 
-                    CartID = "C001", 
+                    CartID = 1, 
                     OrderID = 1, 
                     Quantity = 2, 
                     UnitPrice = 50, 
-                    TotalPrice = 100
                 },
                 new CartDetail
                 {
                     CartDetailID = 2, 
                     ProductID = "RZVMNP1", 
-                    CartID = "C002", 
+                    CartID = 2, 
                     OrderID = 2, 
                     Quantity = 3, 
-                    UnitPrice = 40, 
-                    TotalPrice = 120  
+                    UnitPrice = 40,  
                 },
                 new CartDetail
                 {                  
                    CartDetailID = 3, 
                    ProductID = "RZDAV3", 
-                   CartID = "C002", 
+                   CartID = 2, 
                    OrderID = 2, 
                    Quantity = 1, 
                    UnitPrice = 75, 
-                   TotalPrice = 75
                 }
             };
 
@@ -256,7 +256,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Description = "chiếc chuột siêu bổ rẻ ",
                     Size = "Trung bình",
                     SaleID = 1,
-                    BrandID = "B002",
+                    BrandID = 2,
                     OrderID=1,
                     SubCategoryID = 4
                 },
@@ -271,7 +271,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Description="Chiếc chuột được nhiều tuyển thủ chuyên nghiệp tin dùng",
                     Size="Trung bình",
                     SaleID=null,
-                    BrandID="B002",
+                    BrandID= 2,
                     OrderID=1,
                     SubCategoryID=4
                 },
@@ -286,7 +286,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Description="Một chiếc bàn phím cơ mỳ ăn liền với 3mode hotswap tầm giá 1 củ mà bạn không nên bỏ qua", 
                     Size="75%", 
                     SaleID=2, 
-                    BrandID="B005",
+                    BrandID=5,
                     OrderID=1,
                     SubCategoryID=2
                 }

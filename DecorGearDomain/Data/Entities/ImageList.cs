@@ -11,6 +11,7 @@ namespace DecorGearDomain.Data.Entities
 {
     public class ImageList : EntityBase
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ImageListID { get; set; }
         
         [Required]

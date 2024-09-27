@@ -7,6 +7,7 @@ namespace DecorGearDomain.Data.Entities
 {
     public class Order : EntityBase
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OrderID { get; set; }
 
         [Required]
@@ -31,9 +32,7 @@ namespace DecorGearDomain.Data.Entities
         // Khóa ngoại
 
         // 1 - n
-        public virtual ICollection<CartDetail> CartDetails { get; set; } = new List<CartDetail>();
-
-        public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+        public virtual ICollection<OrderDetail>? OrderDetails { get; set; } = new List<OrderDetail>();
 
         // n - 1
         public virtual Voucher Voucher { get; set; }

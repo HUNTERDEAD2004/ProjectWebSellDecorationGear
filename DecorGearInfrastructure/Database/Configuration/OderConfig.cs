@@ -23,6 +23,7 @@ namespace DecorGearInfrastructure.Database.Configuration
                         .WithMany(p => p.Orders)
                         .HasForeignKey(a => a.UserID)
                         .OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 }

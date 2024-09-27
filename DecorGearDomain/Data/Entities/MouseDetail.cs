@@ -12,6 +12,7 @@ namespace DecorGearDomain.Data.Entities
 {
     public class MouseDetail : EntityBase
     {
+        
         public string MouseDetailID { get; set; }
 
         [Required]

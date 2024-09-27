@@ -12,7 +12,7 @@ namespace DecorGearDomain.Data.Entities
     public class Role : EntityBase
     {
         [Required]
-        public string RoleID { get; set; }
+        public Guid RoleID { get; set; }
 
         [Required]
         public string RoleName { get; set; }

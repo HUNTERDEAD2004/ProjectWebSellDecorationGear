@@ -30,7 +30,7 @@ namespace DecorGearDomain.Data.Entities
         public string Password { get; set; }
 
         [Required]
-        public string RoleID { get; set; }
+        public Guid RoleID { get; set; }
         
         public UserStatus Status { get; set; }
 
