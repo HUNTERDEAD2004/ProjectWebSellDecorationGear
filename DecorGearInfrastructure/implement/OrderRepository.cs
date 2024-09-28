@@ -53,17 +53,26 @@ namespace DecorGearInfrastructure.implement
 
         public async Task<bool> DeleteOder(DeleteOrderRequest request, CancellationToken cancellationToken)
         {
-             var order = await _dbcontext.Orders.FirstOrDefaultAsync(o => o.OrderID == request.OderID, cancellationToken);
+            // Tìm hóa đơn cần xóa
+            var order = await _dbcontext.Orders
+                .Include(o => o.OrderDetails) 
+                .FirstOrDefaultAsync(o => o.OrderID == request.OderID, cancellationToken);
+
             if (order == null)
             {
-                return false;
+                return false; 
             }
-            else 
-            { 
-                _dbcontext.Orders .Remove(order);
-                await _dbcontext.SaveChangesAsync();    
-                return true;
+           
+            if (order.OrderDetails != null && order.OrderDetails.Any())
+            {
+                _dbcontext.OrderDetails.RemoveRange(order.OrderDetails);
             }
+
+            // Xóa hóa đơn chính
+            _dbcontext.Orders.Remove(order);
+            await _dbcontext.SaveChangesAsync();
+
+            return true;
         }
 
         public async Task<IEnumerable<OderDto>> GetAllOder(CancellationToken cancellationToken)

@@ -33,6 +33,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Voucher> Vouchers { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
+        public virtual DbSet<VoucherUser> VoucherUsers { get; set; }
         #endregion
 
         public AppDbContext()
@@ -491,6 +492,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     VoucherID=1,
                     VoucherName="Giảm giá 30%",
                     VoucherPercent=30,
+                    expiry = DateTime.ParseExact("05-11-2024", "dd-MM-yyyy", null),
                     Status = EntityStatus.Active
                 },
                 new Voucher
@@ -498,11 +500,22 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     VoucherID=2,
                     VoucherName="Giảm giá 50%",
                     VoucherPercent=50,
+                    expiry = DateTime.ParseExact("05-11-2024", "dd-MM-yyyy", null),
                     Status = EntityStatus.Inactive
                 }
             };
 
             modelBuilder.Entity<Voucher>().HasData(VoucherData);
+
+            var VoucherUser = new List<VoucherUser>
+            {
+                new VoucherUser
+                {
+                    VoucherUserId=1,
+                    UserID = "U001",
+                    VoucherID = 1,
+                }
+            };
 
             //Seed OderData
             var OrderData = new List<Order>

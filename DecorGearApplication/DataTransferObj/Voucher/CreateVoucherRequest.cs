@@ -13,5 +13,6 @@ namespace DecorGearApplication.DataTransferObj.Voucher
         public int VoucherPercent { get; set; }
 
         public string UserID { get; set; }
+        public DateTime expiry { get; set; }
     }
 }

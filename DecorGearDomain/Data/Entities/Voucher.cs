@@ -21,7 +21,7 @@ namespace DecorGearDomain.Data.Entities
         [Required(ErrorMessage = "Vui lòng nhập phần trăm giảm giá")]
         [Range(0, 100, ErrorMessage = ("Phần trăm giảm giá không hợp lệ"))]
         public int VoucherPercent { get; set; }
-
+        public DateTime expiry { get; set; }
         public EntityStatus Status { get; set; }
 
         // Khóa ngoại
@@ -29,5 +29,6 @@ namespace DecorGearDomain.Data.Entities
         // 1 - n
 
         public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+        public virtual ICollection<VoucherUser>? VoucherUsers { get; set; } = new List<VoucherUser>();
     }
 }

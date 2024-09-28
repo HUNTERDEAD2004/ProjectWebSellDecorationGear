@@ -40,6 +40,7 @@ namespace DecorGearDomain.Data.Entities
         public virtual ICollection<Favorite>? Favorites { get; set; }
         public virtual ICollection<FeedBack>? FeedBacks { get; set; }
         public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+        public virtual ICollection<VoucherUser>? VoucherUsers { get; set; } = new List<VoucherUser>();
 
         // 1 - 1
         public virtual Cart Cart { get; set; }
@@ -47,7 +48,6 @@ namespace DecorGearDomain.Data.Entities
 
         // n - 1
         public virtual Role Role { get; set; }
-
 
     }
 }
