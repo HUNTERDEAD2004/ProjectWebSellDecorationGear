@@ -68,5 +68,37 @@ namespace DecorGearApi.Controllers
 
             return NoContent();
         }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutOrderDetail([FromBody] OrderDetailDTO request, int id, CancellationToken cancellationToken)
+        {
+            if (request == null)
+            {
+                return BadRequest("Invalid order request");
+            }
+            else
+            {
+                var existingOrderDetail = await _orderDetailRepo.GetByIdOderDetail(new OrderDetailDTO { OrderDetailId = id }, cancellationToken);
+                if (existingOrderDetail == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    existingOrderDetail.ProductID = request.ProductID;
+                    existingOrderDetail.UnitPrice = request.UnitPrice;
+                    existingOrderDetail.Quantity = request.Quantity;
+
+                    var result = await _orderDetailRepo.UpdateOderDetail(existingOrderDetail, cancellationToken);
+                    if (result == ErrorMessage.Successfull)
+                    {
+                        return Ok(ErrorMessage.Successfull);
+                    }
+                    else
+                    {
+                        return StatusCode(500, "Internal server error.");
+                    }
+                }
+            }
+        }
     }
 }

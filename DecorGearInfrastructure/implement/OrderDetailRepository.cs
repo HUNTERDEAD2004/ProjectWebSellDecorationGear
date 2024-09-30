@@ -64,14 +64,14 @@ namespace DecorGearInfrastructure.implement
 
         public async Task<IEnumerable<OrderDetailDTO>> GetAllOderDetail(CancellationToken cancellationToken)
         {
-            var orderDetail = await _dbcontext.OrderDetails.ToListAsync(cancellationToken);
+            var orderDetail = await _dbcontext.OrderDetails.Include(o => o.Product).ToListAsync(cancellationToken);
             return orderDetail.Select(o => new OrderDetailDTO
             {
                 OrderDetailId = o.OrderDetailId,
                 ProductID = o.ProductID,
                 OrderID = o.OrderID,
                 Quantity = o.Quantity,
-                UnitPrice = o.UnitPrice
+                UnitPrice = o.UnitPrice,
             }).ToList();
 
         }

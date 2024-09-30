@@ -1,4 +1,5 @@
 ﻿using DecorGearApplication.DataTransferObj.Order;
+using DecorGearApplication.DataTransferObj.OrderDetail;
 using DecorGearApplication.Interface;
 using DecorGearDomain.Data.Entities;
 using DecorGearDomain.Enum;
@@ -77,25 +78,34 @@ namespace DecorGearInfrastructure.implement
 
         public async Task<IEnumerable<OderDto>> GetAllOder(CancellationToken cancellationToken)
         {
-            var order = await _dbcontext.Orders.ToListAsync(cancellationToken);
+            var order = await _dbcontext.Orders.Include(o => o.OrderDetails).ToListAsync(cancellationToken);
             return order.Select(o => new OderDto
             {
                 OderID = o.OrderID,
                 UserID = o.UserID,
                 VoucherID = o.VoucherID,
-                totalQuantity = o.totalQuantity,
-                totalPrice = (decimal)o.totalPrice,
+                totalQuantity = o.OrderDetails.Sum(od => od.Quantity),
+                totalPrice = (decimal)o.OrderDetails.Sum(od => od.UnitPrice * od.Quantity),
                 paymentMethod = o.paymentMethod,
                 size = o.size,
                 weight = (float)o.weight,
                 OrderDate = o.OrderDate,
                 Status = o.Status,
+
+                orderDetailDTOs = o.OrderDetails.Select(od => new OrderDetailDTO
+                {
+                    OrderDetailId = od.OrderDetailId,
+                    ProductID = od.ProductID,
+                    UnitPrice = od.UnitPrice,
+                    Quantity = od.Quantity
+                }).ToList(),
+
             }).ToList();
         }
 
         public async Task<OderDto> GetKeyOderById(ViewOrderRequest request, CancellationToken cancellationToken)
         {
-            var order = await _dbcontext.Orders.FirstOrDefaultAsync(o => o.OrderID == request.OderID, cancellationToken);
+            var order = await _dbcontext.Orders.Include(o => o.OrderDetails).FirstOrDefaultAsync(o => o.OrderID == request.OderID, cancellationToken);
 
             if (order == null)
             {
@@ -113,6 +123,14 @@ namespace DecorGearInfrastructure.implement
                 weight = (float)order.weight,
                 OrderDate = order.OrderDate,
                 Status = order.Status,
+
+                orderDetailDTOs = order.OrderDetails.Select(od => new OrderDetailDTO
+                {
+                    OrderDetailId = od.OrderDetailId,
+                    ProductID = od.ProductID,
+                    UnitPrice = od.UnitPrice,
+                    Quantity = od.Quantity
+                }).ToList(),
             };
         }
 
