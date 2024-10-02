@@ -8,9 +8,8 @@ namespace DecorGearApplication.DataTransferObj.Favorite
 {
     public class CreateFavoriteRequest
     {
-        public string UserID { get; set; }
+        public Guid UserID { get; set; }
 
-
-        public string ProductID { get; set; }
+        public Guid ProductID { get; set; }
     }
 }

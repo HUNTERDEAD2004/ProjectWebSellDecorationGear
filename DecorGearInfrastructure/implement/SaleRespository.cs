@@ -16,7 +16,7 @@ namespace DecorGearInfrastructure.implement
             throw new NotImplementedException();
         }
 
-        public Task<bool> DeleteSale(DeleteSaleRequest request, CancellationToken cancellationToken)
+        public Task<bool> DeleteSale(Guid id, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
@@ -26,12 +26,12 @@ namespace DecorGearInfrastructure.implement
             throw new NotImplementedException();
         }
 
-        public Task<SaleDto> GetKeySaleById(ViewSaleRequest request, CancellationToken cancellationToken)
+        public Task<SaleDto> GetKeySaleById(Guid id, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
 
-        public Task<ErrorMessage> UpdateSale(UpdateSaleRequest request, CancellationToken cancellationToken)
+        public Task<ErrorMessage> UpdateSale(SaleDto request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

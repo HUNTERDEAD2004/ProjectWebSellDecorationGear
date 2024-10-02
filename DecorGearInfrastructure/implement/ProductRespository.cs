@@ -31,18 +31,12 @@ namespace DecorGearInfrastructure.implement
                 return ErrorMessage.Failed;
             }
 
-            //Kiểm tra xem ProductID đã tồn tại chưa 
-            if (await _appDbContext.Products.AnyAsync(m => m.ProductID == request.ProductID, cancellationToken))
-            {
-                return ErrorMessage.Failed;
-            }
-
             // Thêm Sản Phẩm Mới
             try
             {
-                var CreateProduct = _mapper.Map<Product>(request);
+                var createProduct = _mapper.Map<Product>(request);
 
-                await _appDbContext.Products.AddAsync(CreateProduct, cancellationToken);
+                await _appDbContext.Products.AddAsync(createProduct, cancellationToken);
 
                 await _appDbContext.SaveChangesAsync(cancellationToken);
 
@@ -54,9 +48,9 @@ namespace DecorGearInfrastructure.implement
             }
         }
 
-        public async Task<bool> DeleteProduct(DeleteProductRequest request, CancellationToken cancellationToken)
+        public async Task<bool> DeleteProduct(string id, CancellationToken cancellationToken)
         {
-            var deleteProducts = await _appDbContext.Products.FindAsync(request,cancellationToken);
+            var deleteProducts = await _appDbContext.Products.FindAsync(id,cancellationToken);
             if (deleteProducts != null)
             {
                 _appDbContext.Products.Remove(deleteProducts);
@@ -73,9 +67,9 @@ namespace DecorGearInfrastructure.implement
             return _mapper.Map<List<ProductDto>>(products);
         }
 
-        public async Task<ProductDto> GetKeyProductById(ViewProductRequest request, CancellationToken cancellationToken)
+        public async Task<ProductDto> GetKeyProductById(string id, CancellationToken cancellationToken)
         {
-            var productIds = await _appDbContext.Products.FindAsync(request,cancellationToken);
+            var productIds = await _appDbContext.Products.FindAsync(id,cancellationToken);
 
             return _mapper.Map<ProductDto>(productIds);
         }
@@ -95,7 +89,7 @@ namespace DecorGearInfrastructure.implement
                 return ErrorMessage.Failed;
             }
 
-            // Thêm Sản Phẩm Mới
+            // Cập Nhật Sản Phẩm 
             try
             {
                 var updateProduct = new Product
@@ -108,9 +102,10 @@ namespace DecorGearInfrastructure.implement
                     Weight = request.Weight,
                     Description = request.Description,
                     Size = request.Size,
-                    SaleID = Convert.ToString(request.SaleID),
+                    BatteryCapacity = request.BatteryCapacity,
+                    SaleID = request.SaleID,
                     BrandID = request.BrandID,
-                    SubCategoryID = Convert.ToString(request.SubCategoryID),
+                    SubCategoryID = request.SubCategoryID,
                 };
 
                 _appDbContext.Products.Update(updateProduct);

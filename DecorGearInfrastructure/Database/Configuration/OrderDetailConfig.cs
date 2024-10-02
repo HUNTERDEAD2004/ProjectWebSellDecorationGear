@@ -13,11 +13,11 @@ namespace DecorGearInfrastructure.Database.Configuration
     {
         public void Configure(EntityTypeBuilder<OrderDetail> builder)
         {
-            builder.ToTable("Order");
+            builder.ToTable("OrderDetail");
             builder.HasKey(x => x.OrderDetailID);
             builder.HasOne(a => a.Product)
                         .WithMany(p => p.OrderDetails)
-                        .HasForeignKey(a => a.OrderID)
+                        .HasForeignKey(a => a.ProductID)
                         .OnDelete(DeleteBehavior.Restrict);
             builder.HasOne(a => a.Order)
                         .WithMany(p => p.OrderDetails)

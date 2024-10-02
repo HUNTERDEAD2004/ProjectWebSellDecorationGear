@@ -1,6 +1,10 @@
 ﻿using AutoMapper;
+using Azure.Core;
+using DecorGearApplication.DataTransferObj.Product;
 using DecorGearApplication.Interface;
+using DecorGearDomain.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -10,44 +14,96 @@ namespace DecorGearApi.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly IProductRespository _Res;
-        private readonly IMapper _Mapper;
-        public ProductController(IProductRespository Respo,IMapper mapper)
+        private readonly IProductRespository _res;
+        private readonly IMapper _mapper;
+        public ProductController(IProductRespository respo,IMapper mapper)
         {
-            _Res = Respo;
-            _Mapper = mapper;
+            _res = respo;
+            _mapper = mapper;
         }
 
-        [HttpGet("Get-Product")]
+        [HttpGet("get-all")]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
         {
-            await _Res.GetAllProduct(cancellationToken);
-            return Ok();
+            var result = await _res.GetAllProduct(cancellationToken);
+            return Ok(result);
         }
 
-        // GET api/<ProductController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("get-by-id")]
+        public async Task<IActionResult> GetById(string id, CancellationToken cancellationToken)
         {
-            return "value";
+            var result = await _res.GetKeyProductById(id, cancellationToken);
+            return Ok(result);
         }
 
         // POST api/<ProductController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("create")]
+        public async Task<IActionResult> CreateProduct(CreateProductRequest request, CancellationToken cancellationToken)
         {
+            // Kiểm tra nếu ModelState không hợp lệ
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _res.CreateProduct(request, cancellationToken);
+            return Ok(result);
         }
 
         // PUT api/<ProductController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateProduct(ProductDto request, CancellationToken cancellationToken)
         {
+            // Kiểm tra nếu ModelState không hợp lệ
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            // Lấy sản phẩm cần cập nhật theo ID
+            var valueId = await _res.GetKeyProductById(request.ProductID, cancellationToken);
+            if (valueId == null)
+            {
+                return NotFound("Không có giá trị ID");
+            }
+
+            // Cập nhật các thuộc tính của sản phẩm
+            valueId.ProductID = request.ProductID;
+            valueId.ProductName = request.ProductName;
+            valueId.Price = request.Price;
+            valueId.View = request.View;
+            valueId.Quantity = request.Quantity;
+            valueId.Size = request.Size;
+            valueId.Weight = request.Weight;
+            valueId.BatteryCapacity = request.BatteryCapacity;
+            valueId.Description = request.Description;
+            valueId.SaleID = request.SaleID;
+            valueId.BrandID = request.BrandID;
+            valueId.SubCategoryID = request.SubCategoryID;
+
+            // Gọi phương thức Update để lưu các thay đổi
+            var result = await _res.UpdateProduct(valueId, cancellationToken);
+
+            // Trả về kết quả thành công với sản phẩm đã cập nhật
+            return Ok(result);
         }
 
         // DELETE api/<ProductController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("delete")]
+        public async Task<IActionResult> DeleteProduct(string id, CancellationToken cancellationToken)
         {
+            // Lấy sản phẩm cần xóa theo ID
+            var valueId = await _res.GetKeyProductById(id, cancellationToken);
+            if (valueId == null)
+            {
+                return NotFound("Không có giá trị ID");
+            }
+
+            // Gọi phương thức Delete để xóa sản phẩm
+            await _res.DeleteProduct(id, cancellationToken);
+
+            // Trả về kết quả thành công với thông báo xác nhận        
+            return Ok(valueId);
         }
     }
 }

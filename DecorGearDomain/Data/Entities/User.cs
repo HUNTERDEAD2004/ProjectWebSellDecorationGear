@@ -14,7 +14,7 @@ namespace DecorGearDomain.Data.Entities
     public class User : EntityBase
     {
         [Required(ErrorMessage = "Vui lòng không được để trống")]
-        public string UserID { get; set; }
+        public Guid UserID { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập tên")]
         [StringLength(255, ErrorMessage = "Không được vượt quá 255 ký tự")]

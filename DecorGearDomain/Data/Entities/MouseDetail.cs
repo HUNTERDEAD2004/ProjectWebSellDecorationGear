@@ -13,19 +13,21 @@ namespace DecorGearDomain.Data.Entities
     public class MouseDetail : EntityBase
     {
         [Required(ErrorMessage = "Không được để trống")]
-        public string MouseDetailID { get; set; }
+        public Guid MouseDetailID { get; set; }
 
 
         [Required(ErrorMessage = "Không được để trống")]
-        public string ProductID { get; set; }
+        public Guid ProductID { get; set; }
 
         // thuộc tính
         [Required(ErrorMessage = "Không được để trống.")]
         [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]      
         public string Color { get; set; } // Màu sắc
 
+        // thuộc tính
+        [Required(ErrorMessage = "Không được để trống.")]
         [Range(0, 20000, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
-        public int? DPI { get; set; } // Độ phân giải
+        public int DPI { get; set; } // Độ phân giải
 
         [Required(ErrorMessage = "Không được để trống.")]
         [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
@@ -44,9 +46,6 @@ namespace DecorGearDomain.Data.Entities
 
         [Range(0,20, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
         public int? Button { get; set; } // số nút bấm
-
-        [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
-        public string? BatteryCapacity { get; set; } // dung lượng pin nếu có
 
         [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
         public string? LED { get; set; }

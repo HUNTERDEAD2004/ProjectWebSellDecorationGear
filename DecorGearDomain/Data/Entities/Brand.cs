@@ -11,7 +11,7 @@ namespace DecorGearDomain.Data.Entities
     public class Brand : EntityBase
     {
         [Required(ErrorMessage = "Vui lòng không được để trống")]
-        public string BrandID { get; set; }
+        public Guid BrandID { get; set; }
 
         [Required(ErrorMessage = " Vui lòng nhập tên")]
         [StringLength(255, ErrorMessage = "Không được vượt quá 255 ký tự")]

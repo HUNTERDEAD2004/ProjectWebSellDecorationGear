@@ -9,9 +9,9 @@ namespace DecorGearApplication.DataTransferObj
 {
     public class CartDto
     {
-        public int CartID { get; set; }
+        public Guid CartID { get; set; }
 
-        public string UserID { get; set; }
+        public Guid UserID { get; set; }
 
         public int TotalQuantity { get; set; }
 

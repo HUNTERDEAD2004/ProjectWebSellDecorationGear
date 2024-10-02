@@ -16,9 +16,6 @@ namespace DecorGearInfrastructure.Extention.AutoMapperProfile
         {
             CreateMap<VoucherDto, Voucher>().ReverseMap();
             CreateMap<CreateVoucherRequest, Voucher>();
-            CreateMap<UpdateVoucherRequest, Voucher>();
-            CreateMap<DeleteVoucherRequest, Voucher>();
-            CreateMap<ViewVoucherRequest, Voucher>();
         }
     }
 }

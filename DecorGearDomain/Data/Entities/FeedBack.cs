@@ -14,10 +14,10 @@ namespace DecorGearDomain.Data.Entities
         public Guid FeedBackID { get; set; }
 
         [Required(ErrorMessage = "Không được để trống")]
-        public string UserID { get; set; }
+        public Guid UserID { get; set; }
 
         [Required(ErrorMessage = "Không được để trống")]
-        public string ProductID { get; set; }
+        public Guid ProductID { get; set; }
 
         [StringLength(500, ErrorMessage = "Bình luận không được vượt quá 500 ký tự")]
         public string Comment { get; set; }

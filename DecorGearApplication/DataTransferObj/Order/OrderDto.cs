@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DecorGearApplication.DataTransferObj.Order
 {
-    public class UpdateOrderRequest
+    public class OrderDto
     {
-        public int OderID { get; set; }
+        public Guid OderID { get; set; }
 
-        public string UserID { get; set; }
+        public Guid UserID { get; set; }
+
+        public Guid? VoucherID { get; set; } 
 
         public int totalQuantity { get; set; }
 

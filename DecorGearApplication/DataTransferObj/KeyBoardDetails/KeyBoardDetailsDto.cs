@@ -9,9 +9,9 @@ namespace DecorGearApplication.DataTransferObj.KeyBoardDetails
 {
     public class KeyBoardDetailsDto
     {
-        public string KeyboardDetailID { get; set; }
+        public Guid KeyboardDetailID { get; set; }
 
-        public string ProductID { get; set; }
+        public Guid ProductID { get; set; }
 
         public string Layout { get; set; } 
 
@@ -19,9 +19,7 @@ namespace DecorGearApplication.DataTransferObj.KeyBoardDetails
 
         public string Switch { get; set; } 
 
-        public string? SwitchLife { get; set; } 
-
-        public string? BatteryCapacity { get; set; } 
+        public int? SwitchLife { get; set; }  
 
         public string? Led { get; set; }
 

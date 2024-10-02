@@ -9,7 +9,7 @@ namespace DecorGearApplication.DataTransferObj.Sale
 {
     public class SaleDto
     {
-        public int SaleID { get; set; }
+        public Guid SaleID { get; set; }
 
         public string SaleName { get; set; }
 

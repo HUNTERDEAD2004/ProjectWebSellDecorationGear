@@ -25,7 +25,15 @@ namespace DecorGearDomain.Data.Entities
 
         [Required]
         [Range(0.1, double.MaxValue, ErrorMessage = "Đơn giá phải là giá trị dương")]
-        public decimal UnitPrice { get; set; }
+        public double UnitPrice { get; set; }
+
+        [Required(ErrorMessage = "Không được để trống")]
+        [StringLength(10, ErrorMessage = "Size được phụ thuộc vào chuẩn")]
+        public string Size { get; set; }
+
+        [Required(ErrorMessage = "Không được để trống.")]
+        [Range(0.1, double.MaxValue, ErrorMessage = "Cân nặng được phụ thuộc vào chuẩn")]
+        public double Weight { get; set; }
 
         // Khóa ngoại
 
