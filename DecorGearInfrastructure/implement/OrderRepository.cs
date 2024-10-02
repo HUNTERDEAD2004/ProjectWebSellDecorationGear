@@ -26,31 +26,32 @@ namespace DecorGearInfrastructure.implement
             {
                 return ErrorMessage.Null;
             }
-            else 
+
+            var newOder = new Order
             {
-                var newOder = new Order
-                {
-                    UserID = request.UserID,
-                    VoucherID = request.VoucherID,
-                    totalQuantity = request.totalQuantity,
-                    totalPrice = (double)request.totalPrice,
-                    paymentMethod = request.paymentMethod,
-                    size = request.size.ToString(),
-                    weight = request.weight,
-                    OrderDate = request.OrderDate
-                };
-                await _dbcontext.Orders.AddAsync(newOder, cancellationToken);
-                try
-                {
-                    await _dbcontext.SaveChangesAsync();
-                    return ErrorMessage.Successfull;
-                }
-                catch (Exception)
-                {
-                    return ErrorMessage.Failed;
-                }
+                UserID = request.UserID,
+                VoucherID = request.VoucherID,
+                totalQuantity = request.totalQuantity,
+                totalPrice = ((double)request.totalPrice), 
+                paymentMethod = request.paymentMethod,
+                size = request.size.ToString(),
+                weight = request.weight,
+                OrderDate = request.OrderDate
+            };
+
+            await _dbcontext.Orders.AddAsync(newOder, cancellationToken);
+
+            try
+            {
+                await _dbcontext.SaveChangesAsync(cancellationToken); 
+                return ErrorMessage.Successfull;
+            }
+            catch (Exception ex)
+            {
+                return ErrorMessage.Failed;
             }
         }
+
 
         public async Task<bool> DeleteOder(DeleteOrderRequest request, CancellationToken cancellationToken)
         {
@@ -71,18 +72,20 @@ namespace DecorGearInfrastructure.implement
 
             // Xóa hóa đơn chính
             _dbcontext.Orders.Remove(order);
-            await _dbcontext.SaveChangesAsync();
+            await _dbcontext.SaveChangesAsync(cancellationToken);
 
             return true;
         }
 
         public async Task<IEnumerable<OderDto>> GetAllOder(CancellationToken cancellationToken)
         {
-            var order = await _dbcontext.Orders.Include(o => o.OrderDetails).ToListAsync(cancellationToken);
+            var order = await _dbcontext.Orders.Include(o => o.OrderDetails).Include( x => x.User).ToListAsync(cancellationToken);
             return order.Select(o => new OderDto
             {
                 OderID = o.OrderID,
+
                 UserID = o.UserID,
+                UserName = o.User.Name,
                 VoucherID = o.VoucherID,
                 totalQuantity = o.OrderDetails.Sum(od => od.Quantity),
                 totalPrice = (decimal)o.OrderDetails.Sum(od => od.UnitPrice * od.Quantity),
@@ -152,7 +155,7 @@ namespace DecorGearInfrastructure.implement
                 updateOrder.weight = request.weight;
                 updateOrder.OrderDate = request.OrderDate;
                 updateOrder.Status = request.Status;
-                await _dbcontext.SaveChangesAsync();    
+                await _dbcontext.SaveChangesAsync(cancellationToken);    
                 return ErrorMessage.Successfull;
             }
         }

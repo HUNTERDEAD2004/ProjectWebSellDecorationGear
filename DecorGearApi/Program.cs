@@ -1,4 +1,4 @@
-using DecorGearApplication.Interface;
+﻿using DecorGearApplication.Interface;
 using DecorGearInfrastructure.Database.AppDbContext;
 using DecorGearInfrastructure.implement;
 using DecorGearInfrastructure.Implement;
@@ -22,8 +22,15 @@ namespace DecorGearApi
             {
                 option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnect"));
             });
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin",
+                    builder => builder.WithOrigins("http://localhost:5173") // Thay đổi URL nếu cần
+                                      .AllowAnyMethod()
+                                      .AllowAnyHeader());
+            });
             builder.Services.AddScoped<IOderRespository,  OrderRepository>();
-            builder.Services.AddScoped<ICartDetailRespository, CartRepository>();
+            //builder.Services.AddScoped<ICartDetailRespository, CartRepository>();
             builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
             builder.Services.AddScoped<IVoucherRespository, VoucherRepository>();
             var app = builder.Build();
@@ -38,6 +45,7 @@ namespace DecorGearApi
             }
 
             app.UseHttpsRedirection();
+            app.UseCors("AllowSpecificOrigin");
             app.UseAuthorization();
 
 

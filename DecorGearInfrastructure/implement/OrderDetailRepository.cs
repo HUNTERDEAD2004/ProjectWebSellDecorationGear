@@ -37,7 +37,7 @@ namespace DecorGearInfrastructure.implement
                 await _dbcontext.OrderDetails.AddAsync(newOderDetail);
                 try
                 {
-                    await _dbcontext.SaveChangesAsync();
+                    await _dbcontext.SaveChangesAsync(cancellationToken);
                     return ErrorMessage.Successfull;
                 }
                 catch (Exception)
@@ -57,7 +57,7 @@ namespace DecorGearInfrastructure.implement
             else 
             {
                 _dbcontext.OrderDetails.Remove(id); 
-                await _dbcontext.SaveChangesAsync();    
+                await _dbcontext.SaveChangesAsync(cancellationToken);    
                 return true;
             }
         }
@@ -110,7 +110,7 @@ namespace DecorGearInfrastructure.implement
                 id.ProductID = request.ProductID;
                 id.UnitPrice = request.UnitPrice;
                 id.Quantity = request.Quantity;
-                await _dbcontext.SaveChangesAsync();
+                await _dbcontext.SaveChangesAsync(cancellationToken);
                 return ErrorMessage.Successfull;
             }
         }
