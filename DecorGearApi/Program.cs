@@ -31,12 +31,6 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        // Register other services
-        // builder.Services.AddScoped<IUserRespository, UserRepository>();
-        // builder.Services.AddScoped<ITokenRespotitory, TokenRepository>();
-        // builder.Services.AddScoped<IHashRespository, HashRepository>();
-        // builder.Services.AddScoped<IProductRespository, ProductRespository>();
-
         builder.Services.AddApplication();
         builder.Services.AddEventBus(builder.Configuration);
         //builder.Services.AddAutoMapper(typeof(UserProfile));

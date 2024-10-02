@@ -14,10 +14,10 @@ namespace DecorGearDomain.Data.Entities
         public Guid FavoriteID { get; set; }
 
         [Required(ErrorMessage = "UserID không được để trống")]
-        public string UserID { get; set; }
+        public Guid UserID { get; set; }
 
         [Required(ErrorMessage = "Không được để trống")]
-        public string ProductID { get; set; }
+        public Guid ProductID { get; set; }
 
         // Khóa ngoại
         public virtual Product Product { get; set; }

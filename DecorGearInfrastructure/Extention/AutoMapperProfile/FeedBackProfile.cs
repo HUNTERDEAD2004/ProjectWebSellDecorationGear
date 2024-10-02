@@ -18,8 +18,6 @@ namespace DecorGearInfrastructure.Extention.AutoMapperProfile
         {
             CreateMap<FeedBackDto, FeedBack>().ReverseMap();
             CreateMap<CreateFeedBackRequest, FeedBack>();
-            CreateMap<UpdateFeedBackRequest, FeedBack>();
-            CreateMap<ViewFeedBackRequest, FeedBack>();
         }
     }
 }

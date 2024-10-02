@@ -1,6 +1,7 @@
 ﻿using DecorGearApplication.Interface;
 using DecorGearInfrastructure.Database.AppDbContext;
 using DecorGearInfrastructure.implement;
+using DecorGearInfrastructure.Implement;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -19,6 +20,10 @@ namespace DecorGearInfrastructure.Extention
             services.AddTransient<IBrandRespository, BrandRespository>();
             services.AddTransient<ISaleRespository, SaleRespository>();
             services.AddTransient<IImageListRespository, ImageListRespository>();
+            services.AddTransient<ICategoryRespository, CategoryRespository>();
+            services.AddTransient<ISubCategoryRespository, SubCategoryRespository>();
+            services.AddTransient<IMouseRespository, MouseRespository>();
+            services.AddTransient<IKeyboardRespository, KeyboardRespository>();
 
             services.AddTransient<AppDbContext>();
 

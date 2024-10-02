@@ -12,9 +12,9 @@ namespace DecorGearApplication.Interface
     public interface IImageListRespository
     {
         Task<List<ImageListDto>> GetAllImage(CancellationToken cancellationToken);
-        Task<ImageListDto> GetImageById(ViewImageListRequest request, CancellationToken cancellationToken);
+        Task<ImageListDto> GetImageById(Guid id, CancellationToken cancellationToken);
         Task<ErrorMessage> CreateImage(CreateImageRequest request, CancellationToken cancellationToken);
-        Task<ErrorMessage> UpdateImage(UpdateImageRequest request, CancellationToken cancellationToken);
-        Task<bool> DeleteImage(DeleteImageRequest request, CancellationToken cancellationToken);
+        Task<ErrorMessage> UpdateImage(ImageListDto request, CancellationToken cancellationToken);
+        Task<bool> DeleteImage(Guid id, CancellationToken cancellationToken);
     }
 }

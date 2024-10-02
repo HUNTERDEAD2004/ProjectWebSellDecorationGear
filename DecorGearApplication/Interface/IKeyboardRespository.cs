@@ -12,9 +12,9 @@ namespace DecorGearApplication.Interface
     public interface IKeyboardRespository
     {
         Task<List<KeyBoardDetailsDto>> GetAllKeyBoard(CancellationToken cancellationToken);
-        Task<KeyBoardDetailsDto> GetKeyBoardById(ViewKeyBoardsRequest request, CancellationToken cancellationToken);
+        Task<KeyBoardDetailsDto> GetKeyBoardById(Guid id, CancellationToken cancellationToken);
         Task<ErrorMessage> CreateKeyBoard(CreateKeyBoardsRequest request, CancellationToken cancellationToken);
-        Task<ErrorMessage> UpdateKeyBoard(UpdateKeyBoardsRequest request, CancellationToken cancellationToken);
-        Task<bool> DeleteKeyBoard(DeleteKeyBoardsRequest request, CancellationToken cancellationToken);
+        Task<ErrorMessage> UpdateKeyBoard(KeyBoardDetailsDto request, CancellationToken cancellationToken);
+        Task<bool> DeleteKeyBoard(Guid id, CancellationToken cancellationToken);
     }
 }

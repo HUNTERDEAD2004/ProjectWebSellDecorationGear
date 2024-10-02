@@ -36,7 +36,7 @@ namespace DecorGearInfrastructure.implement
             throw new NotImplementedException();
         }
 
-        public Task<bool> DeleteImage(DeleteImageRequest request, CancellationToken cancellationToken)
+        public Task<bool> DeleteImage(Guid id, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
@@ -46,12 +46,12 @@ namespace DecorGearInfrastructure.implement
             throw new NotImplementedException();
         }
 
-        public Task<ImageListDto> GetImageById(ViewImageListRequest request, CancellationToken cancellationToken)
+        public Task<ImageListDto> GetImageById(Guid id, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }
 
-        public Task<ErrorMessage> UpdateImage(UpdateImageRequest request, CancellationToken cancellationToken)
+        public Task<ErrorMessage> UpdateImage(ImageListDto request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

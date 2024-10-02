@@ -12,7 +12,7 @@ namespace DecorGearDomain.Data.Entities
     public class Sale : EntityBase
     {
         [Required(ErrorMessage = "Không được để trống")]
-        public string SaleID { get; set; }
+        public Guid SaleID { get; set; }
 
         [Required(ErrorMessage ="Vui lòng nhập tên")]
         [StringLength(255, ErrorMessage = "Không được vượt quá 255 ký tự")]

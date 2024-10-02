@@ -14,7 +14,7 @@ namespace DecorGearDomain.Data.Entities
         public Guid ImageListID { get; set; }
 
         [Required(ErrorMessage = "Không được để trống")]
-        public string ProductID { get; set; }
+        public Guid ProductID { get; set; }
 
         [Required(ErrorMessage = "Không được để trống")]
         public List<string> ImagePath { get; set; }

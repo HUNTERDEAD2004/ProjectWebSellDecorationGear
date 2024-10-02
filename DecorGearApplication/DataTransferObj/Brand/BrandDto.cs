@@ -8,7 +8,7 @@ namespace DecorGearApplication.DataTransferObj.Brand
 {
     public class BrandDto
     {
-        public string BrandID { get; set; }
+        public Guid BrandID { get; set; }
 
         public string BrandName { get; set; }
 

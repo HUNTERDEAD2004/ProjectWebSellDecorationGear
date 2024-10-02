@@ -11,8 +11,9 @@ namespace DecorGearDomain.Data.Entities
 {
     public class Voucher : EntityBase
     {
-        [Required(ErrorMessage = "Vui lòng không được để trống")]
-        public string VoucherID { get; set; }
+        [Required(ErrorMessage = "Không được để trống")]
+        [StringLength(100, ErrorMessage = "Không được vượt quá 100 ký tự")]
+        public Guid VoucherID { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập tên")]
         public string VoucherName { get; set; }

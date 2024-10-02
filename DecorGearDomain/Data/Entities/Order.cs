@@ -11,10 +11,10 @@ namespace DecorGearDomain.Data.Entities
         public Guid OrderID { get; set; }
 
         [Required(ErrorMessage = "Không được để trống")]
-        public string UserID { get; set; }
+        public Guid UserID { get; set; }
 
         [StringLength(100, ErrorMessage = "Không được vượt quá 100 ký tự")]
-        public string? VoucherID { get; set; } // 1 oder có tối đa 1 voucher ( có thể có hoặc không nên đẻ ? )
+        public Guid? VoucherID { get; set; } // 1 oder có tối đa 1 voucher ( có thể có hoặc không nên đẻ ? )
 
         [Required(ErrorMessage = "Không được để trống")]
         [Range(1, int.MaxValue, ErrorMessage = "Số lượng phải lớn hơn 0")]

@@ -16,9 +16,6 @@ namespace DecorGearInfrastructure.Extention.AutoMapperProfile
         {
             CreateMap<SaleDto, Sale>().ReverseMap();
             CreateMap<CreateSaleRequest, Sale>();
-            CreateMap<UpdateSaleRequest, Sale>();
-            CreateMap<DeleteSaleRequest, Sale>();
-            CreateMap<ViewSaleRequest, Sale>();
         }
     }
 }

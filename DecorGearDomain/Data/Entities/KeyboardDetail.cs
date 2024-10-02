@@ -14,10 +14,10 @@ namespace DecorGearDomain.Data.Entities
     public class KeyboardDetail : EntityBase
     {
         [Required(ErrorMessage = "Không được để trống")]
-        public string KeyboardDetailID { get; set; }
+        public Guid KeyboardDetailID { get; set; }
 
         [Required(ErrorMessage = "Không được để trống")]
-        public string ProductID { get; set; }
+        public Guid ProductID { get; set; }
 
         // thuộc tính
         [Required(ErrorMessage = "Không được để trống.")]
@@ -35,9 +35,6 @@ namespace DecorGearDomain.Data.Entities
 
         [Range(0,10000000, ErrorMessage = "Tuổi thọ không được vượt quá 10000000 lần nhấn")]
         public int? SwitchLife { get; set; } // tuổi thọ trục (số lần nhấn)
-
-        [Range(0, int.MaxValue, ErrorMessage = "Đơn vị dung lượng pin được dung ở đây là Miliample/Hour")]
-        public int? BatteryCapacity { get; set; } // dung lượng pin
 
         [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
         public string? Led { get; set; }

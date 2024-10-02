@@ -14,9 +14,9 @@ namespace DecorGearApplication.Interface
     public interface IBrandRespository
     {
         Task<List<BrandDto>> GetAllBrand(CancellationToken cancellationToken);
-        Task<BrandDto> GetBrandById(ViewBrandRequest request, CancellationToken cancellationToken);
-        Task<ErrorMessage> CreateBrand(CreateUpdateBrandRequest request, CancellationToken cancellationToken);
-        Task<ErrorMessage> UpdateBrand(CreateUpdateBrandRequest request, CancellationToken cancellationToken);
-        Task<bool> DeleteBrand(DeleteBrandRequest request, CancellationToken cancellationToken);
+        Task<BrandDto> GetBrandById(string id, CancellationToken cancellationToken);
+        Task<ErrorMessage> CreateBrand(CreateBrandRequest request, CancellationToken cancellationToken);
+        Task<ErrorMessage> UpdateBrand(BrandDto request, CancellationToken cancellationToken);
+        Task<bool> DeleteBrand(string id, CancellationToken cancellationToken);
     }
 }
