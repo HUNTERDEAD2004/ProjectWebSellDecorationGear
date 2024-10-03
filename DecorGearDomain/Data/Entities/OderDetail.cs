@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -11,13 +12,14 @@ namespace DecorGearDomain.Data.Entities
 {
     public class OrderDetail : EntityBase
     {
-        public Guid OrderDetailID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int OrderDetailID { get; set; }
 
         [Required(ErrorMessage = "Không được để trống")]
-        public Guid OrderID { get; set; }
+        public int OrderID { get; set; }
 
         [Required(ErrorMessage = "Không được để trống")]
-        public Guid ProductID { get; set; }
+        public int ProductID { get; set; }
 
         [Required(ErrorMessage = "vui lòng không được để trống")]
         [Range(1, int.MaxValue, ErrorMessage = "Số lượng phải lớn hơn 0")]

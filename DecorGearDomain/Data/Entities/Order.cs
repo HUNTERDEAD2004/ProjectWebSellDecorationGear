@@ -8,13 +8,14 @@ namespace DecorGearDomain.Data.Entities
 {
     public class Order : EntityBase
     {
-        public Guid OrderID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int OrderID { get; set; }
 
         [Required(ErrorMessage = "Không được để trống")]
-        public Guid UserID { get; set; }
+        public int UserID { get; set; }
 
         [StringLength(100, ErrorMessage = "Không được vượt quá 100 ký tự")]
-        public Guid? VoucherID { get; set; } // 1 oder có tối đa 1 voucher ( có thể có hoặc không nên đẻ ? )
+        public int? VoucherID { get; set; } // 1 oder có tối đa 1 voucher ( có thể có hoặc không nên đẻ ? )
 
         [Required(ErrorMessage = "Không được để trống")]
         [Range(1, int.MaxValue, ErrorMessage = "Số lượng phải lớn hơn 0")]

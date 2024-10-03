@@ -3,6 +3,7 @@ using DecorGearDomain.Enum;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,9 +12,8 @@ namespace DecorGearDomain.Data.Entities
 {
     public class Voucher : EntityBase
     {
-        [Required(ErrorMessage = "Không được để trống")]
-        [StringLength(100, ErrorMessage = "Không được vượt quá 100 ký tự")]
-        public Guid VoucherID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int VoucherID { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập tên")]
         public string VoucherName { get; set; }
