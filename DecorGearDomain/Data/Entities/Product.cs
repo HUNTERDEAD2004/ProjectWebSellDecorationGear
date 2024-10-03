@@ -11,8 +11,15 @@ namespace DecorGearDomain.Data.Entities
 {
     public class Product : EntityBase
     {
+        public int ProductID { get; set; }
+
+        public int? SaleID { get; set; }  // có thể có hoặc không
+
         [Required(ErrorMessage = "Không được để trống")]
-        public Guid ProductID { get; set; } // ID = 2 chự cái đầu của 2 chữ đầu của sản phầm + số thứ tự
+        public int BrandID { get; set; }
+
+        [Required(ErrorMessage = "Không được để trống")]
+        public int SubCategoryID { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập tên")]
         [StringLength(255, ErrorMessage = "Không vượt quá 255 ký tự")]
@@ -43,14 +50,6 @@ namespace DecorGearDomain.Data.Entities
 
         [Range(0, int.MaxValue, ErrorMessage = "Đơn vị dung lượng pin được dung ở đây là Miliample/Hour")]
         public int? BatteryCapacity { get; set; } // dung lượng pin
-
-        public Guid? SaleID { get; set; }  // có thể có hoặc không
-
-        [Required(ErrorMessage = "Không được để trống")]
-        public Guid BrandID { get; set; }
-
-        [Required(ErrorMessage = "Không được để trống")]
-        public Guid SubCategoryID { get; set; }
 
         // Khóa ngoại
 

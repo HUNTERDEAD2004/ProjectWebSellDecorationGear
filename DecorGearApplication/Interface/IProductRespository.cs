@@ -11,9 +11,9 @@ namespace DecorGearApplication.Interface
     public interface IProductRespository
     {
         Task<List<ProductDto>> GetAllProduct(CancellationToken cancellationToken);
-        Task<ProductDto> GetKeyProductById(string id, CancellationToken cancellationToken);
+        Task<ProductDto> GetKeyProductById(Guid id, CancellationToken cancellationToken);
         Task<ErrorMessage> CreateProduct(CreateProductRequest request, CancellationToken cancellationToken);
         Task<ErrorMessage> UpdateProduct(ProductDto request, CancellationToken cancellationToken);
-        Task<bool> DeleteProduct(string id, CancellationToken cancellationToken);
+        Task<bool> DeleteProduct(Guid id, CancellationToken cancellationToken);
     }
 }

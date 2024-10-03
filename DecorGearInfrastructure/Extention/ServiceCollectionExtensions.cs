@@ -16,14 +16,6 @@ namespace DecorGearInfrastructure.Extention
     {
         public static IServiceCollection AddEventBus(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddTransient<IProductRespository, ProductRespository>();
-            services.AddTransient<IBrandRespository, BrandRespository>();
-            services.AddTransient<ISaleRespository, SaleRespository>();
-            services.AddTransient<IImageListRespository, ImageListRespository>();
-            services.AddTransient<ICategoryRespository, CategoryRespository>();
-            services.AddTransient<ISubCategoryRespository, SubCategoryRespository>();
-            services.AddTransient<IMouseRespository, MouseRespository>();
-            services.AddTransient<IKeyboardRespository, KeyboardRespository>();
 
             services.AddTransient<AppDbContext>();
 

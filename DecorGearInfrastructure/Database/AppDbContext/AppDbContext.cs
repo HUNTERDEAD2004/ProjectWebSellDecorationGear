@@ -57,48 +57,6 @@ namespace DecorGearInfrastructure.Database.AppDbContext
 
         public void SeedingData(ModelBuilder modelBuilder)
         {
-            // Seed Brand data
-            var brandData = new List<Brand>()
-            {
-                new Brand()
-                {
-                    BrandID = Guid.Parse("0dd00f64-398a-406c-9248-65a5c029cc8b"),
-                    BrandName = "Logitech",
-                    Description = "Chuyên sản phẩm gaming cao cấp"
-                },
-                new Brand()
-                 {
-                     BrandID = Guid.Parse("bc9bd21f-6aea-4eb7-8a49-5b7f3ec42ca7"),
-                     BrandName = "Razer",
-                     Description = "Chuyên sản phẩm gaming cao cấp"
-                },
-                new Brand()
-                {
-                    BrandID = Guid.Parse("2e50c8a2-879e-46e5-8e63-1909844a5a76"),
-                    BrandName = "Xing-Meng",
-                    Description = "Bàn Phím cơ"
-                },
-                new Brand()
-                {
-                    BrandID = Guid.Parse("596c9f51-a7b4-4894-af33-57486bcd0ad2"),
-                    BrandName = "Fl-esport",
-                    Description = "Bàn Phím cơ"
-                },
-                new Brand()
-                {
-                    BrandID = Guid.Parse("d718f5fe-ae8d-49c4-be86-5507ed4b206f"),
-                    BrandName = "Aula",
-                    Description = "Bàn Phím cơ"
-                },
-                new Brand()
-                {
-                    BrandID = Guid.Parse("8f1fd0cf-d533-44db-b517-66d603193204"),
-                    BrandName = "Zowie",
-                    Description = "Chuột gaming"
-                }
-            };
-            modelBuilder.Entity<Brand>(b => { b.HasData(brandData); });
-
             // Seed Role data
             var roleData = new List<Role>
             {
@@ -160,46 +118,6 @@ namespace DecorGearInfrastructure.Database.AppDbContext
 
             modelBuilder.Entity<Cart>().HasData(cartData);
 
-            // Seed cartDetail
-            var cartDetailData = new List<CartDetail>
-            {
-                new CartDetail
-                {
-                    CartDetailID = Guid.NewGuid(), 
-                    ProductID = Guid.Parse("0a687c3c-04f3-433b-856a-1385cd9e4e9e"), 
-                    CartID = Guid.Parse("872db45e-e45a-4fca-957a-abe8ebaac097"), 
-                    Quantity = 2, 
-                    UnitPrice = 50, 
-                    TotalPrice = 100,
-                    Size = "L",
-                    Weight = 25.5
-                },
-                new CartDetail
-                {
-                    CartDetailID = Guid.NewGuid(), 
-                    ProductID = Guid.Parse("572ad5ee-dbef-49e4-aa74-3e7c9e217e09"), 
-                    CartID = Guid.Parse("872db45e-e45a-4fca-957a-abe8ebaac097"), 
-                    Quantity = 3, 
-                    UnitPrice = 40, 
-                    TotalPrice = 120,
-                    Size = "S",
-                    Weight = 3.5
-                },
-                new CartDetail
-                {                  
-                   CartDetailID = Guid.NewGuid(), 
-                   ProductID = Guid.Parse("94188732-288f-46c5-8dee-aefb12127e1d"), 
-                   CartID = Guid.Parse("abebc4fa-6657-4545-8b4b-5d1d48d2f15e"), 
-                   Quantity = 15, 
-                   UnitPrice = 75, 
-                   TotalPrice = 1125,
-                   Size = "L",
-                   Weight = 20.5
-                }
-            };
-
-            modelBuilder.Entity<CartDetail>().HasData(cartDetailData);
-
             // Seed category
             var categoryData = new List<Category>
             {
@@ -215,43 +133,14 @@ namespace DecorGearInfrastructure.Database.AppDbContext
 
             modelBuilder.Entity<Category>().HasData(categoryData);
 
-            // Seed Subcategory
-            var subCategoryData = new List<SubCategory>
-            {
-                new SubCategory
-                {
-                   SubCategoryID = Guid.Parse("274a7034-b93e-4751-9dd5-58ffe8a63501"), 
-                    CategoryID =  Guid.Parse("a83b8346-21ae-4c5e-8751-78e3df7e2a58"), 
-                    SubCategoryName = "Chuột Logitech"
-                },
-                new SubCategory
-                {
-                   SubCategoryID = Guid.Parse("a59da842-37d0-4415-a3e3-c369b372fc3a"), 
-                    CategoryID =  Guid.Parse("e1b0c57f-8eb9-43ea-b1b5-b0862920a9c4"), 
-                    SubCategoryName = "Bàn Phím Aula"
-                },
-                new SubCategory
-                {
-                   SubCategoryID = Guid.Parse("fc4d928b-1cee-4a89-bcd5-81c12a680a78"), 
-                    CategoryID =  Guid.Parse("e1b0c57f-8eb9-43ea-b1b5-b0862920a9c4"), 
-                    SubCategoryName = "Bàn Phím Xing-Meng"
-                },
-                new SubCategory
-                {
-                   SubCategoryID = Guid.Parse("a1f33141-f953-4b1b-9a49-ef16c72fa8bd"), 
-                    CategoryID =  Guid.Parse("a83b8346-21ae-4c5e-8751-78e3df7e2a58"), 
-                    SubCategoryName = "Chuột Razer"
-                }
-            };
 
-            modelBuilder.Entity<SubCategory>().HasData(subCategoryData);
 
             // Seed Product
             var ProductData = new List<Product>
             {
                 new Product
                 {
-                    ProductID = Guid.Parse("9fed113d-e297-46cb-ae5c-2143c08cce79"),
+                    ProductID = Guid.NewGuid(),
                     ProductName = "Chuột gaming Razer death adder v3",
                     Price = 405.8,
                     View = 1000,
@@ -259,13 +148,13 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Weight = 500,
                     Description = "chiếc chuột siêu bổ rẻ ",
                     Size = "Trung bình",
-                    SaleID = Guid.Parse("a83b8346-21ae-4c5e-8751-78e3df7e2a58"),
+                    SaleID = Guid.Parse("9fed113d-e297-46cb-ae5c-2143c08cce79"),
                     BrandID = Guid.Parse("bc9bd21f-6aea-4eb7-8a49-5b7f3ec42ca7"),
                     SubCategoryID = Guid.Parse("a83b8346-21ae-4c5e-8751-78e3df7e2a58")
                 },
                 new Product
                 {
-                    ProductID=Guid.Parse("bfe62974-e3a6-43e5-a22e-5d307752be32"),
+                    ProductID=Guid.NewGuid(),
                     ProductName="Chuột gaming Razor mini pro 1",
                     Price=2000000,
                     View=1000,
@@ -274,12 +163,12 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Description="Chiếc chuột được nhiều tuyển thủ chuyên nghiệp tin dùng",
                     Size="Trung bình",
                     SaleID=null,
-                    BrandID=Guid.Parse("bc9bd21f-6aea-4eb7-8a49-5b7f3ec42ca7"),
+                    BrandID=Guid.Parse("bc9bd21f-6aea-4eb7-8a49-5b7f3ec42ca"),
                     SubCategoryID=Guid.Parse("a83b8346-21ae-4c5e-8751-78e3df7e2a58")
                 },
                 new Product
                 {
-                    ProductID=Guid.Parse("f65a19bc-a333-4a87-a628-dbf9e1bcfc47"), 
+                    ProductID=Guid.NewGuid(), 
                     ProductName="Bàn phím cơ AulaF75", 
                     Price=1000000, 
                     View=8000,
@@ -287,7 +176,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Weight=400, 
                     Description="Một chiếc bàn phím cơ mỳ ăn liền với 3mode hotswap tầm giá 1 củ mà bạn không nên bỏ qua", 
                     Size="75%", 
-                    SaleID=Guid.Parse("bc9bd21f-6aea-4eb7-8a49-5b7f3ec42ca7"), 
+                    SaleID=null, 
                     BrandID=Guid.Parse("d718f5fe-ae8d-49c4-be86-5507ed4b206f"),
                     SubCategoryID=Guid.Parse("a59da842-37d0-4415-a3e3-c369b372fc3a")
                 }
@@ -308,7 +197,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 { 
                     FavoriteID = Guid.NewGuid(), 
                     UserID = Guid.Parse("173ec5bc-ff4c-4a78-9aee-45942272ca68"), 
-                    ProductID = Guid.Parse("9fed113d-e297-46cb-ae5c-2143c08cce79")
+                    ProductID = Guid.NewGuid()
                 },
                 new Favorite 
                 { 
