@@ -13,11 +13,11 @@ namespace DecorGearDomain.Data.Entities
     public class MouseDetail : EntityBase
     {
         [Required(ErrorMessage = "Không được để trống")]
-        public Guid MouseDetailID { get; set; }
+        public int MouseDetailID { get; set; }
 
 
         [Required(ErrorMessage = "Không được để trống")]
-        public Guid ProductID { get; set; }
+        public int ProductID { get; set; }
 
         // thuộc tính
         [Required(ErrorMessage = "Không được để trống.")]
