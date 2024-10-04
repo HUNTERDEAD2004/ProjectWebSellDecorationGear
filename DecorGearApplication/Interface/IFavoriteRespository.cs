@@ -14,8 +14,8 @@ namespace DecorGearApplication.Interface
     public interface IFavoriteRespository
     {
         Task<List<FavoriteDto>> GetAllCategory(CancellationToken cancellationToken);
-        Task<FavoriteDto> GetCategoryById(Guid id, CancellationToken cancellationToken);
+        Task<FavoriteDto> GetCategoryById(int id, CancellationToken cancellationToken);
         Task<ErrorMessage> CreateFavorite(CreateFavoriteRequest request, CancellationToken cancellationToken);
-        Task<bool> DeleteFavorite(Guid id, CancellationToken cancellationToken);
+        Task<bool> DeleteFavorite(int id, CancellationToken cancellationToken);
     }
 }

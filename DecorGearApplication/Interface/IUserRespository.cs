@@ -14,8 +14,8 @@ namespace DecorGearApplication.Interface
     {
         Task<ErrorMessage> Register(User user, CancellationToken cancellationToken);
         Task<List<UserDto>> GetAllUsers(CancellationToken cancellationToken);
-        Task<UserDto> GetUserById(Guid id, CancellationToken cancellationToken);
+        Task<UserDto> GetUserById(int id, CancellationToken cancellationToken);
         Task<ErrorMessage> UpdateUser(UserUpdateRequest request, CancellationToken cancellationToken);
-        Task<bool> DeleteUser(Guid id, CancellationToken cancellationToken);
+        Task<bool> DeleteUser(int id, CancellationToken cancellationToken);
     }
 }
