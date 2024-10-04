@@ -12,9 +12,9 @@ namespace DecorGearApplication.Interface
     public interface IOderRespository
     {
         Task<List<OrderDto>> GetAllOder(CancellationToken cancellationToken);
-        Task<OrderDto> GetKeyOderById(Guid id, CancellationToken cancellationToken);
+        Task<OrderDto> GetKeyOderById(int id, CancellationToken cancellationToken);
         Task<ErrorMessage> CreateOder(CreateOrderRequest request, CancellationToken cancellationToken);
         Task<ErrorMessage> UpdateOder(OrderDto request, CancellationToken cancellationToken);
-        Task<bool> DeleteOder(Guid id, CancellationToken cancellationToken);
+        Task<bool> DeleteOder(int id, CancellationToken cancellationToken);
     }
 }
