@@ -58,18 +58,48 @@ namespace DecorGearInfrastructure.Database.AppDbContext
 
         public void SeedingData(ModelBuilder modelBuilder)
         {
+            // Seed Brand data
+            var brandData = new List<Brand>
+            {
+                new Brand
+                {
+                    BrandID = 1,
+                    BrandName = "Razer",
+                    Description = "Thương hiệu gaming gear được tin dùng các proplayer"
+                },
+                new Brand
+                {
+                    BrandID = 2,
+                    BrandName = "Aula",
+                    Description = "Một thương hiệu bàn phím đã quá quen thuộc với một số ae"
+                },
+                new Brand
+                {
+                    BrandID = 3,
+                    BrandName = "Rainy",
+                    Description = "Thương hiệu bàn phím  với một số ae"
+                },
+                new Brand
+                {
+                    BrandID = 4,
+                    BrandName = "Logitech",
+                    Description = "Một thương gaming gear quá quen thuộc với các proplayer"
+                }
+            };
+            modelBuilder.Entity<Brand>().HasData(brandData);
+
             // Seed Role data
             var roleData = new List<Role>
             {
                 new Role
                 {
-                    RoleID = Guid.Parse("a8c899ec-6d9d-4f5e-bd52-93f8ccd5fe2c"),
+                    RoleID = 1,
                     RoleName = "Admin"
                 },
                 new Role
                 {
-                    RoleID = Guid.Parse("b718035b-4570-49be-88bb-ff109e5a2a19"),
-                    RoleName = "User"
+                    RoleID = 2,
+                    RoleName = "Admin"
                 }
             };
             modelBuilder.Entity<Role>().HasData(roleData);
@@ -79,24 +109,24 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new User
                 {
-                    UserID = Guid.Parse("fa06b6a4-7694-4f78-8cf7-4e8dbfb6ff7b"),
+                    UserID = 1,
                     Name = "John Smith",
                     PhoneNumber = "0524567890",
                     Email = "john@example.com",
                     UserName = "admin1",
                     Password = "hashedadminpassword",  // You should hash passwords securely!
-                    RoleID = Guid.Parse("a8c899ec-6d9d-4f5e-bd52-93f8ccd5fe2c"),  // Admin Role
+                    RoleID = 1,  // Admin Role
                     Status = UserStatus.Active
                 },
                 new User
                 {
-                    UserID = Guid.Parse("173ec5bc-ff4c-4a78-9aee-45942272ca68"),
+                    UserID = 2,
                     Name = "Jane hangminton",
                     PhoneNumber = "0987654321",
                     Email = "jane@example.com",
                     UserName = "admin2",
                     Password = "hashedadminpassword",  // You should hash passwords securely!
-                    RoleID = Guid.Parse("b718035b-4570-49be-88bb-ff109e5a2a19"),  // Admin Role
+                    RoleID = 2,  // Admin Role
                     Status = UserStatus.Active
                 }
             };
@@ -109,11 +139,11 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new Cart
                 {
-                    CartID= Guid.Parse("abebc4fa-6657-4545-8b4b-5d1d48d2f15e"), UserID=Guid.Parse("fa06b6a4-7694-4f78-8cf7-4e8dbfb6ff7b")
+                    CartID= 1, UserID = 1
                 },
                 new Cart
                 {
-                   CartID = Guid.Parse("872db45e-e45a-4fca-957a-abe8ebaac097"), UserID = Guid.Parse("173ec5bc-ff4c-4a78-9aee-45942272ca68")
+                   CartID = 2, UserID = 2
                 },
             };
 
@@ -124,24 +154,45 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new Category
                 {
-                   CategoryID =  Guid.Parse("a83b8346-21ae-4c5e-8751-78e3df7e2a58"), CategoryName = "Chuột"
+                   CategoryID = 1, CategoryName = "Chuột"
                 },
                 new Category
                 {
-                   CategoryID =  Guid.Parse("e1b0c57f-8eb9-43ea-b1b5-b0862920a9c4"), CategoryName = "Bàn Phím"
+                   CategoryID = 2, CategoryName = "Bàn Phím"
                 }
             };
 
             modelBuilder.Entity<Category>().HasData(categoryData);
 
+            // Seed Subcategory
+            var subCategoryData = new List<SubCategory>
+            {
+                new SubCategory
+                {
+                   SubCategoryID = 1, SubCategoryName = "Chuột Razer", CategoryID = 1
+                },
+                new SubCategory
+                {
+                   SubCategoryID = 2, SubCategoryName = "Chuột logitech", CategoryID = 1
+                },
+                 new SubCategory
+                {
+                   SubCategoryID = 3, SubCategoryName = "Bàn Phím Aula", CategoryID = 2
+                },
+                 new SubCategory
+                {
+                   SubCategoryID = 4, SubCategoryName = "Bàn Phím Rainy", CategoryID = 2
+                },
+            };
 
+            modelBuilder.Entity<SubCategory>().HasData(subCategoryData);
 
             // Seed Product
             var ProductData = new List<Product>
             {
                 new Product
                 {
-                    ProductID = Guid.NewGuid(),
+                    ProductID = 1,
                     ProductName = "Chuột gaming Razer death adder v3",
                     Price = 405.8,
                     View = 1000,
@@ -149,13 +200,13 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Weight = 500,
                     Description = "chiếc chuột siêu bổ rẻ ",
                     Size = "Trung bình",
-                    SaleID = Guid.Parse("9fed113d-e297-46cb-ae5c-2143c08cce79"),
-                    BrandID = Guid.Parse("bc9bd21f-6aea-4eb7-8a49-5b7f3ec42ca7"),
-                    SubCategoryID = Guid.Parse("a83b8346-21ae-4c5e-8751-78e3df7e2a58")
+                    SaleID = 1,
+                    BrandID = 1,
+                    SubCategoryID = 1
                 },
                 new Product
                 {
-                    ProductID=Guid.NewGuid(),
+                    ProductID=2,
                     ProductName="Chuột gaming Razor mini pro 1",
                     Price=2000000,
                     View=1000,
@@ -164,12 +215,12 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Description="Chiếc chuột được nhiều tuyển thủ chuyên nghiệp tin dùng",
                     Size="Trung bình",
                     SaleID=null,
-                    BrandID=Guid.Parse("bc9bd21f-6aea-4eb7-8a49-5b7f3ec42ca"),
-                    SubCategoryID=Guid.Parse("a83b8346-21ae-4c5e-8751-78e3df7e2a58")
+                    BrandID=1,
+                    SubCategoryID=1
                 },
                 new Product
                 {
-                    ProductID=Guid.NewGuid(), 
+                    ProductID=3, 
                     ProductName="Bàn phím cơ AulaF75", 
                     Price=1000000, 
                     View=8000,
@@ -178,8 +229,8 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Description="Một chiếc bàn phím cơ mỳ ăn liền với 3mode hotswap tầm giá 1 củ mà bạn không nên bỏ qua", 
                     Size="75%", 
                     SaleID=null, 
-                    BrandID=Guid.Parse("d718f5fe-ae8d-49c4-be86-5507ed4b206f"),
-                    SubCategoryID=Guid.Parse("a59da842-37d0-4415-a3e3-c369b372fc3a")
+                    BrandID=2,
+                    SubCategoryID=3
                 }
             };
 
@@ -190,21 +241,21 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new Favorite 
                 { 
-                    FavoriteID = Guid.NewGuid(), 
-                    UserID = Guid.Parse("fa06b6a4-7694-4f78-8cf7-4e8dbfb6ff7b"), 
-                    ProductID = Guid.Parse("bfe62974-e3a6-43e5-a22e-5d307752be32") 
+                    FavoriteID = 1, 
+                    UserID = 1, 
+                    ProductID = 1 
                 },
                 new Favorite 
                 { 
-                    FavoriteID = Guid.NewGuid(), 
-                    UserID = Guid.Parse("173ec5bc-ff4c-4a78-9aee-45942272ca68"), 
-                    ProductID = Guid.NewGuid()
+                    FavoriteID = 2, 
+                    UserID = 2, 
+                    ProductID = 1
                 },
                 new Favorite 
                 { 
-                    FavoriteID = Guid.NewGuid(), 
-                    UserID = Guid.Parse("fa06b6a4-7694-4f78-8cf7-4e8dbfb6ff7b"), 
-                    ProductID = Guid.Parse("f65a19bc-a333-4a87-a628-dbf9e1bcfc47")
+                    FavoriteID = 3, 
+                    UserID = 1, 
+                    ProductID = 2
                 }
             };
 
@@ -215,23 +266,23 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new FeedBack 
                 { 
-                    FeedBackID = Guid.NewGuid(), 
-                    UserID = Guid.Parse("fa06b6a4-7694-4f78-8cf7-4e8dbfb6ff7b"), 
-                    ProductID = Guid.Parse("bfe62974-e3a6-43e5-a22e-5d307752be32"), 
+                    FeedBackID = 1, 
+                    UserID = 1, 
+                    ProductID = 1, 
                     Comment = "Sản phẩm rất tốt!" 
                 },
                 new FeedBack 
                 { 
-                    FeedBackID = Guid.NewGuid(), 
-                    UserID = Guid.Parse("173ec5bc-ff4c-4a78-9aee-45942272ca68"), 
-                    ProductID = Guid.Parse("9fed113d-e297-46cb-ae5c-2143c08cce79"), 
+                    FeedBackID = 2, 
+                    UserID = 1, 
+                    ProductID = 2, 
                     Comment = "Chất lượng bình thường." 
                 },
                 new FeedBack 
                 { 
-                    FeedBackID = Guid.NewGuid(), 
-                    UserID = Guid.Parse("fa06b6a4-7694-4f78-8cf7-4e8dbfb6ff7b"), 
-                    ProductID = Guid.Parse("f65a19bc-a333-4a87-a628-dbf9e1bcfc47"), 
+                    FeedBackID = 3, 
+                    UserID = 2, 
+                    ProductID = 3, 
                     Comment = "Giao hàng nhanh, sản phẩm đẹp." 
                 }
             };
@@ -243,8 +294,8 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new KeyboardDetail
                 {
-                    KeyboardDetailID = Guid.Parse("370155b0-c511-4d9b-a593-e05328e1c8d5"),
-                    ProductID = Guid.Parse("f65a19bc-a333-4a87-a628-dbf9e1bcfc47"),
+                    KeyboardDetailID = 1,
+                    ProductID = 3,
                     Color = "Red",
                     Layout = "80%",
                     Case = "Nhôm",
@@ -259,8 +310,8 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 },
                 new KeyboardDetail
                 {
-                    KeyboardDetailID = Guid.Parse("b2fc0c65-a73b-40b8-9a06-b2b29b518e97"),
-                    ProductID = Guid.Parse("f65a19bc-a333-4a87-a628-dbf9e1bcfc47"),
+                    KeyboardDetailID = 1,
+                    ProductID = 3,
                     Color = "Black",
                     Layout = "75%",
                     Case = "Nhựa",
@@ -282,8 +333,8 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new MouseDetail
                 {
-                    MouseDetailID = Guid.Parse("e61d2e54-400d-4997-978d-b78241035b89"),
-                    ProductID = Guid.Parse("9fed113d-e297-46cb-ae5c-2143c08cce79"),
+                    MouseDetailID = 1,
+                    ProductID = 1,
                     Color = "Đen",
                     DPI = 16000,
                     Connectivity = "USB",
@@ -296,8 +347,8 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 },
                 new MouseDetail
                 {
-                    MouseDetailID = Guid.Parse("e679eab0-f692-4837-be8a-1440a3a0dac8"),
-                    ProductID = Guid.Parse("bfe62974-e3a6-43e5-a22e-5d307752be32"),
+                    MouseDetailID = 2,
+                    ProductID = 2,
                     Color = "Trắng",
                     DPI = 12000,
                     Connectivity = "Bluetooth",
@@ -317,15 +368,15 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new ImageList
                 {
-                    ImageListID = Guid.NewGuid(),
-                    ProductID = Guid.Parse("f65a19bc-a333-4a87-a628-dbf9e1bcfc47"),
+                    ImageListID = 1,
+                    ProductID = 3,
                     ImagePath=["/images/aulaf75_img1.jpg", "/images/aulaf75_img2.jpg", "/images/aulaf75_img3.jpg"],
                     Description = "Hình ảnh của sản phẩm aulaf75"
                 },
                 new ImageList
                 {
-                    ImageListID= Guid.NewGuid(), 
-                    ProductID=Guid.Parse("bfe62974-e3a6-43e5-a22e-5d307752be32"), 
+                    ImageListID= 2, 
+                    ProductID=1, 
                     ImagePath=["/images/rzdav3_img.jpg", "/images/rzdav3_img2.jpg"], 
                     Description="Hình ảnh của sản phẩm razer deadth addzer v3"
                 }
@@ -338,15 +389,15 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new Member
                 {
-                    MemberID= Guid.NewGuid(),
-                    UserID=Guid.Parse("fa06b6a4-7694-4f78-8cf7-4e8dbfb6ff7b"),
+                    MemberID= 1,
+                    UserID= 1,
                     Points=100,
                     ExpiryDate=DateTime.Parse("11/12/2024")
                 },
                 new Member 
                 { 
-                    MemberID= Guid.NewGuid(), 
-                    UserID=Guid.Parse("173ec5bc-ff4c-4a78-9aee-45942272ca68"), 
+                    MemberID= 2, 
+                    UserID= 2, 
                     Points=200, 
                     ExpiryDate=DateTime.Parse("26/3/2025")
                 }
@@ -359,14 +410,14 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new Sale
                 {
-                    SaleID=Guid.Parse("9fed113d-e297-46cb-ae5c-2143c08cce79"),
+                    SaleID=1,
                     SaleName="Giảm giá mùa hè",
                     SalePercent=100,
                     Status = EntityStatus.Active
                 },
                 new Sale
                 {
-                    SaleID=Guid.Parse("bc9bd21f-6aea-4eb7-8a49-5b7f3ec42ca7"),
+                    SaleID=2,
                     SaleName="Giảm giá cuối năm",
                     SalePercent=200,
                     Status = EntityStatus.Inactive
@@ -380,14 +431,14 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new Voucher
                 {
-                    VoucherID=Guid.Parse("31ee7e10-df50-47ee-a475-de8333a8c80f"),
+                    VoucherID=1,
                     VoucherName="Giảm giá 30%",
                     VoucherPercent=30,
                     Status = EntityStatus.Active
                 },
                 new Voucher
                 {
-                    VoucherID=Guid.Parse("7ebbf433-5da6-416f-aec7-1e1a856c5349"),
+                    VoucherID=2,
                     VoucherName="Giảm giá 50%",
                     VoucherPercent=50,
                     Status = EntityStatus.Inactive
@@ -401,9 +452,9 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new Order 
                 { 
-                    OrderID=Guid.Parse("7ebbf433-5da6-416f-aec7-1e1a856c5349"), 
-                    UserID=Guid.Parse("fa06b6a4-7694-4f78-8cf7-4e8dbfb6ff7b"), 
-                    VoucherID=Guid.Parse("31ee7e10-df50-47ee-a475-de8333a8c80f"), 
+                    OrderID=1, 
+                    UserID=1, 
+                    VoucherID=1, 
                     totalQuantity=5, 
                     totalPrice=500.00, 
                     Status=OrderStatus.OrderConfirmed, 
@@ -412,8 +463,8 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 },
                 new Order 
                 { 
-                    OrderID=Guid.Parse("1ae84276-f5a7-4cc2-950c-ebc9510da79d"), 
-                    UserID=Guid.Parse("173ec5bc-ff4c-4a78-9aee-45942272ca68"), 
+                    OrderID=2, 
+                    UserID=2, 
                     VoucherID=null, 
                     totalQuantity=3, 
                     totalPrice=300.00, 
@@ -430,9 +481,9 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new OrderDetail
                 {
-                    OrderDetailID = Guid.Parse("cc17e300-7803-43f8-9615-ac260ea1ea6d"),
-                    OrderID=Guid.Parse("1ae84276-f5a7-4cc2-950c-ebc9510da79d"),
-                    ProductID=Guid.Parse("f65a19bc-a333-4a87-a628-dbf9e1bcfc47"),
+                    OrderDetailID = 1,
+                    OrderID=1,
+                    ProductID=3,
                     Quantity=10,
                     UnitPrice=10000000,
                     Size = "M",
@@ -440,9 +491,9 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 },
                 new OrderDetail
                 {
-                    OrderDetailID = Guid.Parse("75877ab6-1e90-40bc-93f8-87b2f5ac0553"),
-                    OrderID=Guid.Parse("1ae84276-f5a7-4cc2-950c-ebc9510da79d"),
-                    ProductID=Guid.Parse("f65a19bc-a333-4a87-a628-dbf9e1bcfc47"),
+                    OrderDetailID = 2,
+                    OrderID=1,
+                    ProductID=3,
                     Quantity=1,
                     UnitPrice=1000000,
                     Size = "S",
@@ -450,9 +501,9 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 },
                 new OrderDetail
                 {
-                    OrderDetailID = Guid.Parse("1cee39e1-0d72-4626-ad70-4cb0b2c7e260"),
-                    OrderID=Guid.Parse("1ae84276-f5a7-4cc2-950c-ebc9510da79d"),
-                    ProductID=Guid.Parse("f65a19bc-a333-4a87-a628-dbf9e1bcfc47"),
+                    OrderDetailID = 3,
+                    OrderID=2,
+                    ProductID=1,
                     Quantity=1000,
                     UnitPrice=1000000000,
                     Size = "L",
