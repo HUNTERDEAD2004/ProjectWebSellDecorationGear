@@ -16,10 +16,10 @@ namespace DecorGearApplication.Interface
 
         Task<List<Member>> GetAllMembers(CancellationToken cancellationToken);
 
-        Task<Member> GetMembersByid(Guid id, CancellationToken cancellationToken);
+        Task<Member> GetMembersByid(int id, CancellationToken cancellationToken);
 
         Task<ErrorMessage> UpdateMember(MemberDto memberdto, CancellationToken cancellationToken);
 
-        Task<bool> DeleteMember(Guid id, CancellationToken cancellationToken);
+        Task<bool> DeleteMember(int id, CancellationToken cancellationToken);
     }
 }

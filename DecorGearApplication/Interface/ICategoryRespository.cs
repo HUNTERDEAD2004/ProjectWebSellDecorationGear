@@ -14,9 +14,9 @@ namespace DecorGearApplication.Interface
     public interface ICategoryRespository
     {
         Task<List<CategoryDto>> GetAllCategory(CancellationToken cancellationToken);
-        Task<CategoryDto> GetCategoryById(Guid id, CancellationToken cancellationToken);
+        Task<CategoryDto> GetCategoryById(int id, CancellationToken cancellationToken);
         Task<ErrorMessage> CreateCategory(CreateCategoryRequest request, CancellationToken cancellationToken);
         Task<ErrorMessage> UpdateCategory(CategoryDto request, CancellationToken cancellationToken);
-        Task<bool> DeleteCategory(Guid id, CancellationToken cancellationToken);
+        Task<bool> DeleteCategory(int id, CancellationToken cancellationToken);
     }
 }

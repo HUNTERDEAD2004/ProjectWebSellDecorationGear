@@ -1,7 +1,5 @@
 ﻿using DecorGearApplication.Interface;
 using DecorGearInfrastructure.Database.AppDbContext;
-using DecorGearInfrastructure.implement;
-using DecorGearInfrastructure.Implement;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -16,6 +14,7 @@ namespace DecorGearInfrastructure.Extention
     {
         public static IServiceCollection AddEventBus(this IServiceCollection services, IConfiguration configuration)
         {
+            //services.AddTransient<>
 
             services.AddTransient<AppDbContext>();
 

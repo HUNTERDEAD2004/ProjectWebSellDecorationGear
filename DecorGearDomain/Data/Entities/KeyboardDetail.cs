@@ -13,7 +13,6 @@ namespace DecorGearDomain.Data.Entities
 {
     public class KeyboardDetail : EntityBase
     {
-        [Required(ErrorMessage = "Không được để trống")]
         public int KeyboardDetailID { get; set; }
 
         [Required(ErrorMessage = "Không được để trống")]
