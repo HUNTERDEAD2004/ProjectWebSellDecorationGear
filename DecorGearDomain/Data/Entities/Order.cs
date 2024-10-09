@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.CompilerServices;
 using DecorGearDomain.Data.Base;
 using DecorGearDomain.Enum;
 
@@ -34,6 +33,7 @@ namespace DecorGearDomain.Data.Entities
 
         [Required(ErrorMessage = "Không được để trống")]
         public DateTime OrderDate { get; set; } // ngày giao hàng
+
 
         // Khóa ngoại
 

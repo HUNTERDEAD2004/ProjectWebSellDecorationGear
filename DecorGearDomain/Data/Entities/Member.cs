@@ -15,7 +15,7 @@ namespace DecorGearDomain.Data.Entities
         public int MemberID { get; set; }
 
         [Required(ErrorMessage = "Không được để trống")]
-        public int UserID { get; set; }  
+        public int UserID { get; set; }
 
         [Required(ErrorMessage = "Không được để trống")]
         [Range(0, int.MaxValue, ErrorMessage = "Phải là số dương")]

@@ -8,9 +8,9 @@ namespace DecorGearApplication.DataTransferObj.CartDetail
 {
     public class CreateCartDetailRequest
     {
-        public Guid UserID { get; set; }
+        public string UserID { get; set; }
 
-        public Guid ProductID { get; set; }
+        public string ProductID { get; set; }
 
         public int Quantity { get; set; }
 

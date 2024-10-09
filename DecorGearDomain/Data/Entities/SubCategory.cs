@@ -12,6 +12,7 @@ namespace DecorGearDomain.Data.Entities
 {
     public class SubCategory : EntityBase
     {
+
         [Required(ErrorMessage = "Vui lòng không được để trống")]
         public int SubCategoryID { get; set; }
 
@@ -21,7 +22,6 @@ namespace DecorGearDomain.Data.Entities
 
         [Required(ErrorMessage = "Vui lòng không được để trống")]
         public int CategoryID { get; set; }
-
         // Khóa ngoại
 
         // n - 1

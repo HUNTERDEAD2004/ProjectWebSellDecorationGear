@@ -17,6 +17,9 @@ namespace DecorGearInfrastructure.Extention.AutoMapperProfile
         {
             CreateMap<MouseDetailsDto, MouseDetail>().ReverseMap();
             CreateMap<CreateMouseRequest, MouseDetail>();
+            CreateMap<UpdateMouseRequest, MouseDetail>();
+            CreateMap<DeleteMouseRequest, KeyboardDetail>();
+            CreateMap<ViewKeyBoardsRequest, MouseDetail>();
         }
     }
 }

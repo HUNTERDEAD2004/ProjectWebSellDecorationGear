@@ -8,26 +8,26 @@ namespace DecorGearApplication.DataTransferObj.Product
 {
     public class CreateProductRequest
     {
+        public string UserID { get; set; }
+
         public string ProductName { get; set; }
 
-        public double Price { get; set; }
+        public decimal Price { get; set; }
 
-        public int View { get; set; }
+        public string View { get; set; }
 
-        public int Quantity { get; set; }
+        public string Quantity { get; set; }
 
-        public double Weight { get; set; }
+        public string Weight { get; set; }
 
         public string Description { get; set; }
 
         public string Size { get; set; }
 
-        public int? BatteryCapacity { get; set; } // dung lượng pin
+        public int? SaleID { get; set; }
 
-        public Guid? SaleID { get; set; }  // có thể có hoặc không
+        public string BrandID { get; set; }
 
-        public Guid BrandID { get; set; }
-
-        public Guid SubCategoryID { get; set; }
+        public int SubCategoryID { get; set; }
     }
 }

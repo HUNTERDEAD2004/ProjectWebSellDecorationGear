@@ -8,9 +8,9 @@ namespace DecorGearApplication.DataTransferObj.FeedBack
 {
     public class CreateFeedBackRequest
     {
-        public Guid UserID { get; set; }
+        public int UserID { get; set; }
 
-        public Guid ProductID { get; set; }
+        public int ProductID { get; set; }
 
         public string Comment { get; set; }
     }

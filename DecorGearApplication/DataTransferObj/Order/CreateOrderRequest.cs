@@ -8,9 +8,9 @@ namespace DecorGearApplication.DataTransferObj.Order
 {
     public class CreateOrderRequest
     {
-        public Guid UserID { get; set; }
+        public string UserID { get; set; }
 
-        public Guid? VoucherID { get; set; }
+        public int? VoucherID { get; set; }
 
         public int totalQuantity { get; set; }
 

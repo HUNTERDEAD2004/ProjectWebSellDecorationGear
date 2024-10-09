@@ -22,6 +22,7 @@ namespace DecorGearDomain.Data.Entities
         [StringLength(500, ErrorMessage = "Bình luận không được vượt quá 500 ký tự")]
         public string Comment { get; set; }
 
+
         //Khóa ngoại
         public virtual Product Product { get; set; }
 

@@ -14,8 +14,11 @@ namespace DecorGearInfrastructure.Extention.AutoMapperProfile
     {
         public ProductProfile()
         {
-            CreateMap<Product,ProductDto>().ReverseMap();
+            CreateMap<ProductDto, Product>().ReverseMap();
             CreateMap<CreateProductRequest, Product>();
+            CreateMap<UpdateProductRequest, Product>();
+            CreateMap<DeleteProductRequest, Product>();
+            CreateMap<ViewProductRequest, Product>();
         }
     }
 }

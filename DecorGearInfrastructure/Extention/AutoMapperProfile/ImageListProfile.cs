@@ -16,6 +16,8 @@ namespace DecorGearInfrastructure.Extention.AutoMapperProfile
         {
             CreateMap<ImageListDto, ImageList>().ReverseMap();
             CreateMap<CreateImageRequest, ImageList>();
+            CreateMap<UpdateImageRequest, ImageList>();
+            CreateMap<ViewImageListRequest, ImageList>();
         }
     }
 }

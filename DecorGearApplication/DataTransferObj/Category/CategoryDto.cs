@@ -9,7 +9,7 @@ namespace DecorGearApplication.DataTransferObj.Category
 {
     public class CategoryDto
     {
-        public Guid CategoryID { get; set; }
+        public int CategoryID { get; set; }
 
         public string CategoryName { get; set; }
     }
