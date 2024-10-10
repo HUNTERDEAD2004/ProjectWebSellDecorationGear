@@ -12,7 +12,7 @@ using DecorGearApplication.Interface;
 using DecorGearApplication.IServices;
 using DecorGearApplication.DataTransferObj.User.Email;
 
-namespace DecorGearInfrastructure.implement
+namespace DecorGearInfrastructure.Implement
 {
     public class UserRepository : IUserRespository
     {

@@ -1,33 +1,12 @@
-﻿using Application.DataTransferObj.User.Request;
-using AutoMapper;
-using DecorGearApplication.DataTransferObj.Token;
+﻿using DecorGearApplication.DataTransferObj.Token;
 using DecorGearApplication.DataTransferObj.User.Email;
 using DecorGearApplication.DataTransferObj.User.Login;
 using DecorGearApplication.Interface;
 using DecorGearApplication.IServices;
-using DecorGearApplication.Services;
-using DecorGearDomain.Data.Entities;
-using DecorGearDomain.Enum;
-using DecorGearInfrastructure.Database.AppDbContext;
 using DecorGearInfrastructure.Extention;
-using DecorGearInfrastructure.implement;
-using Ecommerce.Application.DataTransferObj.User;
-using Ecommerce.Application.DataTransferObj.User.Request;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+
 
 namespace DecorGearApi.Controllers
 {

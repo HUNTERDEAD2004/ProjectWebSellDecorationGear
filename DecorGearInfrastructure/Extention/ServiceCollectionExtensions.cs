@@ -2,7 +2,7 @@
 using DecorGearApplication.IServices;
 using DecorGearApplication.Services;
 using DecorGearInfrastructure.Database.AppDbContext;
-using DecorGearInfrastructure.implement;
+using DecorGearInfrastructure.Implement;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

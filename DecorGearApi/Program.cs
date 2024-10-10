@@ -5,7 +5,7 @@ using DecorGearDomain.Data.Entities;
 using DecorGearInfrastructure.Database.AppDbContext;
 using DecorGearInfrastructure.Extention;
 using DecorGearInfrastructure.Extention.AutoMapperProfile;
-using DecorGearInfrastructure.implement;
+using DecorGearInfrastructure.Implement;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

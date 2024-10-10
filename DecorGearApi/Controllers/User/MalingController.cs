@@ -1,19 +1,17 @@
 ﻿using DecorGearApplication.DataTransferObj.User.Email;
-using DecorGearApplication.Interface;
 using DecorGearApplication.IServices;
 using DecorGearDomain.Data.Entities;
-using DecorGearInfrastructure.implement;
-using MailKit;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using MimeKit;
-using System.Security.Claims;
 
-namespace DecorGearApi.Controllers
+
+namespace DecorGearApi.Controllers.User
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/user/[controller]")]
+  
     public class MalingController : ControllerBase
     {
         private readonly IMailingServices _mailingServices;
@@ -42,7 +40,7 @@ namespace DecorGearApi.Controllers
             }
             catch (Exception ex)
             {
-              
+
                 return StatusCode(500, "An error occurred while sending the email.");
             }
         }
@@ -65,6 +63,6 @@ namespace DecorGearApi.Controllers
             return Ok();
         }
 
-      
+
     }
 }

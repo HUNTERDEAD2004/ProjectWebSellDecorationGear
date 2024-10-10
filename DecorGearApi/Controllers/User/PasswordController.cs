@@ -1,24 +1,22 @@
 ﻿using DecorGearApplication.DataTransferObj.User;
 using DecorGearApplication.DataTransferObj.User.Password;
 using DecorGearApplication.IServices;
-using DecorGearApplication.Services;
 using DecorGearDomain.Enum;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Distributed;
 
-namespace DecorGearApi.Controllers
+
+namespace DecorGearApi.Controllers.User
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/user/[controller]")]
+   
     public class PasswordController : ControllerBase
     {
         private readonly IPasswordServices _passwordService;
         public PasswordController(IPasswordServices passwordServices)
         {
             _passwordService = passwordServices;
-         
+
         }
         [HttpPost("change-password")]
         public async Task<ActionResult<ResponseDto<ErrorMessage>>> ChangePassword([FromBody] ChangePasswordRequest request, CancellationToken cancellationToken)

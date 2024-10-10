@@ -14,7 +14,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DecorGearInfrastructure.implement
+namespace DecorGearInfrastructure.Implement
 {
     public class FeedBackRepository : IFeedBackRespository
     {
