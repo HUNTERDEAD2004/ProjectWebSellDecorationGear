@@ -9,7 +9,13 @@ namespace DecorGearApplication.DataTransferObj.Product
 {
     public class ProductDto
     {
-        public Guid ProductID { get; set; } // ID = 2 chự cái đầu của hãng + kèm tên đặc biệt của sản phẩm + số thứ tự
+        public int ProductID { get; set; }
+
+        public int? SaleID { get; set; }  // có thể có hoặc không
+
+        public int BrandID { get; set; }
+
+        public int SubCategoryID { get; set; }
 
         public string ProductName { get; set; }
 
@@ -26,11 +32,5 @@ namespace DecorGearApplication.DataTransferObj.Product
         public string Size { get; set; }
 
         public int? BatteryCapacity { get; set; } // dung lượng pin
-
-        public Guid? SaleID { get; set; }  // có thể có hoặc không
-
-        public Guid BrandID { get; set; }
-
-        public Guid SubCategoryID { get; set; }
     }
 }

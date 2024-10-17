@@ -9,7 +9,7 @@ namespace DecorGearApplication.DataTransferObj.Voucher
 {
     public class VoucherDto
     {
-        public Guid VoucherID { get; set; }
+        public int VoucherID { get; set; }
 
         public string VoucherName { get; set; }
 

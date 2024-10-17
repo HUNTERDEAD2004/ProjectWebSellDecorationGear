@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DecorGearApplication.DataTransferObj.Product
 {
-    public class CreateProductRequest
+    public class UpdateProductRequest
     {
         public string ProductName { get; set; }
 

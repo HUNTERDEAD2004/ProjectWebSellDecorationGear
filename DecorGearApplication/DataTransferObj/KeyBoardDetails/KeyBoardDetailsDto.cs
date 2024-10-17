@@ -9,9 +9,11 @@ namespace DecorGearApplication.DataTransferObj.KeyBoardDetails
 {
     public class KeyBoardDetailsDto
     {
-        public Guid KeyboardDetailID { get; set; }
+        public int KeyboardDetailID { get; set; }
 
-        public Guid ProductID { get; set; }
+        public int ProductID { get; set; }
+
+        public string Color { get; set; }
 
         public string Layout { get; set; } 
 

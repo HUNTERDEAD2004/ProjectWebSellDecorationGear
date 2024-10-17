@@ -4,7 +4,6 @@ using DecorGearDomain.Data.Entities;
 using DecorGearInfrastructure.Database.AppDbContext;
 using DecorGearInfrastructure.Extention;
 using DecorGearInfrastructure.Extention.AutoMapperProfile;
-using DecorGearInfrastructure.implement;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -20,11 +19,6 @@ public class Program
         const string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
         var builder = WebApplication.CreateBuilder(args);
-
-
-        // Register DbContext with the service container
-        // builder.Services.AddDbContext<AppDbContext>(options =>
-        //    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
         // Add services to the container
         builder.Services.AddControllers();

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using DecorGearApplication.DataTransferObj.Brand;
-using DecorGearApplication.DataTransferObj.Product;
+using DecorGearApplication.DataTransferObj.SubCategory;
 using DecorGearApplication.Interface;
 using DecorGearDomain.Data.Entities;
 using DecorGearDomain.Enum;
@@ -14,18 +14,17 @@ using System.Threading.Tasks;
 
 namespace DecorGearInfrastructure.Implement
 {
-    public class BrandRespository : IBrandRespository
+    public class SubCategoryRespository : ISubCategoryRespository
     {
         private readonly AppDbContext _appDbContext;
         private readonly IMapper _mapper;
 
-        public BrandRespository(AppDbContext appDbContext, IMapper mapper)
+        public SubCategoryRespository(AppDbContext appDbContext, IMapper mapper)
         {
             _appDbContext = appDbContext;
             _mapper = mapper;
         }
-
-        public async Task<ErrorMessage> CreateBrand(CreateBrandRequest request, CancellationToken cancellationToken)
+        public async Task<ErrorMessage> CreateSubCategory(CreateSubCategoryRequest request, CancellationToken cancellationToken)
         {
             // Kiểm Tra Tính Hợp Lệ của Dữ Liệu
             if (request == null)
@@ -35,9 +34,9 @@ namespace DecorGearInfrastructure.Implement
             // Thêm Sản Phẩm Mới
             try
             {
-                var createBrand = _mapper.Map<Brand>(request);
+                var createSubCategory = _mapper.Map<SubCategory>(request);
 
-                await _appDbContext.Brands.AddAsync(createBrand, cancellationToken);
+                await _appDbContext.SubCategories.AddAsync(createSubCategory, cancellationToken);
 
                 await _appDbContext.SaveChangesAsync(cancellationToken);
 
@@ -49,33 +48,33 @@ namespace DecorGearInfrastructure.Implement
             }
         }
 
-        public async Task<bool> DeleteBrand(int id, CancellationToken cancellationToken)
+        public async Task<bool> DeleteSubCategory(int id, CancellationToken cancellationToken)
         {
-            var deleteBrand = await _appDbContext.Brands.FindAsync(id, cancellationToken);
-            if (deleteBrand != null)
+            var deleteSubCategory = await _appDbContext.SubCategories.FindAsync(id, cancellationToken);
+            if (deleteSubCategory != null)
             {
-                _appDbContext.Brands.Remove(deleteBrand);
+                _appDbContext.SubCategories.Remove(deleteSubCategory);
                 _appDbContext.SaveChanges();
                 return true;
             }
             return false;
         }
 
-        public async Task<List<BrandDto>> GetAllBrand(CancellationToken cancellationToken)
+        public async Task<List<SubCategoryDto>> GetAllSubCategory(CancellationToken cancellationToken)
         {
-            var brands = await _appDbContext.Brands.ToListAsync(cancellationToken);
+            var subCategory = await _appDbContext.SubCategories.ToListAsync(cancellationToken);
 
-            return _mapper.Map<List<BrandDto>>(brands);
+            return _mapper.Map<List<SubCategoryDto>>(subCategory);
         }
 
-        public async Task<BrandDto> GetBrandById(int id, CancellationToken cancellationToken)
+        public async Task<SubCategoryDto> GetSubCategoryeById(int id, CancellationToken cancellationToken)
         {
-            var brandIds = await _appDbContext.Brands.FindAsync(id, cancellationToken);
+            var subCategoryIds = await _appDbContext.SubCategories.FindAsync(id, cancellationToken);
 
-            return _mapper.Map<BrandDto>(brandIds);
+            return _mapper.Map<SubCategoryDto>(subCategoryIds);
         }
 
-        public async Task<ErrorMessage> UpdateBrand(int id, UpdateBrandRequest request, CancellationToken cancellationToken)
+        public async Task<ErrorMessage> UpdateSubCategory(int id,UpdateSubCategoryRequest request, CancellationToken cancellationToken)
         {
             // Kiểm Tra Tính Hợp Lệ của Dữ Liệu
             if (request == null)
@@ -86,12 +85,12 @@ namespace DecorGearInfrastructure.Implement
             // Cập Nhật Sản Phẩm 
             try
             {
-                var brand = await _appDbContext.Brands.FindAsync(id, cancellationToken);
+                var subCategory = await _appDbContext.SubCategories.FindAsync(id,cancellationToken);
 
-                brand.BrandName = request.BrandName;
-                brand.Description = request.Description;
+                subCategory.SubCategoryName = request.SubCategoryName;
+                subCategory.CategoryID = request.CategoryID;
 
-                _appDbContext.Brands.Update(brand);
+                _appDbContext.SubCategories.Update(subCategory);
 
                 await _appDbContext.SaveChangesAsync(cancellationToken);
 

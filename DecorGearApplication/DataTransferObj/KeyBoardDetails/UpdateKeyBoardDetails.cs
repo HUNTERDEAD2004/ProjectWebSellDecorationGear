@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DecorGearApplication.DataTransferObj.KeyBoardDetails
 {
-    public class CreateKeyBoardsRequest
+    public class UpdateKeyBoardDetails
     {
         public int ProductID { get; set; }
 

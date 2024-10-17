@@ -9,11 +9,11 @@ namespace DecorGearApplication.DataTransferObj.Order
 {
     public class OrderDto
     {
-        public Guid OderID { get; set; }
+        public int OderID { get; set; }
 
-        public Guid UserID { get; set; }
+        public int UserID { get; set; }
 
-        public Guid? VoucherID { get; set; } 
+        public int? VoucherID { get; set; } 
 
         public int totalQuantity { get; set; }
 
