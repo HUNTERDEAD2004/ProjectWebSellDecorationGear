@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DecorGearApplication.DataTransferObj.MouseDetails
 {
-    public class CreateMouseRequest
+    public class UpdateMouseRequest
     {
         public int ProductID { get; set; }
 

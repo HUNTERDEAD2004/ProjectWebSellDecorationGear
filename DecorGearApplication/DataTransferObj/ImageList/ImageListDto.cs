@@ -9,9 +9,9 @@ namespace DecorGearApplication.DataTransferObj.ImageList
 {
     public class ImageListDto
     {
-        public Guid ImageListID { get; set; }
+        public int ImageListID { get; set; }
 
-        public Guid ProductID { get; set; }
+        public int ProductID { get; set; }
 
         public List<string> ImagePath { get; set; }
 

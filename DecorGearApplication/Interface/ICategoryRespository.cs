@@ -16,7 +16,7 @@ namespace DecorGearApplication.Interface
         Task<List<CategoryDto>> GetAllCategory(CancellationToken cancellationToken);
         Task<CategoryDto> GetCategoryById(int id, CancellationToken cancellationToken);
         Task<ErrorMessage> CreateCategory(CreateCategoryRequest request, CancellationToken cancellationToken);
-        Task<ErrorMessage> UpdateCategory(CategoryDto request, CancellationToken cancellationToken);
+        Task<ErrorMessage> UpdateCategory(int id, UpdateCategoryRequest request, CancellationToken cancellationToken);
         Task<bool> DeleteCategory(int id, CancellationToken cancellationToken);
     }
 }

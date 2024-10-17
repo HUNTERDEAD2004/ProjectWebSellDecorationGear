@@ -310,7 +310,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 },
                 new KeyboardDetail
                 {
-                    KeyboardDetailID = 1,
+                    KeyboardDetailID = 2,
                     ProductID = 3,
                     Color = "Black",
                     Layout = "75%",

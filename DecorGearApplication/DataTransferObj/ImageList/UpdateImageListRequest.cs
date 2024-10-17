@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DecorGearApplication.DataTransferObj.ImageList
 {
-    public class CreateImageRequest
+    public class UpdateImageListRequest
     {
         public int ProductID { get; set; }
 
