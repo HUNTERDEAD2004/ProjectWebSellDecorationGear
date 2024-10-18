@@ -51,9 +51,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseSqlServer("Data Source=DESKTOPD-DELLIN\\SQLEXPRESS;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True;");
-            // optionsBuilder.UseSqlServer("Data Source=MSI\\SQLEXPRESS;Initial Catalog=DemoGear;Integrated Security=True;Encrypt=True;Trust Server Certificate=True");
-            optionsBuilder.UseSqlServer("Data Source=LAP-CN-192\\MSSQLSERVER01;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True");
-
+            optionsBuilder.UseSqlServer("Server=LAPTOP-K61S7AVO;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
