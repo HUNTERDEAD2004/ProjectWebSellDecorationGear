@@ -100,25 +100,21 @@ namespace DecorGearInfrastructure.Implement
 
                 await _db.Users.AddAsync(user, cancellationToken);
                 await _db.SaveChangesAsync(cancellationToken);
-
-              
+            
                 var subject = "Xác thực email";               
                 var verificationCode = new Random().Next(100000, 999999).ToString();
                 await _mailingServices.SendEmailAsync(user.Email, subject,
                     $"Mã xác thực của bạn là: {verificationCode}");
-
-        
+  
                 var verificationEntity = new VerificationCode
                 {
                     Email = request.Email,
                     Code = verificationCode.ToString(), 
                     ExpirationTime = DateTime.UtcNow.AddMinutes(2)
                 };
-
-           
+          
                 await _db.VerificationCodes.AddAsync(verificationEntity, cancellationToken);
                 await _db.SaveChangesAsync(cancellationToken);
-
 
                 return new ResponseDto<UserDto>
                 {
@@ -162,18 +158,22 @@ namespace DecorGearInfrastructure.Implement
         {
             return await _db.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.UserName == username, cancellationToken);
         }
+
         public async Task<User> GetUserByIdAsync(int id, CancellationToken cancellationToken)
         {
             return await _db.Users.SingleOrDefaultAsync(u => u.UserID == id, cancellationToken);
         }
+
         public async Task<User> GetUserByEmailAsync(string email, CancellationToken cancellationToken)
         {
             return await _db.Users.SingleOrDefaultAsync(u => u.Email == email, cancellationToken);
         }
+
         public async Task<User> GetUserByPhoneNumberAsync(string phonenumber, CancellationToken cancellationToken)
         {
             return await _db.Users.SingleOrDefaultAsync(u => u.PhoneNumber == phonenumber, cancellationToken);
         }
+
         public async Task SaveRefreshTokenAsync(int userId, string refreshToken)
         {
             var user = await _db.Users.SingleOrDefaultAsync(u => u.UserID == userId);
@@ -199,6 +199,7 @@ namespace DecorGearInfrastructure.Implement
                 await _db.SaveChangesAsync();
             }
         }
+
         public async Task RemoveOldRefreshTokenAsync(int userId)
         {
             var user = await _db.Users.FindAsync(userId);
@@ -229,15 +230,13 @@ namespace DecorGearInfrastructure.Implement
         public async Task<ResponseDto<bool>> VerifyCodeAsync(VerifyCodeRequest request, CancellationToken cancellationToken)
         {
               try
-                {
-                
+                {  
                 var email = request.Email;
                 var code = request.Code;
 
                 var verificationCode = await _db.VerificationCodes
                         .FirstOrDefaultAsync(vc => vc.Email == email && vc.Code == code, cancellationToken);
-
-                  
+                
                     if (verificationCode == null)
                         return new ResponseDto<bool>(StatusCodes.Status400BadRequest, "Mã xác thực không hợp lệ hoặc không tồn tại.");
 
@@ -334,7 +333,6 @@ namespace DecorGearInfrastructure.Implement
                 var subject = "Xác thực email";
                 await _mailingServices.SendEmailAsync(email, subject, $"Mã xác thực của bạn là: {newVerificationCode}");
 
-                // Lưu mã xác thực mới vào cơ sở dữ liệu
                 var verificationEntity = new VerificationCode
                 {
                     Email = email,
@@ -373,10 +371,8 @@ namespace DecorGearInfrastructure.Implement
             user.Email = request.Email;
             user.UserName = request.UserName;
 
-
             _db.Users.Update(user);
             await _db.SaveChangesAsync(cancellationToken);
-
 
             var userDto = new UserDto
             {

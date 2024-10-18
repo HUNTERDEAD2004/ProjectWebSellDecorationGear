@@ -30,14 +30,12 @@ namespace DecorGearApplication.Services
           
             if (request.NewPassword != request.NewPasswordConFirm)
                 return new ResponseDto<ErrorMessage>(StatusCodes.Status400BadRequest, "Mật khẩu mới và mậy khảu xác nhận không khớp");
-
-                // Lấy thông tin người dùng từ repo
+            
             var user = await _userRepository.GetUserByIdAsync(request.Id, cancellationToken);
 
             if (user == null)
                 return new ResponseDto<ErrorMessage>(StatusCodes.Status400BadRequest, "Người dùng không tồn tại");
 
-                // Kiểm tra mật khẩu cũ
              if (!VerifyPassword(request.OldPassword, user.Password))
                  return new ResponseDto<ErrorMessage>(StatusCodes.Status400BadRequest, "Mật khẩu cũ không đúng");
 
@@ -63,7 +61,6 @@ namespace DecorGearApplication.Services
             await _mailingServices.SendEmailAsync(userByEmail.Email, "Mã xác thực để đặt lại mật khẩu",
                 $"Mã xác thực của bạn là: {verificationCode}");
 
-            // Lưu mã xác thực vào cơ sở dữ liệu
             var codeEntity = new VerificationCodePw
             {
                 UserId = userByEmail.UserID,
@@ -81,7 +78,6 @@ namespace DecorGearApplication.Services
 
         public async Task<ResponseDto<ErrorMessage>> ResetPassword(ResetPassword request, CancellationToken cancellationToken)
         {
-            // Kiểm tra mã xác thực
             if (string.IsNullOrEmpty(request.VerificationCodePw))
                 return new ResponseDto<ErrorMessage>(StatusCodes.Status400BadRequest, "Mã xác thực không hợp lệ.");
 
