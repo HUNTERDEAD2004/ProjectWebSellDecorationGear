@@ -13,8 +13,10 @@ namespace DecorGearInfrastructure.Extention.AutoMapperProfile
     {
         public CategoryProfile() 
         {
-            CreateMap<Category,CategoryDto>().ReverseMap();
+            CreateMap<CategoryDto, Category>().ReverseMap();
             CreateMap<CreateCategoryRequest, Category>();
+            CreateMap<UpdateCategoryRequest, Category>();
+            CreateMap<ViewCategoryRequest, Category>();
         }
     }
 }

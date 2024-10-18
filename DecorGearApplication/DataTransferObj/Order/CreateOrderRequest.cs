@@ -8,7 +8,7 @@ namespace DecorGearApplication.DataTransferObj.Order
 {
     public class CreateOrderRequest
     {
-        public int UserID { get; set; }
+        public string UserID { get; set; }
 
         public int? VoucherID { get; set; }
 

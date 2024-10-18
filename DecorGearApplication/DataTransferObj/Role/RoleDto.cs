@@ -9,7 +9,7 @@ namespace DecorGearApplication.DataTransferObj.Role
 {
     public class RoleDto
     {
-        public Guid RoleID { get; set; }
+        public int RoleID { get; set; }
 
         public string RoleName { get; set; }
     }
