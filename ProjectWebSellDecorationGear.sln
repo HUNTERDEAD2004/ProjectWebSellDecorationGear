@@ -3,19 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DecorGearApi", "DecorGearApi\DecorGearApi.csproj", "{9A214007-81A8-4D2F-8B6D-F4531F284F37}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cilent", "Cilent", "{9AD59139-5195-4EC6-BCF5-BED97A1BDD5D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DecorGearMVC", "DecorGearMVC\DecorGearMVC.csproj", "{C31E84F9-D3C4-4FE9-B73B-90396B7F6C81}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecorGearMVC", "DecorGearMVC\DecorGearMVC.csproj", "{C31E84F9-D3C4-4FE9-B73B-90396B7F6C81}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{E1ECA553-D96B-4E33-A271-6577BA52F01F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DecorGearInfrastructure", "DecorGearInfrastructure\DecorGearInfrastructure.csproj", "{F6807CDB-5CB1-44DE-88BA-1F079F205E48}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecorGearInfrastructure", "DecorGearInfrastructure\DecorGearInfrastructure.csproj", "{F6807CDB-5CB1-44DE-88BA-1F079F205E48}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DecorGearApplication", "DecorGearApplication\DecorGearApplication.csproj", "{40CE902D-21BF-41A3-8226-6C70FD978E76}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecorGearApplication", "DecorGearApplication\DecorGearApplication.csproj", "{40CE902D-21BF-41A3-8226-6C70FD978E76}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DecorGearDomain", "DecorGearDomain\DecorGearDomain.csproj", "{FBF68363-343C-45BC-8018-83D8FEBA31C7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecorGearApi", "DecorGearApi\DecorGearApi.csproj", "{B3488989-3DC6-4EE1-A610-9CD040380809}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecorGearDomain", "DecorGearDomain\DecorGearDomain.csproj", "{FBF68363-343C-45BC-8018-83D8FEBA31C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +23,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9A214007-81A8-4D2F-8B6D-F4531F284F37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A214007-81A8-4D2F-8B6D-F4531F284F37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A214007-81A8-4D2F-8B6D-F4531F284F37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A214007-81A8-4D2F-8B6D-F4531F284F37}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C31E84F9-D3C4-4FE9-B73B-90396B7F6C81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C31E84F9-D3C4-4FE9-B73B-90396B7F6C81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C31E84F9-D3C4-4FE9-B73B-90396B7F6C81}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,20 +43,16 @@ Global
 		{FBF68363-343C-45BC-8018-83D8FEBA31C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBF68363-343C-45BC-8018-83D8FEBA31C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FBF68363-343C-45BC-8018-83D8FEBA31C7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B3488989-3DC6-4EE1-A610-9CD040380809}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B3488989-3DC6-4EE1-A610-9CD040380809}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B3488989-3DC6-4EE1-A610-9CD040380809}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B3488989-3DC6-4EE1-A610-9CD040380809}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{9A214007-81A8-4D2F-8B6D-F4531F284F37} = {E1ECA553-D96B-4E33-A271-6577BA52F01F}
 		{C31E84F9-D3C4-4FE9-B73B-90396B7F6C81} = {9AD59139-5195-4EC6-BCF5-BED97A1BDD5D}
 		{F6807CDB-5CB1-44DE-88BA-1F079F205E48} = {E1ECA553-D96B-4E33-A271-6577BA52F01F}
 		{40CE902D-21BF-41A3-8226-6C70FD978E76} = {E1ECA553-D96B-4E33-A271-6577BA52F01F}
 		{FBF68363-343C-45BC-8018-83D8FEBA31C7} = {E1ECA553-D96B-4E33-A271-6577BA52F01F}
-		{B3488989-3DC6-4EE1-A610-9CD040380809} = {E1ECA553-D96B-4E33-A271-6577BA52F01F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DE738CDA-7658-42ED-82C5-7647842F7BE3}

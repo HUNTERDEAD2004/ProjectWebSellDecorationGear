@@ -44,8 +44,10 @@ namespace DecorGearDomain.Data.Entities
 
         // n - 1
 
-        public virtual Product Product { get; set; }  
 
-        public virtual Cart Cart { get; set; } 
+
+        public virtual Product Product { get; set; }  // Mỗi CartDetail liên kết với một Product
+
+        public virtual Cart Cart { get; set; } // Các CartDetail liên kết với một cart
     }
 }
