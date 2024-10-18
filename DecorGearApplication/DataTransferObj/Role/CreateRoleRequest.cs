@@ -8,7 +8,7 @@ namespace DecorGearApplication.DataTransferObj.Role
 {
     public class CreateRoleRequest
     {
-        public string UserID { get; set; }
+        public int UserID { get; set; }
 
         public string RoleName { get; set; }
     }

@@ -1,21 +1,17 @@
 ﻿using DecorGearDomain.Data.Base;
 using DecorGearDomain.Enum;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+
 
 namespace DecorGearDomain.Data.Entities
 {
     public class User : EntityBase
     {
-        [Required]
-        public string UserID { get; set; }  
+        [Key]
+        public int UserID { get; set; }
 
+        [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
 
         public string PhoneNumber { get; set; }
@@ -28,12 +24,16 @@ namespace DecorGearDomain.Data.Entities
 
         [Required]
         public string Password { get; set; }
-
+  
+      
         [Required]
-        public string RoleID { get; set; }
+        public int RoleID { get; set; }
         
-        public UserStatus Status { get; set; }
+       // public string RoleName { get; set; }    
 
+        public string? RefreshToken { get; set; }
+        public UserStatus Status { get; set; }
+       
         // Khóa ngoại
 
         // 1 - n
@@ -48,6 +48,6 @@ namespace DecorGearDomain.Data.Entities
         // n - 1
         public virtual Role Role { get; set; }
 
-
+       
     }
 }

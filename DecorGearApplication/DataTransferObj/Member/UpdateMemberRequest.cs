@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DecorGearApplication.DataTransferObj.Member
 {
-    public class CreateUpdateMemberRequest
-    {
-        public string UserID { get; set; }
+    public class UpdateMemberRequest
+    {      
+        public int? UserID { get; set; }
 
         public int Points { get; set; }
 

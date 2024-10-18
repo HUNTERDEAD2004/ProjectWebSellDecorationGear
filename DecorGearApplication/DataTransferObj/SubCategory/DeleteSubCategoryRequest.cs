@@ -10,6 +10,6 @@ namespace DecorGearApplication.DataTransferObj.SubCategory
     {
         public int SubCategoryID { get; set; }
 
-        public string UserID { get; set; }
+        public int UserID { get; set; }
     }
 }
