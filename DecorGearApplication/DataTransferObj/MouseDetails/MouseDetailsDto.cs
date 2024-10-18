@@ -9,23 +9,27 @@ namespace DecorGearApplication.DataTransferObj.MouseDetails
 {
     public class MouseDetailsDto
     {
-        public int MouseDetailID { get; set; }
+        public string MouseDetailID { get; set; }
 
-        public int ProductID { get; set; }
+        public string ProductID { get; set; }
 
         public string Color { get; set; } 
 
-        public int DPI { get; set; } 
+        public string? DPI { get; set; } 
 
         public string Connectivity { get; set; } 
 
         public string Dimensions { get; set; } 
 
+        public string Weight { get; set; } 
+
         public string Material { get; set; } 
 
         public string? EyeReading { get; set; }   
 
-        public int? Button { get; set; } 
+        public string? Button { get; set; } 
+
+        public string? BatteryCapacity { get; set; } 
 
         public string? LED { get; set; }
 

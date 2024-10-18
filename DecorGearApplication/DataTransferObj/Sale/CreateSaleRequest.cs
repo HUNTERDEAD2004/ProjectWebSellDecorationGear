@@ -11,5 +11,7 @@ namespace DecorGearApplication.DataTransferObj.Sale
         public string SaleName { get; set; }
 
         public int SalePercent { get; set; }
+
+        public int UserID { get; set; }
     }
 }

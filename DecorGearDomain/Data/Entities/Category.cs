@@ -19,6 +19,7 @@ namespace DecorGearDomain.Data.Entities
         //Khóa ngoại
 
         // 1 - n
+
         public virtual ICollection<SubCategory> SubCategories { get; set; }
     }
 }

@@ -17,6 +17,9 @@ namespace DecorGearInfrastructure.Extention.AutoMapperProfile
         {
             CreateMap<KeyBoardDetailsDto, KeyboardDetail>().ReverseMap();
             CreateMap<CreateKeyBoardsRequest, KeyboardDetail>();
+            CreateMap<UpdateKeyBoardsRequest, KeyboardDetail>();
+            CreateMap<DeleteKeyBoardsRequest, KeyboardDetail>();
+            CreateMap<ViewKeyBoardsRequest, KeyboardDetail>();
         }
     }
 }

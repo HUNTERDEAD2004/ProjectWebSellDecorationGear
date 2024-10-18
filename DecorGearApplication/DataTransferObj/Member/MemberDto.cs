@@ -9,9 +9,9 @@ namespace DecorGearApplication.DataTransferObj.Member
 {
     public class MemberDto
     {
-        public Guid MemberID { get; set; }
+        public int MemberID { get; set; }
 
-        public Guid UserID { get; set; } 
+        public int? UserID { get; set; } 
 
         public int Points { get; set; }
 
