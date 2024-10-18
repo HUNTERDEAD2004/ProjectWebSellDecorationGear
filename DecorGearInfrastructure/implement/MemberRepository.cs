@@ -35,7 +35,7 @@ namespace DecorGearInfrastructure.implement
 
             return new ResponseDto<ErrorMessage>(StatusCodes.Status201Created,"Tạo member thành công");
         }
-        //hoang anh te
+
         public async Task<ResponseDto<bool>> DeleteMemberAsync(DeleteMemberRequest request, CancellationToken cancellation)
         {
             var member = await _db.Members.FindAsync(request.MemberID, cancellation);
