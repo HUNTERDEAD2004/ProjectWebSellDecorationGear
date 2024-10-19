@@ -111,7 +111,7 @@ namespace DecorGearApplication.Services
             {
                 ValidateIssuer = true,
                 ValidateAudience = true,
-                ValidateLifetime = true, // Kiểm tra thời gian sống của token
+                ValidateLifetime = true, 
                 ValidateIssuerSigningKey = true,
                 ValidIssuer = Issuer,
                 ValidAudience = Audience,
