@@ -6,6 +6,7 @@ namespace DecorGearMVC
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddHttpClient(); // Thêm dòng này
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 

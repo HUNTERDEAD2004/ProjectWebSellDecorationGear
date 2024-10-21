@@ -12,6 +12,6 @@ namespace DecorGearApplication.DataTransferObj.SubCategory
 
         public string SubCategoryName { get; set; }
 
-        public string UserID { get; set; }
+        public int UserID { get; set; }
     }
 }

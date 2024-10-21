@@ -12,13 +12,13 @@ namespace DecorGearDomain.Data.Entities
     {
         public int CategoryID { get; set; }
 
-        [Required(ErrorMessage = " Vui lòng nhập tên")]
+        [Required(ErrorMessage = "Vui lòng nhập tên")]
+        [StringLength(255, ErrorMessage = "Không được vượt quá 255 ký tự")]
         public string CategoryName { get; set; }
 
         //Khóa ngoại
 
         // 1 - n
-        public virtual ICollection<CartDetail> CartDetails { get; set; } = new List<CartDetail>();
 
         public virtual ICollection<SubCategory> SubCategories { get; set; }
     }

@@ -14,7 +14,7 @@ namespace DecorGearInfrastructure.Database.Configuration
         public void Configure(EntityTypeBuilder<Order> builder)
         {
             builder.ToTable("Order");
-            builder.HasKey(x => x.OderID);
+            builder.HasKey(x => x.OrderID);
             builder.HasOne(a => a.Voucher)
                         .WithMany(p => p.Orders)
                         .HasForeignKey(a => a.VoucherID)

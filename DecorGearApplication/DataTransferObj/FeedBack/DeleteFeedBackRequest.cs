@@ -10,6 +10,6 @@ namespace DecorGearApplication.DataTransferObj.FeedBack
     {
         public int FeedBackID { get; set; }
 
-        public string UserID { get; set; }
+        public int UserID { get; set; }
     }
 }

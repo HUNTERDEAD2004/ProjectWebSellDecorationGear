@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DecorGearApplication.DataTransferObj.Sale
 {
-    internal class UpdateSaleRequest
+    public class UpdateSaleRequest
     {
         public int SaleID { get; set; }
 
@@ -14,6 +14,6 @@ namespace DecorGearApplication.DataTransferObj.Sale
 
         public int SalePercent { get; set; }
 
-        public string UserID { get; set; }
+        public int UserID { get; set; }
     }
 }
