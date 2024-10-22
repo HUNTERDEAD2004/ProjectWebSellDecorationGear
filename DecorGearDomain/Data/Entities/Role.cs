@@ -11,13 +11,8 @@ namespace DecorGearDomain.Data.Entities
 {
     public class Role : EntityBase
     {
-       
+        public int RoleID { get; set; }
 
-        [Required]
-        [Key]
-        public int RoleID { get; set; }   
-        public int? UserID { get; set; }
-        public string ? CreatedBy { get; set; } // Thuộc tính lưu ID của người tạo
         [Required]
         public string? RoleName { get; set; }   
 

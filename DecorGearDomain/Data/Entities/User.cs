@@ -8,30 +8,30 @@ namespace DecorGearDomain.Data.Entities
 {
     public class User : EntityBase
     {
-        [Key]
         public int UserID { get; set; }
 
-        [Required(ErrorMessage = "Name is required")]
+        [Required(ErrorMessage = "Vui lòng không được để trống")]
+        public int RoleID { get; set; }
+
+        [Required(ErrorMessage = "Vui lòng nhập tên")]
+        [StringLength(255, ErrorMessage = "Không được vượt quá 255 ký tự")]
         public string Name { get; set; }
 
+        [Phone(ErrorMessage = "Vui lòng nhập đúng chuẩn SĐT bắt đầu bằng 0 có tối đa 10 hoặc 11")]
         public string PhoneNumber { get; set; }
 
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Vui lòng nhập đúng chuẩn email <a-zA-Z0-9+@gmail.com>")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập tên tài khoản")]
         public string UserName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vui lòng nhập mật khẩu")]
         public string Password { get; set; }
-  
-      
-        [Required]
-        public int RoleID { get; set; }
-        
-       // public string RoleName { get; set; }    
 
         public string? RefreshToken { get; set; }
+
+        [Range(1, 3, ErrorMessage = "Vui lòng lựa chọn từ 1 - 3 <(Hoạt động:1) (Không hoạt động:2) (Khóa:3)> ")]
         public UserStatus Status { get; set; }
        
         // Khóa ngoại

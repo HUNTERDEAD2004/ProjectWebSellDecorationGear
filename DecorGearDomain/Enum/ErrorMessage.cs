@@ -8,7 +8,7 @@ namespace DecorGearDomain.Enum
 {
     public enum ErrorMessage
     {
-        Successful = 1,
+        Successfull = 1,
         Failed = 2,
         Null = 3,
         RoleNotFound = 4,

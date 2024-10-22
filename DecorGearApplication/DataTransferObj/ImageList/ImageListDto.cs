@@ -11,7 +11,7 @@ namespace DecorGearApplication.DataTransferObj.ImageList
     {
         public int ImageListID { get; set; }
 
-        public string ProductID { get; set; }
+        public int ProductID { get; set; }
 
         public List<string> ImagePath { get; set; }
 

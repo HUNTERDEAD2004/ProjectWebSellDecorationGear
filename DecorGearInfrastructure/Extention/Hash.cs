@@ -23,10 +23,19 @@ namespace DecorGearInfrastructure.Extention
 
         // Xác thực mật khẩu
         public static bool VerifyPassword(string enteredPassword, string storedHash)
-        {
+            {
             string hashOfInput = HashPassword(enteredPassword);
             return hashOfInput == storedHash;
         }
-       
+
+        public static string GenerateRandomString()
+        {
+            const string chars = "0123456789";
+            var random = new Random();
+            var randomString = new string(Enumerable.Repeat(chars, 8)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+
+            return randomString;
+        }
     }
 }

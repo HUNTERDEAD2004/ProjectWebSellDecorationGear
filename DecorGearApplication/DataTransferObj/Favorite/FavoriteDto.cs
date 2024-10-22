@@ -11,10 +11,8 @@ namespace DecorGearApplication.DataTransferObj
     {
         public int FavoriteID { get; set; }
 
+        public int UserID { get; set; }
 
-        public string UserID { get; set; }
-
-
-        public string ProductID { get; set; }
+        public int ProductID { get; set; }
     }
 }

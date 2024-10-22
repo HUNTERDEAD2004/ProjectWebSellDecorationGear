@@ -12,6 +12,5 @@ namespace DecorGearApplication.DataTransferObj.Role
 
         public string RoleName { get; set; }
 
-        public int UserID { get; set; }
     }
 }

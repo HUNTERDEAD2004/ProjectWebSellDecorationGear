@@ -6,14 +6,10 @@ using System.Threading.Tasks;
 
 namespace DecorGearApplication.DataTransferObj.Brand
 {
-    public class CreateUpdateBrandRequest
+    public class CreateBrandRequest
     {
-        public string BrandID { get; set; }
-
         public string BrandName { get; set; }
 
         public string Description { get; set; }
-
-        public string UserID { get; set; }
     }
 }

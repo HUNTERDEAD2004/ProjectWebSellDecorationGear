@@ -29,7 +29,7 @@ namespace DecorGearDomain.Data.Entities
         [Range(0.01, double.MaxValue, ErrorMessage = "Giá phải lớn hơn 0")]
         public double Price { get; set; }
 
-        [Range(0, 10000, ErrorMessage = "View không được vượt quá 10000 lượt xem")]
+        [Range(0,10000, ErrorMessage = "View không được vượt quá 10000 lượt xem")]
         public int View { get; set; }
 
         [Required(ErrorMessage = "Không được để trống.")]
@@ -50,7 +50,6 @@ namespace DecorGearDomain.Data.Entities
 
         [Range(0, int.MaxValue, ErrorMessage = "Đơn vị dung lượng pin được dung ở đây là Miliample/Hour")]
         public int? BatteryCapacity { get; set; } // dung lượng pin
-
 
         // Khóa ngoại
 

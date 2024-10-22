@@ -12,7 +12,6 @@ namespace DecorGearDomain.Data.Entities
     public class Member : EntityBase
     {
         [Required(ErrorMessage = "Không được để trống")]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MemberID { get; set; }
 
         [Required(ErrorMessage = "Không được để trống")]

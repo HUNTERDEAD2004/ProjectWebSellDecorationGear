@@ -11,7 +11,7 @@ namespace DecorGearApplication.DataTransferObj
     {
         public int CartID { get; set; }
 
-        public string UserID { get; set; }
+        public int UserID { get; set; }
 
         public int TotalQuantity { get; set; }
 

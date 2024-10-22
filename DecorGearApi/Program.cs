@@ -66,7 +66,7 @@ public class Program
         builder.Services.AddScoped<IMemberRespository, MemberRepository>();
         builder.Services.AddScoped<IMemberServices, MemberServices>();
         builder.Services.AddEventBus(builder.Configuration);
-        builder.Services.AddAutoMapper(typeof(UserProfile), typeof(FeedBackProfile));
+        //builder.Services.AddAutoMapper(typeof(UserProfile), typeof(FeedBackProfile));
 
         builder.Services.AddStackExchangeRedisCache(options =>
         {

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DecorGearInfrastructure.Database.Configuration
 {
-    public class OderConfig : IEntityTypeConfiguration<Order>
+    public class OrderConfig : IEntityTypeConfiguration<Order>
     {
         public void Configure(EntityTypeBuilder<Order> builder)
         {

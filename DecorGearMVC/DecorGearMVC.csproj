@@ -16,4 +16,8 @@
     <Folder Include="Services\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DecorGearApplication\DecorGearApplication.csproj" />
+  </ItemGroup>
+
 </Project>

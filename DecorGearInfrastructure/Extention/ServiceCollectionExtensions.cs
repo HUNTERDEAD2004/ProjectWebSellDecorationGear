@@ -19,10 +19,6 @@ namespace DecorGearInfrastructure.Extention
     {
         public static IServiceCollection AddEventBus(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<AppDbContext>(options =>
-            {
-                options.UseSqlServer("Server=LAPTOP-K61S7AVO;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True");
-            });
             //services.AddTransient<IExampleRepository, ExampleRepository>();
             services.AddTransient<IMailingServices, MailingServices>();
             services.AddTransient<IUserRespository, UserRepository>();
@@ -35,6 +31,16 @@ namespace DecorGearInfrastructure.Extention
             services.AddTransient<IMemberRespository,MemberRepository>();
             services.AddTransient<IMemberServices, MemberServices>();  
             services.AddHttpContextAccessor();
+
+            services.AddScoped<IImageListRespository, ImageListRespository>();
+            services.AddScoped<IProductRespository, ProductRespository>();
+            services.AddScoped<ICategoryRespository, CategoryRespository>();
+            services.AddScoped<ISubCategoryRespository, SubCategoryRespository>();
+            services.AddScoped<IBrandRespository, BrandRespository>();
+            services.AddScoped<IKeyboardRespository, KeyboardRespository>();
+            services.AddScoped<IMouseRespository, MouseRespository>();
+
+            services.AddTransient<AppDbContext>();
 
             return services;
         }
