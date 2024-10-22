@@ -25,7 +25,7 @@ namespace DecorGearApi
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowSpecificOrigin",
-                    builder => builder.WithOrigins("http://localhost:5173") // Thay đổi URL nếu cần
+                    builder => builder.WithOrigins("http://localhost:5173") 
                                       .AllowAnyMethod()
                                       .AllowAnyHeader());
             });
