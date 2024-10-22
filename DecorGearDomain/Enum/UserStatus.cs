@@ -10,7 +10,9 @@ namespace DecorGearDomain.Enum
     {
         Active, // Hoạt động 
         Inactive, // Không hoạt động
-        Lock // Khóa
+        Lock,// Khóa
+        Verified
+
     }
 
 }

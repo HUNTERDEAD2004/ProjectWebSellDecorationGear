@@ -8,11 +8,11 @@ namespace DecorGearApplication.DataTransferObj.MouseDetails
 {
     public class CreateMouseRequest
     {
-        public string ProductID { get; set; }
+        public int ProductID { get; set; }
 
         public string Color { get; set; }
 
-        public string? DPI { get; set; }
+        public int DPI { get; set; }
 
         public string Connectivity { get; set; }
 
@@ -24,9 +24,7 @@ namespace DecorGearApplication.DataTransferObj.MouseDetails
 
         public string? EyeReading { get; set; }
 
-        public string? Button { get; set; }
-
-        public string? BatteryCapacity { get; set; }
+        public int? Button { get; set; }
 
         public string? LED { get; set; }
 

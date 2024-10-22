@@ -18,7 +18,7 @@ namespace DecorGearInfrastructure.Database.Configuration
             builder.HasOne(a => a.User)
                 .WithMany(p => p.Favorites)
                 .HasForeignKey(a => a.UserID)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
             builder.HasOne(a => a.Product)
                 .WithMany(p => p.Favorites)
                 .HasForeignKey(a => a.ProductID)

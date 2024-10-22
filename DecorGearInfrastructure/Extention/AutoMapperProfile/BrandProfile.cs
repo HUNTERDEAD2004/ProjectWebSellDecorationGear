@@ -16,9 +16,7 @@ namespace DecorGearInfrastructure.Extention.AutoMapperProfile
         public BrandProfile() 
         {
             CreateMap<BrandDto, Brand>().ReverseMap();
-            CreateMap<CreateUpdateBrandRequest, Brand > ();
-            CreateMap<ViewBrandRequest, Brand>();
-            CreateMap<DeleteBrandRequest, Brand>();
+            CreateMap<CreateBrandRequest, Brand > ();
         }
     }
 }

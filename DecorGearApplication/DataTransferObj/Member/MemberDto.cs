@@ -11,7 +11,7 @@ namespace DecorGearApplication.DataTransferObj.Member
     {
         public int MemberID { get; set; }
 
-        public string? UserID { get; set; } 
+        public int? UserID { get; set; } 
 
         public int Points { get; set; }
 

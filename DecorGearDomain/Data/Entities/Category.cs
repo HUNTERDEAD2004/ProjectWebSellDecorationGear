@@ -14,7 +14,8 @@ namespace DecorGearDomain.Data.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CategoryID { get; set; }
 
-        [Required(ErrorMessage = " Vui lòng nhập tên")]
+        [Required(ErrorMessage = "Vui lòng nhập tên")]
+        [StringLength(255, ErrorMessage = "Không được vượt quá 255 ký tự")]
         public string CategoryName { get; set; }
 
         //Khóa ngoại

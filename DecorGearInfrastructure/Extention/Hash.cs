@@ -5,51 +5,27 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ecommerce.Infrastructure.Extention
+namespace DecorGearInfrastructure.Extention
 {
     public class Hash
     {
-        private const string Key = "h4mX#u2Dv@9s8FHg";
-        // mã hóa
-        public static string EncryptPassword(string password)
+        private const int HashSize = 32; // Kích thước băm (256 bits)
+
+        // Mã hóa mật khẩu
+        public static string HashPassword(string password)
         {
-            using (var aes = new AesManaged())
+            using (var sha256 = SHA256.Create())
             {
-                byte[] keyBytes = Encoding.UTF8.GetBytes(Key);
-                byte[] iv = new byte[aes.BlockSize / 8];
-                byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
-
-                aes.Key = keyBytes;
-                aes.IV = iv;
-                aes.Mode = CipherMode.CBC;
-
-                ICryptoTransform encryptor = aes.CreateEncryptor();
-
-                byte[] encryptedBytes = encryptor.TransformFinalBlock(passwordBytes, 0, passwordBytes.Length);
-
-                return Convert.ToBase64String(encryptedBytes);
+                byte[] hash = sha256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                return Convert.ToBase64String(hash);
             }
         }
 
-        // giải mã
-        public static string DecryptPassword(string encryptedPassword)
-        {
-            using (var aes = new AesManaged())
+        // Xác thực mật khẩu
+        public static bool VerifyPassword(string enteredPassword, string storedHash)
             {
-                byte[] keyBytes = Encoding.UTF8.GetBytes(Key);
-                byte[] iv = new byte[aes.BlockSize / 8];
-                byte[] encryptedBytes = Convert.FromBase64String(encryptedPassword);
-
-                aes.Key = keyBytes;
-                aes.IV = iv;
-                aes.Mode = CipherMode.CBC;
-
-                ICryptoTransform decryptor = aes.CreateDecryptor();
-
-                byte[] decryptedBytes = decryptor.TransformFinalBlock(encryptedBytes, 0, encryptedBytes.Length);
-
-                return Encoding.UTF8.GetString(decryptedBytes);
-            }
+            string hashOfInput = HashPassword(enteredPassword);
+            return hashOfInput == storedHash;
         }
 
         public static string GenerateRandomString()

@@ -1,4 +1,5 @@
 ﻿using DecorGearDomain.Data.Entities;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -14,7 +15,7 @@ namespace DecorGearInfrastructure.Database.Configuration
         public void Configure(EntityTypeBuilder<OrderDetail> builder)
         {
             builder.ToTable("OrderDetail");
-            builder.HasKey(x => x.OrderDetailId);
+            builder.HasKey(x => x.OrderDetailID);
             builder.HasOne(a => a.Product)
                         .WithMany(p => p.OrderDetails)
                         .HasForeignKey(a => a.ProductID)

@@ -15,6 +15,6 @@ namespace DecorGearApplication.Interface
         Task<PaginationResponse<RoleDto>> GetAllAsync(ViewRoleRequest request, CancellationToken cancellationToken);
         Task<bool> CreateAsync(Role request, CancellationToken cancellationToken);
         Task<bool> UpdateAsync(Role request, CancellationToken cancellationToken);
-        Task<bool> DeleteAsync(Guid roleId, CancellationToken cancellationToken);
+        Task<bool> DeleteAsync(int roleId, CancellationToken cancellationToken);
     }
 }

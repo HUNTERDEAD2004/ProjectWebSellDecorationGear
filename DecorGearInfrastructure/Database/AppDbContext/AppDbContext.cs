@@ -1,10 +1,13 @@
 ﻿using DecorGearApplication.DataTransferObj.Role;
 using DecorGearDomain.Data.Entities;
 using DecorGearDomain.Enum;
+using DecorGearInfrastructure.Extention;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -32,8 +35,8 @@ namespace DecorGearInfrastructure.Database.AppDbContext
         public virtual DbSet<SubCategory> SubCategories { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Voucher> Vouchers { get; set; }
-        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
-        public virtual DbSet<VoucherUser> VoucherUsers { get; set; }
+        public virtual DbSet<VerificationCode> VerificationCodes { get; set; }
+        public virtual DbSet<VerificationCodePw> VerificationCodePws { get; set; }
         #endregion
 
         public AppDbContext()
@@ -47,6 +50,8 @@ namespace DecorGearInfrastructure.Database.AppDbContext
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.UseSqlServer("Data Source=DESKTOPD-DELLIN\\SQLEXPRESS;Database=DecorationGear2;Trusted_Connection=True;TrustServerCertificate=True;");
+            //optionsBuilder.UseSqlServer("Server=LAPTOP-K61S7AVO;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True");
             optionsBuilder.UseSqlServer("Data Source=PHUC\\SQLEXPRESS;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True;");
         }
 
@@ -54,64 +59,52 @@ namespace DecorGearInfrastructure.Database.AppDbContext
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             SeedingData(modelBuilder);
-        }
 
+        }
         public void SeedingData(ModelBuilder modelBuilder)
         {
             // Seed Brand data
-            var brandData = new List<Brand>()
+            var brandData = new List<Brand>
             {
-                new Brand()
+                new Brand
                 {
                     BrandID = 1,
-                    BrandName = "Logitech",
-                    Description = "Chuyên sản phẩm gaming cao cấp"
+                    BrandName = "Razer",
+                    Description = "Thương hiệu gaming gear được tin dùng các proplayer"
                 },
-                new Brand()
-                 {
-                     BrandID = 2,
-                     BrandName = "Razer",
-                     Description = "Chuyên sản phẩm gaming cao cấp"
+                new Brand
+                {
+                    BrandID = 2,
+                    BrandName = "Aula",
+                    Description = "Một thương hiệu bàn phím đã quá quen thuộc với một số ae"
                 },
-                new Brand()
+                new Brand
                 {
                     BrandID = 3,
-                    BrandName = "Xing-Meng",
-                    Description = "Bàn Phím cơ"
+                    BrandName = "Rainy",
+                    Description = "Thương hiệu bàn phím  với một số ae"
                 },
-                new Brand()
+                new Brand
                 {
                     BrandID = 4,
-                    BrandName = "Fl-esport",
-                    Description = "Bàn Phím cơ"
-                },
-                new Brand()
-                {
-                    BrandID = 5,
-                    BrandName = "Aula",
-                    Description = "Bàn Phím cơ"
-                },
-                new Brand()
-                {
-                    BrandID = 6,
-                    BrandName = "Zowie",
-                    Description = "Chuột gaming"
+                    BrandName = "Logitech",
+                    Description = "Một thương gaming gear quá quen thuộc với các proplayer"
                 }
             };
-            modelBuilder.Entity<Brand>(b => { b.HasData(brandData); });
+            modelBuilder.Entity<Brand>().HasData(brandData);
 
             // Seed Role data
             var roleData = new List<Role>
             {
                 new Role
                 {
-                    RoleID = Guid.Parse("e3ac98c7-890b-4f02-8fae-2d2ddda6c3a8"),
+                    RoleID = 1,
                     RoleName = "Admin"
                 },
                 new Role
                 {
-                    RoleID = Guid.Parse("a4bb2c7b-1abc-49ed-baa4-3b72d6579f92"),
-                    RoleName = "User"
+                    RoleID = 2,
+                    RoleName = "Admin"
                 }
             };
             modelBuilder.Entity<Role>().HasData(roleData);
@@ -123,90 +116,55 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new User
                 {
-                    UserID = "U001",
-                    Name = "John Smith",
-                    PhoneNumber = "0524567890",
-                    Email = "john@example.com",
-                    UserName = "admin1",
-                    Password = "hashedadminpassword",  // You should hash passwords securely!
-                    RoleID = Guid.Parse("e3ac98c7-890b-4f02-8fae-2d2ddda6c3a8"),  // Admin Role
+                    UserID = 1,
+                    Name = "Admin",
+                    PhoneNumber = "0123456789",
+                    Email = "admin@example.com",
+                    UserName = "admin",
+                    Password = Hash.HashPassword("Admin@123"),  // Băm mật khẩu một cách an toàn
+                    RoleID = 1,  // Vai trò Admin
                     Status = UserStatus.Active
                 },
                 new User
                 {
-                    UserID = "U002",
-                    Name = "Jane hangminton",
+                    UserID = 2,
+                    Name = "Jane Hangminton",
                     PhoneNumber = "0987654321",
                     Email = "jane@example.com",
-                    UserName = "admin2",
-                    Password = "hashedadminpassword",  // You should hash passwords securely!
-                    RoleID = Guid.Parse("e3ac98c7-890b-4f02-8fae-2d2ddda6c3a8"),  // Admin Role
+                    UserName = "user2",
+                    Password = Hash.HashPassword("UserPassword123"),  // Băm mật khẩu một cách an toàn
+                    RoleID = 2,  // Vai trò User
                     Status = UserStatus.Active
                 }
             };
 
             modelBuilder.Entity<User>().HasData(userData);
 
-
-            // Seed users
+            // Seed cart
             var cartData = new List<Cart>
             {
                 new Cart
                 {
-                    CartID=1, UserID="U001"
+                    CartID= 1, UserID = 1
                 },
                 new Cart
                 {
-                   CartID = 2, UserID = "U002"
+                   CartID = 2, UserID = 2
                 },
             };
 
             modelBuilder.Entity<Cart>().HasData(cartData);
-
-            // Seed cartDetail
-            var cartDetailData = new List<CartDetail>
-            {
-                new CartDetail
-                {
-                    CartDetailID = 1, 
-                    ProductID = "AULAF75", 
-                    CartID = 1, 
-                    OrderID = 1, 
-                    Quantity = 2, 
-                    UnitPrice = 50, 
-                },
-                new CartDetail
-                {
-                    CartDetailID = 2, 
-                    ProductID = "RZVMNP1", 
-                    CartID = 2, 
-                    OrderID = 2, 
-                    Quantity = 3, 
-                    UnitPrice = 40,  
-                },
-                new CartDetail
-                {                  
-                   CartDetailID = 3, 
-                   ProductID = "RZDAV3", 
-                   CartID = 2, 
-                   OrderID = 2, 
-                   Quantity = 1, 
-                   UnitPrice = 75, 
-                }
-            };
-
-            modelBuilder.Entity<CartDetail>().HasData(cartDetailData);
 
             // Seed category
             var categoryData = new List<Category>
             {
                 new Category
                 {
-                   CategoryID =  1, CategoryName = "Chuột"
+                   CategoryID = 1, CategoryName = "Chuột"
                 },
                 new Category
                 {
-                   CategoryID =  2, CategoryName = "Bàn Phím"
+                   CategoryID = 2, CategoryName = "Bàn Phím"
                 }
             };
 
@@ -217,28 +175,20 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new SubCategory
                 {
-                   SubCategoryID = 1, 
-                    CategoryID =  1, 
-                    SubCategoryName = "Chuột Logitech"
+                   SubCategoryID = 1, SubCategoryName = "Chuột Razer", CategoryID = 1
                 },
                 new SubCategory
                 {
-                   SubCategoryID = 2, 
-                    CategoryID =  2, 
-                    SubCategoryName = "Bàn Phím Aula"
+                   SubCategoryID = 2, SubCategoryName = "Chuột logitech", CategoryID = 1
                 },
-                new SubCategory
+                 new SubCategory
                 {
-                   SubCategoryID = 3, 
-                    CategoryID =  2, 
-                    SubCategoryName = "Bàn Phím Xing-Meng"
+                   SubCategoryID = 3, SubCategoryName = "Bàn Phím Aula", CategoryID = 2
                 },
-                new SubCategory
+                 new SubCategory
                 {
-                   SubCategoryID = 4, 
-                    CategoryID =  1, 
-                    SubCategoryName = "Chuột Razer"
-                }
+                   SubCategoryID = 4, SubCategoryName = "Bàn Phím Rainy", CategoryID = 2
+                },
             };
 
             modelBuilder.Entity<SubCategory>().HasData(subCategoryData);
@@ -248,7 +198,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new Product
                 {
-                    ProductID = "RZDAV3",
+                    ProductID = 1,
                     ProductName = "Chuột gaming Razer death adder v3",
                     Price = 405.8,
                     View = 1000,
@@ -257,12 +207,12 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Description = "chiếc chuột siêu bổ rẻ ",
                     Size = "Trung bình",
                     SaleID = 1,
-                    BrandID = 2,
-                    SubCategoryID = 4
+                    BrandID = 1,
+                    SubCategoryID = 1
                 },
                 new Product
                 {
-                    ProductID="RZVMNP1",
+                    ProductID=2,
                     ProductName="Chuột gaming Razor mini pro 1",
                     Price=2000000,
                     View=1000,
@@ -271,12 +221,12 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Description="Chiếc chuột được nhiều tuyển thủ chuyên nghiệp tin dùng",
                     Size="Trung bình",
                     SaleID=null,
-                    BrandID= 2,
-                    SubCategoryID=4
+                    BrandID=1,
+                    SubCategoryID=1
                 },
                 new Product
                 {
-                    ProductID="AULAF75", 
+                    ProductID=3, 
                     ProductName="Bàn phím cơ AulaF75", 
                     Price=1000000, 
                     View=8000,
@@ -284,9 +234,9 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Weight=400, 
                     Description="Một chiếc bàn phím cơ mỳ ăn liền với 3mode hotswap tầm giá 1 củ mà bạn không nên bỏ qua", 
                     Size="75%", 
-                    SaleID=2, 
-                    BrandID=5,
-                    SubCategoryID=2
+                    SaleID=null, 
+                    BrandID=2,
+                    SubCategoryID=3
                 }
             };
 
@@ -298,20 +248,20 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 new Favorite 
                 { 
                     FavoriteID = 1, 
-                    UserID = "U001", 
-                    ProductID = "RZVMNP1"
+                    UserID = 1, 
+                    ProductID = 1 
                 },
                 new Favorite 
                 { 
                     FavoriteID = 2, 
-                    UserID = "U002", 
-                    ProductID = "RZDAV3"
+                    UserID = 2, 
+                    ProductID = 1
                 },
                 new Favorite 
                 { 
                     FavoriteID = 3, 
-                    UserID = "U001", 
-                    ProductID = "AULAF75"
+                    UserID = 1, 
+                    ProductID = 2
                 }
             };
 
@@ -323,22 +273,22 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 new FeedBack 
                 { 
                     FeedBackID = 1, 
-                    UserID = "U001", 
-                    ProductID = "RZVMNP1", 
+                    UserID = 1, 
+                    ProductID = 1, 
                     Comment = "Sản phẩm rất tốt!" 
                 },
                 new FeedBack 
                 { 
                     FeedBackID = 2, 
-                    UserID = "U002", 
-                    ProductID = "RZDAV3", 
+                    UserID = 1, 
+                    ProductID = 2, 
                     Comment = "Chất lượng bình thường." 
                 },
                 new FeedBack 
                 { 
                     FeedBackID = 3, 
-                    UserID = "U001", 
-                    ProductID = "AULAF75", 
+                    UserID = 2, 
+                    ProductID = 3, 
                     Comment = "Giao hàng nhanh, sản phẩm đẹp." 
                 }
             };
@@ -350,13 +300,13 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new KeyboardDetail
                 {
-                    KeyboardDetailID = "KD001",
-                    ProductID = "AULAF75",
+                    KeyboardDetailID = 1,
+                    ProductID = 3,
+                    Color = "Red",
                     Layout = "80%",
                     Case = "Nhôm",
                     Switch = "Cherry MX Red",
                     SwitchLife = 50000000,
-                    BatteryCapacity = 4000,
                     Led = "RGB",
                     KeycapMaterial = "PBT",
                     SwitchMaterial = "Kim loại",
@@ -366,13 +316,13 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 },
                 new KeyboardDetail
                 {
-                    KeyboardDetailID = "KD002",
-                    ProductID = "AULAF75",
+                    KeyboardDetailID = 2,
+                    ProductID = 3,
+                    Color = "Black",
                     Layout = "75%",
                     Case = "Nhựa",
                     Switch = "Gateron Brown",
                     SwitchLife = 60000000,
-                    BatteryCapacity = 3000,
                     Led = "Đơn sắc",
                     KeycapMaterial = "ABS",
                     SwitchMaterial = "Nhựa",
@@ -389,8 +339,8 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new MouseDetail
                 {
-                    MouseDetailID = "MD001",
-                    ProductID = "RZDAV3",
+                    MouseDetailID = 1,
+                    ProductID = 1,
                     Color = "Đen",
                     DPI = 16000,
                     Connectivity = "USB",
@@ -398,14 +348,13 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Material = "Nhựa",
                     EyeReading = "1000Hz",
                     Button = 6,
-                    BatteryCapacity = null,
                     LED = "RGB",
                     SS = "Razer Synapse"
                 },
                 new MouseDetail
                 {
-                    MouseDetailID = "MD002",
-                    ProductID = "RZDAV3",
+                    MouseDetailID = 2,
+                    ProductID = 2,
                     Color = "Trắng",
                     DPI = 12000,
                     Connectivity = "Bluetooth",
@@ -413,7 +362,6 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Material = "Kim loại",
                     EyeReading = "500Hz",
                     Button = 5,
-                    BatteryCapacity = "4000mAh",
                     LED = "Đơn sắc",
                     SS = "Logitech G HUB"
                 }
@@ -427,14 +375,14 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 new ImageList
                 {
                     ImageListID = 1,
-                    ProductID = "AULAF75",
+                    ProductID = 3,
                     ImagePath=["/images/aulaf75_img1.jpg", "/images/aulaf75_img2.jpg", "/images/aulaf75_img3.jpg"],
                     Description = "Hình ảnh của sản phẩm aulaf75"
                 },
                 new ImageList
                 {
-                    ImageListID=2, 
-                    ProductID="RZDAV3", 
+                    ImageListID= 2, 
+                    ProductID=1, 
                     ImagePath=["/images/rzdav3_img.jpg", "/images/rzdav3_img2.jpg"], 
                     Description="Hình ảnh của sản phẩm razer deadth addzer v3"
                 }
@@ -447,15 +395,15 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new Member
                 {
-                    MemberID=1,
-                    UserID="U001",
+                    MemberID= 1,
+                    UserID= 1,
                     Points=100,
                     ExpiryDate=DateTime.Parse("11/12/2024")
                 },
                 new Member 
                 { 
-                    MemberID=2, 
-                    UserID="U002", 
+                    MemberID= 2, 
+                    UserID= 2, 
                     Points=200, 
                     ExpiryDate=DateTime.Parse("10/3/2025")
                 }
@@ -507,71 +455,78 @@ namespace DecorGearInfrastructure.Database.AppDbContext
 
             modelBuilder.Entity<Voucher>().HasData(VoucherData);
 
-            var VoucherUser = new List<VoucherUser>
-            {
-                new VoucherUser
-                {
-                    VoucherUserId=1,
-                    UserID = "U001",
-                    VoucherID = 1,
-                }
-            };
-
-            //Seed OderData
+            //Seed OrderData
             var OrderData = new List<Order>
             {
                 new Order 
                 { 
                     OrderID=1, 
-                    UserID="U001", 
+                    UserID=1, 
                     VoucherID=1, 
                     totalQuantity=5, 
                     totalPrice=500.00, 
-                    Status=OrderStatus.OrderConfirmed, 
+                    Status=OrderStatus.Confirmed, 
                     paymentMethod="Credit Card", 
-                    size="L", 
-                    weight=1.5,
-                    OrderDate=DateTime.Parse("1/09/2024")
+                    OrderDate=DateTime.Parse("16/09/2024")
                 },
                 new Order 
                 { 
                     OrderID=2, 
-                    UserID="U002", 
+                    UserID=2, 
                     VoucherID=null, 
                     totalQuantity=3, 
                     totalPrice=300.00, 
-                    Status=OrderStatus.Paid, 
+                    Status=OrderStatus.Pending, 
                     paymentMethod="Cash", 
-                    size="LF", 
-                    weight=2.0, 
-                    OrderDate=DateTime.Parse("1/09/2024")
+                    OrderDate=DateTime.Parse("17/09/2024")
                 }
             };
 
             modelBuilder.Entity<Order>().HasData(OrderData);
 
-            var OderDetail = new List<OrderDetail>
+            //Seed OrderDetailData
+            var orderDetailData = new List<OrderDetail>
             {
                 new OrderDetail
                 {
-                    OrderDetailId =1, 
-                    OrderID=2,  
-                    ProductID = "AULAF75",
-                    Quantity = 3,
-                    UnitPrice = 1000000,
+                    OrderDetailID = 1,
+                    OrderID=1,
+                    ProductID=3,
+                    Quantity=10,
+                    UnitPrice=10000000,
+                    Size = "M",
+                    Weight = 4000
                 },
                 new OrderDetail
                 {
-                    OrderDetailId =2,
+                    OrderDetailID = 2,
+                    OrderID=1,
+                    ProductID=3,
+                    Quantity=1,
+                    UnitPrice=1000000,
+                    Size = "S",
+                    Weight = 400
+                },
+                new OrderDetail
+                {
+                    OrderDetailID = 3,
                     OrderID=2,
-                    ProductID = "RZDAV3",
-                    Quantity = 1,
-                    UnitPrice = (decimal) 405.8,
+                    ProductID=1,
+                    Quantity=1000,
+                    UnitPrice=1000000000,
+                    Size = "L",
+                    Weight = 400000
                 }
             };
-            modelBuilder.Entity<OrderDetail>().HasData(OderDetail);
+
+            modelBuilder.Entity<OrderDetail>().HasData(orderDetailData);
 
             base.OnModelCreating(modelBuilder);          
         }
+
     }
 }
+
+    
+
+

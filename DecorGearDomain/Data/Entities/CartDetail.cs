@@ -14,16 +14,18 @@ namespace DecorGearDomain.Data.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CartDetailID { get; set; }
 
-        [Required]
-        public string ProductID { get; set; }
+        [Required(ErrorMessage = "ProductID vui lòng không được để trống")]
+        public int ProductID { get; set; }
 
         [Required]
         public int CartID { get; set; }
 
-        public int OrderID { get; set; }
-        
+        [Required(ErrorMessage = "vui lòng không được để trống")]
+        [Range(1, int.MaxValue, ErrorMessage = "Số lượng phải lớn hơn 0")]
         public int Quantity { get; set; }
 
+        [Required]
+        [Range(0.1, double.MaxValue, ErrorMessage = "Đơn giá phải là giá trị dương > 0")]
         public double UnitPrice { get; set; }
 
         // Khóa ngoại
@@ -32,6 +34,6 @@ namespace DecorGearDomain.Data.Entities
 
         public virtual Product Product { get; set; }  // Mỗi CartDetail liên kết với một Product
 
-        public virtual Cart Cart { get; set; } // Các CartDetail liên kết với một cart
+        public virtual Cart Cart { get; set; } 
     }
 }
