@@ -50,8 +50,8 @@ namespace DecorGearInfrastructure.Database.AppDbContext
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer("Data Source=DESKTOPD-DELLIN\\SQLEXPRESS;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True;");
-            optionsBuilder.UseSqlServer("Server=LAPTOP-K61S7AVO;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True");
+            optionsBuilder.UseSqlServer("Data Source=DESKTOPD-DELLIN\\SQLEXPRESS;Database=DecorationGear2;Trusted_Connection=True;TrustServerCertificate=True;");
+            //optionsBuilder.UseSqlServer("Server=LAPTOP-K61S7AVO;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -114,32 +114,30 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 new User
                 {
                     UserID = 1,
-                    Name = "John Smith",
-                    PhoneNumber = "0524567890",
-                    Email = "john@example.com",
-                    UserName = "admin1",
-                    Password = "hashedadminpassword",  // You should hash passwords securely!
-                    RoleID = 1,  // Admin Role
+                    Name = "Admin",
+                    PhoneNumber = "0123456789",
+                    Email = "admin@example.com",
+                    UserName = "admin",
+                    Password = Hash.HashPassword("Admin@123"),  // Băm mật khẩu một cách an toàn
+                    RoleID = 1,  // Vai trò Admin
                     Status = UserStatus.Active
                 },
                 new User
                 {
                     UserID = 2,
-                    Name = "Jane hangminton",
+                    Name = "Jane Hangminton",
                     PhoneNumber = "0987654321",
                     Email = "jane@example.com",
-                    UserName = "admin2",
-                    Password = "hashedadminpassword",  // You should hash passwords securely!
-                    RoleID = 2,  // Admin Role
+                    UserName = "user2",
+                    Password = Hash.HashPassword("UserPassword123"),  // Băm mật khẩu một cách an toàn
+                    RoleID = 2,  // Vai trò User
                     Status = UserStatus.Active
                 }
             };
 
             modelBuilder.Entity<User>().HasData(userData);
 
-
-            modelBuilder.Entity<User>().HasData(userData);
-            // Seed users
+            // Seed cart
             var cartData = new List<Cart>
             {
                 new Cart
