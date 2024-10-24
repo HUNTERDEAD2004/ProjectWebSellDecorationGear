@@ -1,7 +1,6 @@
 ﻿using DecorGearApplication.DataTransferObj.User.Email;
 using DecorGearApplication.IServices;
 using DecorGearDomain.Data.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using MimeKit;
@@ -11,7 +10,7 @@ namespace DecorGearApi.Controllers.User
 {
     [ApiController]
     [Route("api/user/[controller]")]
-  
+
     public class MalingController : ControllerBase
     {
         private readonly IMailingServices _mailingServices;

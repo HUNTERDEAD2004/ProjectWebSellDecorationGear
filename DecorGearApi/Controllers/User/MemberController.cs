@@ -1,9 +1,5 @@
-﻿using DecorGearApplication.DataTransferObj.FeedBack;
-using DecorGearApplication.DataTransferObj.Member;
+﻿using DecorGearApplication.DataTransferObj.Member;
 using DecorGearApplication.IServices;
-using DecorGearApplication.Services;
-using DecorGearDomain.Data.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DecorGearApi.Controllers.User
@@ -43,6 +39,6 @@ namespace DecorGearApi.Controllers.User
         }
 
 
-       
+
     }
 }

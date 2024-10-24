@@ -4,11 +4,6 @@ using DecorGearDomain.Data.Entities;
 using DecorGearDomain.Enum;
 using DecorGearInfrastructure.Database.AppDbContext;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DecorGearInfrastructure.implement
 {
@@ -29,7 +24,7 @@ namespace DecorGearInfrastructure.implement
             {
                 var newOderDetail = new OrderDetail
                 {
-                    OrderID = request.OrderID,  
+                    OrderID = request.OrderID,
                     ProductID = request.ProductID,
                     Quantity = request.Quantity,
                     UnitPrice = request.UnitPrice,
@@ -54,10 +49,10 @@ namespace DecorGearInfrastructure.implement
             {
                 return false;
             }
-            else 
+            else
             {
-                _dbcontext.OrderDetails.Remove(id); 
-                await _dbcontext.SaveChangesAsync(cancellationToken);    
+                _dbcontext.OrderDetails.Remove(id);
+                await _dbcontext.SaveChangesAsync(cancellationToken);
                 return true;
             }
         }

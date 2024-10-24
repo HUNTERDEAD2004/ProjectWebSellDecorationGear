@@ -1,17 +1,8 @@
-﻿using DecorGearApplication.DataTransferObj.Role;
-using DecorGearDomain.Data.Entities;
+﻿using DecorGearDomain.Data.Entities;
 using DecorGearDomain.Enum;
 using DecorGearInfrastructure.Extention;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Globalization;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DecorGearInfrastructure.Database.AppDbContext
 {
@@ -51,8 +42,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer("Data Source=DESKTOPD-DELLIN\\SQLEXPRESS;Database=DecorationGear2;Trusted_Connection=True;TrustServerCertificate=True;");
-            //optionsBuilder.UseSqlServer("Server=LAPTOP-K61S7AVO;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True");
+            //optionsBuilder.UseSqlServer("Data Source=DESKTOPD-DELLIN\\SQLEXPRESS;Database=DecorationGear2;Trusted_Connection=True;TrustServerCertificate=True;")
             optionsBuilder.UseSqlServer("Data Source=PHUC\\SQLEXPRESS;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True;");
         }
 
@@ -109,8 +99,8 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 }
             };
             modelBuilder.Entity<Role>().HasData(roleData);
-            
-           
+
+
 
             // Seed users
             var userData = new List<User>
@@ -161,27 +151,27 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new CartDetail
                 {
-                    CartDetailID = 9, 
-                    ProductID = 1, 
-                    CartID = 1,  
-                    Quantity = 2, 
-                    UnitPrice = 50, 
+                    CartDetailID = 9,
+                    ProductID = 1,
+                    CartID = 1,
+                    Quantity = 2,
+                    UnitPrice = 50,
                 },
                 new CartDetail
                 {
-                    CartDetailID = 10, 
-                    ProductID = 2, 
-                    CartID = 2, 
-                    Quantity = 3, 
-                    UnitPrice = 40,  
+                    CartDetailID = 10,
+                    ProductID = 2,
+                    CartID = 2,
+                    Quantity = 3,
+                    UnitPrice = 40,
                 },
                 new CartDetail
-                {                  
-                   CartDetailID = 11, 
-                   ProductID = 2, 
-                   CartID = 2, 
-                   Quantity = 1, 
-                   UnitPrice = 75, 
+                {
+                   CartDetailID = 11,
+                   ProductID = 2,
+                   CartID = 2,
+                   Quantity = 1,
+                   UnitPrice = 75,
                 }
             };
 
@@ -258,15 +248,15 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 },
                 new Product
                 {
-                    ProductID=3, 
-                    ProductName="Bàn phím cơ AulaF75", 
-                    Price=1000000, 
+                    ProductID=3,
+                    ProductName="Bàn phím cơ AulaF75",
+                    Price=1000000,
                     View=8000,
                     Quantity=100,
-                    Weight=400, 
-                    Description="Một chiếc bàn phím cơ mỳ ăn liền với 3mode hotswap tầm giá 1 củ mà bạn không nên bỏ qua", 
-                    Size="75%", 
-                    SaleID=null, 
+                    Weight=400,
+                    Description="Một chiếc bàn phím cơ mỳ ăn liền với 3mode hotswap tầm giá 1 củ mà bạn không nên bỏ qua",
+                    Size="75%",
+                    SaleID=null,
                     BrandID=2,
                     SubCategoryID=3
                 }
@@ -277,22 +267,22 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             // Seed Favorite
             var favoriteData = new List<Favorite>
             {
-                new Favorite 
-                { 
-                    FavoriteID = 1, 
-                    UserID = 1, 
-                    ProductID = 1 
-                },
-                new Favorite 
-                { 
-                    FavoriteID = 2, 
-                    UserID = 2, 
+                new Favorite
+                {
+                    FavoriteID = 1,
+                    UserID = 1,
                     ProductID = 1
                 },
-                new Favorite 
-                { 
-                    FavoriteID = 3, 
-                    UserID = 1, 
+                new Favorite
+                {
+                    FavoriteID = 2,
+                    UserID = 2,
+                    ProductID = 1
+                },
+                new Favorite
+                {
+                    FavoriteID = 3,
+                    UserID = 1,
                     ProductID = 2
                 }
             };
@@ -302,26 +292,26 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             // Seed FeedBack
             var feedbackData = new List<FeedBack>
             {
-                new FeedBack 
-                { 
-                    FeedBackID = 1, 
-                    UserID = 1, 
-                    ProductID = 1, 
-                    Comment = "Sản phẩm rất tốt!" 
+                new FeedBack
+                {
+                    FeedBackID = 1,
+                    UserID = 1,
+                    ProductID = 1,
+                    Comment = "Sản phẩm rất tốt!"
                 },
-                new FeedBack 
-                { 
-                    FeedBackID = 2, 
-                    UserID = 1, 
-                    ProductID = 2, 
-                    Comment = "Chất lượng bình thường." 
+                new FeedBack
+                {
+                    FeedBackID = 2,
+                    UserID = 1,
+                    ProductID = 2,
+                    Comment = "Chất lượng bình thường."
                 },
-                new FeedBack 
-                { 
-                    FeedBackID = 3, 
-                    UserID = 2, 
-                    ProductID = 3, 
-                    Comment = "Giao hàng nhanh, sản phẩm đẹp." 
+                new FeedBack
+                {
+                    FeedBackID = 3,
+                    UserID = 2,
+                    ProductID = 3,
+                    Comment = "Giao hàng nhanh, sản phẩm đẹp."
                 }
             };
 
@@ -413,9 +403,9 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 },
                 new ImageList
                 {
-                    ImageListID= 2, 
-                    ProductID=1, 
-                    ImagePath=["/images/rzdav3_img.jpg", "/images/rzdav3_img2.jpg"], 
+                    ImageListID= 2,
+                    ProductID=1,
+                    ImagePath=["/images/rzdav3_img.jpg", "/images/rzdav3_img2.jpg"],
                     Description="Hình ảnh của sản phẩm razer deadth addzer v3"
                 }
             };
@@ -432,11 +422,11 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Points=100,
                     ExpiryDate=DateTime.Parse("11/12/2024")
                 },
-                new Member 
-                { 
-                    MemberID= 2, 
-                    UserID= 2, 
-                    Points=200, 
+                new Member
+                {
+                    MemberID= 2,
+                    UserID= 2,
+                    Points=200,
                     ExpiryDate=DateTime.Parse("10/3/2025")
                 }
             };
@@ -490,28 +480,28 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             //Seed OrderData
             var OrderData = new List<Order>
             {
-                new Order 
-                { 
-                    OrderID=1, 
-                    UserID=1, 
-                    VoucherID=1, 
-                    totalQuantity=5, 
-                    size="L", 
+                new Order
+                {
+                    OrderID=1,
+                    UserID=1,
+                    VoucherID=1,
+                    totalQuantity=5,
+                    size="L",
                     weight= (float)1.5,
-                    Status=OrderStatus.Delivered, 
-                    paymentMethod="Credit Card", 
+                    Status=OrderStatus.Delivered,
+                    paymentMethod="Credit Card",
                     OrderDate=DateTime.Parse("09/09/2024")
                 },
-                new Order 
-                { 
-                    OrderID=2, 
-                    UserID=2, 
-                    VoucherID=null, 
-                    totalQuantity=3,     
-                    size="LF", 
-                    weight=(float)2.0,    
-                    Status=OrderStatus.Delivered, 
-                    paymentMethod="Cash", 
+                new Order
+                {
+                    OrderID=2,
+                    UserID=2,
+                    VoucherID=null,
+                    totalQuantity=3,
+                    size="LF",
+                    weight=(float)2.0,
+                    Status=OrderStatus.Delivered,
+                    paymentMethod="Cash",
                     OrderDate=DateTime.Parse("09/09/2024")
                 }
             };
@@ -549,12 +539,12 @@ namespace DecorGearInfrastructure.Database.AppDbContext
 
             modelBuilder.Entity<OrderDetail>().HasData(orderDetailData);
 
-            base.OnModelCreating(modelBuilder);          
+            base.OnModelCreating(modelBuilder);
         }
 
     }
 }
 
-    
+
 
 

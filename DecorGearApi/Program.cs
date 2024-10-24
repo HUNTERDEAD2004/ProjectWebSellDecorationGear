@@ -7,16 +7,10 @@ using DecorGearInfrastructure.Extention;
 using DecorGearInfrastructure.Extention.AutoMapperProfile;
 using DecorGearInfrastructure.implement;
 using DecorGearInfrastructure.Implement;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 using System.Text;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
 
 public class Program
 {
@@ -77,11 +71,11 @@ public class Program
         builder.Services.AddStackExchangeRedisCache(options =>
         {
             options.Configuration = "localhost:6379"; // Cấu hình Redis
-        });    
+        });
     }
 
-    
-  
+
+
     private static void ConfigureCors(WebApplicationBuilder builder)
     {
         builder.Services.AddCors(options =>
@@ -127,7 +121,7 @@ public class Program
 
         builder.Services.AddHttpContextAccessor();
     }
-    
+
     private static void ConfigureMiddleware(WebApplication app)
     {
         if (app.Environment.IsDevelopment())

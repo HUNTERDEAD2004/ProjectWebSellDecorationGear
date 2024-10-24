@@ -1,11 +1,6 @@
 ﻿using DecorGearApplication.DataTransferObj.FeedBack;
 using DecorGearApplication.DataTransferObj.User;
 using DecorGearDomain.Enum;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DecorGearApplication.IServices
 {

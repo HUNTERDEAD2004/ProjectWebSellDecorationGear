@@ -5,11 +5,6 @@ using DecorGearDomain.Data.Entities;
 using DecorGearDomain.Enum;
 using DecorGearInfrastructure.Database.AppDbContext;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DecorGearInfrastructure.implement
 {
@@ -32,7 +27,7 @@ namespace DecorGearInfrastructure.implement
                 UserID = request.UserID,
                 VoucherID = request.VoucherID,
                 totalQuantity = request.totalQuantity,
-                totalPrice = ((double)request.totalPrice), 
+                totalPrice = ((double)request.totalPrice),
                 paymentMethod = request.paymentMethod,
                 size = request.size.ToString(),
                 weight = request.weight,
@@ -43,7 +38,7 @@ namespace DecorGearInfrastructure.implement
 
             try
             {
-                await _dbcontext.SaveChangesAsync(cancellationToken); 
+                await _dbcontext.SaveChangesAsync(cancellationToken);
                 return ErrorMessage.Successfull;
             }
             catch (Exception ex)
@@ -57,14 +52,14 @@ namespace DecorGearInfrastructure.implement
         {
             // Tìm hóa đơn cần xóa
             var order = await _dbcontext.Orders
-                .Include(o => o.OrderDetails) 
+                .Include(o => o.OrderDetails)
                 .FirstOrDefaultAsync(o => o.OrderID == request.OderID, cancellationToken);
 
             if (order == null)
             {
-                return false; 
+                return false;
             }
-           
+
             if (order.OrderDetails != null && order.OrderDetails.Any())
             {
                 _dbcontext.OrderDetails.RemoveRange(order.OrderDetails);
@@ -79,7 +74,7 @@ namespace DecorGearInfrastructure.implement
 
         public async Task<IEnumerable<OderDto>> GetAllOder(CancellationToken cancellationToken)
         {
-            var order = await _dbcontext.Orders.Include(o => o.OrderDetails).Include( x => x.User).ToListAsync(cancellationToken);
+            var order = await _dbcontext.Orders.Include(o => o.OrderDetails).Include(x => x.User).ToListAsync(cancellationToken);
             return order.Select(o => new OderDto
             {
                 OderID = o.OrderID,
@@ -140,7 +135,7 @@ namespace DecorGearInfrastructure.implement
         public async Task<ErrorMessage> UpdateOder(OderDto request, CancellationToken cancellationToken)
         {
             var updateOrder = await _dbcontext.Orders.FirstOrDefaultAsync(o => o.OrderID == request.OderID, cancellationToken);
-            if(updateOrder == null)
+            if (updateOrder == null)
             {
                 return ErrorMessage.Failed;
             }
@@ -155,7 +150,7 @@ namespace DecorGearInfrastructure.implement
                 updateOrder.weight = request.weight;
                 updateOrder.OrderDate = request.OrderDate;
                 updateOrder.Status = request.Status;
-                await _dbcontext.SaveChangesAsync(cancellationToken);    
+                await _dbcontext.SaveChangesAsync(cancellationToken);
                 return ErrorMessage.Successfull;
             }
         }

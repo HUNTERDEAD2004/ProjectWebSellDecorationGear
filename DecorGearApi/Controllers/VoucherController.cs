@@ -1,9 +1,6 @@
-﻿using DecorGearApplication.DataTransferObj.Order;
-using DecorGearApplication.DataTransferObj.OrderDetail;
-using DecorGearApplication.DataTransferObj.Voucher;
+﻿using DecorGearApplication.DataTransferObj.Voucher;
 using DecorGearApplication.Interface;
 using DecorGearDomain.Enum;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DecorGearApi.Controllers

@@ -3,11 +3,6 @@ using DecorGearApplication.Interface;
 using DecorGearDomain.Enum;
 using DecorGearInfrastructure.Database.AppDbContext;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DecorGearInfrastructure.implement
 {
@@ -16,7 +11,7 @@ namespace DecorGearInfrastructure.implement
         private readonly AppDbContext _dbContext;
         public VoucherRepository(AppDbContext appDbContext)
         {
-                _dbContext = appDbContext;
+            _dbContext = appDbContext;
         }
         public Task<ErrorMessage> CreateVoucher(CreateVoucherRequest request, CancellationToken cancellationToken)
         {
@@ -68,7 +63,7 @@ namespace DecorGearInfrastructure.implement
             }
             else
             {
-                udVoucher.VoucherName = request.VoucherName;    
+                udVoucher.VoucherName = request.VoucherName;
                 udVoucher.VoucherPercent = request.VoucherPercent;
                 udVoucher.expiry = DateTime.ParseExact(request.expiry, "dd-MM-yyyy", null);
                 await _dbContext.SaveChangesAsync(cancellationToken);

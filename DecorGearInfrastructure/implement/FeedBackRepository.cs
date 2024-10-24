@@ -18,7 +18,7 @@ namespace DecorGearInfrastructure.Implement
         public FeedBackRepository(AppDbContext db, IMapper map)
         {
             _db = db;
-           _map = map;
+            _map = map;
         }
         public async Task<ResponseDto<ErrorMessage>> CreateFeedBack(CreateFeedBackRequest request, CancellationToken cancellationToken)
         {
@@ -26,7 +26,7 @@ namespace DecorGearInfrastructure.Implement
             await _db.FeedBacks.AddAsync(feedback);
             await _db.SaveChangesAsync(cancellationToken);
 
-            return new ResponseDto<ErrorMessage>(StatusCodes.Status201Created, "Feedback được tạo thành công");         
+            return new ResponseDto<ErrorMessage>(StatusCodes.Status201Created, "Feedback được tạo thành công");
         }
 
         public async Task<ResponseDto<bool>> DeleteFeedBack(DeleteFeedBackRequest request, CancellationToken cancellationToken)
@@ -35,12 +35,12 @@ namespace DecorGearInfrastructure.Implement
             var feedback = await _db.FeedBacks.FindAsync(request.FeedBackID, cancellationToken);
             if (feedback == null)
             {
-                return new ResponseDto<bool>(StatusCodes.Status404NotFound, "Feedback không tồn tại.");            
+                return new ResponseDto<bool>(StatusCodes.Status404NotFound, "Feedback không tồn tại.");
             }
             _db.FeedBacks.Remove(feedback);
             await _db.SaveChangesAsync(cancellationToken);
 
-            return new ResponseDto<bool>(StatusCodes.Status200OK, "Xóa FeedBack Thành Công");       
+            return new ResponseDto<bool>(StatusCodes.Status200OK, "Xóa FeedBack Thành Công");
         }
 
         public async Task<List<FeedBackDto>> GetAllFeedBack(CancellationToken cancellationToken)
@@ -51,21 +51,21 @@ namespace DecorGearInfrastructure.Implement
 
         public async Task<FeedBackDto> FeedBackById(int id, CancellationToken cancellationToken)
         {
-           var feedbackbyid = await _db.FeedBacks.FindAsync(id,cancellationToken);
-            return  _map.Map<FeedBackDto>(feedbackbyid);
+            var feedbackbyid = await _db.FeedBacks.FindAsync(id, cancellationToken);
+            return _map.Map<FeedBackDto>(feedbackbyid);
         }
 
         public async Task<ResponseDto<ErrorMessage>> UpdateFeedBack(int id, UpdateFeedBackRequest request, CancellationToken cancellationToken)
         {
-            var feedback = await _db.FeedBacks.FindAsync( id, cancellationToken);
-            if (feedback == null)          
-                return new ResponseDto<ErrorMessage>(StatusCodes.Status404NotFound, "Feedback không tồn tại.");             
-            
+            var feedback = await _db.FeedBacks.FindAsync(id, cancellationToken);
+            if (feedback == null)
+                return new ResponseDto<ErrorMessage>(StatusCodes.Status404NotFound, "Feedback không tồn tại.");
+
             _map.Map(request, feedback);
             _db.FeedBacks.Update(feedback);
             await _db.SaveChangesAsync(cancellationToken);
 
-            return new ResponseDto<ErrorMessage>(StatusCodes.Status200OK, "Feedback đã được cập nhật thành công.");         
+            return new ResponseDto<ErrorMessage>(StatusCodes.Status200OK, "Feedback đã được cập nhật thành công.");
         }
     }
 }

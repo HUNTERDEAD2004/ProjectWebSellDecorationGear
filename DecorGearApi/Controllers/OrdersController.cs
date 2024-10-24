@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DecorGearApplication.DataTransferObj.Order;
 using DecorGearApplication.Interface;
-using DecorGearApplication.DataTransferObj.Order;
 using DecorGearDomain.Enum;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DecorGearApi.Controllers
 {
@@ -64,23 +64,24 @@ namespace DecorGearApi.Controllers
 
             if (result == ErrorMessage.Successfull)
             {
-                return CreatedAtAction(nameof(CreateOrder), null); 
+                return CreatedAtAction(nameof(CreateOrder), null);
             }
             else if (result == ErrorMessage.Null || result == ErrorMessage.Failed)
             {
-                return BadRequest("Failed to create order."); 
+                return BadRequest("Failed to create order.");
             }
 
-            return StatusCode(500, "Internal server error."); 
+            return StatusCode(500, "Internal server error.");
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutOder([FromBody] UpdateOrderRequest request, int id,  CancellationToken cancellationToken)
+        public async Task<IActionResult> PutOder([FromBody] UpdateOrderRequest request, int id, CancellationToken cancellationToken)
         {
             if (request == null)
             {
                 return BadRequest("Invalid order request.");
             }
-            else {
+            else
+            {
                 var existingOrder = await _orderRepo.GetKeyOderById(new ViewOrderRequest { OderID = id }, cancellationToken);
 
                 if (existingOrder == null)
@@ -101,7 +102,8 @@ namespace DecorGearApi.Controllers
                     {
                         return NoContent();
                     }
-                    else {
+                    else
+                    {
                         return BadRequest("Failed to update order.");
                     }
                 }

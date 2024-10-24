@@ -1,12 +1,6 @@
 ﻿using DecorGearDomain.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DecorGearInfrastructure.Database.Configuration
 {
@@ -30,7 +24,7 @@ namespace DecorGearInfrastructure.Database.Configuration
                 .WithOne(m => m.User)
                 .HasForeignKey<Member>(m => m.UserID)
                 .OnDelete(DeleteBehavior.Cascade);
-      
+
 
             // Mối quan hệ với Role (n-1)
             builder.HasOne(u => u.Role)
@@ -38,7 +32,7 @@ namespace DecorGearInfrastructure.Database.Configuration
                 .HasForeignKey(u => u.RoleID)
                 .IsRequired();
 
-       
+
         }
 
     }

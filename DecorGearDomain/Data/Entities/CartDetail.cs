@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using DecorGearDomain.Data.Base;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DecorGearDomain.Data.Base;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DecorGearDomain.Data.Entities
 {
@@ -16,7 +11,7 @@ namespace DecorGearDomain.Data.Entities
 
         [Required(ErrorMessage = "ProductID vui lòng không được để trống")]
         public int ProductID { get; set; }
-        
+
         [Required(ErrorMessage = "CartID vui lòng không được để trống")]
         public int CartID { get; set; }
 
@@ -36,8 +31,8 @@ namespace DecorGearDomain.Data.Entities
 
         // n - 1
 
-        public virtual Product Product { get; set; }  
+        public virtual Product Product { get; set; }
 
-        public virtual Cart Cart { get; set; } 
+        public virtual Cart Cart { get; set; }
     }
 }

@@ -5,12 +5,6 @@ using DecorGearDomain.Data.Entities;
 using DecorGearDomain.Enum;
 using DecorGearInfrastructure.Database.AppDbContext;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DecorGearInfrastructure.Implement
 {
@@ -75,7 +69,7 @@ namespace DecorGearInfrastructure.Implement
             return _mapper.Map<ProductDto>(productIds);
         }
 
-        public async Task<ErrorMessage> UpdateProduct(int id,UpdateProductRequest request, CancellationToken cancellationToken)
+        public async Task<ErrorMessage> UpdateProduct(int id, UpdateProductRequest request, CancellationToken cancellationToken)
         {
             // Kiểm Tra Tính Hợp Lệ của Dữ Liệu
             if (request == null)
@@ -86,7 +80,7 @@ namespace DecorGearInfrastructure.Implement
             // Cập Nhật Sản Phẩm 
             try
             {
-                var product = await _appDbContext.Products.FindAsync(id,cancellationToken);
+                var product = await _appDbContext.Products.FindAsync(id, cancellationToken);
 
                 product.ProductName = request.ProductName;
                 product.Price = request.Price;

@@ -6,11 +6,6 @@ using DecorGearDomain.Data.Entities;
 using DecorGearDomain.Enum;
 using DecorGearInfrastructure.Database.AppDbContext;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DecorGearInfrastructure.Implement
 {
@@ -19,7 +14,7 @@ namespace DecorGearInfrastructure.Implement
         private readonly AppDbContext _dbcontext;
         public CartRepository(AppDbContext appDbContext)
         {
-                _dbcontext = appDbContext;
+            _dbcontext = appDbContext;
         }
         public async Task<ErrorMessage> AddProductToCart(CreateCartDetailRequest request, CancellationToken cancellationToken)
         {

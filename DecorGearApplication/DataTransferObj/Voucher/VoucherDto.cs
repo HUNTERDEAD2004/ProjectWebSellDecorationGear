@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DecorGearApplication.DataTransferObj.Voucher
+﻿namespace DecorGearApplication.DataTransferObj.Voucher
 {
     public class VoucherDto
     {
@@ -14,6 +7,6 @@ namespace DecorGearApplication.DataTransferObj.Voucher
         public string VoucherName { get; set; }
 
         public int VoucherPercent { get; set; }
-        public string expiry  {  get; set; } 
+        public string expiry { get; set; }
     }
 }
