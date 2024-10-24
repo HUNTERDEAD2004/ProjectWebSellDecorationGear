@@ -31,6 +31,8 @@ namespace DecorGearDomain.Data.Entities
         [Required(ErrorMessage = "Không được để trống")]
         [StringLength(100, ErrorMessage = "Không được vượt quá 100 ký tự")]
         public string paymentMethod { get; set; }
+        public string size { get; set; }
+        public float weight { get; set; }
 
         [Required(ErrorMessage = "Không được để trống")]
         public DateTime OrderDate { get; set; } // ngày giao hàng

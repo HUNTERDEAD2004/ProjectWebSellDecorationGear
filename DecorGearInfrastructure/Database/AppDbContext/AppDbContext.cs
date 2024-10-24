@@ -36,6 +36,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Voucher> Vouchers { get; set; }
         public virtual DbSet<VerificationCode> VerificationCodes { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<VerificationCodePw> VerificationCodePws { get; set; }
         #endregion
 
@@ -162,8 +163,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 {
                     CartDetailID = 1, 
                     ProductID = 1, 
-                    CartID = 1, 
-                    OrderID = 1, 
+                    CartID = 1,  
                     Quantity = 2, 
                     UnitPrice = 50, 
                 },
@@ -172,7 +172,6 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     CartDetailID = 2, 
                     ProductID = 2, 
                     CartID = 2, 
-                    OrderID = 2, 
                     Quantity = 3, 
                     UnitPrice = 40,  
                 },
@@ -181,7 +180,6 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                    CartDetailID = 3, 
                    ProductID = 2, 
                    CartID = 2, 
-                   OrderID = 2, 
                    Quantity = 1, 
                    UnitPrice = 75, 
                 }
@@ -502,8 +500,8 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     VoucherID=1, 
                     totalQuantity=5, 
                     size="L", 
-                    weight=1.5,
-                    Status=OrderStatus.Confirmed, 
+                    weight= (float)1.5,
+                    Status=OrderStatus.Delivered, 
                     paymentMethod="Credit Card", 
                     OrderDate=DateTime.Parse("16/09/2024")
                 },
@@ -514,8 +512,8 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     VoucherID=null, 
                     totalQuantity=3,     
                     size="LF", 
-                    weight=2.0,    
-                    Status=OrderStatus.Pending, 
+                    weight=(float)2.0,    
+                    Status=OrderStatus.Delivered, 
                     paymentMethod="Cash", 
                     OrderDate=DateTime.Parse("17/09/2024")
                 }
@@ -528,33 +526,27 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new OrderDetail
                 {
-                    OrderDetailID = 1,
+                    OrderDetailId = 1,
                     OrderID=1,
                     ProductID=3,
                     Quantity=10,
                     UnitPrice=10000000,
-                    Size = "M",
-                    Weight = 4000
                 },
                 new OrderDetail
                 {
-                    OrderDetailID = 2,
+                    OrderDetailId = 2,
                     OrderID=1,
                     ProductID=3,
                     Quantity=1,
                     UnitPrice=1000000,
-                    Size = "S",
-                    Weight = 400
                 },
                 new OrderDetail
                 {
-                    OrderDetailID = 3,
+                    OrderDetailId = 3,
                     OrderID=2,
                     ProductID=1,
                     Quantity=1000,
                     UnitPrice=1000000000,
-                    Size = "L",
-                    Weight = 400000
                 }
             };
 

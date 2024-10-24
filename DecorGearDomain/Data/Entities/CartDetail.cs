@@ -16,7 +16,7 @@ namespace DecorGearDomain.Data.Entities
 
         [Required(ErrorMessage = "ProductID vui lòng không được để trống")]
         public int ProductID { get; set; }
-
+        
         [Required(ErrorMessage = "CartID vui lòng không được để trống")]
         public int CartID { get; set; }
 

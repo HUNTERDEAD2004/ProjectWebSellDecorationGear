@@ -12,7 +12,7 @@ namespace DecorGearApplication.DataTransferObj.OrderDetail
     {
         public int OrderDetailId { get; set; }
         [Required]
-        public string ProductID { get; set; }
+        public int ProductID { get; set; }
         [Required]
         public int OrderID { get; set; }
         public int Quantity { get; set; }

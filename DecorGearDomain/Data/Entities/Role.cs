@@ -18,9 +18,6 @@ namespace DecorGearDomain.Data.Entities
 
         // cấu hình 1 - n 
         public virtual ICollection<User> Users { get; set; } = new List<User>();
-
-
-      
        
     }
 }

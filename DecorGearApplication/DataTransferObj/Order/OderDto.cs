@@ -14,7 +14,7 @@ namespace DecorGearApplication.DataTransferObj.Order
     {
         public int OderID { get; set; }
 
-        public string UserID { get; set; }
+        public int UserID { get; set; }
         public string UserName { get; set; }
 
         public int? VoucherID { get; set; }
