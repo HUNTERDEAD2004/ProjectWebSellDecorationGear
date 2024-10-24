@@ -15,12 +15,13 @@ namespace DecorGearDomain.Data.Entities
         public int ImageListID { get; set; }
 
         [Required(ErrorMessage = "Không được để trống")]
-        public string ProductID { get; set; }
-        
+        public int ProductID { get; set; }
+
+        [Required(ErrorMessage = "Không được để trống")]
         public List<string> ImagePath { get; set; }
+
         [StringLength(500, ErrorMessage = "Không được vượt quá 500 ký tự")]
         public string Description { get; set; }
-
         //Khóa ngoại
         public virtual Product Product { get; set; }
     }

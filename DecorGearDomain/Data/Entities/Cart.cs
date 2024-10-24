@@ -11,17 +11,11 @@ namespace DecorGearDomain.Data.Entities
 {
     public class Cart : EntityBase
     {
-        [Required(ErrorMessage = "Vui lòng không được để trống")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CartID { get; set; }
 
         [Required(ErrorMessage = "Vui lòng không được để trống")]
-        public string UserID { get; set; }
-        [Required(ErrorMessage = "Vui lòng không được để trống")]
-        [Range(1, int.MaxValue, ErrorMessage = "Số lượng phải lớn hơn 0")]
-        public int TotalQuantity { get; set; }
-        [Required(ErrorMessage = "Vui lòng không được để trống")]
-        [Range(0.0, double.MaxValue, ErrorMessage = "Tổng số tiền phải là giá trị dương")]
-        public decimal TotalAmount { get; set; }
+        public int UserID { get; set; }
 
         // Khóa ngoại
 

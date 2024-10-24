@@ -13,17 +13,21 @@ namespace DecorGearDomain.Data.Entities
     public class MouseDetail : EntityBase
     {
         [Required(ErrorMessage = "Không được để trống")]
-        public string MouseDetailID { get; set; }
+        public int MouseDetailID { get; set; }
+
 
         [Required(ErrorMessage = "Không được để trống")]
-        public string ProductID { get; set; }
-        [Required(ErrorMessage = "Không được để trống.")]
-        [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
+        public int ProductID { get; set; }
+
         // thuộc tính
+        [Required(ErrorMessage = "Không được để trống.")]
+        [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]      
         public string Color { get; set; } // Màu sắc
 
-        [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
-        public string? DPI { get; set; } // Độ phân giải
+        // thuộc tính
+        [Required(ErrorMessage = "Không được để trống.")]
+        [Range(0, 20000, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
+        public int DPI { get; set; } // Độ phân giải
 
         [Required(ErrorMessage = "Không được để trống.")]
         [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
@@ -35,19 +39,17 @@ namespace DecorGearDomain.Data.Entities
 
         [Required(ErrorMessage = "Không được để trống.")]
         [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
-        public string Weight { get; set; } // Trọng lượng
-
-        [Required(ErrorMessage = "Không được để trống.")]
-        [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
         public string Material { get; set; } // vật liệu
+
         [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
         public string? EyeReading { get; set; }   //(tần số quét )
+
+        [Range(0,20, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
+        public int? Button { get; set; } // số nút bấm
+
         [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
-        public string? Button {  get; set; } // số nút bấm
-        [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
-        public string?  BatteryCapacity { get; set; } // dung lượng pin nếu có
-        [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
-        public string? LED {  get; set; }
+        public string? LED { get; set; }
+
         [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
         public string? SS { get; set; } // (software support) phần mềm hỗ trợ
 
