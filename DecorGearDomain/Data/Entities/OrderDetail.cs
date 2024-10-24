@@ -23,7 +23,7 @@ namespace DecorGearDomain.Data.Entities
         [Required(ErrorMessage = "vui lòng không được để trống")]
         [Range(1, int.MaxValue, ErrorMessage = "Số lượng phải lớn hơn 0")]
         public int Quantity { get; set; }
-        public decimal UnitPrice { get; set; }
+        public double UnitPrice { get; set; }
         public virtual Order Order { get; set; }
         public virtual Product Product { get; set; }
     }
