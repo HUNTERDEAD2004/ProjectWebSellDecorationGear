@@ -95,7 +95,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 new Role
                 {
                     RoleID = 2,
-                    RoleName = "Admin"
+                    RoleName = "User"
                 }
             };
             modelBuilder.Entity<Role>().HasData(roleData);
