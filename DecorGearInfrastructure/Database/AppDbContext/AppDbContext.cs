@@ -51,7 +51,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=DESKTOPD-DELLIN\\SQLEXPRESS;Database=DecorationGear2;Trusted_Connection=True;TrustServerCertificate=True;");
+            //optionsBuilder.UseSqlServer("Data Source=DESKTOPD-DELLIN\\SQLEXPRESS;Database=DecorationGear2;Trusted_Connection=True;TrustServerCertificate=True;");
             //optionsBuilder.UseSqlServer("Server=LAPTOP-K61S7AVO;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True");
             optionsBuilder.UseSqlServer("Data Source=PHUC\\SQLEXPRESS;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True;");
         }
@@ -161,7 +161,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new CartDetail
                 {
-                    CartDetailID = 1, 
+                    CartDetailID = 9, 
                     ProductID = 1, 
                     CartID = 1,  
                     Quantity = 2, 
@@ -169,7 +169,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 },
                 new CartDetail
                 {
-                    CartDetailID = 2, 
+                    CartDetailID = 10, 
                     ProductID = 2, 
                     CartID = 2, 
                     Quantity = 3, 
@@ -177,16 +177,13 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 },
                 new CartDetail
                 {                  
-                   CartDetailID = 3, 
+                   CartDetailID = 11, 
                    ProductID = 2, 
                    CartID = 2, 
                    Quantity = 1, 
                    UnitPrice = 75, 
                 }
             };
-
-            modelBuilder.Entity<CartDetail>().HasData(cartDetailData);
-
 
             modelBuilder.Entity<CartDetail>().HasData(cartDetailData);
 
@@ -503,7 +500,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     weight= (float)1.5,
                     Status=OrderStatus.Delivered, 
                     paymentMethod="Credit Card", 
-                    OrderDate=DateTime.Parse("16/09/2024")
+                    OrderDate=DateTime.Parse("09/09/2024")
                 },
                 new Order 
                 { 
@@ -515,7 +512,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     weight=(float)2.0,    
                     Status=OrderStatus.Delivered, 
                     paymentMethod="Cash", 
-                    OrderDate=DateTime.Parse("17/09/2024")
+                    OrderDate=DateTime.Parse("09/09/2024")
                 }
             };
 
