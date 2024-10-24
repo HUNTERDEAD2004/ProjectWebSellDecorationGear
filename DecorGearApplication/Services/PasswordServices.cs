@@ -5,10 +5,9 @@ using DecorGearApplication.IServices;
 using DecorGearDomain.Data.Entities;
 using DecorGearDomain.Enum;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Caching.Distributed;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
+
 
 namespace DecorGearApplication.Services
 {
@@ -27,20 +26,20 @@ namespace DecorGearApplication.Services
 
         public async Task<ResponseDto<ErrorMessage>> ChangePassword(ChangePasswordRequest request, CancellationToken cancellationToken)
         {
-          
+
             if (request.NewPassword != request.NewPasswordConFirm)
                 return new ResponseDto<ErrorMessage>(StatusCodes.Status400BadRequest, "Mật khẩu mới và mậy khảu xác nhận không khớp");
-            
+
             var user = await _userRepository.GetUserByIdAsync(request.Id, cancellationToken);
 
             if (user == null)
                 return new ResponseDto<ErrorMessage>(StatusCodes.Status400BadRequest, "Người dùng không tồn tại");
 
-             if (!VerifyPassword(request.OldPassword, user.Password))
-                 return new ResponseDto<ErrorMessage>(StatusCodes.Status400BadRequest, "Mật khẩu cũ không đúng");
+            if (!VerifyPassword(request.OldPassword, user.Password))
+                return new ResponseDto<ErrorMessage>(StatusCodes.Status400BadRequest, "Mật khẩu cũ không đúng");
 
-                var hashedPassword = HashPassword(request.NewPassword);
-          
+            var hashedPassword = HashPassword(request.NewPassword);
+
             user.Password = hashedPassword;
             await _userRepository.UpdateUserAsync(user, cancellationToken);
 
@@ -54,10 +53,10 @@ namespace DecorGearApplication.Services
 
             if (userByEmail == null)
                 return new ResponseDto<ErrorMessage>(StatusCodes.Status404NotFound, "Tài khoản không tồn tại.");
-            
-            
-            var verificationCode = new Random().Next(100000, 999999).ToString(); 
-        
+
+
+            var verificationCode = new Random().Next(100000, 999999).ToString();
+
             await _mailingServices.SendEmailAsync(userByEmail.Email, "Mã xác thực để đặt lại mật khẩu",
                 $"Mã xác thực của bạn là: {verificationCode}");
 
@@ -66,7 +65,7 @@ namespace DecorGearApplication.Services
                 UserId = userByEmail.UserID,
                 Code = verificationCode,
                 CreatedAt = DateTime.UtcNow,
-                Expiration = DateTime.UtcNow.AddMinutes(1) 
+                Expiration = DateTime.UtcNow.AddMinutes(1)
             };
 
             await _userRepository.SaveVerificationCodeAsync(codeEntity, cancellationToken);

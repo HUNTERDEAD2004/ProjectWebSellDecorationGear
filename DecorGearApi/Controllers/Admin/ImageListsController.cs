@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using DecorGearApplication.DataTransferObj.ImageList;
-using DecorGearApplication.DataTransferObj.KeyBoardDetails;
 using DecorGearApplication.Interface;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DecorGearApi.Controllers
@@ -49,7 +47,7 @@ namespace DecorGearApi.Controllers
 
         // PUT api/<ProductController>/5
         [HttpPut("update")]
-        public async Task<IActionResult> UpdateImageLists(int id,UpdateImageListRequest request, CancellationToken cancellationToken)
+        public async Task<IActionResult> UpdateImageLists(int id, UpdateImageListRequest request, CancellationToken cancellationToken)
         {
             // Kiểm tra nếu ModelState không hợp lệ
             if (!ModelState.IsValid)
@@ -63,9 +61,9 @@ namespace DecorGearApi.Controllers
             {
                 return NotFound("Không có giá trị ID");
             }
-            
+
             // Gọi phương thức Update để lưu các thay đổi
-            var result = await _res.UpdateImage(id,request, cancellationToken);
+            var result = await _res.UpdateImage(id, request, cancellationToken);
 
             // Trả về kết quả thành công với sản phẩm đã cập nhật
             return Ok(result);

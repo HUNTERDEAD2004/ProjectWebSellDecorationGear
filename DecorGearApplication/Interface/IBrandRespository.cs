@@ -1,13 +1,5 @@
-﻿using Application.DataTransferObj.User.Request;
-using DecorGearApplication.DataTransferObj.Brand;
-using DecorGearDomain.Data.Entities;
+﻿using DecorGearApplication.DataTransferObj.Brand;
 using DecorGearDomain.Enum;
-using Ecommerce.Application.DataTransferObj.User.Request;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DecorGearApplication.Interface
 {

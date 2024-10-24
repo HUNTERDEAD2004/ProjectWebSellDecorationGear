@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Security.Cryptography;
 
 namespace DecorGearInfrastructure.Extention
 {
@@ -23,7 +18,7 @@ namespace DecorGearInfrastructure.Extention
 
         // Xác thực mật khẩu
         public static bool VerifyPassword(string enteredPassword, string storedHash)
-            {
+        {
             string hashOfInput = HashPassword(enteredPassword);
             return hashOfInput == storedHash;
         }

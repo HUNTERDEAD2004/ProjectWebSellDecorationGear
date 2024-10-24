@@ -1,12 +1,5 @@
-﻿using DecorGearDomain.Data.Base;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using System.ComponentModel.DataAnnotations;
+using DecorGearDomain.Data.Base;
 namespace DecorGearDomain.Data.Entities
 {
     public class Product : EntityBase
@@ -29,7 +22,7 @@ namespace DecorGearDomain.Data.Entities
         [Range(0.01, double.MaxValue, ErrorMessage = "Giá phải lớn hơn 0")]
         public double Price { get; set; }
 
-        [Range(0,10000, ErrorMessage = "View không được vượt quá 10000 lượt xem")]
+        [Range(0, 10000, ErrorMessage = "View không được vượt quá 10000 lượt xem")]
         public int View { get; set; }
 
         [Required(ErrorMessage = "Không được để trống.")]

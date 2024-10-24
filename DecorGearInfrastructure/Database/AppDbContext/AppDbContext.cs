@@ -1,17 +1,9 @@
-﻿using DecorGearApplication.DataTransferObj.Role;
-using DecorGearDomain.Data.Entities;
+﻿using DecorGearDomain.Data.Entities;
 using DecorGearDomain.Enum;
 using DecorGearInfrastructure.Extention;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Globalization;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace DecorGearInfrastructure.Database.AppDbContext
 {
@@ -51,7 +43,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseSqlServer("Data Source=DESKTOPD-DELLIN\\SQLEXPRESS;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True;");
-            optionsBuilder.UseSqlServer("Server=LAPTOP-K61S7AVO;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True");
+            optionsBuilder.UseSqlServer("Data Source=LAP-CN-192\\MSSQLSERVER01;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -108,37 +100,38 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             };
             modelBuilder.Entity<Role>().HasData(roleData);
 
-            // Seed users
+            // Khởi tạo dữ liệu người dùng
             var userData = new List<User>
-            {
-                new User
-                {
-                    UserID = 1,
-                    Name = "John Smith",
-                    PhoneNumber = "0524567890",
-                    Email = "john@example.com",
-                    UserName = "admin1",
-                    Password = "hashedadminpassword",  // You should hash passwords securely!
-                    RoleID = 1,  // Admin Role
-                    Status = UserStatus.Active
-                },
-                new User
-                {
-                    UserID = 2,
-                    Name = "Jane hangminton",
-                    PhoneNumber = "0987654321",
-                    Email = "jane@example.com",
-                    UserName = "admin2",
-                    Password = "hashedadminpassword",  // You should hash passwords securely!
-                    RoleID = 2,  // Admin Role
-                    Status = UserStatus.Active
-                }
-            };
+{
+    new User
+    {
+        UserID = 1,
+        Name = "Admin",
+        PhoneNumber = "0123456789",
+        Email = "admin@example.com",
+        UserName = "admin",
+        Password = Hash.HashPassword("Admin@123"),
+        RoleID = 1,  // Vai trò Admin
+        Status = UserStatus.Active
+    },
+    new User
+    {
+        UserID = 2,
+        Name = "Jane Hangminton",
+        PhoneNumber = "0987654321",
+        Email = "jane@example.com",
+        UserName = "user2",
+        Password = Hash.HashPassword("UserPassword123"),
+        RoleID = 2,  // Vai trò User
+        Status = UserStatus.Active
+    }
+};
 
+            // Thêm người dùng vào model builder
             modelBuilder.Entity<User>().HasData(userData);
 
 
-            modelBuilder.Entity<User>().HasData(userData);
+
             // Seed users
             var cartData = new List<Cart>
             {
@@ -225,15 +218,15 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 },
                 new Product
                 {
-                    ProductID=3, 
-                    ProductName="Bàn phím cơ AulaF75", 
-                    Price=1000000, 
+                    ProductID=3,
+                    ProductName="Bàn phím cơ AulaF75",
+                    Price=1000000,
                     View=8000,
                     Quantity=100,
-                    Weight=400, 
-                    Description="Một chiếc bàn phím cơ mỳ ăn liền với 3mode hotswap tầm giá 1 củ mà bạn không nên bỏ qua", 
-                    Size="75%", 
-                    SaleID=null, 
+                    Weight=400,
+                    Description="Một chiếc bàn phím cơ mỳ ăn liền với 3mode hotswap tầm giá 1 củ mà bạn không nên bỏ qua",
+                    Size="75%",
+                    SaleID=null,
                     BrandID=2,
                     SubCategoryID=3
                 }
@@ -244,22 +237,22 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             // Seed Favorite
             var favoriteData = new List<Favorite>
             {
-                new Favorite 
-                { 
-                    FavoriteID = 1, 
-                    UserID = 1, 
-                    ProductID = 1 
-                },
-                new Favorite 
-                { 
-                    FavoriteID = 2, 
-                    UserID = 2, 
+                new Favorite
+                {
+                    FavoriteID = 1,
+                    UserID = 1,
                     ProductID = 1
                 },
-                new Favorite 
-                { 
-                    FavoriteID = 3, 
-                    UserID = 1, 
+                new Favorite
+                {
+                    FavoriteID = 2,
+                    UserID = 2,
+                    ProductID = 1
+                },
+                new Favorite
+                {
+                    FavoriteID = 3,
+                    UserID = 1,
                     ProductID = 2
                 }
             };
@@ -269,26 +262,26 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             // Seed FeedBack
             var feedbackData = new List<FeedBack>
             {
-                new FeedBack 
-                { 
-                    FeedBackID = 1, 
-                    UserID = 1, 
-                    ProductID = 1, 
-                    Comment = "Sản phẩm rất tốt!" 
+                new FeedBack
+                {
+                    FeedBackID = 1,
+                    UserID = 1,
+                    ProductID = 1,
+                    Comment = "Sản phẩm rất tốt!"
                 },
-                new FeedBack 
-                { 
-                    FeedBackID = 2, 
-                    UserID = 1, 
-                    ProductID = 2, 
-                    Comment = "Chất lượng bình thường." 
+                new FeedBack
+                {
+                    FeedBackID = 2,
+                    UserID = 1,
+                    ProductID = 2,
+                    Comment = "Chất lượng bình thường."
                 },
-                new FeedBack 
-                { 
-                    FeedBackID = 3, 
-                    UserID = 2, 
-                    ProductID = 3, 
-                    Comment = "Giao hàng nhanh, sản phẩm đẹp." 
+                new FeedBack
+                {
+                    FeedBackID = 3,
+                    UserID = 2,
+                    ProductID = 3,
+                    Comment = "Giao hàng nhanh, sản phẩm đẹp."
                 }
             };
 
@@ -380,9 +373,9 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 },
                 new ImageList
                 {
-                    ImageListID= 2, 
-                    ProductID=1, 
-                    ImagePath=["/images/rzdav3_img.jpg", "/images/rzdav3_img2.jpg"], 
+                    ImageListID= 2,
+                    ProductID=1,
+                    ImagePath=["/images/rzdav3_img.jpg", "/images/rzdav3_img2.jpg"],
                     Description="Hình ảnh của sản phẩm razer deadth addzer v3"
                 }
             };
@@ -399,11 +392,11 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Points=100,
                     ExpiryDate=DateTime.Parse("11/12/2024")
                 },
-                new Member 
-                { 
-                    MemberID= 2, 
-                    UserID= 2, 
-                    Points=200, 
+                new Member
+                {
+                    MemberID= 2,
+                    UserID= 2,
+                    Points=200,
                     ExpiryDate=DateTime.Parse("26/3/2025")
                 }
             };
@@ -455,26 +448,26 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             //Seed OrderData
             var OrderData = new List<Order>
             {
-                new Order 
-                { 
-                    OrderID=1, 
-                    UserID=1, 
-                    VoucherID=1, 
-                    totalQuantity=5, 
-                    totalPrice=500.00, 
-                    Status=OrderStatus.Confirmed, 
-                    paymentMethod="Credit Card", 
+                new Order
+                {
+                    OrderID=1,
+                    UserID=1,
+                    VoucherID=1,
+                    totalQuantity=5,
+                    totalPrice=500.00,
+                    Status=OrderStatus.Confirmed,
+                    paymentMethod="Credit Card",
                     OrderDate=DateTime.Parse("16/09/2024")
                 },
-                new Order 
-                { 
-                    OrderID=2, 
-                    UserID=2, 
-                    VoucherID=null, 
-                    totalQuantity=3, 
-                    totalPrice=300.00, 
-                    Status=OrderStatus.Pending, 
-                    paymentMethod="Cash", 
+                new Order
+                {
+                    OrderID=2,
+                    UserID=2,
+                    VoucherID=null,
+                    totalQuantity=3,
+                    totalPrice=300.00,
+                    Status=OrderStatus.Pending,
+                    paymentMethod="Cash",
                     OrderDate=DateTime.Parse("17/09/2024")
                 }
             };
@@ -518,12 +511,12 @@ namespace DecorGearInfrastructure.Database.AppDbContext
 
             modelBuilder.Entity<OrderDetail>().HasData(orderDetailData);
 
-            base.OnModelCreating(modelBuilder);          
+            base.OnModelCreating(modelBuilder);
         }
 
     }
 }
 
-    
+
 
 

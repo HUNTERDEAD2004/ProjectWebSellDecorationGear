@@ -33,7 +33,7 @@ namespace DecorGearDomain.Data.Entities
 
         [Range(1, 3, ErrorMessage = "Vui lòng lựa chọn từ 1 - 3 <(Hoạt động:1) (Không hoạt động:2) (Khóa:3)> ")]
         public UserStatus Status { get; set; }
-       
+
         // Khóa ngoại
 
         // 1 - n
@@ -48,6 +48,6 @@ namespace DecorGearDomain.Data.Entities
         // n - 1
         public virtual Role Role { get; set; }
 
-       
+
     }
 }

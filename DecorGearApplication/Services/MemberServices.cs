@@ -2,13 +2,8 @@
 using DecorGearApplication.DataTransferObj.User;
 using DecorGearApplication.Interface;
 using DecorGearApplication.IServices;
-using DecorGearDomain.Data.Entities;
 using DecorGearDomain.Enum;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace DecorGearApplication.Services
 {
@@ -27,7 +22,7 @@ namespace DecorGearApplication.Services
 
         public async Task<ResponseDto<bool>> DeleteMemberAsync(DeleteMemberRequest request, CancellationToken cancellation)
         {
-            return  await _repo.DeleteMemberAsync(request, cancellation);
+            return await _repo.DeleteMemberAsync(request, cancellation);
         }
 
         public async Task<List<MemberDto>> GetAllMembersAsync(CancellationToken cancellation)
@@ -42,7 +37,7 @@ namespace DecorGearApplication.Services
 
         public async Task<ResponseDto<ErrorMessage>> UpdateMemberAsync(int id, UpdateMemberRequest request, CancellationToken cancellation)
         {
-            return await _repo.UpdateMemberAsync(id, request,cancellation);
+            return await _repo.UpdateMemberAsync(id, request, cancellation);
         }
     }
 }

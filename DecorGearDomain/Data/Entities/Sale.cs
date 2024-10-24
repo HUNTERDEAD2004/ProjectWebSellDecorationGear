@@ -1,11 +1,7 @@
 ﻿using DecorGearDomain.Data.Base;
 using DecorGearDomain.Enum;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace DecorGearDomain.Data.Entities
 {

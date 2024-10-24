@@ -1,5 +1,4 @@
-﻿using DecorGearApplication.Interface;
-using DecorGearApplication.IServices;
+﻿using DecorGearApplication.IServices;
 using DecorGearDomain.Data.Entities;
 using MailKit.Net.Smtp;
 using MailKit.Security;
@@ -7,11 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using MimeKit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 
 
@@ -42,7 +37,7 @@ namespace DecorGearApplication.Services
                 throw new ArgumentNullException(nameof(subject), "Subject cannot be null or empty.");
             }
 
-            
+
             var emailBody = $"{body}";
 
             var email = new MimeMessage()
@@ -55,7 +50,7 @@ namespace DecorGearApplication.Services
 
             var builder = new BodyBuilder
             {
-                HtmlBody = emailBody 
+                HtmlBody = emailBody
             };
 
             if (attachments != null)

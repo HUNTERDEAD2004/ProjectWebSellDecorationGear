@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DecorGearApplication.DataTransferObj.Order
+﻿namespace DecorGearApplication.DataTransferObj.Order
 {
     public class OderDto
     {
@@ -13,7 +6,7 @@ namespace DecorGearApplication.DataTransferObj.Order
 
         public string UserID { get; set; }
 
-        public int? VoucherID { get; set; } 
+        public int? VoucherID { get; set; }
 
         public int totalQuantity { get; set; }
 

@@ -1,17 +1,10 @@
 ﻿using AutoMapper;
 using DecorGearApplication.DataTransferObj.MouseDetails;
 using DecorGearApplication.Interface;
-using DecorGearDomain.Data.Entities;
 using DecorGearDomain.Enum;
 using DecorGearInfrastructure.Database.AppDbContext;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.Intrinsics.Arm;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace DecorGearInfrastructure.Implement
 {
@@ -20,7 +13,7 @@ namespace DecorGearInfrastructure.Implement
         private readonly AppDbContext _appDbContext;
         private readonly IMapper _mapper;
 
-        public MouseRespository(AppDbContext appDbContext,IMapper mapper)
+        public MouseRespository(AppDbContext appDbContext, IMapper mapper)
         {
             _appDbContext = appDbContext;
             _mapper = mapper;
@@ -51,7 +44,7 @@ namespace DecorGearInfrastructure.Implement
         public async Task<bool> DeleteMouse(int id, CancellationToken cancellationToken)
         {
             var keyResult = await _appDbContext.MouseDetails.FindAsync(id, cancellationToken);
-            if (keyResult != null) 
+            if (keyResult != null)
             {
                 _appDbContext.MouseDetails.Remove(keyResult);
                 _appDbContext.SaveChanges();
@@ -69,12 +62,12 @@ namespace DecorGearInfrastructure.Implement
 
         public async Task<MouseDetailsDto> GetMouseById(int id, CancellationToken cancellationToken)
         {
-            var keyResult = await _appDbContext.MouseDetails.FindAsync(id,cancellationToken);
+            var keyResult = await _appDbContext.MouseDetails.FindAsync(id, cancellationToken);
 
             return _mapper.Map<MouseDetailsDto>(keyResult);
         }
 
-        public async Task<ErrorMessage> UpdateMouse(int id,UpdateMouseRequest request, CancellationToken cancellationToken)
+        public async Task<ErrorMessage> UpdateMouse(int id, UpdateMouseRequest request, CancellationToken cancellationToken)
         {
             if (request == null)
             {

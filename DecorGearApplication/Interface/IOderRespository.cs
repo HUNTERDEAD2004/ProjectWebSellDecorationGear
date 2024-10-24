@@ -1,11 +1,5 @@
-﻿using DecorGearApplication.DataTransferObj.MouseDetails;
-using DecorGearApplication.DataTransferObj.Order;
+﻿using DecorGearApplication.DataTransferObj.Order;
 using DecorGearDomain.Enum;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DecorGearApplication.Interface
 {

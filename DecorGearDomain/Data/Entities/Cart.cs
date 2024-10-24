@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using DecorGearDomain.Data.Base;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DecorGearDomain.Data.Base;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DecorGearDomain.Data.Entities
 {

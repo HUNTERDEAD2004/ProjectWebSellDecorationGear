@@ -1,16 +1,11 @@
 ﻿using AutoMapper;
 using DecorGearApplication.DataTransferObj.Brand;
-using DecorGearApplication.DataTransferObj.Product;
 using DecorGearApplication.Interface;
 using DecorGearDomain.Data.Entities;
 using DecorGearDomain.Enum;
 using DecorGearInfrastructure.Database.AppDbContext;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace DecorGearInfrastructure.Implement
 {
