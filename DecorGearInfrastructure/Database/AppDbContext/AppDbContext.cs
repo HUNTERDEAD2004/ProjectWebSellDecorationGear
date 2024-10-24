@@ -161,7 +161,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 new CartDetail
                 {
                     CartDetailID = 1, 
-                    ProductID = "AULAF75", 
+                    ProductID = 1, 
                     CartID = 1, 
                     OrderID = 1, 
                     Quantity = 2, 
@@ -170,7 +170,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 new CartDetail
                 {
                     CartDetailID = 2, 
-                    ProductID = "RZVMNP1", 
+                    ProductID = 2, 
                     CartID = 2, 
                     OrderID = 2, 
                     Quantity = 3, 
@@ -179,7 +179,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 new CartDetail
                 {                  
                    CartDetailID = 3, 
-                   ProductID = "RZDAV3", 
+                   ProductID = 2, 
                    CartID = 2, 
                    OrderID = 2, 
                    Quantity = 1, 
