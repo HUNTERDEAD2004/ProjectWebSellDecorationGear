@@ -1,5 +1,8 @@
-﻿using System;
+﻿using DecorGearDomain.Data.Base;
+using DecorGearDomain.Enum;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -16,10 +19,17 @@ namespace DecorGearDomain.Data.Entities
         public string ProductID { get; set; }
         [Required]
         public int OrderID { get; set; }
+
+        [Required(ErrorMessage = "Không được để trống")]
+        public int ProductID { get; set; }
+
+        [Required(ErrorMessage = "vui lòng không được để trống")]
+        [Range(1, int.MaxValue, ErrorMessage = "Số lượng phải lớn hơn 0")]
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
         public virtual Order Order { get; set; }
-        public virtual Product Product { get; set; }    
+        public virtual Product Product { get; set; }
 
+        public virtual Order Order { get; set; }
     }
 }

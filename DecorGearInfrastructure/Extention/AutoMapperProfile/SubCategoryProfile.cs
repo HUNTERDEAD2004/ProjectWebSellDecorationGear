@@ -16,9 +16,6 @@ namespace DecorGearInfrastructure.Extention.AutoMapperProfile
         {
             CreateMap<SubCategoryDto, SubCategory>().ReverseMap();
             CreateMap<CreateSubCategoryRequest, SubCategory>();
-            CreateMap<UpdateSubCategoryRequest, SubCategory>();
-            CreateMap<DeleteSubCategoryRequest, SubCategory>();
-            CreateMap<ViewSubCategoryRequest, SubCategory>();
         }
     }
 }

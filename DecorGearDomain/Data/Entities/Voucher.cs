@@ -16,7 +16,7 @@ namespace DecorGearDomain.Data.Entities
         public int VoucherID { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập tên")]
-        public string VoucherName {  get; set; }
+        public string VoucherName { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập phần trăm giảm giá")]
         [Range(0, 100, ErrorMessage = ("Phần trăm giảm giá không hợp lệ"))]

@@ -11,13 +11,16 @@ namespace DecorGearDomain.Data.Entities
 {
     public class Role : EntityBase
     {
-        [Required]
-        public Guid RoleID { get; set; }
+        public int RoleID { get; set; }
 
         [Required]
-        public string RoleName { get; set; }
+        public string? RoleName { get; set; }   
 
         // cấu hình 1 - n 
         public virtual ICollection<User> Users { get; set; } = new List<User>();
+
+
+      
+       
     }
 }
