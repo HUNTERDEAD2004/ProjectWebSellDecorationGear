@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
 using DecorGearApplication.DataTransferObj.MouseDetails;
 using DecorGearApplication.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DecorGearApi.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/admin/[controller]")]
+    [Authorize(Roles = "Admin")]
     public class MouseController : ControllerBase
     {
         private readonly IMouseRespository _res;

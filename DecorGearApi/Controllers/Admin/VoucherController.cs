@@ -1,12 +1,14 @@
 ﻿using DecorGearApplication.DataTransferObj.Voucher;
 using DecorGearApplication.Interface;
 using DecorGearDomain.Enum;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DecorGearApi.Controllers
+namespace DecorGearApi.Controllers.Admin
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/admin/[controller]")]
+    [Authorize(Roles = "Admin")]
     public class VoucherController : ControllerBase
     {
         private readonly IVoucherRespository _voucherRepo;

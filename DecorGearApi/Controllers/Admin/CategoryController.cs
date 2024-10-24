@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
 using DecorGearApplication.DataTransferObj.Category;
 using DecorGearApplication.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DecorGearApi.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/admin/[controller]")]
+    [Authorize(Roles = "Admin")]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryRespository _res;

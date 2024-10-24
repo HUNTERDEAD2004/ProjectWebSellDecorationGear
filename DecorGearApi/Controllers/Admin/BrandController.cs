@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
 using DecorGearApplication.DataTransferObj.Brand;
 using DecorGearApplication.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DecorGearApi.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/admin/[controller]")]
+    [Authorize(Roles = "Admin")]
     public class BrandController : ControllerBase
     {
         private readonly IBrandRespository _res;
