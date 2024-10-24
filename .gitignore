@@ -378,3 +378,6 @@ FodyWeavers.xsd
 /DecorGearInfrastructure/Migrations/AppDbContextModelSnapshot.cs
 /DecorGearInfrastructure/Migrations/20240916053218_DecoGMigration.cs
 /DecorGearInfrastructure/Migrations/20240916053218_DecoGMigration.Designer.cs
+/DecorGearInfrastructure/Migrations/20241018024333_newdb.cs
+/DecorGearInfrastructure/Migrations/20241018024333_newdb.Designer.cs
+/DecorGearInfrastructure/Extention/HashKey.cs
