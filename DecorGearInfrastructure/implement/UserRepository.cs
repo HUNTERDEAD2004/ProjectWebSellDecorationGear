@@ -19,14 +19,12 @@ namespace DecorGearInfrastructure.Implement
     {
         private readonly AppDbContext _db;
         private readonly IMapper _map;
-        private readonly ITokenServices _tokenServices;
         private readonly IMailingServices _mailingServices;
 
-        public UserRepository(AppDbContext db, IMapper map, ITokenServices tokenServices, IMailingServices mailingServices)
+        public UserRepository(AppDbContext db, IMapper map, IMailingServices mailingServices)
         {
             _db = db;
             _map = map;
-            _tokenServices = tokenServices;
             _mailingServices = mailingServices;
         }
         public async Task<bool> EmailExistsAsync(string email)
@@ -62,7 +60,6 @@ namespace DecorGearInfrastructure.Implement
             {
                 if (request == null)
                     return new ResponseDto<UserDto>(StatusCodes.Status400BadRequest, "Dữ liệu yêu cầu không được để trống.");
-
                 if (string.IsNullOrWhiteSpace(request.Email) ||
                     string.IsNullOrWhiteSpace(request.UserName) ||
                     string.IsNullOrWhiteSpace(request.Password) ||
@@ -70,7 +67,6 @@ namespace DecorGearInfrastructure.Implement
                 {
                     return new ResponseDto<UserDto>(StatusCodes.Status400BadRequest, "Các trường không được để trống.");
                 }
-
 
                 if (await EmailExistsAsync(request.Email))
                     return new ResponseDto<UserDto>(StatusCodes.Status400BadRequest, "Email đã tồn tại.");
@@ -279,13 +275,12 @@ namespace DecorGearInfrastructure.Implement
         public async Task<User> GetUserByVerificationCodeAsync(string verificationCode, CancellationToken cancellationToken)
         {
             var verificationEntry = await _db.VerificationCodePws
-                .FirstOrDefaultAsync(vc => vc.Code == verificationCode && vc.Expiration > DateTime.UtcNow, cancellationToken);
+                .SingleOrDefaultAsync(vc => vc.Code == verificationCode && vc.Expiration > DateTime.UtcNow, cancellationToken);
 
             if (verificationEntry == null)
             {
                 return null;
             }
-
             // Tìm người dùng tương ứng với mã xác thực
             return await _db.Users.FindAsync(verificationEntry.UserId);
         }

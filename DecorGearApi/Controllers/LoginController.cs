@@ -135,7 +135,7 @@ namespace DecorGearApi.Controllers
             var response = await _userRepository.ResendVerificationCodeAsync(email, CancellationToken.None);
             return StatusCode(response.Status, response.Message);
         }
-
+     
     }
 
 }

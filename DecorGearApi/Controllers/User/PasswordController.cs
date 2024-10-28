@@ -40,7 +40,7 @@ namespace DecorGearApi.Controllers.User
             return NotFound(result);
         }
 
-        [HttpPost("reset-password")]
+        [HttpPost("forgot-password-verify-code")]
         public async Task<ActionResult<ResponseDto<ErrorMessage>>> ResetPassword([FromBody] ResetPassword request, CancellationToken cancellationToken)
         {
             var result = await _passwordService.ResetPassword(request, cancellationToken);

@@ -14,13 +14,11 @@ namespace DecorGearApplication.Services
     {
         private readonly IUserRespository _userRepository;
         private readonly IMailingServices _mailingServices;
-        private readonly ITokenServices _tokenServices;
 
-        public PasswordServices(IUserRespository userRepository, IMailingServices mailingServices, ITokenServices tokenServices)
+        public PasswordServices(IUserRespository userRepository, IMailingServices mailingServices)
         {
             _userRepository = userRepository;
             _mailingServices = mailingServices;
-            _tokenServices = tokenServices;
         }
 
         public async Task<ResponseDto<ErrorMessage>> ChangePassword(ChangePasswordRequest request, CancellationToken cancellationToken)
@@ -37,7 +35,7 @@ namespace DecorGearApplication.Services
             if (!VerifyPassword(request.OldPassword, user.Password))
                 return new ResponseDto<ErrorMessage>(StatusCodes.Status400BadRequest, "Mật khẩu cũ không đúng");
 
-            var hashedPassword = HashPassword(request.NewPassword);
+            var hashedPassword = (request.NewPassword);
 
             user.Password = hashedPassword;
             await _userRepository.UpdateUserAsync(user, cancellationToken);
@@ -78,20 +76,7 @@ namespace DecorGearApplication.Services
         {
             if (string.IsNullOrEmpty(request.VerificationCodePw))
                 return new ResponseDto<ErrorMessage>(StatusCodes.Status400BadRequest, "Mã xác thực không hợp lệ.");
-
-
-            if (string.IsNullOrEmpty(request.NewPassword) || string.IsNullOrEmpty(request.ConfirmPW))
-                return new ResponseDto<ErrorMessage>(StatusCodes.Status400BadRequest, "Mật khẩu mới và xác nhận mật khẩu không được để trống.");
-
-
-            if (request.NewPassword != request.ConfirmPW)
-                return new ResponseDto<ErrorMessage>(StatusCodes.Status400BadRequest, "Mật khẩu mới và xác nhận mật khẩu không khớp.");
-
-
-            if (request.NewPassword.Length < 6)
-                return new ResponseDto<ErrorMessage>(StatusCodes.Status400BadRequest, "Mật khẩu phải có ít nhất 6 ký tự.");
-
-
+            
             var user = await _userRepository.GetUserByVerificationCodeAsync(request.VerificationCodePw, cancellationToken);
             if (user == null)
                 return new ResponseDto<ErrorMessage>(StatusCodes.Status404NotFound, "Không tìm thấy người dùng với mã xác thực.");

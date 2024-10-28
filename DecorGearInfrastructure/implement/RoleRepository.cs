@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using DecorGearApplication.DataTransferObj.Role;
+﻿using DecorGearApplication.DataTransferObj.Role;
 using DecorGearApplication.Interface;
 using DecorGearApplication.ValueObj.Pagination;
 using DecorGearDomain.Data.Entities;
@@ -11,12 +10,10 @@ namespace DecorGearInfrastructure.Implement
     public class RoleRepository : IRoleRespository
     {
         private readonly AppDbContext _db;
-        private readonly IMapper _map;
 
-        public RoleRepository(AppDbContext db, IMapper map)
+        public RoleRepository(AppDbContext db )
         {
             _db = db;
-            _map = map;
         }
 
         public async Task<bool> CreateAsync(Role request, CancellationToken cancellationToken)
