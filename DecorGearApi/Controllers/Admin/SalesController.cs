@@ -64,20 +64,20 @@ namespace DecorGearApi.Controllers.Admin
         }
 
         [HttpDelete("delete/{id}")]
-        public async Task<IActionResult> DeleteSale(int id, CancellationToken cancellationToken)
+        public async Task<IActionResult> DeleteSale(DeleteSaleRequest request, CancellationToken cancellationToken)
         {
-            var valueID = await _res.GetKeySaleById(id, cancellationToken);
+            var valueID = await _res.GetKeySaleById(request.SaleID, cancellationToken);
 
             if (valueID == null)
             {
                 return NotFound("Không tìm thấy giá trị id");
             }
             // Gọi phương thức xoá
-            var result = await _res.DeleteSale(id, cancellationToken);
+            var result = await _res.DeleteSale(request, cancellationToken);
             return Ok(result);
         }
 
-        [HttpGet("search")]
+        [HttpGet("search")] 
         public async Task<IActionResult> SearchSale(string salename, CancellationToken cancellationToken)
         {
             var res = await _res.Search(salename, cancellationToken);
