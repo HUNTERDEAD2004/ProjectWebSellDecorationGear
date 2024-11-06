@@ -23,6 +23,6 @@ namespace DecorGearInfrastructure.Extention.AutoMapperProfile
                 .ForMember(dest => dest.FavoriteCount, opt => opt.MapFrom(src => src.Favorites.Count));
         }
 
-       
+
     }
 }

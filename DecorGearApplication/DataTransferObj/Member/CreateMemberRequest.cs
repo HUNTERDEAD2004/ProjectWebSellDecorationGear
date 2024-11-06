@@ -2,7 +2,7 @@
 {
     public class CreateMemberRequest
     {
-      
+
 
         public int? UserID { get; set; }
 

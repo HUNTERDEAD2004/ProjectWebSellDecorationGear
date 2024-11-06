@@ -1,6 +1,4 @@
-﻿using DecorGearApplication.DataTransferObj.Home;
-using DecorGearInfrastructure.Implement;
-using Microsoft.AspNetCore.Http;
+﻿using DecorGearInfrastructure.Implement;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DecorGearApi.Controllers.User
@@ -17,19 +15,19 @@ namespace DecorGearApi.Controllers.User
 
         [HttpGet("get-hot-product")]
 
-        public async Task<ActionResult> GetHotProductAsync (CancellationToken cancellationToken)
+        public async Task<ActionResult> GetHotProductAsync(CancellationToken cancellationToken)
         {
-            var tophot = await _homeRepository.GetTopHotProductsAsync(5,cancellationToken);
-          
+            var tophot = await _homeRepository.GetTopHotProductsAsync(5, cancellationToken);
+
             return Ok(tophot);
         }
 
 
         [HttpGet("get-top-view")]
 
-        public async Task<ActionResult> GetTopView (CancellationToken cancellation)
+        public async Task<ActionResult> GetTopView(CancellationToken cancellation)
         {
-            var topview =await _homeRepository.GetTopViewedProductsAsync(5,cancellation);
+            var topview = await _homeRepository.GetTopViewedProductsAsync(5, cancellation);
             return Ok(topview);
         }
     }

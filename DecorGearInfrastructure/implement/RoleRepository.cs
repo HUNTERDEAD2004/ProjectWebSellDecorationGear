@@ -11,7 +11,7 @@ namespace DecorGearInfrastructure.Implement
     {
         private readonly AppDbContext _db;
 
-        public RoleRepository(AppDbContext db )
+        public RoleRepository(AppDbContext db)
         {
             _db = db;
         }

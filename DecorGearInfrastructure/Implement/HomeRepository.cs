@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DecorGearInfrastructure.Implement
 {
-    
+
     public class HomeRepository
     {
         private readonly AppDbContext _Context;
@@ -27,7 +27,7 @@ namespace DecorGearInfrastructure.Implement
         public async Task<List<TopHotProductDto>> GetTopHotProductsAsync(int limit, CancellationToken cancellationToken)
         {
             return await _Context.Products
-                .OrderByDescending(p => p.OrderDetails.Sum(od => od.Quantity)) 
+                .OrderByDescending(p => p.OrderDetails.Sum(od => od.Quantity))
                 .Take(limit)
                 .ProjectTo<TopHotProductDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);

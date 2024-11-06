@@ -76,7 +76,7 @@ namespace DecorGearApplication.Services
         {
             if (string.IsNullOrEmpty(request.VerificationCodePw))
                 return new ResponseDto<ErrorMessage>(StatusCodes.Status400BadRequest, "Mã xác thực không hợp lệ.");
-            
+
             var user = await _userRepository.GetUserByVerificationCodeAsync(request.VerificationCodePw, cancellationToken);
             if (user == null)
                 return new ResponseDto<ErrorMessage>(StatusCodes.Status404NotFound, "Không tìm thấy người dùng với mã xác thực.");
