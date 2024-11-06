@@ -1,4 +1,5 @@
-﻿using DecorGearApplication.Interface;
+﻿using DecorGearApplication.DataTransferObj.RevenueProduct;
+using DecorGearApplication.Interface;
 using DecorGearApplication.IServices;
 using DecorGearApplication.Services;
 using DecorGearDomain.Data.Entities;
@@ -65,6 +66,8 @@ public class Program
         builder.Services.AddScoped<IFeedbackServices, FeedbackServices>();
         builder.Services.AddScoped<IMemberRespository, MemberRepository>();
         builder.Services.AddScoped<IMemberServices, MemberServices>();
+        builder.Services.AddScoped<ISaleRespository, SaleRepository>();
+        builder.Services.AddScoped<IRevenueProductRepo, StatisticalRepository>();
         builder.Services.AddEventBus(builder.Configuration);
         builder.Services.AddAutoMapper(typeof(UserProfile), typeof(FeedBackProfile));
 

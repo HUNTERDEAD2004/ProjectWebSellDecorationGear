@@ -87,7 +87,7 @@ namespace DecorGearInfrastructure.Implement
             // Cập Nhật Sản Phẩm 
             try
             {
-                var keyBoards = await _appDbContext.KeyboardDetails.FindAsync(id);
+                var keyBoards = await _appDbContext.KeyboardDetails.FindAsync(id,cancellationToken); // sữa
 
                 keyBoards.ProductID = request.ProductID;
                 keyBoards.KeycapMaterial = request.KeycapMaterial;

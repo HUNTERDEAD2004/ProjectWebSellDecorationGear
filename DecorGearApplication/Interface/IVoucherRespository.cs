@@ -12,9 +12,9 @@ namespace DecorGearApplication.Interface
     public interface IVoucherRespository
     {
         Task<List<VoucherDto>> GetAllVoucher(CancellationToken cancellationToken);
-        Task<VoucherDto> GetKeyVoucherById(ViewVoucherRequest request, CancellationToken cancellationToken);
+        Task<VoucherDto> GetKeyVoucherById(int id, CancellationToken cancellationToken);
         Task<ErrorMessage> CreateVoucher(CreateVoucherRequest request, CancellationToken cancellationToken);
-        Task<ErrorMessage> UpdateVoucher(UpdateVoucherRequest request, CancellationToken cancellationToken);
-        Task<bool> DeleteVoucher(DeleteVoucherRequest request, CancellationToken cancellationToken);
+        Task<ErrorMessage> UpdateVoucher(int id, CancellationToken cancellationToken);
+        Task<bool> DeleteVoucher(int id, CancellationToken cancellationToken);
     }
 }

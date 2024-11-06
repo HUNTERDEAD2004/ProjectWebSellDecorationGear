@@ -80,11 +80,7 @@ namespace DecorGearApi.Controllers
             {
                 return NotFound("Không có giá trị ID");
             }
-
-            // Gọi phương thức Delete để xóa sản phẩm
             await _res.DeleteProduct(id, cancellationToken);
-
-            // Trả về kết quả thành công với thông báo xác nhận        
             return Ok(valueId);
         }
     }

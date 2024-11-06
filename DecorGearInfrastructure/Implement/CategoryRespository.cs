@@ -72,7 +72,7 @@ namespace DecorGearInfrastructure.Implement
 
             return _mapper.Map<CategoryDto>(keyResult);
         }
-
+            
         public async Task<ErrorMessage> UpdateCategory(int id, UpdateCategoryRequest request, CancellationToken cancellationToken)
         {
             if (request != null)

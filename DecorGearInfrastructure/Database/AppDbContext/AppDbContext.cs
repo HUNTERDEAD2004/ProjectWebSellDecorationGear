@@ -29,6 +29,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
         public virtual DbSet<Member> Members { get; set; }
         public virtual DbSet<MouseDetail> MouseDetails { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails  { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Sale> Sales { get; set; }
@@ -50,7 +51,8 @@ namespace DecorGearInfrastructure.Database.AppDbContext
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=DESKTOPD-DELLIN\\SQLEXPRESS;Database=DecorationGear2;Trusted_Connection=True;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-64M86CN;Database=DecorationGear2;Trusted_Connection=True;TrustServerCertificate=True");
+            //optionsBuilder.UseSqlServer("Data Source=DESKTOPD-DELLIN\\SQLEXPRESS;Database=DecorationGear2;Trusted_Connection=True;TrustServerCertificate=True;");
             //optionsBuilder.UseSqlServer("Server=LAPTOP-K61S7AVO;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True");
         }
 

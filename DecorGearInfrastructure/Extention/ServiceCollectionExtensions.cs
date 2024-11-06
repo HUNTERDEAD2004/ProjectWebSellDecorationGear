@@ -39,6 +39,7 @@ namespace DecorGearInfrastructure.Extention
             services.AddScoped<IBrandRespository, BrandRespository>();
             services.AddScoped<IKeyboardRespository, KeyboardRespository>();
             services.AddScoped<IMouseRespository, MouseRespository>();
+            services.AddScoped<ISaleRespository, SaleRepository>(); 
 
             services.AddTransient<AppDbContext>();
 

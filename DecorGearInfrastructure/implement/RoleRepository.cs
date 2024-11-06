@@ -69,8 +69,6 @@ namespace DecorGearInfrastructure.Implement
                 return false;
             }
         }
-
-
         private async Task<Role?> GetRoleById(int id, CancellationToken cancellationToken)
         {
             return await _db.Roles.FirstOrDefaultAsync(x => x.RoleID == id, cancellationToken);
