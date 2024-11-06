@@ -24,6 +24,7 @@ namespace DecorGearInfrastructure.Extention
             services.AddScoped<IFeedbackServices, FeedbackServices>();
             services.AddTransient<IMemberRespository, MemberRepository>();
             services.AddTransient<IMemberServices, MemberServices>();
+            services.AddTransient<HomeRepository>();
             services.AddHttpContextAccessor();
 
             services.AddScoped<IImageListRespository, ImageListRespository>();

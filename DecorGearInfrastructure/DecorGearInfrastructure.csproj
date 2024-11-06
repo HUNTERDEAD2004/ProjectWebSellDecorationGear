@@ -31,8 +31,4 @@
     <ProjectReference Include="..\DecorGearDomain\DecorGearDomain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Implement\" />
-  </ItemGroup>
-
 </Project>

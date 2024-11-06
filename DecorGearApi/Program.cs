@@ -62,6 +62,7 @@ public class Program
         builder.Services.AddScoped<IMemberRespository, MemberRepository>();
         builder.Services.AddScoped<IMemberServices, MemberServices>();
         builder.Services.AddScoped<IOderRespository, OrderRepository>();
+        builder.Services.AddScoped<HomeRepository>();
         //builder.Services.AddScoped<ICartDetailRespository, CartRepository>();
         builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
         builder.Services.AddScoped<IVoucherRespository, VoucherRepository>();
