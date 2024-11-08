@@ -59,11 +59,13 @@ public class Program
         builder.Services.AddScoped<IMailingServices, MailingServices>();
         builder.Services.AddScoped<IFeedBackRespository, FeedBackRepository>();
         builder.Services.AddScoped<IFeedbackServices, FeedbackServices>();
+        builder.Services.AddScoped<ICartDetailRespository, CartDetailRepository>();
+        builder.Services.AddScoped<CartService>();
         builder.Services.AddScoped<IMemberRespository, MemberRepository>();
         builder.Services.AddScoped<IMemberServices, MemberServices>();
         builder.Services.AddScoped<IOderRespository, OrderRepository>();
         builder.Services.AddScoped<HomeRepository>();
-        //builder.Services.AddScoped<ICartDetailRespository, CartRepository>();
+        builder.Services.AddScoped<ICartRespository, CartRepository>();
         builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
         builder.Services.AddScoped<IVoucherRespository, VoucherRepository>();
         builder.Services.AddEventBus(builder.Configuration);

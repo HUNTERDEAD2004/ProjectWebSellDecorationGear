@@ -4,6 +4,6 @@
     {
         public DateTimeOffset CreatedTime { get; set; }
 
-        public Guid? CreatedBy { get; set; }
+        public int? CreatedBy { get; set; }
     }
 }

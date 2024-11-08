@@ -11,6 +11,6 @@ namespace DecorGearApplication.DataTransferObj
         public List<CartDetailDto> cartDetails { get; set; } = new List<CartDetailDto> { };
         public int TotalQuantity => cartDetails.Sum(x => x.Quantity);
 
-        public decimal TotalPrice => cartDetails.Sum(x => x.UnitPrice * x.TotalPrice);
+        public decimal TotalPrice => cartDetails.Sum(x => x.UnitPrice * x.Quantity);
     }
 }

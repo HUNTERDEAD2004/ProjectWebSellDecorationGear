@@ -1,9 +1,5 @@
-﻿using AutoMapper;
-using DecorGearApplication.DataTransferObj;
-using DecorGearApplication.DataTransferObj.CartDetail;
-using DecorGearApplication.Interface;
+﻿using DecorGearApplication.Interface;
 using DecorGearDomain.Data.Entities;
-using DecorGearDomain.Enum;
 using DecorGearInfrastructure.Database.AppDbContext;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,93 +7,33 @@ namespace DecorGearInfrastructure.Implement
 {
     public class CartRepository : ICartRespository
     {
-        private readonly AppDbContext _dbcontext;
-        private readonly IMapper _mapper;
-        public CartRepository(AppDbContext appDbContext, IMapper mapper)
+        private readonly AppDbContext _context;
+
+        public CartRepository(AppDbContext context)
         {
-            _dbcontext = appDbContext;
-            _mapper = mapper;
+            _context = context;
+        }
+        // Lấy giỏ hàng của người dùng theo UserID
+        public async Task<Cart> GetCartByUserId(int userId)
+        {
+            return await _context.Carts
+                .Where(c => c.UserID == userId && !c.Deleted)
+                .FirstOrDefaultAsync();
         }
 
-        public async Task<ErrorMessage> AddProductToCart(CreateCartDetailRequest request, CancellationToken cancellationToken)
+        // Tạo mới giỏ hàng
+        public async Task CreateAsync(Cart cart)
         {
-            using var transaction = await _dbcontext.Database.BeginTransactionAsync(cancellationToken);
-
-            try
-            {
-                var product = await _dbcontext.Products.FirstOrDefaultAsync(p => p.ProductID == request.ProductID, cancellationToken);
-                if (product == null)
-                {
-                    return ErrorMessage.Failed;
-                }
-
-                if (product.Quantity < request.Quantity)
-                {
-                    return ErrorMessage.Failed;
-                }
-
-                var cart = await _dbcontext.Carts
-                    .Include(c => c.CartDetails)
-                    .FirstOrDefaultAsync(c => c.UserID == request.UserID, cancellationToken);
-
-                if (cart == null)
-                {
-                    cart = new Cart { UserID = request.UserID, CartDetails = new List<CartDetail>() };
-                    _dbcontext.Carts.Add(cart);
-                }
-
-                var existingCartDetail = cart.CartDetails.FirstOrDefault(item => item.ProductID == request.ProductID);
-                if (existingCartDetail != null)
-                {
-                    existingCartDetail.Quantity += request.Quantity;
-                }
-                else
-                {
-                    var newCartDetail = new CartDetail
-                    {
-                        ProductID = request.ProductID,
-                        Quantity = request.Quantity,
-                        UnitPrice = (double)request.UnitPrice,
-                    };
-                    cart.CartDetails.Add(newCartDetail);
-                }
-
-                product.Quantity -= request.Quantity;
-
-                await _dbcontext.SaveChangesAsync(cancellationToken);
-                await transaction.CommitAsync(cancellationToken);
-
-                return ErrorMessage.Successfull;
-            }
-            catch (Exception)
-            {
-                await transaction.RollbackAsync(cancellationToken);
-                return ErrorMessage.Failed;
-            }
+            await _context.Carts.AddAsync(cart);
+            await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> DeleteCart(int id, CancellationToken cancellationToken)
+        // Cập nhật giỏ hàng
+        public async Task UpdateAsync(Cart cart)
         {
-            var deletecrat = await _dbcontext.Carts.FindAsync(id, cancellationToken);
-            if (deletecrat != null)
-            {
-                _dbcontext.Carts.Remove(deletecrat);
-                _dbcontext.SaveChanges();
-                return true;
-            }
-            return false;
+            _context.Carts.Update(cart);
+            await _context.SaveChangesAsync();
         }
 
-        public async Task<List<CartDto>> GetAllCart(CancellationToken cancellationToken)
-        {
-            var result = await _dbcontext.Carts.ToListAsync(cancellationToken);
-            return _mapper.Map<List<CartDto>>(result);
-        }
-
-        public async Task<CartDto> GetCartById(int id, CancellationToken cancellationToken)
-        {
-            var getid = await _dbcontext.Carts.FindAsync(id, cancellationToken);
-            return _mapper.Map<CartDto>(getid);
-        }
     }
 }

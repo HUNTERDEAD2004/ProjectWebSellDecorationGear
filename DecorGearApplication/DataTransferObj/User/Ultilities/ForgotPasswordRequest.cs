@@ -2,7 +2,7 @@
 {
     public class ForgotPasswordRequest
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string NewPassword { get; set; }
         public string ConfirmPW { get; set; }
     }

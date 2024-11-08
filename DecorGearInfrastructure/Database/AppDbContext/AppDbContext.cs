@@ -42,7 +42,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=DESKTOP-C28IEAF;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("Data Source=LAP-CN-192;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
