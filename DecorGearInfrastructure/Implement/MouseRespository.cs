@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
+using DecorGearApplication.DataTransferObj.Category;
 using DecorGearApplication.DataTransferObj.MouseDetails;
 using DecorGearApplication.Interface;
+using DecorGearApplication.ValueObj.Response;
 using DecorGearDomain.Data.Entities;
 using DecorGearDomain.Enum;
 using DecorGearInfrastructure.Database.AppDbContext;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -26,11 +29,16 @@ namespace DecorGearInfrastructure.Implement
             _mapper = mapper;
         }
 
-        public async Task<ErrorMessage> CreateMouse(CreateMouseRequest request, CancellationToken cancellationToken)
+        public async Task<ResponseDto<MouseDetailsDto>> CreateMouse(CreateMouseRequest request, CancellationToken cancellationToken)
         {
             if (request == null)
             {
-                return ErrorMessage.Failed;
+                return new ResponseDto<MouseDetailsDto>
+                {
+                    DataResponse = null,
+                    Status = StatusCodes.Status400BadRequest,
+                    Message = "Chưa có request."
+                };
             }
             try
             {
@@ -40,31 +48,136 @@ namespace DecorGearInfrastructure.Implement
 
                 _appDbContext.SaveChanges();
 
-                return ErrorMessage.Successfull;
+                return new ResponseDto<MouseDetailsDto>
+                {
+                    DataResponse = null,
+                    Status = StatusCodes.Status400BadRequest,
+                    Message = "Chưa có request."
+                };
             }
-            catch (Exception)
+            catch (DbUpdateException)
             {
-                return ErrorMessage.Failed;
+                return new ResponseDto<MouseDetailsDto>
+                {
+                    DataResponse = null,
+                    Status = StatusCodes.Status500InternalServerError,
+                    Message = "Lỗi khi cập nhật cơ sở dữ liệu."
+                };
+            }
+            catch (ArgumentException)
+            {
+                return new ResponseDto<MouseDetailsDto>
+                {
+                    DataResponse = null,
+                    Status = StatusCodes.Status400BadRequest,
+                    Message = "Tham số không hợp lệ."
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ResponseDto<MouseDetailsDto>
+                {
+                    DataResponse = null,
+                    Status = StatusCodes.Status400BadRequest,
+                    Message = "Lỗi không xác định: " + ex.Message + "."
+                };
             }
         }
 
-        public async Task<bool> DeleteMouse(int id, CancellationToken cancellationToken)
+        public async Task<ResponseDto<bool>> DeleteMouse(int id, CancellationToken cancellationToken)
         {
             var keyResult = await _appDbContext.MouseDetails.FindAsync(id, cancellationToken);
             if (keyResult != null) 
             {
                 _appDbContext.MouseDetails.Remove(keyResult);
                 _appDbContext.SaveChanges();
-                return true;
+                return new ResponseDto<bool>
+                {
+                    DataResponse = true,
+                    Status = StatusCodes.Status200OK,
+                    Message = "Xóa thành công."
+                };
             }
-            return false;
+            return new ResponseDto<bool>
+            {
+                DataResponse = false,
+                Status = StatusCodes.Status400BadRequest,
+                Message = "Sửa thất bại."
+            };
         }
 
-        public async Task<List<MouseDetailsDto>> GetAllMouse(CancellationToken cancellationToken)
+        public async Task<List<MouseDetailsDto>> GetAllMouse(ViewMouseRequest? request, CancellationToken cancellationToken)
         {
-            var result = await _appDbContext.MouseDetails.ToListAsync(cancellationToken);
+            var query = from md in _appDbContext.MouseDetails
+                        select new MouseDetailsDto
+                        {
+                            MouseDetailID = md.MouseDetailID,
+                            ProductID = md.ProductID,
+                            Color = md.Color,
+                            DPI = md.DPI,
+                            Connectivity = md.Connectivity,
+                            Dimensions = md.Dimensions,
+                            Material = md.Material,
+                            EyeReading = md.EyeReading,
+                            Button = md.Button,
+                            LED = md.LED,
+                            SS = md.SS
+                        };
 
-            return _mapper.Map<List<MouseDetailsDto>>(result);
+            // Áp dụng các điều kiện lọc
+            if (request.MouseDetailID.HasValue)
+            {
+                query = query.Where(x => x.MouseDetailID == request.MouseDetailID);
+            }
+            if (request.ProductID.HasValue)
+            {
+                query = query.Where(x => x.ProductID == request.ProductID);
+            }
+            if (!string.IsNullOrEmpty(request.Color))
+            {
+                query = query.Where(x => x.Color == request.Color);
+            }
+            if (request.DPI.HasValue)
+            {
+                query = query.Where(x => x.DPI == request.DPI);
+            }
+            if (!string.IsNullOrEmpty(request.Connectivity))
+            {
+                query = query.Where(x => x.Connectivity == request.Connectivity);
+            }
+            if (!string.IsNullOrEmpty(request.Dimensions))
+            {
+                query = query.Where(x => x.Dimensions == request.Dimensions);
+            }
+            if (!string.IsNullOrEmpty(request.Material))
+            {
+                query = query.Where(x => x.Material == request.Material);
+            }
+            if (!string.IsNullOrEmpty(request.EyeReading))
+            {
+                query = query.Where(x => x.EyeReading == request.EyeReading);
+            }
+            if (request.Button.HasValue)
+            {
+                query = query.Where(x => x.Button == request.Button);
+            }
+            if (!string.IsNullOrEmpty(request.LED))
+            {
+                query = query.Where(x => x.LED == request.LED);
+            }
+            if (!string.IsNullOrEmpty(request.SS))
+            {
+                query = query.Where(x => x.SS == request.SS);
+            }
+
+            // Thực hiện truy vấn
+            var result = await query.ToListAsync();
+            return result;
+
+
+            //var result = await _appDbContext.MouseDetails.ToListAsync(cancellationToken);
+
+            //return _mapper.Map<List<MouseDetailsDto>>(result);
         }
 
         public async Task<MouseDetailsDto> GetMouseById(int id, CancellationToken cancellationToken)
@@ -74,11 +187,16 @@ namespace DecorGearInfrastructure.Implement
             return _mapper.Map<MouseDetailsDto>(keyResult);
         }
 
-        public async Task<ErrorMessage> UpdateMouse(int id,UpdateMouseRequest request, CancellationToken cancellationToken)
+        public async Task<ResponseDto<MouseDetailsDto>> UpdateMouse(int id,UpdateMouseRequest request, CancellationToken cancellationToken)
         {
             if (request == null)
             {
-                return ErrorMessage.Failed;
+                return new ResponseDto<MouseDetailsDto>
+                {
+                    DataResponse = null,
+                    Status = StatusCodes.Status400BadRequest,
+                    Message = "Chưa có request."
+                };
             }
             try
             {
@@ -99,12 +217,39 @@ namespace DecorGearInfrastructure.Implement
 
                 await _appDbContext.SaveChangesAsync(cancellationToken);
 
-                return ErrorMessage.Successfull;
-
+                return new ResponseDto<MouseDetailsDto>
+                {
+                    DataResponse = null,
+                    Status = StatusCodes.Status400BadRequest,
+                    Message = "Cập nhật thành công."
+                };
             }
-            catch (Exception)
+            catch (DbUpdateException)
             {
-                return ErrorMessage.Failed;
+                return new ResponseDto<MouseDetailsDto>
+                {
+                    DataResponse = null,
+                    Status = StatusCodes.Status500InternalServerError,
+                    Message = "Lỗi khi cập nhật cơ sở dữ liệu."
+                };
+            }
+            catch (ArgumentException)
+            {
+                return new ResponseDto<MouseDetailsDto>
+                {
+                    DataResponse = null,
+                    Status = StatusCodes.Status400BadRequest,
+                    Message = "Tham số không hợp lệ."
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ResponseDto<MouseDetailsDto>
+                {
+                    DataResponse = null,
+                    Status = StatusCodes.Status400BadRequest,
+                    Message = "Lỗi không xác định: " + ex.Message + "."
+                };
             }
         }
     }

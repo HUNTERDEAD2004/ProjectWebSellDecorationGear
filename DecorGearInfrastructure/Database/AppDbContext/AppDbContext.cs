@@ -202,7 +202,8 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Quantity = 100,
                     Weight = 500,
                     Description = "chiếc chuột siêu bổ rẻ ",
-                    Size = "Trung bình",
+                    AvatarProduct = "/images/razordav3.jpg",
+                    Size = "M",
                     SaleID = 1,
                     BrandID = 1,
                     SubCategoryID = 1
@@ -216,7 +217,8 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Quantity=100,
                     Weight=350,
                     Description="Chiếc chuột được nhiều tuyển thủ chuyên nghiệp tin dùng",
-                    Size="Trung bình",
+                    AvatarProduct = "/images/razorminipro1.jpg",
+                    Size="M",
                     SaleID=null,
                     BrandID=1,
                     SubCategoryID=1
@@ -229,8 +231,9 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     View=8000,
                     Quantity=100,
                     Weight=400, 
-                    Description="Một chiếc bàn phím cơ mỳ ăn liền với 3mode hotswap tầm giá 1 củ mà bạn không nên bỏ qua", 
-                    Size="75%", 
+                    Description="Một chiếc bàn phím cơ mỳ ăn liền với 3mode hotswap tầm giá 1 củ mà bạn không nên bỏ qua",
+                    AvatarProduct = "/images/aulaf75.jpg",
+                    Size="M", 
                     SaleID=null, 
                     BrandID=2,
                     SubCategoryID=3
@@ -373,14 +376,14 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 {
                     ImageListID = 1,
                     ProductID = 3,
-                    ImagePath=["/images/aulaf75_img1.jpg", "/images/aulaf75_img2.jpg", "/images/aulaf75_img3.jpg"],
+                    ImagePath= "/images/aulaf75_img2.jpg",
                     Description = "Hình ảnh của sản phẩm aulaf75"
                 },
                 new ImageList
                 {
                     ImageListID= 2, 
                     ProductID=1, 
-                    ImagePath=["/images/rzdav3_img.jpg", "/images/rzdav3_img2.jpg"], 
+                    ImagePath= "/images/rzdav3_img2.jpg", 
                     Description="Hình ảnh của sản phẩm razer deadth addzer v3"
                 }
             };

@@ -1,5 +1,6 @@
 ﻿using DecorGearApplication.DataTransferObj.MouseDetails;
 using DecorGearApplication.DataTransferObj.SubCategory;
+using DecorGearApplication.ValueObj.Response;
 using DecorGearDomain.Enum;
 using System;
 using System.Collections.Generic;
@@ -13,8 +14,8 @@ namespace DecorGearApplication.Interface
     {
         Task<List<SubCategoryDto>> GetAllSubCategory(CancellationToken cancellationToken);
         Task<SubCategoryDto> GetSubCategoryeById(int id, CancellationToken cancellationToken);
-        Task<ErrorMessage> CreateSubCategory(CreateSubCategoryRequest request, CancellationToken cancellationToken);
-        Task<ErrorMessage> UpdateSubCategory(int id, UpdateSubCategoryRequest request, CancellationToken cancellationToken);
-        Task<bool> DeleteSubCategory(int id, CancellationToken cancellationToken);
+        Task<ResponseDto<SubCategoryDto>> CreateSubCategory(CreateSubCategoryRequest request, CancellationToken cancellationToken);
+        Task<ResponseDto<SubCategoryDto>> UpdateSubCategory(int id, UpdateSubCategoryRequest request, CancellationToken cancellationToken);
+        Task<ResponseDto<bool>> DeleteSubCategory(int id, CancellationToken cancellationToken);
     }
 }

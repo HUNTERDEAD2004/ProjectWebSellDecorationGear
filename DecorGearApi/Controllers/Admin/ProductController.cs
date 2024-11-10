@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DecorGearApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/admin/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
     {
@@ -19,9 +19,9 @@ namespace DecorGearApi.Controllers
         }
 
         [HttpGet("get-all")]
-        public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
+        public async Task<IActionResult> GetAll([FromQuery]ViewProductRequest? request, CancellationToken cancellationToken)
         {
-            var result = await _res.GetAllProduct(cancellationToken);
+            var result = await _res.GetAllProduct(request,cancellationToken);
             return Ok(result);
         }
 
