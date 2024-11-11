@@ -1,12 +1,6 @@
-﻿using DecorGearApplication.DataTransferObj.Product;
-using DecorGearApplication.DataTransferObj.Sale;
+﻿using DecorGearApplication.DataTransferObj.Sale;
 using DecorGearApplication.DataTransferObj.User;
 using DecorGearDomain.Enum;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DecorGearApplication.Interface
 {

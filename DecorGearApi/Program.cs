@@ -8,13 +8,9 @@ using DecorGearInfrastructure.Extention;
 using DecorGearInfrastructure.Extention.AutoMapperProfile;
 using DecorGearInfrastructure.implement;
 using DecorGearInfrastructure.Implement;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 using System.Text;
 
 public class Program
@@ -66,6 +62,10 @@ public class Program
         builder.Services.AddScoped<IFeedbackServices, FeedbackServices>();
         builder.Services.AddScoped<IMemberRespository, MemberRepository>();
         builder.Services.AddScoped<IMemberServices, MemberServices>();
+        builder.Services.AddScoped<IOderRespository, OrderRepository>();
+        //builder.Services.AddScoped<ICartDetailRespository, CartRepository>();
+        builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
+        builder.Services.AddScoped<IVoucherRespository, VoucherRepository>();
         builder.Services.AddScoped<ISaleRespository, SaleRepository>();
         builder.Services.AddScoped<IRevenueProductRepo, StatisticalRepository>();
         builder.Services.AddEventBus(builder.Configuration);
@@ -74,11 +74,11 @@ public class Program
         builder.Services.AddStackExchangeRedisCache(options =>
         {
             options.Configuration = "localhost:6379"; // Cấu hình Redis
-        });    
+        });
     }
 
-    
-  
+
+
     private static void ConfigureCors(WebApplicationBuilder builder)
     {
         builder.Services.AddCors(options =>
@@ -124,7 +124,7 @@ public class Program
 
         builder.Services.AddHttpContextAccessor();
     }
-    
+
     private static void ConfigureMiddleware(WebApplication app)
     {
         if (app.Environment.IsDevelopment())
@@ -138,5 +138,6 @@ public class Program
         app.UseAuthentication();
         app.UseAuthorization();
         app.MapControllers();
+        app.Run();
     }
 }
