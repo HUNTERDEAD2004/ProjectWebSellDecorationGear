@@ -31,4 +31,10 @@
     <ProjectReference Include="..\DecorGearInfrastructure\DecorGearInfrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DecorGearApplication\DecorGearApplication.csproj" />
+    <ProjectReference Include="..\DecorGearDomain\DecorGearDomain.csproj" />
+    <ProjectReference Include="..\DecorGearInfrastructure\DecorGearInfrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

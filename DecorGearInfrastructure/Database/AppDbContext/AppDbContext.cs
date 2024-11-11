@@ -1,17 +1,8 @@
-﻿using DecorGearApplication.DataTransferObj.Role;
-using DecorGearDomain.Data.Entities;
+﻿using DecorGearDomain.Data.Entities;
 using DecorGearDomain.Enum;
 using DecorGearInfrastructure.Extention;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Globalization;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DecorGearInfrastructure.Database.AppDbContext
 {
@@ -36,6 +27,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Voucher> Vouchers { get; set; }
         public virtual DbSet<VerificationCode> VerificationCodes { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<VerificationCodePw> VerificationCodePws { get; set; }
         #endregion
 
@@ -51,7 +43,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Data Source=DESKTOPD-DELLIN\\SQLEXPRESS;Database=DecorationGear2;Trusted_Connection=True;TrustServerCertificate=True;");
-            //optionsBuilder.UseSqlServer("Server=LAPTOP-K61S7AVO;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True");
+            //optionsBuilder.UseSqlServer("Data Source=PHUC\\SQLEXPRESS;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -103,10 +95,12 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 new Role
                 {
                     RoleID = 2,
-                    RoleName = "Admin"
+                    RoleName = "User"
                 }
             };
             modelBuilder.Entity<Role>().HasData(roleData);
+
+
 
             // Seed users
             var userData = new List<User>
@@ -151,6 +145,37 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             };
 
             modelBuilder.Entity<Cart>().HasData(cartData);
+
+            // Seed cartDetail
+            var cartDetailData = new List<CartDetail>
+            {
+                new CartDetail
+                {
+                    CartDetailID = 9,
+                    ProductID = 1,
+                    CartID = 1,
+                    Quantity = 2,
+                    UnitPrice = 50,
+                },
+                new CartDetail
+                {
+                    CartDetailID = 10,
+                    ProductID = 2,
+                    CartID = 2,
+                    Quantity = 3,
+                    UnitPrice = 40,
+                },
+                new CartDetail
+                {
+                   CartDetailID = 11,
+                   ProductID = 2,
+                   CartID = 2,
+                   Quantity = 1,
+                   UnitPrice = 75,
+                }
+            };
+
+            modelBuilder.Entity<CartDetail>().HasData(cartDetailData);
 
             // Seed category
             var categoryData = new List<Category>
@@ -225,9 +250,9 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 },
                 new Product
                 {
-                    ProductID=3, 
-                    ProductName="Bàn phím cơ AulaF75", 
-                    Price=1000000, 
+                    ProductID=3,
+                    ProductName="Bàn phím cơ AulaF75",
+                    Price=1000000,
                     View=8000,
                     Quantity=100,
                     Weight=400, 
@@ -245,22 +270,22 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             // Seed Favorite
             var favoriteData = new List<Favorite>
             {
-                new Favorite 
-                { 
-                    FavoriteID = 1, 
-                    UserID = 1, 
-                    ProductID = 1 
-                },
-                new Favorite 
-                { 
-                    FavoriteID = 2, 
-                    UserID = 2, 
+                new Favorite
+                {
+                    FavoriteID = 1,
+                    UserID = 1,
                     ProductID = 1
                 },
-                new Favorite 
-                { 
-                    FavoriteID = 3, 
-                    UserID = 1, 
+                new Favorite
+                {
+                    FavoriteID = 2,
+                    UserID = 2,
+                    ProductID = 1
+                },
+                new Favorite
+                {
+                    FavoriteID = 3,
+                    UserID = 1,
                     ProductID = 2
                 }
             };
@@ -270,26 +295,26 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             // Seed FeedBack
             var feedbackData = new List<FeedBack>
             {
-                new FeedBack 
-                { 
-                    FeedBackID = 1, 
-                    UserID = 1, 
-                    ProductID = 1, 
-                    Comment = "Sản phẩm rất tốt!" 
+                new FeedBack
+                {
+                    FeedBackID = 1,
+                    UserID = 1,
+                    ProductID = 1,
+                    Comment = "Sản phẩm rất tốt!"
                 },
-                new FeedBack 
-                { 
-                    FeedBackID = 2, 
-                    UserID = 1, 
-                    ProductID = 2, 
-                    Comment = "Chất lượng bình thường." 
+                new FeedBack
+                {
+                    FeedBackID = 2,
+                    UserID = 1,
+                    ProductID = 2,
+                    Comment = "Chất lượng bình thường."
                 },
-                new FeedBack 
-                { 
-                    FeedBackID = 3, 
-                    UserID = 2, 
-                    ProductID = 3, 
-                    Comment = "Giao hàng nhanh, sản phẩm đẹp." 
+                new FeedBack
+                {
+                    FeedBackID = 3,
+                    UserID = 2,
+                    ProductID = 3,
+                    Comment = "Giao hàng nhanh, sản phẩm đẹp."
                 }
             };
 
@@ -400,12 +425,12 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Points=100,
                     ExpiryDate=DateTime.Parse("11/12/2024")
                 },
-                new Member 
-                { 
-                    MemberID= 2, 
-                    UserID= 2, 
-                    Points=200, 
-                    ExpiryDate=DateTime.Parse("26/3/2025")
+                new Member
+                {
+                    MemberID= 2,
+                    UserID= 2,
+                    Points=200,
+                    ExpiryDate=DateTime.Parse("10/3/2025")
                 }
             };
 
@@ -440,6 +465,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     VoucherID=1,
                     VoucherName="Giảm giá 30%",
                     VoucherPercent=30,
+                    expiry = DateTime.ParseExact("05-11-2024", "dd-MM-yyyy", null),
                     Status = EntityStatus.Active
                 },
                 new Voucher
@@ -447,6 +473,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     VoucherID=2,
                     VoucherName="Giảm giá 50%",
                     VoucherPercent=50,
+                    expiry = DateTime.ParseExact("05-11-2024", "dd-MM-yyyy", null),
                     Status = EntityStatus.Inactive
                 }
             };
@@ -456,27 +483,29 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             //Seed OrderData
             var OrderData = new List<Order>
             {
-                new Order 
-                { 
-                    OrderID=1, 
-                    UserID=1, 
-                    VoucherID=1, 
-                    totalQuantity=5, 
-                    totalPrice=500.00, 
-                    Status=OrderStatus.Confirmed, 
-                    paymentMethod="Credit Card", 
-                    OrderDate=DateTime.Parse("16/09/2024")
+                new Order
+                {
+                    OrderID=1,
+                    UserID=1,
+                    VoucherID=1,
+                    totalQuantity=5,
+                    size="L",
+                    weight= (float)1.5,
+                    Status=OrderStatus.Delivered,
+                    paymentMethod="Credit Card",
+                    OrderDate=DateTime.Parse("09/09/2024")
                 },
-                new Order 
-                { 
-                    OrderID=2, 
-                    UserID=2, 
-                    VoucherID=null, 
-                    totalQuantity=3, 
-                    totalPrice=300.00, 
-                    Status=OrderStatus.Pending, 
-                    paymentMethod="Cash", 
-                    OrderDate=DateTime.Parse("17/09/2024")
+                new Order
+                {
+                    OrderID=2,
+                    UserID=2,
+                    VoucherID=null,
+                    totalQuantity=3,
+                    size="LF",
+                    weight=(float)2.0,
+                    Status=OrderStatus.Delivered,
+                    paymentMethod="Cash",
+                    OrderDate=DateTime.Parse("09/09/2024")
                 }
             };
 
@@ -487,44 +516,38 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             {
                 new OrderDetail
                 {
-                    OrderDetailID = 1,
+                    OrderDetailId = 1,
                     OrderID=1,
                     ProductID=3,
                     Quantity=10,
                     UnitPrice=10000000,
-                    Size = "M",
-                    Weight = 4000
                 },
                 new OrderDetail
                 {
-                    OrderDetailID = 2,
+                    OrderDetailId = 2,
                     OrderID=1,
                     ProductID=3,
                     Quantity=1,
                     UnitPrice=1000000,
-                    Size = "S",
-                    Weight = 400
                 },
                 new OrderDetail
                 {
-                    OrderDetailID = 3,
+                    OrderDetailId = 3,
                     OrderID=2,
                     ProductID=1,
                     Quantity=1000,
                     UnitPrice=1000000000,
-                    Size = "L",
-                    Weight = 400000
                 }
             };
 
             modelBuilder.Entity<OrderDetail>().HasData(orderDetailData);
 
-            base.OnModelCreating(modelBuilder);          
+            base.OnModelCreating(modelBuilder);
         }
 
     }
 }
 
-    
+
 
 

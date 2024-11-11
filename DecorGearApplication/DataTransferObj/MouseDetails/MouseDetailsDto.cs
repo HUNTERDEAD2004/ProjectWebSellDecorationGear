@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DecorGearApplication.DataTransferObj.MouseDetails
+﻿namespace DecorGearApplication.DataTransferObj.MouseDetails
 {
     public class MouseDetailsDto
     {
@@ -13,19 +6,19 @@ namespace DecorGearApplication.DataTransferObj.MouseDetails
 
         public int ProductID { get; set; }
 
-        public string Color { get; set; } 
+        public string Color { get; set; }
 
-        public int DPI { get; set; } 
+        public int DPI { get; set; }
 
-        public string Connectivity { get; set; } 
+        public string Connectivity { get; set; }
 
-        public string Dimensions { get; set; } 
+        public string Dimensions { get; set; }
 
         public string Material { get; set; } 
 
-        public string? EyeReading { get; set; }   
+        public string? EyeReading { get; set; }
 
-        public int? Button { get; set; } 
+        public int? Button { get; set; }
 
         public string? LED { get; set; }
 

@@ -1,16 +1,12 @@
 ﻿using DecorGearDomain.Data.Base;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DecorGearDomain.Data.Entities
 {
     public class FeedBack : EntityBase
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int FeedBackID { get; set; }
 
         [Required(ErrorMessage = "Không được để trống")]

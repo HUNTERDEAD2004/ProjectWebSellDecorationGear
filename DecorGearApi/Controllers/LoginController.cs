@@ -114,21 +114,21 @@ namespace DecorGearApi.Controllers
 
 
         [HttpPost("verify-code")]
-            public async Task<IActionResult> VerifyCode(VerifyCodeRequest request, CancellationToken cancellationToken)
+        public async Task<IActionResult> VerifyCode(VerifyCodeRequest request, CancellationToken cancellationToken)
+        {
+            if (request == null || !ModelState.IsValid)
             {
-                if (request == null || !ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
-
-                var result = await _userRepository.VerifyCodeAsync(request, cancellationToken);
-                if (result.Status == StatusCodes.Status200OK)
-                {
-                    return Ok(result);
-                }
-
-                return StatusCode(result.Status, result.Message);
+                return BadRequest(ModelState);
             }
+
+            var result = await _userRepository.VerifyCodeAsync(request, cancellationToken);
+            if (result.Status == StatusCodes.Status200OK)
+            {
+                return Ok(result);
+            }
+
+            return StatusCode(result.Status, result.Message);
+        }
         [HttpPost("resend-verification-code")]
         public async Task<IActionResult> ResendVerificationCode([FromBody] string email)
         {

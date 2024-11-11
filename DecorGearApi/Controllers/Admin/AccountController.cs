@@ -3,7 +3,6 @@ using DecorGearApplication.DataTransferObj.User.Request;
 using DecorGearApplication.IServices;
 using Ecommerce.Application.DataTransferObj.User.Request;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DecorGearApi.Controllers.Admin
@@ -11,7 +10,7 @@ namespace DecorGearApi.Controllers.Admin
     [ApiController]
     [Route("api/admin/[controller]")]
     [Authorize(Roles = "Admin")]
-    public class AccountController : ControllerBase   
+    public class AccountController : ControllerBase
     {
         private readonly IUserServices _userServices;
         private readonly IMapper _mapper;
@@ -41,7 +40,7 @@ namespace DecorGearApi.Controllers.Admin
                 return BadRequest(ModelState);
             }
 
-            var result = await _userServices.UpdateUser( id,request, cancellationToken);
+            var result = await _userServices.UpdateUser(id, request, cancellationToken);
 
             if (result.Status == StatusCodes.Status200OK)
             {
@@ -54,7 +53,7 @@ namespace DecorGearApi.Controllers.Admin
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteUser(UserDeleteRequest request, CancellationToken cancellationToken)
         {
-            var result = await _userServices.DeleteUser(request,cancellationToken);
+            var result = await _userServices.DeleteUser(request, cancellationToken);
             if (result.Status == StatusCodes.Status200OK)
             {
                 return Ok(result);

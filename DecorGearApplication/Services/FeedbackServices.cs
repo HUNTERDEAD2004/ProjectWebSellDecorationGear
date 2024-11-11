@@ -3,11 +3,6 @@ using DecorGearApplication.DataTransferObj.User;
 using DecorGearApplication.Interface;
 using DecorGearApplication.IServices;
 using DecorGearDomain.Enum;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DecorGearApplication.Services
 {
@@ -35,7 +30,7 @@ namespace DecorGearApplication.Services
 
         public async Task<FeedBackDto> FeedBackById(int id, CancellationToken cancellationToken)
         {
-           return await _feedBackRespository.FeedBackById(id, cancellationToken);
+            return await _feedBackRespository.FeedBackById(id, cancellationToken);
         }
 
         public async Task<ResponseDto<ErrorMessage>> UpdateFeedBack(int id, UpdateFeedBackRequest request, CancellationToken cancellationToken)

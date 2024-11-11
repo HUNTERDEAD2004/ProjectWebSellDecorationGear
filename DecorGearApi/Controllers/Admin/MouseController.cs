@@ -1,12 +1,7 @@
 ﻿using AutoMapper;
-using DecorGearApplication.DataTransferObj.KeyBoardDetails;
 using DecorGearApplication.DataTransferObj.MouseDetails;
 using DecorGearApplication.Interface;
-using DecorGearDomain.Data.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Drawing;
-using System.Runtime.Intrinsics.Arm;
 
 namespace DecorGearApi.Controllers
 {
@@ -23,7 +18,7 @@ namespace DecorGearApi.Controllers
         }
 
         [HttpGet("get-all")]
-        public async Task<IActionResult> GetAll(ViewMouseRequest? request, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetAll([FromQuery]ViewMouseRequest? request, CancellationToken cancellationToken)
         {
             var result = await _res.GetAllMouse(request, cancellationToken);
             return Ok(result);
@@ -52,7 +47,7 @@ namespace DecorGearApi.Controllers
 
         // PUT api/<ProductController>/5
         [HttpPut("update")]
-        public async Task<IActionResult> UpdateMouse(int id,UpdateMouseRequest request, CancellationToken cancellationToken)
+        public async Task<IActionResult> UpdateMouse(int id, UpdateMouseRequest request, CancellationToken cancellationToken)
         {
             // Kiểm tra nếu ModelState không hợp lệ
             if (!ModelState.IsValid)
@@ -68,7 +63,7 @@ namespace DecorGearApi.Controllers
             }
 
             // Gọi phương thức Update để lưu các thay đổi
-            var result = await _res.UpdateMouse(id,request, cancellationToken);
+            var result = await _res.UpdateMouse(id, request, cancellationToken);
 
             // Trả về kết quả thành công với sản phẩm đã cập nhật
             return Ok(result);

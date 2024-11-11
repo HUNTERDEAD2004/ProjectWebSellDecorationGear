@@ -1,33 +1,33 @@
 ﻿using Application.DataTransferObj.User.Request;
 using AutoMapper;
+using DecorGearApplication.DataTransferObj.User;
+using DecorGearApplication.DataTransferObj.User.Email;
+using DecorGearApplication.DataTransferObj.User.Request;
+using DecorGearApplication.Interface;
+using DecorGearApplication.IServices;
 using DecorGearDomain.Data.Entities;
 using DecorGearDomain.Enum;
 using DecorGearInfrastructure.Database.AppDbContext;
-using Ecommerce.Application.DataTransferObj.User.Request;
-using Microsoft.EntityFrameworkCore;
-using DecorGearApplication.DataTransferObj.User;
-using Microsoft.AspNetCore.Http;
 using DecorGearInfrastructure.Extention;
-using DecorGearApplication.Interface;
-using DecorGearApplication.IServices;
-using DecorGearApplication.DataTransferObj.User.Email;
-using DecorGearApplication.DataTransferObj.User.Request;
+using Ecommerce.Application.DataTransferObj.User.Request;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace DecorGearInfrastructure.Implement
 {
     public class UserRepository : IUserRespository
     {
         private readonly AppDbContext _db;
-        private readonly IMapper _map;   
+        private readonly IMapper _map;
         private readonly ITokenServices _tokenServices;
         private readonly IMailingServices _mailingServices;
-    
+
         public UserRepository(AppDbContext db, IMapper map, ITokenServices tokenServices, IMailingServices mailingServices)
         {
             _db = db;
             _map = map;
-           _tokenServices = tokenServices;
-            _mailingServices = mailingServices;        
+            _tokenServices = tokenServices;
+            _mailingServices = mailingServices;
         }
         public async Task<bool> EmailExistsAsync(string email)
         {
@@ -38,9 +38,9 @@ namespace DecorGearInfrastructure.Implement
         {
             return await _db.Users.AnyAsync(x => x.UserName == username);
         }
-        public async Task<bool> PhoneExistsAsync (string phoneNumber)
+        public async Task<bool> PhoneExistsAsync(string phoneNumber)
         {
-            return await _db.Users.AnyAsync (x => x.PhoneNumber == phoneNumber);
+            return await _db.Users.AnyAsync(x => x.PhoneNumber == phoneNumber);
         }
 
         public async Task<List<UserDto>> GetAllUsers(CancellationToken cancellationToken)
@@ -59,7 +59,7 @@ namespace DecorGearInfrastructure.Implement
         public async Task<ResponseDto<UserDto>> Register(UserCreateRequest request, CancellationToken cancellationToken)
         {
             try
-            {           
+            {
                 if (request == null)
                     return new ResponseDto<UserDto>(StatusCodes.Status400BadRequest, "Dữ liệu yêu cầu không được để trống.");
 
@@ -71,7 +71,7 @@ namespace DecorGearInfrastructure.Implement
                     return new ResponseDto<UserDto>(StatusCodes.Status400BadRequest, "Các trường không được để trống.");
                 }
 
-            
+
                 if (await EmailExistsAsync(request.Email))
                     return new ResponseDto<UserDto>(StatusCodes.Status400BadRequest, "Email đã tồn tại.");
 
@@ -85,9 +85,9 @@ namespace DecorGearInfrastructure.Implement
                 if (userRole == null)
                     return new ResponseDto<UserDto>(StatusCodes.Status400BadRequest, "Vai trò không tìm thấy!");
 
-             
+
                 var user = new User
-                {  
+                {
                     Name = request.Name,
                     PhoneNumber = request.PhoneNumber,
                     Email = request.Email,
@@ -100,19 +100,19 @@ namespace DecorGearInfrastructure.Implement
 
                 await _db.Users.AddAsync(user, cancellationToken);
                 await _db.SaveChangesAsync(cancellationToken);
-            
-                var subject = "Xác thực email";               
+
+                var subject = "Xác thực email";
                 var verificationCode = new Random().Next(100000, 999999).ToString();
                 await _mailingServices.SendEmailAsync(user.Email, subject,
                     $"Mã xác thực của bạn là: {verificationCode}");
-  
+
                 var verificationEntity = new VerificationCode
                 {
                     Email = request.Email,
-                    Code = verificationCode.ToString(), 
+                    Code = verificationCode.ToString(),
                     ExpirationTime = DateTime.UtcNow.AddMinutes(2)
                 };
-          
+
                 await _db.VerificationCodes.AddAsync(verificationEntity, cancellationToken);
                 await _db.SaveChangesAsync(cancellationToken);
 
@@ -143,7 +143,7 @@ namespace DecorGearInfrastructure.Implement
             }
             catch (Exception ex)
             {
-            
+
                 return new ResponseDto<UserDto>(StatusCodes.Status500InternalServerError, "Lỗi không xác định: " + ex.Message);
             }
         }
@@ -152,7 +152,7 @@ namespace DecorGearInfrastructure.Implement
         {
             _db.Users.Update(user);
             await _db.SaveChangesAsync(cancellationToken);
-        }      
+        }
 
         public async Task<User> GetUserByUsernameAsync(string username, CancellationToken cancellationToken)
         {
@@ -205,7 +205,7 @@ namespace DecorGearInfrastructure.Implement
             var user = await _db.Users.FindAsync(userId);
             if (user != null)
             {
-                user.RefreshToken = null; 
+                user.RefreshToken = null;
                 await _db.SaveChangesAsync();
             }
         }
@@ -229,16 +229,16 @@ namespace DecorGearInfrastructure.Implement
 
         public async Task<ResponseDto<bool>> VerifyCodeAsync(VerifyCodeRequest request, CancellationToken cancellationToken)
         {
-              try
-                {  
+            try
+            {
                 var email = request.Email;
                 var code = request.Code;
 
                 var verificationCode = await _db.VerificationCodes
                         .FirstOrDefaultAsync(vc => vc.Email == email && vc.Code == code, cancellationToken);
-                
-                    if (verificationCode == null)
-                        return new ResponseDto<bool>(StatusCodes.Status400BadRequest, "Mã xác thực không hợp lệ hoặc không tồn tại.");
+
+                if (verificationCode == null)
+                    return new ResponseDto<bool>(StatusCodes.Status400BadRequest, "Mã xác thực không hợp lệ hoặc không tồn tại.");
 
                 // Kiểm tra xem mã đã hết hạn chưa
                 var timeRemaining = verificationCode.ExpirationTime - DateTime.UtcNow;
@@ -248,43 +248,42 @@ namespace DecorGearInfrastructure.Implement
                     _db.VerificationCodes.Remove(verificationCode);
                     await _db.SaveChangesAsync(cancellationToken);
                     return new ResponseDto<bool>(StatusCodes.Status400BadRequest, "Mã xác thực đã hết hạn.");
-                }             
+                }
 
                 _db.VerificationCodes.Remove(verificationCode);
-                    await _db.SaveChangesAsync(cancellationToken);
+                await _db.SaveChangesAsync(cancellationToken);
 
 
                 return new ResponseDto<bool>(StatusCodes.Status200OK, "Xác thực thành công!");
-                   
-                }
-                catch (DbUpdateException)
-                {
-                    return new ResponseDto<bool>(StatusCodes.Status500InternalServerError, "Lỗi khi cập nhật cơ sở dữ liệu.");
-                }
-                catch (ArgumentException)
-                {
-                    return new ResponseDto<bool>(StatusCodes.Status400BadRequest, "Tham số không hợp lệ.");
-                }
-                catch (Exception ex)
-                {
-                    return new ResponseDto<bool>(StatusCodes.Status500InternalServerError, "Lỗi không xác định: " + ex.Message);
-                }           
+
+            }
+            catch (DbUpdateException)
+            {
+                return new ResponseDto<bool>(StatusCodes.Status500InternalServerError, "Lỗi khi cập nhật cơ sở dữ liệu.");
+            }
+            catch (ArgumentException)
+            {
+                return new ResponseDto<bool>(StatusCodes.Status400BadRequest, "Tham số không hợp lệ.");
+            }
+            catch (Exception ex)
+            {
+                return new ResponseDto<bool>(StatusCodes.Status500InternalServerError, "Lỗi không xác định: " + ex.Message);
+            }
         }
         public async Task SaveVerificationCodeAsync(VerificationCodePw verificationCode, CancellationToken cancellationToken)
         {
-             await _db.VerificationCodePws.AddAsync(verificationCode, cancellationToken);
-             await _db.SaveChangesAsync(cancellationToken);
+            await _db.VerificationCodePws.AddAsync(verificationCode, cancellationToken);
+            await _db.SaveChangesAsync(cancellationToken);
         }
 
         public async Task<User> GetUserByVerificationCodeAsync(string verificationCode, CancellationToken cancellationToken)
         {
-            // Tìm mã xác thực và kiểm tra xem nó có còn hiệu lực hay không
             var verificationEntry = await _db.VerificationCodePws
                 .FirstOrDefaultAsync(vc => vc.Code == verificationCode && vc.Expiration > DateTime.UtcNow, cancellationToken);
 
             if (verificationEntry == null)
             {
-                return null; 
+                return null;
             }
 
             // Tìm người dùng tương ứng với mã xác thực
@@ -309,7 +308,7 @@ namespace DecorGearInfrastructure.Implement
                 var user = await _db.Users.FirstOrDefaultAsync(u => u.Email == email, cancellationToken);
                 if (user == null)
                     return new ResponseDto<bool>(StatusCodes.Status400BadRequest, "Email không tồn tại.");
-               
+
                 // Kiểm tra xem mã xác thực trước đó có tồn tại và còn hiệu lực không
                 var existingCode = await _db.VerificationCodes
                     .FirstOrDefaultAsync(vc => vc.Email == email, cancellationToken);
@@ -327,7 +326,7 @@ namespace DecorGearInfrastructure.Implement
                         return new ResponseDto<bool>(StatusCodes.Status400BadRequest, "Mã xác thực còn hiệu lực. Vui lòng kiểm tra email.");
                     }
                 }
-           
+
                 var newVerificationCode = new Random().Next(100000, 999999).ToString();
 
                 var subject = "Xác thực email";
@@ -337,13 +336,13 @@ namespace DecorGearInfrastructure.Implement
                 {
                     Email = email,
                     Code = newVerificationCode,
-                    ExpirationTime = DateTime.UtcNow.AddMinutes(2) 
+                    ExpirationTime = DateTime.UtcNow.AddMinutes(2)
                 };
 
                 await _db.VerificationCodes.AddAsync(verificationEntity, cancellationToken);
                 await _db.SaveChangesAsync(cancellationToken);
 
-                return new ResponseDto<bool>(StatusCodes.Status200OK, "Mã xác thực mới đã được gửi đến email của bạn.");             
+                return new ResponseDto<bool>(StatusCodes.Status200OK, "Mã xác thực mới đã được gửi đến email của bạn.");
             }
             catch (DbUpdateException)
             {
@@ -363,9 +362,9 @@ namespace DecorGearInfrastructure.Implement
         {
             var user = await _db.Users.FindAsync(id, cancellationToken);
 
-            if (user == null)     
-                return new ResponseDto<UserDto>(StatusCodes.Status404NotFound, "Người dùng không tồn tại.");               
-            
+            if (user == null)
+                return new ResponseDto<UserDto>(StatusCodes.Status404NotFound, "Người dùng không tồn tại.");
+
             user.Name = request.Name;
             user.PhoneNumber = request.PhoneNumber;
             user.Email = request.Email;
@@ -383,7 +382,7 @@ namespace DecorGearInfrastructure.Implement
             };
 
             return new ResponseDto<UserDto>(StatusCodes.Status200OK, "Cập nhật người dùng thành công.", userDto);
-           
+
         }
     }
 

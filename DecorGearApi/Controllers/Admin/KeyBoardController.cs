@@ -1,12 +1,7 @@
 ﻿using AutoMapper;
 using DecorGearApplication.DataTransferObj.KeyBoardDetails;
-using DecorGearApplication.DataTransferObj.Product;
 using DecorGearApplication.Interface;
-using DecorGearDomain.Data.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using System.Drawing;
 
 namespace DecorGearApi.Controllers
 {
@@ -55,7 +50,7 @@ namespace DecorGearApi.Controllers
 
         // API sửa chi tiêt bàn phím
         [HttpPut("update")]
-        public async Task<IActionResult> UpdateProduct(int id,UpdateKeyBoardDetails request, CancellationToken cancellationToken)
+        public async Task<IActionResult> UpdateProduct(int id, UpdateKeyBoardDetails request, CancellationToken cancellationToken)
         {
             // Kiểm tra nếu ModelState không hợp lệ
             if (!ModelState.IsValid)
@@ -71,7 +66,7 @@ namespace DecorGearApi.Controllers
             }
 
             // Gọi phương thức Update để lưu các thay đổi
-            var result = await _res.UpdateKeyBoard(id,request, cancellationToken);
+            var result = await _res.UpdateKeyBoard(id, request, cancellationToken);
 
             // Trả về kết quả thành công với sản phẩm đã cập nhật
             return Ok(result);

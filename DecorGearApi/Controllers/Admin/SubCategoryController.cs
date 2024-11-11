@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
-using DecorGearApplication.DataTransferObj.Category;
 using DecorGearApplication.DataTransferObj.SubCategory;
 using DecorGearApplication.Interface;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DecorGearApi.Controllers
@@ -41,7 +39,7 @@ namespace DecorGearApi.Controllers
         }
 
         [HttpPut("update")]
-        public async Task<IActionResult> UpdateSubCategory(int id,UpdateSubCategoryRequest request, CancellationToken cancellationToken)
+        public async Task<IActionResult> UpdateSubCategory(int id, UpdateSubCategoryRequest request, CancellationToken cancellationToken)
         {
             if (!ModelState.IsValid)
             {
@@ -54,7 +52,7 @@ namespace DecorGearApi.Controllers
                 return NotFound("Không tìm thấy giá trị id");
             }
 
-            var result = await _res.UpdateSubCategory(id,request, cancellationToken);
+            var result = await _res.UpdateSubCategory(id, request, cancellationToken);
 
             return Ok(result);
         }

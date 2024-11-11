@@ -1,11 +1,7 @@
-﻿using DecorGearApplication.DataTransferObj.User;
-using DecorGearApplication.DataTransferObj.User.Login;
-using DecorGearApplication.Interface;
+﻿using DecorGearApplication.DataTransferObj.User.Login;
 using DecorGearApplication.IServices;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -53,7 +49,7 @@ namespace DecorGearApplication.Services
             {
                 new Claim(ClaimTypes.Name, user.Username),
                 new Claim(ClaimTypes.Role, user.RoleName),
-                new Claim("UserId", user.UserId.ToString()) 
+                new Claim("UserId", user.UserId.ToString())
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SecretKey));
@@ -111,7 +107,7 @@ namespace DecorGearApplication.Services
             {
                 ValidateIssuer = true,
                 ValidateAudience = true,
-                ValidateLifetime = true, 
+                ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
                 ValidIssuer = Issuer,
                 ValidAudience = Audience,
