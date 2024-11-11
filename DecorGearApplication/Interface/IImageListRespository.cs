@@ -1,5 +1,7 @@
-﻿using DecorGearApplication.DataTransferObj.FeedBack;
+﻿using DecorGearApplication.DataTransferObj.Category;
+using DecorGearApplication.DataTransferObj.FeedBack;
 using DecorGearApplication.DataTransferObj.ImageList;
+using DecorGearApplication.ValueObj.Response;
 using DecorGearDomain.Enum;
 using System;
 using System.Collections.Generic;
@@ -13,9 +15,9 @@ namespace DecorGearApplication.Interface
     {
         Task<List<ImageListDto>> GetAllImage(CancellationToken cancellationToken);
         Task<ImageListDto> GetImageById(int id, CancellationToken cancellationToken);
-        Task<ErrorMessage> CreateImage(CreateImageRequest request, CancellationToken cancellationToken);
-        Task<ErrorMessage> UpdateImage(int id, UpdateImageListRequest request, CancellationToken cancellationToken);
-        Task<bool> DeleteImage(int id, CancellationToken cancellationToken);
-        public bool IsValidImageFormat(List<string> imagePaths);
+        Task<ResponseDto<ImageListDto>> CreateImage(CreateImageRequest request, CancellationToken cancellationToken);
+        Task<ResponseDto<ImageListDto>> UpdateImage(int id, UpdateImageListRequest request, CancellationToken cancellationToken);
+        Task<ResponseDto<bool>> DeleteImage(int id, CancellationToken cancellationToken);
+        public bool IsValidImageFormat(string imagePaths);
     }
 }

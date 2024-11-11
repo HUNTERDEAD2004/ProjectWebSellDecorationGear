@@ -40,18 +40,21 @@ namespace DecorGearDomain.Data.Entities
         [Range(0.1, double.MaxValue, ErrorMessage = "Cân nặng phải lớn hơn 0kg")]
         public double Weight { get; set; }
 
-        [Required(ErrorMessage = "Không được để trống.")]
         [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
+
+        [Required(ErrorMessage = "Không được để trống.")]
+        [StringLength(100, ErrorMessage = "Ảnh đại diện của sản phẩm không được để trống")]
+        public string AvatarProduct { get; set; }
 
         [Required(ErrorMessage = "Không được để trống")]
-        [StringLength(10, ErrorMessage = "Size được phụ thuộc vào cân nặng S(<=5) , M(>5<=15) , L(>15<=30) , (>30<=50)XL , (>50<=100)XXL")]
+        [StringLength(10, ErrorMessage = "Size được phụ thuộc vào cân nặng S(<=5) , M(>5<=15) , L(>15<=30) , (>30<=50)XL , (>50<=100)XXL ")]
         public string Size { get; set; }
 
         [Range(0, int.MaxValue, ErrorMessage = "Đơn vị dung lượng pin được dung ở đây là Miliample/Hour")]
         public int? BatteryCapacity { get; set; } // dung lượng pin
 
-        // Khóa ngoại
+        // Khóa ngoại 
 
         // 1 - n
         public virtual ICollection<ImageList>? ImageLists { get; set; } = new List<ImageList>();

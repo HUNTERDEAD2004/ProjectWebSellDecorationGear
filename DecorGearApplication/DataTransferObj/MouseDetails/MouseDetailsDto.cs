@@ -21,8 +21,6 @@ namespace DecorGearApplication.DataTransferObj.MouseDetails
 
         public string Dimensions { get; set; } 
 
-        public string Weight { get; set; } 
-
         public string Material { get; set; } 
 
         public string? EyeReading { get; set; }   
