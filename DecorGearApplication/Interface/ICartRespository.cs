@@ -1,14 +1,11 @@
-﻿using DecorGearApplication.DataTransferObj;
-using DecorGearApplication.DataTransferObj.CartDetail;
-using DecorGearDomain.Data.Entities;
-using DecorGearDomain.Enum;
+﻿using DecorGearDomain.Data.Entities;
 
 namespace DecorGearApplication.Interface
 {
     public interface ICartRespository
     {
         Task<Cart> GetCartByUserId(int userId);
-        Task CreateAsync(Cart cart);
-        Task UpdateAsync(Cart cart);
+        Task CreateAsync(Cart cart, CancellationToken cancellationToken);
+        Task UpdateAsync(Cart cart, CancellationToken cancellationToken);
     }
 }

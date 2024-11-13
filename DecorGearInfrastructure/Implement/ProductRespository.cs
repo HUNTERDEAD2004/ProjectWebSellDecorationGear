@@ -105,5 +105,9 @@ namespace DecorGearInfrastructure.Implement
                 return ErrorMessage.Failed;
             }
         }
+        public async Task<Product> GetProductById(int productId)
+        {
+            return await _appDbContext.Products.FirstOrDefaultAsync(p => p.ProductID == productId);
+        }
     }
 }

@@ -2,11 +2,10 @@
 using DecorGearApplication.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DecorGearApi.Controllers.Admin
+namespace DecorGearApi.Controllers.User
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("api/admin/[controller]")]
-    // [Authorize(Roles = "Admin")]
     public class CartController : ControllerBase
     {
         private readonly CartService _cartService;

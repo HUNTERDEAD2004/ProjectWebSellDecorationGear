@@ -21,19 +21,30 @@ namespace DecorGearInfrastructure.Implement
                 .FirstOrDefaultAsync();
         }
 
-        // Tạo mới giỏ hàng
-        public async Task CreateAsync(Cart cart)
+
+        public Task CreateAsync(Cart cart, CancellationToken cancellationToken)
         {
-            await _context.Carts.AddAsync(cart);
-            await _context.SaveChangesAsync();
+            throw new NotImplementedException();
         }
 
-        // Cập nhật giỏ hàng
-        public async Task UpdateAsync(Cart cart)
+        public async Task UpdateAsync(Cart cart, CancellationToken cancellationToken)
         {
-            _context.Carts.Update(cart);
-            await _context.SaveChangesAsync();
-        }
+            if (cart == null)
+                throw new ArgumentNullException(nameof(cart));
 
+            var existingCart = await _context.Carts.FindAsync(cart.CartID);
+            if (existingCart != null)
+            {
+                existingCart.TotalQuantity = cart.TotalQuantity;
+                existingCart.TotalAmount = cart.TotalAmount;
+                existingCart.CartDetails = cart.CartDetails;
+
+                await _context.SaveChangesAsync(cancellationToken);
+            }
+            else
+            {
+                throw new InvalidOperationException("Cart not found.");
+            }
+        }
     }
 }

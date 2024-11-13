@@ -1,6 +1,4 @@
-﻿using DecorGearApplication.DataTransferObj.CartDetail;
-using DecorGearDomain.Data.Entities;
-using DecorGearDomain.Enum;
+﻿using DecorGearDomain.Data.Entities;
 
 namespace DecorGearApplication.Interface
 {

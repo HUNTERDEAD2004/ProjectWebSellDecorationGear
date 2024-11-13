@@ -1,4 +1,5 @@
 ﻿using DecorGearApplication.DataTransferObj.Product;
+using DecorGearDomain.Data.Entities;
 using DecorGearDomain.Enum;
 
 namespace DecorGearApplication.Interface
@@ -10,5 +11,6 @@ namespace DecorGearApplication.Interface
         Task<ErrorMessage> CreateProduct(CreateProductRequest request, CancellationToken cancellationToken);
         Task<ErrorMessage> UpdateProduct(int id, UpdateProductRequest request, CancellationToken cancellationToken);
         Task<bool> DeleteProduct(int id, CancellationToken cancellationToken);
+        Task<Product> GetProductById(int productId);
     }
 }

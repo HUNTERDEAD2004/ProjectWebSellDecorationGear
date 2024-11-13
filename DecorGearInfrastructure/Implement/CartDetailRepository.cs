@@ -13,8 +13,8 @@ public class CartDetailRepository : ICartDetailRespository
     {
         _context = new AppDbContext();
     }
-    
-    
+
+
     // Lấy chi tiết sản phẩm trong giỏ hàng
     public async Task<CartDetail> GetCartDetailByCartIdAndProductId(int cartId, int productId)
     {
@@ -52,5 +52,5 @@ public class CartDetailRepository : ICartDetailRespository
             .Where(cd => cd.CartID == cartId && !cd.Deleted)
             .SumAsync(cd => cd.TotalPrice);
     }
-    
+
 }
