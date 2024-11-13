@@ -1,4 +1,4 @@
-﻿namespace Ecommerce.Application.DataTransferObj.User
+﻿namespace DecorGearApplication.DataTransferObj.User
 {
     public class LoginDTO
     {

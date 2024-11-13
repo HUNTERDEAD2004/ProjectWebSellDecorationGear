@@ -1,6 +1,6 @@
 ﻿using DecorGearDomain.Enum;
 
-namespace Application.DataTransferObj.User.Request
+namespace DecorGearApplication.DataTransferObj.User.Request
 {
     public class UserDto
     {

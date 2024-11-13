@@ -1,4 +1,4 @@
-﻿namespace Ecommerce.Application.DataTransferObj.User.Ultilities
+﻿namespace DecorGearApplication.DataTransferObj.User.Ultilities
 {
     public class ForgotPasswordRequest
     {

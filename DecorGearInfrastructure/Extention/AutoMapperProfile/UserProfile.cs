@@ -1,7 +1,6 @@
-﻿using Application.DataTransferObj.User.Request;
-using AutoMapper;
+﻿using AutoMapper;
+using DecorGearApplication.DataTransferObj.User.Request;
 using DecorGearDomain.Data.Entities;
-using Ecommerce.Application.DataTransferObj.User.Request;
 
 namespace DecorGearInfrastructure.Extention.AutoMapperProfile
 {

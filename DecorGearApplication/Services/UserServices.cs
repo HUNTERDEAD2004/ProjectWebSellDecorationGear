@@ -1,9 +1,7 @@
-﻿using Application.DataTransferObj.User.Request;
-using DecorGearApplication.DataTransferObj.User;
+﻿using DecorGearApplication.DataTransferObj.User;
 using DecorGearApplication.DataTransferObj.User.Request;
 using DecorGearApplication.Interface;
 using DecorGearApplication.IServices;
-using Ecommerce.Application.DataTransferObj.User.Request;
 
 
 

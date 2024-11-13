@@ -27,6 +27,7 @@ namespace DecorGearInfrastructure.Extention
             services.AddTransient<CartService>();
             services.AddTransient<HomeRepository>();
             services.AddTransient<ICartRespository, CartRepository>();
+            services.AddTransient<IAddressRepository, AddressRepository>();
             services.AddHttpContextAccessor();
 
             services.AddScoped<IImageListRespository, ImageListRespository>();

@@ -1,8 +1,8 @@
-﻿namespace Ecommerce.Application.DataTransferObj.User.Ultilities
+﻿namespace DecorGearApplication.DataTransferObj.User.Ultilities
 {
     public class SeedMailRequest
     {
-        public bool type { get; set; } // true is activating account,false is send code
+        public bool type { get; set; } 
         public string email { get; set; }
     }
 }

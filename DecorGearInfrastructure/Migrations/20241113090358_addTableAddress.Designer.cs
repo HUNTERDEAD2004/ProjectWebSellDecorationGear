@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DecorGearInfrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241108081528_newdb")]
-    partial class newdb
+    [Migration("20241113090358_addTableAddress")]
+    partial class addTableAddress
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,49 @@ namespace DecorGearInfrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("DecorGearDomain.Data.Entities.Address", b =>
+                {
+                    b.Property<int>("AddressId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AddressId"));
+
+                    b.Property<string>("DistrictCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DistrictName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProvinceCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProvinceName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("WardCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WardName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AddressId");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Address");
+                });
 
             modelBuilder.Entity("DecorGearDomain.Data.Entities.Brand", b =>
                 {
@@ -1631,6 +1674,17 @@ namespace DecorGearInfrastructure.Migrations
                     b.ToTable("VoucherUser", (string)null);
                 });
 
+            modelBuilder.Entity("DecorGearDomain.Data.Entities.Address", b =>
+                {
+                    b.HasOne("DecorGearDomain.Data.Entities.User", "User")
+                        .WithOne("Address")
+                        .HasForeignKey("DecorGearDomain.Data.Entities.Address", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("DecorGearDomain.Data.Entities.Cart", b =>
                 {
                     b.HasOne("DecorGearDomain.Data.Entities.User", "User")
@@ -1901,6 +1955,9 @@ namespace DecorGearInfrastructure.Migrations
 
             modelBuilder.Entity("DecorGearDomain.Data.Entities.User", b =>
                 {
+                    b.Navigation("Address")
+                        .IsRequired();
+
                     b.Navigation("Cart")
                         .IsRequired();
 

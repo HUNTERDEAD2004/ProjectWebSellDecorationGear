@@ -9,8 +9,6 @@ using MimeKit;
 
 
 
-
-
 namespace DecorGearApplication.Services
 {
     public class MailingServices : IMailingServices

@@ -25,6 +25,11 @@ namespace DecorGearInfrastructure.Database.Configuration
                 .HasForeignKey<Member>(m => m.UserID)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            // Mối quan hệ với Address (1-1)
+            builder.HasOne(u => u.Address)
+                .WithOne(m => m.User)
+                .HasForeignKey<Address>(m => m.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             // Mối quan hệ với Role (n-1)
             builder.HasOne(u => u.Role)

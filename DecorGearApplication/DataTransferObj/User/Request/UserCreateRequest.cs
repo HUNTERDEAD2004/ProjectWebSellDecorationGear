@@ -1,4 +1,4 @@
-﻿namespace Ecommerce.Application.DataTransferObj.User.Request
+﻿namespace DecorGearApplication.DataTransferObj.User.Request
 {
     public class UserCreateRequest
     {

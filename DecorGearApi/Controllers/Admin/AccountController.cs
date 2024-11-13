@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using DecorGearApplication.DataTransferObj.User.Request;
 using DecorGearApplication.IServices;
-using Ecommerce.Application.DataTransferObj.User.Request;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

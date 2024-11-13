@@ -1,7 +1,5 @@
-﻿using Application.DataTransferObj.User.Request;
-using DecorGearApplication.DataTransferObj.User;
+﻿using DecorGearApplication.DataTransferObj.User;
 using DecorGearApplication.DataTransferObj.User.Request;
-using Ecommerce.Application.DataTransferObj.User.Request;
 
 namespace DecorGearApplication.IServices
 {

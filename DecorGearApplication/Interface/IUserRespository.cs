@@ -1,9 +1,7 @@
-﻿using Application.DataTransferObj.User.Request;
-using DecorGearApplication.DataTransferObj.User;
+﻿using DecorGearApplication.DataTransferObj.User;
 using DecorGearApplication.DataTransferObj.User.Email;
 using DecorGearApplication.DataTransferObj.User.Request;
 using DecorGearDomain.Data.Entities;
-using Ecommerce.Application.DataTransferObj.User.Request;
 
 namespace DecorGearApplication.Interface
 {

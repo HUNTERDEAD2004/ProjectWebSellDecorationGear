@@ -29,6 +29,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
         public virtual DbSet<VerificationCode> VerificationCodes { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<VerificationCodePw> VerificationCodePws { get; set; }
+        public virtual DbSet<Address> Address { get; set; }
         #endregion
 
         public AppDbContext()

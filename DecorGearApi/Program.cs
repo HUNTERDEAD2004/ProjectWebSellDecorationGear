@@ -66,6 +66,7 @@ public class Program
         builder.Services.AddScoped<IOderRespository, OrderRepository>();
         builder.Services.AddScoped<HomeRepository>();
         builder.Services.AddScoped<ICartRespository, CartRepository>();
+        builder.Services.AddScoped<IAddressRepository, AddressRepository>();
         builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
         builder.Services.AddScoped<IVoucherRespository, VoucherRepository>();
         builder.Services.AddEventBus(builder.Configuration);

@@ -1,5 +1,4 @@
-﻿using Application.DataTransferObj.User.Request;
-using AutoMapper;
+﻿using AutoMapper;
 using DecorGearApplication.DataTransferObj.User;
 using DecorGearApplication.DataTransferObj.User.Email;
 using DecorGearApplication.DataTransferObj.User.Request;
@@ -9,7 +8,6 @@ using DecorGearDomain.Data.Entities;
 using DecorGearDomain.Enum;
 using DecorGearInfrastructure.Database.AppDbContext;
 using DecorGearInfrastructure.Extention;
-using Ecommerce.Application.DataTransferObj.User.Request;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
