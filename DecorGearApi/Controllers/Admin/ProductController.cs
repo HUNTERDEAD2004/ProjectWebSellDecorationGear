@@ -33,7 +33,7 @@ namespace DecorGearApi.Controllers
 
         // POST api/<ProductController>
         [HttpPost("create")]
-        public async Task<IActionResult> CreateProduct(CreateProductRequest request, CancellationToken cancellationToken)
+        public async Task<IActionResult> CreateProduct([FromQuery]CreateProductRequest request, CancellationToken cancellationToken)
         {
             // Kiểm tra nếu ModelState không hợp lệ
             if (!ModelState.IsValid)
@@ -47,7 +47,7 @@ namespace DecorGearApi.Controllers
 
         // PUT api/<ProductController>/5
         [HttpPut("update")]
-        public async Task<IActionResult> UpdateProduct(int id, UpdateProductRequest request, CancellationToken cancellationToken)
+        public async Task<IActionResult> UpdateProduct(int id, [FromQuery]UpdateProductRequest request, CancellationToken cancellationToken)
         {
             // Kiểm tra nếu ModelState không hợp lệ
             if (!ModelState.IsValid)

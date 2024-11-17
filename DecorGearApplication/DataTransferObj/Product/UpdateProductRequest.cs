@@ -2,10 +2,6 @@
 {
     public class UpdateProductRequest
     {
-        public string ProductID { get; set; }
-
-        public string UserID { get; set; }
-
         public string ProductName { get; set; }
 
         public double Price { get; set; }
@@ -21,6 +17,8 @@
         public string Size { get; set; }
 
         public int? BatteryCapacity { get; set; } // dung lượng pin
+
+        public string AvatarProduct { get; set; }
 
         public int? SaleID { get; set; }  // có thể có hoặc không
 

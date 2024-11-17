@@ -33,7 +33,7 @@ namespace DecorGearApi.Controllers
 
         // POST api/<ProductController>
         [HttpPost("create")]
-        public async Task<IActionResult> CreateMouse(CreateMouseRequest request, CancellationToken cancellationToken)
+        public async Task<IActionResult> CreateMouse(CreateMouseRequest request, [FromQuery]CancellationToken cancellationToken)
         {
             // Kiểm tra nếu ModelState không hợp lệ
             if (!ModelState.IsValid)
@@ -47,7 +47,7 @@ namespace DecorGearApi.Controllers
 
         // PUT api/<ProductController>/5
         [HttpPut("update")]
-        public async Task<IActionResult> UpdateMouse(int id, UpdateMouseRequest request, CancellationToken cancellationToken)
+        public async Task<IActionResult> UpdateMouse(int id, UpdateMouseRequest request, [FromQuery]CancellationToken cancellationToken)
         {
             // Kiểm tra nếu ModelState không hợp lệ
             if (!ModelState.IsValid)

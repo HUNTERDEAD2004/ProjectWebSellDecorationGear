@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿ using AutoMapper;
 using DecorGearApplication.DataTransferObj.ImageList;
 using DecorGearApplication.DataTransferObj.MouseDetails;
 using DecorGearApplication.DataTransferObj.Product;
@@ -44,6 +44,16 @@ namespace DecorGearInfrastructure.Implement
             // Thêm Sản Phẩm Mới
             try
             {
+                if (!IsValidImageFormat(request.AvatarProduct))
+                {
+                    return new ResponseDto<ProductDto>
+                    {
+                        DataResponse = null,
+                        Status = StatusCodes.Status400BadRequest,
+                        Message = "Sai định dạng."
+                    };
+                }
+
                 var createProduct = _mapper.Map<Product>(request);
 
                 await _appDbContext.Products.AddAsync(createProduct, cancellationToken);
@@ -108,6 +118,59 @@ namespace DecorGearInfrastructure.Implement
             };
         }
 
+        public bool IsValidImageFormat(string imagePath)
+        {
+            // Thư mục chứa ảnh trong server
+            var rootDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
+
+            // Kiểm tra nếu đường dẫn nằm trong thư mục "wwwroot/images"
+            var fullImagePath = Path.GetFullPath(imagePath);
+
+            if (!fullImagePath.StartsWith(rootDirectory))
+            {
+                return false; // Đường dẫn không hợp lệ
+            }
+
+            // Các định dạng hợp lệ
+            var validExtensions = new List<string> { ".jpg", ".jpeg" };
+
+            // Lấy phần mở rộng của tệp
+            var extension = Path.GetExtension(imagePath)?.ToLower();
+
+            // Kiểm tra phần mở rộng
+            if (!validExtensions.Contains(extension))
+            {
+                return false; // Phần mở rộng không hợp lệ
+            }
+
+            // Kiểm tra file có tồn tại không
+            if (!File.Exists(fullImagePath))
+            {
+                return false; // Tệp không tồn tại
+            }
+
+            return true; // Tệp hợp lệ
+        }
+
+
+        //public bool IsValidImageFormat(string imagePath)
+        //{
+        //    // Các định dạng hợp lệ
+        //    var validExtensions = new List<string> { ".jpg", ".jpeg" };
+
+        //    // Lấy phần mở rộng của tệp
+        //    var extension = Path.GetExtension(imagePath)?.ToLower();
+
+        //    // Nếu phần mở rộng không hợp lệ, trả về false
+        //    if (!validExtensions.Contains(extension))
+        //    {
+        //        return false;
+        //    }
+
+        //    // Tất cả các tệp đều hợp lệ
+        //    return true;
+        //}
+
         public async Task<List<ProductDto>> GetAllProduct(ViewProductRequest? request, CancellationToken cancellationToken)
         {
             var query = (from p in _appDbContext.Products
@@ -115,17 +178,16 @@ namespace DecorGearInfrastructure.Implement
                         join s in _appDbContext.Sales on p.SaleID equals s.SaleID into saleJoin
                         from s in saleJoin.DefaultIfEmpty() // Left join để Sale có thể null
                         join sc in _appDbContext.SubCategories on p.SubCategoryID equals sc.SubCategoryID
-                        join i in _appDbContext.ImageLists on p.ProductID equals i.ProductID
+                        //join i in _appDbContext.ImageLists on p.ProductID equals i.ProductID
                         select new ProductDto
                         {
                             ProductID = p.ProductID,
                             ProductName = p.ProductName, // Thêm ProductName
                             Price = p.Price,             // Thêm Price
-                            BrandID = b.BrandID,
                             BrandName = b.BrandName,
-                            SaleID = s != null ? s.SaleID : null,
+                            //SaleID = s != null ? s.SaleID : null,
                             SaleCode = s != null ? s.SaleName : null,
-                            SubCategoryID = sc.SubCategoryID,
+                            //SubCategoryID = sc.SubCategoryID,
                             SubCategoryName = sc.SubCategoryName,
                             View = p.View,
                             Quantity = p.Quantity,
@@ -134,10 +196,10 @@ namespace DecorGearInfrastructure.Implement
                             Description = p.Description,
                             Size = p.Size,
                             BatteryCapacity = p.BatteryCapacity,
-                            ImageProduct = _appDbContext.ImageLists
-                                    .Where(img => img.ProductID == p.ProductID)
-                                    .Select(img => img.ImagePath)
-                                    .ToList()
+                            //ImageProduct = _appDbContext.ImageLists
+                            //        .Where(img => img.ProductID == p.ProductID)
+                            //        .Select(img => img.ImagePath)
+                            //        .ToList()
                         }).AsNoTracking().AsQueryable();
 
             // Lọc sản phẩm 
@@ -218,6 +280,17 @@ namespace DecorGearInfrastructure.Implement
                 product.SaleID = request.SaleID;
                 product.BrandID = request.BrandID;
                 product.SubCategoryID = request.SubCategoryID;
+                product.AvatarProduct = request.AvatarProduct;
+
+                if (!IsValidImageFormat(request.AvatarProduct))
+                {
+                    return new ResponseDto<ProductDto>
+                    {
+                        DataResponse = null,
+                        Status = StatusCodes.Status400BadRequest,
+                        Message = "Sai định dạng."
+                    };
+                }
 
                 _appDbContext.Products.Update(product);
 

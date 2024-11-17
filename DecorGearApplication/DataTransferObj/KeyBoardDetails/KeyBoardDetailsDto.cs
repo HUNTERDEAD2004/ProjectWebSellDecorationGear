@@ -27,5 +27,9 @@
         public string? Stabilizes { get; set; }
 
         public string? PCB { get; set; }
+
+        // Sửa thuộc tính ImageProduct thành List<string>
+
+        public List<string> ImageProduct { get; set; }
     }
 }

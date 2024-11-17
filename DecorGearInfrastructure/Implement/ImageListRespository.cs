@@ -126,21 +126,55 @@ namespace DecorGearInfrastructure.Implement
 
         public bool IsValidImageFormat(string imagePath)
         {
+            // Thư mục chứa ảnh trong server
+            var rootDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
+
+            // Kiểm tra nếu đường dẫn nằm trong thư mục "wwwroot/images"
+            var fullImagePath = Path.GetFullPath(imagePath);
+
+            if (!fullImagePath.StartsWith(rootDirectory))
+            {
+                return false; // Đường dẫn không hợp lệ
+            }
+
             // Các định dạng hợp lệ
             var validExtensions = new List<string> { ".jpg", ".jpeg" };
 
             // Lấy phần mở rộng của tệp
             var extension = Path.GetExtension(imagePath)?.ToLower();
 
-            // Nếu phần mở rộng không hợp lệ, trả về false
+            // Kiểm tra phần mở rộng
             if (!validExtensions.Contains(extension))
             {
-                return false;
+                return false; // Phần mở rộng không hợp lệ
             }
 
-            // Tất cả các tệp đều hợp lệ
-            return true;
+            // Kiểm tra file có tồn tại không
+            if (!File.Exists(fullImagePath))
+            {
+                return false; // Tệp không tồn tại
+            }
+
+            return true; // Tệp hợp lệ
         }
+
+        //public bool IsValidImageFormat(string imagePath)
+        //{
+        //    // Các định dạng hợp lệ
+        //    var validExtensions = new List<string> { ".jpg", ".jpeg" };
+
+        //    // Lấy phần mở rộng của tệp
+        //    var extension = Path.GetExtension(imagePath)?.ToLower();
+
+        //    // Nếu phần mở rộng không hợp lệ, trả về false
+        //    if (!validExtensions.Contains(extension))
+        //    {
+        //        return false;
+        //    }
+
+        //    // Tất cả các tệp đều hợp lệ
+        //    return true;
+        //}
 
         public async Task<ResponseDto<ImageListDto>> UpdateImage(int id, UpdateImageListRequest request, CancellationToken cancellationToken)
         {
@@ -161,8 +195,19 @@ namespace DecorGearInfrastructure.Implement
                 var imageList = await _appDbContext.ImageLists.FindAsync(id);
 
                 imageList.ImagePath = request.ImagePath;
-                imageList.ProductID = request.ProductID;
+                imageList.MouseDetailID = request.MouseDetailID;
+                imageList.KeyboardDetailID = request.KeyboardDetailID;
                 imageList.Description = request.Description;
+
+                if (!IsValidImageFormat(request.ImagePath))
+                {
+                    return new ResponseDto<ImageListDto>
+                    {
+                        DataResponse = null,
+                        Status = StatusCodes.Status400BadRequest,
+                        Message = "Sai định dạng."
+                    };
+                }
 
                 _appDbContext.ImageLists.Update(imageList);
 

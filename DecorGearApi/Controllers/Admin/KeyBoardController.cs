@@ -36,7 +36,7 @@ namespace DecorGearApi.Controllers
 
         // API tạo chi tiêt bàn phím
         [HttpPost("create")]
-        public async Task<IActionResult> CreateKeyBoard(CreateKeyBoardsRequest request, CancellationToken cancellationToken)
+        public async Task<IActionResult> CreateKeyBoard(CreateKeyBoardsRequest request, [FromQuery]CancellationToken cancellationToken)
         {
             // Kiểm tra nếu ModelState không hợp lệ
             if (!ModelState.IsValid)
@@ -50,7 +50,7 @@ namespace DecorGearApi.Controllers
 
         // API sửa chi tiêt bàn phím
         [HttpPut("update")]
-        public async Task<IActionResult> UpdateProduct(int id, UpdateKeyBoardDetails request, CancellationToken cancellationToken)
+        public async Task<IActionResult> UpdateProduct(int id, UpdateKeyBoardDetails request, [FromQuery]CancellationToken cancellationToken)
         {
             // Kiểm tra nếu ModelState không hợp lệ
             if (!ModelState.IsValid)

@@ -14,8 +14,6 @@ namespace DecorGearApplication.DataTransferObj.Product
 
         public int? SaleID { get; set; }  // có thể có hoặc không
 
-        public int BrandID { get; set; }
-
         public int SubCategoryID { get; set; }
 
         public string SubCategoryName { get; set; }
@@ -41,9 +39,5 @@ namespace DecorGearApplication.DataTransferObj.Product
         public int? BatteryCapacity { get; set; } // dung lượng pin
 
         public string AvatarProduct { get; set; }
-
-        // Sửa thuộc tính ImageProduct thành List<string>
-
-        public List<string> ImageProduct { get; set; }
     }
 }

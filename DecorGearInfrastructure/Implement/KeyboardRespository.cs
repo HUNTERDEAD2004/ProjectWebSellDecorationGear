@@ -111,6 +111,7 @@ namespace DecorGearInfrastructure.Implement
         public async Task<List<KeyBoardDetailsDto>> GetAllKeyBoard(ViewKeyBoardsRequest? request, CancellationToken cancellationToken)
         {
             var query = from kd in _appDbContext.KeyboardDetails
+                        join i in _appDbContext.ImageLists on kd.KeyboardDetailID equals i.KeyboardDetailID
                         select new KeyBoardDetailsDto
                         {
                             KeyboardDetailID = kd.KeyboardDetailID,
@@ -125,7 +126,11 @@ namespace DecorGearInfrastructure.Implement
                             SwitchMaterial = kd.SwitchMaterial,
                             SS = kd.SS,
                             Stabilizes = kd.Stabilizes,
-                            PCB = kd.PCB
+                            PCB = kd.PCB,
+                            ImageProduct = _appDbContext.ImageLists
+                                    .Where(img => img.KeyboardDetailID == kd.KeyboardDetailID)
+                                    .Select(img => img.ImagePath)
+                                    .ToList()
                         };
 
             // Áp dụng các điều kiện lọc

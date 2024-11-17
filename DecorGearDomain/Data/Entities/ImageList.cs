@@ -9,8 +9,9 @@ namespace DecorGearDomain.Data.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ImageListID { get; set; }
 
-        [Required(ErrorMessage = "Không được để trống")]
-        public int ProductID { get; set; }
+        public int? MouseDetailID { get; set; }
+
+        public int? KeyboardDetailID { get; set; }
 
         [Required(ErrorMessage = "Không được để trống")]
         public string ImagePath { get; set; }
@@ -19,6 +20,10 @@ namespace DecorGearDomain.Data.Entities
         public string? Description { get; set; }
 
         //Khóa ngoại
-        public virtual Product Product { get; set; }
+
+        // n - 1
+        public virtual MouseDetail MouseDetail { get; set; }
+
+        public virtual KeyboardDetail KeyboardDetail { get; set; }
     }
 }

@@ -130,6 +130,8 @@ public class Program
             app.UseSwaggerUI();
         }
 
+        app.UseStaticFiles(); // Kích hoạt wwwroot để phục vụ file tĩnh
+
         app.UseHttpsRedirection();
         app.UseCors("AllowAll");
         app.UseAuthentication();

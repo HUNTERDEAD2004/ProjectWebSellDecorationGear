@@ -42,7 +42,8 @@ namespace DecorGearInfrastructure.Database.AppDbContext
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=DESKTOPD-DELLIN\\SQLEXPRESS;Database=DecorationGear2;Trusted_Connection=True;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("Data Source=DESKTOPD-DELLIN\\SQLEXPRESS;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True;");
+
             //optionsBuilder.UseSqlServer("Data Source=PHUC\\SQLEXPRESS;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True;");
         }
 
@@ -400,14 +401,16 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 new ImageList
                 {
                     ImageListID = 1,
-                    ProductID = 3,
+                    MouseDetailID=null,
+                    KeyboardDetailID = 2, 
                     ImagePath= "/images/aulaf75_img2.jpg",
                     Description = "Hình ảnh của sản phẩm aulaf75"
                 },
                 new ImageList
                 {
                     ImageListID= 2, 
-                    ProductID=1, 
+                    MouseDetailID=1,
+                    KeyboardDetailID = null,
                     ImagePath= "/images/rzdav3_img2.jpg", 
                     Description="Hình ảnh của sản phẩm razer deadth addzer v3"
                 }

@@ -51,7 +51,6 @@ namespace DecorGearDomain.Data.Entities
         // Khóa ngoại 
 
         // 1 - n
-        public virtual ICollection<ImageList>? ImageLists { get; set; } = new List<ImageList>();
         public virtual ICollection<Favorite>? Favorites { get; set; } = new List<Favorite>();
         public virtual ICollection<CartDetail>? CartDetails { get; set; } = new List<CartDetail>();
         public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();

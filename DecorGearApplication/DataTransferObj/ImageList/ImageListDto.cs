@@ -4,7 +4,9 @@
     {
         public int ImageListID { get; set; }
 
-        public int ProductID { get; set; }
+        public int? MouseDetailID { get; set; }
+
+        public int? KeyboardDetailID { get; set; }
 
         public string ImagePath { get; set; }
 

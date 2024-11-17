@@ -10,9 +10,13 @@ namespace DecorGearInfrastructure.Database.Configuration
         {
             builder.ToTable("ImageList");
             builder.HasKey(k => k.ImageListID);
-            builder.HasOne(a => a.Product)
+            builder.HasOne(a => a.MouseDetail)
                             .WithMany(p => p.ImageLists)
-                            .HasForeignKey(a => a.ProductID)
+                            .HasForeignKey(a => a.MouseDetailID)
+                            .OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(a => a.KeyboardDetail)
+                            .WithMany(p => p.ImageLists)
+                            .HasForeignKey(a => a.KeyboardDetailID)
                             .OnDelete(DeleteBehavior.Restrict);
         }
     }
