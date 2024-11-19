@@ -43,11 +43,17 @@ namespace DecorGearInfrastructure.Implement
             return new ResponseDto<bool>(StatusCodes.Status200OK, "Xóa FeedBack Thành Công");
         }
 
-        public async Task<List<FeedBackDto>> GetAllFeedBack(CancellationToken cancellationToken)
+        public async Task<List<FeedBackDto>> GetAllFeedBack(int pageNumber, int pageSize)
         {
-            var feedback = await _db.FeedBacks.ToListAsync();
+            var feedback = await _db.FeedBacks
+                .OrderBy(u => u.FeedBackID) 
+                .Skip((pageNumber - 1) * pageSize) 
+                .Take(pageSize) 
+                .ToListAsync();
+
             return _map.Map<List<FeedBackDto>>(feedback);
         }
+
 
         public async Task<FeedBackDto> FeedBackById(int id, CancellationToken cancellationToken)
         {

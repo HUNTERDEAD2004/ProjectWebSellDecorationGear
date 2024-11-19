@@ -1,17 +1,25 @@
-namespace DecorGearApplication.ValueObj.Pagination;
+using DecorGearDomain.Enum;
+using System.Linq;
 
-public static IEnumerable<T> Paginate<T>(
-    this IQueryable<T> source,
-    SortOrderEnum sortOrder,
-    Func<T, IComparable> sorter,
-    int skip,
-    int limit)
+public static class PaginationExtensions
 {
-    return (sortOrder switch
+    public static IQueryable<T> Paginate<T>(
+        this IQueryable<T> source,
+        SortOrderEnum sortOrder,
+        Func<T, object> sorter,
+        int skip,
+        int limit)
     {
-        SortOrderEnum.None => source,
-        SortOrderEnum.Ascending => source.AsEnumerable().OrderBy(sorter).AsQueryable(),
-        SortOrderEnum.Descending => source.AsEnumerable().OrderByDescending(sorter).AsQueryable(),
-        _ => source,
-    }).Skip(skip * limit).Take(limit);
+        // Sắp xếp theo yêu cầu
+        var sortedSource = sortOrder switch
+        {
+            SortOrderEnum.None => source,
+            SortOrderEnum.Ascending => source.OrderBy(x => sorter(x)),
+            SortOrderEnum.Descending => source.OrderByDescending(x => sorter(x)),
+            _ => source
+        };
+
+        // Áp dụng phân trang
+        return sortedSource.Skip(skip).Take(limit);
+    }
 }

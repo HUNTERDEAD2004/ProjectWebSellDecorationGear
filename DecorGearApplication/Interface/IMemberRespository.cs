@@ -7,7 +7,7 @@ namespace DecorGearApplication.Interface
 {
     public interface IMemberRespository
     {
-        Task<List<MemberDto>> GetAllMembersAsync(CancellationToken cancellation);
+        Task<List<MemberDto>> GetAllMembersAsync(int pageNumber, int pageSize);
         Task<MemberDto> GetMemberByIdAsync(int memberId, CancellationToken cancellation);
         Task<ResponseDto<ErrorMessage>> CreateMemberAsync(CreateMemberRequest request, CancellationToken cancellation);
         Task<ResponseDto<ErrorMessage>> UpdateMemberAsync(int id, UpdateMemberRequest request, CancellationToken cancellation);

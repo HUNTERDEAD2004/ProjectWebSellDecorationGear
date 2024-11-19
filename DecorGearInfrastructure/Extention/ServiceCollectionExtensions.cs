@@ -16,14 +16,11 @@ namespace DecorGearInfrastructure.Extention
             //services.AddTransient<IExampleRepository, ExampleRepository>();
             services.AddTransient<IMailingServices, MailingServices>();
             services.AddTransient<IUserRespository, UserRepository>();
-            services.AddScoped<IUserServices, UserServices>();
             services.AddTransient<ITokenServices, TokenServices>();
             services.AddTransient<IPasswordServices, PasswordServices>();
             services.AddScoped<MailingServices>();
             services.AddScoped<IFeedBackRespository, FeedBackRepository>();
-            services.AddScoped<IFeedbackServices, FeedbackServices>();
             services.AddTransient<IMemberRespository, MemberRepository>();
-            services.AddTransient<IMemberServices, MemberServices>();
             services.AddTransient<CartService>();
             services.AddTransient<HomeRepository>();
             services.AddTransient<ICartRespository, CartRepository>();

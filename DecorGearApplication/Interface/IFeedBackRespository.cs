@@ -6,7 +6,7 @@ namespace DecorGearApplication.Interface
 {
     public interface IFeedBackRespository
     {
-        Task<List<FeedBackDto>> GetAllFeedBack(CancellationToken cancellationToken);
+        Task<List<FeedBackDto>> GetAllFeedBack(int pageNumber, int pageSize);
         Task<FeedBackDto> FeedBackById(int id, CancellationToken cancellationToken);
         Task<ResponseDto<ErrorMessage>> CreateFeedBack(CreateFeedBackRequest request, CancellationToken cancellationToken);
         Task<ResponseDto<ErrorMessage>> UpdateFeedBack(int id, UpdateFeedBackRequest request, CancellationToken cancellationToken);

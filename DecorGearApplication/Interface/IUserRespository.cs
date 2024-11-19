@@ -10,7 +10,7 @@ namespace DecorGearApplication.Interface
         Task<bool> EmailExistsAsync(string email);
         Task<bool> UserExistsAsync(string username);
         Task<bool> PhoneExistsAsync(string phoneNumber);
-        Task<List<UserDto>> GetAllUsers(CancellationToken cancellationToken);
+        Task<List<UserDto>> GetAllUsers(int pageNumber, int pageSize);
         Task<UserDto> GetUserById(int id, CancellationToken cancellationToken);
         Task<ResponseDto<UserDto>> Register(UserCreateRequest request, CancellationToken cancellationToken);
         Task<ResponseDto<bool>> DeleteUser(UserDeleteRequest request, CancellationToken cancellationToken);

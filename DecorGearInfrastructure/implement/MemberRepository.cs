@@ -41,10 +41,13 @@ namespace DecorGearInfrastructure.implement
             return new ResponseDto<bool>(StatusCodes.Status200OK, "Xóa Member Thành Công");
         }
 
-        public async Task<List<MemberDto>> GetAllMembersAsync(CancellationToken cancellation)
+        public async Task<List<MemberDto>> GetAllMembersAsync(int pageNumber, int pageSize)
         {
             return await _db.Members
                 .Include(m => m.User)
+                .OrderBy(m => m.MemberID) // Sắp xếp để đảm bảo kết quả ổn định
+                .Skip((pageNumber - 1) * pageSize) // Bỏ qua các bản ghi trước đó
+                .Take(pageSize) // Lấy số lượng bản ghi cần thiết
                 .Select(m => new MemberDto
                 {
                     MemberID = m.MemberID,
@@ -52,8 +55,9 @@ namespace DecorGearInfrastructure.implement
                     Points = m.Points,
                     ExpiryDate = m.ExpiryDate,
                 })
-                .ToListAsync(cancellation);
+                .ToListAsync();
         }
+
 
         public async Task<MemberDto> GetMemberByIdAsync(int memberId, CancellationToken cancellation)
         {

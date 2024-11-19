@@ -50,9 +50,9 @@ namespace DecorGearInfrastructure.Database.AppDbContext
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             SeedingData(modelBuilder);
-
+                
         }
-        public void SeedingData(ModelBuilder modelBuilder)
+        public void SeedingData(ModelBuilder modelBuilder)  
         {
             // Seed Brand data
             var brandData = new List<Brand>

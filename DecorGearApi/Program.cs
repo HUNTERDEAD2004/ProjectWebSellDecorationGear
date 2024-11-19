@@ -38,11 +38,11 @@ public class Program
         app.Run();
     }
 
-    private static void ConfigureDbContext(WebApplicationBuilder builder)
-    {
-        builder.Services.AddDbContext<AppDbContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-    }
+        private static void ConfigureDbContext(WebApplicationBuilder builder)
+        {
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+        }
 
     private static void ConfigureServices(WebApplicationBuilder builder)
     {
@@ -53,16 +53,13 @@ public class Program
         // Register services
         builder.Services.AddScoped<ITokenServices, TokenServices>();
         builder.Services.AddScoped<IUserRespository, UserRepository>();
-        builder.Services.AddScoped<IUserServices, UserServices>();
         builder.Services.AddScoped<IPasswordServices, PasswordServices>();
         builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
         builder.Services.AddScoped<IMailingServices, MailingServices>();
         builder.Services.AddScoped<IFeedBackRespository, FeedBackRepository>();
-        builder.Services.AddScoped<IFeedbackServices, FeedbackServices>();
         builder.Services.AddScoped<ICartDetailRespository, CartDetailRepository>();
         builder.Services.AddScoped<CartService>();
         builder.Services.AddScoped<IMemberRespository, MemberRepository>();
-        builder.Services.AddScoped<IMemberServices, MemberServices>();
         builder.Services.AddScoped<IOderRespository, OrderRepository>();
         builder.Services.AddScoped<HomeRepository>();
         builder.Services.AddScoped<ICartRespository, CartRepository>();

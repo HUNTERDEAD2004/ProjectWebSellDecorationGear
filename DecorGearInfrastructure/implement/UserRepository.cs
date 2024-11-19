@@ -39,12 +39,16 @@ namespace DecorGearInfrastructure.Implement
             return await _db.Users.AnyAsync(x => x.PhoneNumber == phoneNumber);
         }
 
-        public async Task<List<UserDto>> GetAllUsers(CancellationToken cancellationToken)
+        public async Task<List<UserDto>> GetAllUsers(int pageNumber, int pageSize)
         {
-            var users = await _db.Users.ToListAsync();
-
+            var users = await _db.Users
+                .OrderBy(u => u.UserID) 
+                .Skip((pageNumber - 1) * pageSize) 
+                .Take(pageSize) 
+                .ToListAsync();
             return _map.Map<List<UserDto>>(users);
         }
+
 
         public async Task<UserDto> GetUserById(int id, CancellationToken cancellationToken)
         {
