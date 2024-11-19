@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DecorGearApplication.DataTransferObj.User.Request;
+using DecorGearApplication.Interface;
 using DecorGearApplication.IServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,24 +12,20 @@ namespace DecorGearApi.Controllers.Admin
     [Authorize(Roles = "Admin")]
     public class AccountController : ControllerBase
     {
-        private readonly IUserServices _userServices;
+        private readonly IUserRespository _userRespository;
         private readonly IMapper _mapper;
 
-        public AccountController(IUserServices userServices, IMapper mapper)
+        public AccountController(IUserRespository userRespository, IMapper mapper)
         {
-            _userServices = userServices;
+            _userRespository = userRespository;
             _mapper = mapper;
         }
 
         [HttpGet("get-all")]
-        public async Task<IActionResult> GetAllUsers(CancellationToken cancellationToken)
+        public async Task<IActionResult> GetAllUsers([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
-            var users = await _userServices.GetAllUsers(cancellationToken);
-            return Ok(new
-            {
-                TotalUsers = users.Count,
-                Users = users
-            });
+            var users = await _userRespository.GetAllUsers(pageNumber, pageSize);
+            return Ok(users);
         }
 
         [HttpPut("update/{id}")]
@@ -39,7 +36,7 @@ namespace DecorGearApi.Controllers.Admin
                 return BadRequest(ModelState);
             }
 
-            var result = await _userServices.UpdateUser(id, request, cancellationToken);
+            var result = await _userRespository.UpdateUser(id, request, cancellationToken);
 
             if (result.Status == StatusCodes.Status200OK)
             {
@@ -52,7 +49,7 @@ namespace DecorGearApi.Controllers.Admin
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteUser(UserDeleteRequest request, CancellationToken cancellationToken)
         {
-            var result = await _userServices.DeleteUser(request, cancellationToken);
+            var result = await _userRespository.DeleteUser(request, cancellationToken);
             if (result.Status == StatusCodes.Status200OK)
             {
                 return Ok(result);
