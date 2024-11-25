@@ -1,4 +1,6 @@
 ﻿using DecorGearApplication.DataTransferObj.ImageList;
+using DecorGearApplication.DataTransferObj.KeyBoardDetails;
+using DecorGearApplication.DataTransferObj.MouseDetails;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -39,5 +41,11 @@ namespace DecorGearApplication.DataTransferObj.Product
         public int? BatteryCapacity { get; set; } // dung lượng pin
 
         public string AvatarProduct { get; set; }
+
+        // Danh sách chi tiết chuột
+        public List<MouseDetailsDto> MouseDetails { get; set; }
+
+        // Danh sách chi tiết bàn phím
+        public List<KeyBoardDetailsDto> KeyboardDetails { get; set; }
     }
 }

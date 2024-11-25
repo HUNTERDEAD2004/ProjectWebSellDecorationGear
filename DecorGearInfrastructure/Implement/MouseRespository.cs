@@ -108,8 +108,9 @@ namespace DecorGearInfrastructure.Implement
 
         public async Task<List<MouseDetailsDto>> GetAllMouse(ViewMouseRequest? request, CancellationToken cancellationToken)
         {
-            var query = from md in _appDbContext.MouseDetails
-                        select new MouseDetailsDto
+            var query = (from md in _appDbContext.MouseDetails
+                         join i in _appDbContext.ImageLists on md.MouseDetailID equals i.MouseDetailID into images
+                         select new MouseDetailsDto
                         {
                             MouseDetailID = md.MouseDetailID,
                             ProductID = md.ProductID,
@@ -122,11 +123,8 @@ namespace DecorGearInfrastructure.Implement
                             Button = md.Button,
                             LED = md.LED,
                             SS = md.SS,
-                            ImageProduct = _appDbContext.ImageLists
-                                    .Where(img => img.MouseDetailID == md.MouseDetailID)
-                                    .Select(img => img.ImagePath)
-                                    .ToList()
-                        };
+                            ImageProduct = images.Select(img => img.ImagePath).ToList() // Tập hợp hình ảnh
+                        }).AsNoTracking().AsQueryable();
 
             // Áp dụng các điều kiện lọc
             if (request.MouseDetailID.HasValue)
@@ -177,11 +175,6 @@ namespace DecorGearInfrastructure.Implement
             // Thực hiện truy vấn
             var result = await query.ToListAsync();
             return result;
-
-
-            //var result = await _appDbContext.MouseDetails.ToListAsync(cancellationToken);
-
-            //return _mapper.Map<List<MouseDetailsDto>>(result);
         }
 
         public async Task<MouseDetailsDto> GetMouseById(int id, CancellationToken cancellationToken)

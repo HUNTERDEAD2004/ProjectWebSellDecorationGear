@@ -9,21 +9,21 @@ namespace DecorGearApi.Controllers.User
 {
     [Route("api/user/[controller]")]
     [ApiController]
-    public class KeyBoardDetailController : ControllerBase
+    public class MouseDetailController : ControllerBase
     {
         private readonly IProductRespository _res;
         private readonly IMapper _mapper;
-        public KeyBoardDetailController(IProductRespository respo, IMapper mapper)
+        public MouseDetailController(IProductRespository respo, IMapper mapper)
         {
             _res = respo;
             _mapper = mapper;
         }
 
         // API Lấy thông tin chi tiêt bàn phím
-        [HttpGet("get-keyboard-infomation")]
-        public async Task<IActionResult> GetAll([FromQuery]ViewKeyBoardsDetailRequest? request, CancellationToken cancellationToken)
+        [HttpGet("get-mouse-infomation")]
+        public async Task<IActionResult> GetAll([FromQuery] ViewMouseDetailRequest? request, CancellationToken cancellationToken)
         {
-            var result = await _res.GetAllKeyBoardDetail(request, cancellationToken);
+            var result = await _res.GetAllMouseDetail(request, cancellationToken);
             return Ok(result);
         }
     }
