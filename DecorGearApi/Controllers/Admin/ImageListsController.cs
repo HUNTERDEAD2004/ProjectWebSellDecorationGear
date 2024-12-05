@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DecorGearApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/admin/[controller]")]
     [ApiController]
     public class ImageListsController : ControllerBase
     {

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DecorGearApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/admin/[controller]")]
     [ApiController]
     public class MouseController : ControllerBase
     {
@@ -18,9 +18,9 @@ namespace DecorGearApi.Controllers
         }
 
         [HttpGet("get-all")]
-        public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
+        public async Task<IActionResult> GetAll([FromQuery]ViewMouseRequest? request, CancellationToken cancellationToken)
         {
-            var result = await _res.GetAllMouse(cancellationToken);
+            var result = await _res.GetAllMouse(request, cancellationToken);
             return Ok(result);
         }
 

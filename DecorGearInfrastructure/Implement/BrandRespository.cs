@@ -1,10 +1,19 @@
-﻿using AutoMapper;
+﻿using Application.DataTransferObj.User.Request;
+using AutoMapper;
 using DecorGearApplication.DataTransferObj.Brand;
 using DecorGearApplication.Interface;
+using DecorGearApplication.ValueObj.Response;
 using DecorGearDomain.Data.Entities;
 using DecorGearDomain.Enum;
 using DecorGearInfrastructure.Database.AppDbContext;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace DecorGearInfrastructure.Implement
 {
@@ -19,12 +28,17 @@ namespace DecorGearInfrastructure.Implement
             _mapper = mapper;
         }
 
-        public async Task<ErrorMessage> CreateBrand(CreateBrandRequest request, CancellationToken cancellationToken)
+        public async Task<ResponseDto<BrandDto>> CreateBrand(CreateBrandRequest request, CancellationToken cancellationToken)
         {
             // Kiểm Tra Tính Hợp Lệ của Dữ Liệu
             if (request == null)
             {
-                return ErrorMessage.Failed;
+                return new ResponseDto<BrandDto>
+                {
+                    DataResponse = null,
+                    Status = StatusCodes.Status400BadRequest,
+                    Message = "Chưa có request."
+                };
             }
             // Thêm Sản Phẩm Mới
             try
@@ -35,24 +49,62 @@ namespace DecorGearInfrastructure.Implement
 
                 await _appDbContext.SaveChangesAsync(cancellationToken);
 
-                return ErrorMessage.Successfull;
+                return new ResponseDto<BrandDto>
+                {
+                    DataResponse = null,
+                    Status = StatusCodes.Status200OK,
+                    Message = "Tạo thành công."
+                };
+            }
+            catch (DbUpdateException)
+            {
+                return new ResponseDto<BrandDto>
+                {
+                    DataResponse = null,
+                    Status = StatusCodes.Status500InternalServerError,
+                    Message = "Lỗi khi tạo cơ sở dữ liệu."
+                };
+            }
+            catch (ArgumentException)
+            {
+                return new ResponseDto<BrandDto>
+                {
+                    DataResponse = null,
+                    Status = StatusCodes.Status400BadRequest,
+                    Message = "Tham số không hợp lệ."
+                };
             }
             catch (Exception ex)
             {
-                return ErrorMessage.Failed;
+                return new ResponseDto<BrandDto>
+                {
+                    DataResponse = null,
+                    Status = StatusCodes.Status400BadRequest,
+                    Message = "Lỗi không xác định: " + ex.Message + "."
+                };
             }
         }
 
-        public async Task<bool> DeleteBrand(int id, CancellationToken cancellationToken)
+        public async Task<ResponseDto<bool>> DeleteBrand(int id, CancellationToken cancellationToken)
         {
             var deleteBrand = await _appDbContext.Brands.FindAsync(id, cancellationToken);
             if (deleteBrand != null)
             {
                 _appDbContext.Brands.Remove(deleteBrand);
                 _appDbContext.SaveChanges();
-                return true;
+                return new ResponseDto<bool>
+                {
+                    DataResponse = true,
+                    Status = StatusCodes.Status200OK,
+                    Message = "Xóa thành công."
+                };
             }
-            return false;
+            return new ResponseDto<bool>
+            {
+                DataResponse = false,
+                Status = StatusCodes.Status400BadRequest,
+                Message = "Sửa thất bại."
+            };
         }
 
         public async Task<List<BrandDto>> GetAllBrand(CancellationToken cancellationToken)
@@ -69,12 +121,17 @@ namespace DecorGearInfrastructure.Implement
             return _mapper.Map<BrandDto>(brandIds);
         }
 
-        public async Task<ErrorMessage> UpdateBrand(int id, UpdateBrandRequest request, CancellationToken cancellationToken)
+        public async Task<ResponseDto<BrandDto>> UpdateBrand(int id, UpdateBrandRequest request, CancellationToken cancellationToken)
         {
             // Kiểm Tra Tính Hợp Lệ của Dữ Liệu
             if (request == null)
             {
-                return ErrorMessage.Failed;
+                return new ResponseDto<BrandDto>
+                {
+                    DataResponse = null,
+                    Status = StatusCodes.Status400BadRequest,
+                    Message = "Chưa có request."
+                };
             }
 
             // Cập Nhật Sản Phẩm 
@@ -89,11 +146,39 @@ namespace DecorGearInfrastructure.Implement
 
                 await _appDbContext.SaveChangesAsync(cancellationToken);
 
-                return ErrorMessage.Successfull;
+                return new ResponseDto<BrandDto>
+                {
+                    DataResponse = null,
+                    Status = StatusCodes.Status200OK,
+                    Message = "Cật nhật thành công."
+                };
+            }
+            catch (DbUpdateException)
+            {
+                return new ResponseDto<BrandDto>
+                {
+                    DataResponse = null,
+                    Status = StatusCodes.Status500InternalServerError,
+                    Message = "Lỗi khi cập nhật cơ sở dữ liệu."
+                };
+            }
+            catch (ArgumentException)
+            {
+                return new ResponseDto<BrandDto>
+                {
+                    DataResponse = null,
+                    Status = StatusCodes.Status400BadRequest,
+                    Message = "Tham số không hợp lệ."
+                };
             }
             catch (Exception ex)
             {
-                return ErrorMessage.Failed;
+                return new ResponseDto<BrandDto>
+                {
+                    DataResponse = null,
+                    Status = StatusCodes.Status400BadRequest,
+                    Message = "Lỗi không xác định: " + ex.Message + "."
+                };
             }
         }
     }

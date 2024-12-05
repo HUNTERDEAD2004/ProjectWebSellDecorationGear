@@ -43,7 +43,6 @@ namespace DecorGearInfrastructure.Database.AppDbContext
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server=DESKTOP-64M86CN;Database=DecorationGear2;Trusted_Connection=True;TrustServerCertificate=True");
-            
             //optionsBuilder.UseSqlServer("Data Source=DESKTOPD-DELLIN\\SQLEXPRESS;Database=DecorationGear2;Trusted_Connection=True;TrustServerCertificate=True;");
             //optionsBuilder.UseSqlServer("Server=LAPTOP-K61S7AVO;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True");
         }
@@ -229,7 +228,8 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Quantity = 100,
                     Weight = 500,
                     Description = "chiếc chuột siêu bổ rẻ ",
-                    Size = "Trung bình",
+                    AvatarProduct = "/images/razordav3.jpg",
+                    Size = "M",
                     SaleID = 1,
                     BrandID = 1,
                     SubCategoryID = 1
@@ -243,7 +243,8 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Quantity=100,
                     Weight=350,
                     Description="Chiếc chuột được nhiều tuyển thủ chuyên nghiệp tin dùng",
-                    Size="Trung bình",
+                    AvatarProduct = "/images/razorminipro1.jpg",
+                    Size="M",
                     SaleID=null,
                     BrandID=1,
                     SubCategoryID=1
@@ -255,10 +256,15 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Price=1000000,
                     View=8000,
                     Quantity=100,
-                    Weight=400,
+                    Weight=400, 
                     Description="Một chiếc bàn phím cơ mỳ ăn liền với 3mode hotswap tầm giá 1 củ mà bạn không nên bỏ qua",
-                    Size="75%",
-                    SaleID=null,
+                    AvatarProduct = "/images/aulaf75.jpg",
+                    Size="M", 
+                    SaleID=null, 
+                    Weight=400, 
+                    Description="Một chiếc bàn phím cơ mỳ ăn liền với 3mode hotswap tầm giá 1 củ mà bạn không nên bỏ qua", 
+                    Size="75%", 
+                    SaleID=null, 
                     BrandID=2,
                     SubCategoryID=3
                 }
@@ -400,14 +406,17 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 {
                     ImageListID = 1,
                     ProductID = 3,
-                    ImagePath=["/images/aulaf75_img1.jpg", "/images/aulaf75_img2.jpg", "/images/aulaf75_img3.jpg"],
+                    ImagePath= "/images/aulaf75_img2.jpg",
                     Description = "Hình ảnh của sản phẩm aulaf75"
                 },
                 new ImageList
                 {
-                    ImageListID= 2,
-                    ProductID=1,
-                    ImagePath=["/images/rzdav3_img.jpg", "/images/rzdav3_img2.jpg"],
+                    ImageListID= 2, 
+                    ProductID=1, 
+                    ImagePath= "/images/rzdav3_img2.jpg", 
+                    ImageListID= 2, 
+                    ProductID=1, 
+                    ImagePath=["/images/rzdav3_img.jpg", "/images/rzdav3_img2.jpg"], 
                     Description="Hình ảnh của sản phẩm razer deadth addzer v3"
                 }
             };

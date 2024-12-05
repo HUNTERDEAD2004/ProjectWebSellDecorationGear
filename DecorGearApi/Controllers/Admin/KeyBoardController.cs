@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DecorGearApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/admin/[controller]")]
     [ApiController]
     public class KeyBoardController : ControllerBase
     {
@@ -17,13 +17,16 @@ namespace DecorGearApi.Controllers
             _mapper = mapper;
         }
 
+
+        // API lấy toàn bộ thông tin
         [HttpGet("get-all")]
-        public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
+        public async Task<IActionResult> GetAll([FromQuery]ViewKeyBoardsRequest? request, CancellationToken cancellationToken)
         {
-            var result = await _res.GetAllKeyBoard(cancellationToken);
+            var result = await _res.GetAllKeyBoard(request,cancellationToken);
             return Ok(result);
         }
 
+        // API lấy thông tin theo id
         [HttpGet("get-by-id")]
         public async Task<IActionResult> GetById(int id, CancellationToken cancellationToken)
         {
@@ -31,7 +34,7 @@ namespace DecorGearApi.Controllers
             return Ok(result);
         }
 
-        // POST api/<ProductController>
+        // API tạo chi tiêt bàn phím
         [HttpPost("create")]
         public async Task<IActionResult> CreateKeyBoard(CreateKeyBoardsRequest request, CancellationToken cancellationToken)
         {
@@ -45,7 +48,7 @@ namespace DecorGearApi.Controllers
             return Ok(result);
         }
 
-        // PUT api/<ProductController>/5
+        // API sửa chi tiêt bàn phím
         [HttpPut("update")]
         public async Task<IActionResult> UpdateProduct(int id, UpdateKeyBoardDetails request, CancellationToken cancellationToken)
         {
@@ -69,7 +72,7 @@ namespace DecorGearApi.Controllers
             return Ok(result);
         }
 
-        // DELETE api/<ProductController>/5
+        // API xóa chi tiêt bàn phím
         [HttpDelete("delete")]
         public async Task<IActionResult> DeleteProduct(int id, CancellationToken cancellationToken)
         {
