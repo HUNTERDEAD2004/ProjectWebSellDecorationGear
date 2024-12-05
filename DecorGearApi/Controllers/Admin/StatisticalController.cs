@@ -18,14 +18,44 @@ namespace DecorGearApi.Controllers.Admin
         {
             _sttRepo = revenueProductRepo;
         }
-        //tính doanh thu theo sản phẩm
+
+        // API lấy tất cả sản phẩm đã bán
+        [HttpGet("get-all")]
+        public async Task<IActionResult> GetAllSoldProducts()
+        {
+            try
+            {
+                var result = await _sttRepo.GetAllSoldProducts();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message }); 
+            }
+        }
+
+
+        //hiển thị doanh thu và tìm kiếm theo thời gian
         [HttpGet("listdto")]
         public async Task<ActionResult> listdto([FromQuery] DateTime? start, [FromQuery] DateTime? end)
         {
-            var byProduct = await _sttRepo.listdto(start, end);
-            var data = byProduct.ToList();
+            try
+            {
+                //không có tham số start và end, trả về toàn bộ dữ liệu
+                if (!start.HasValue && !end.HasValue)
+                {
+                    var allProducts = await _sttRepo.GetAllSoldProducts();
+                    return Ok(allProducts);
+                }
 
-            return Ok(data);
+                //có tham số, trả về dữ liệu đã lọc theo thời gian
+                var filteredProducts = await _sttRepo.listdto(start, end);
+                return Ok(filteredProducts);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
         // tính tổng + hiển thị sản phẩm
         [HttpGet("GetTotalQuantitySold")]

@@ -9,11 +9,12 @@ namespace DecorGearApplication.DataTransferObj.RevenueProduct
     public class RevenueProductDto
     {
         public string Name { get; set; }
-        public int? TotalProducr { get; set; }// số sản phẩm bán ra
-        public double? TotalRevenue { get; set; }
+        public int? TotalProducr { get; set; }  // Số sản phẩm bán ra
+        public double? TotalRevenue { get; set; }  // Tổng doanh thu
+        public int TotalQuantity { get; set; }  // Tổng số lượng bán
+
+
         //
-        public int CountQuatityByMonth { get; set; }
-        public double RevenueNow { get; set; }
-        public double TotalQuatityByMonth { get; set; }
+
     }
 }
