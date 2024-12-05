@@ -1,18 +1,10 @@
 ﻿using AutoMapper;
 using DecorGearApplication.DataTransferObj.KeyBoardDetails;
-using DecorGearApplication.DataTransferObj.SubCategory;
 using DecorGearApplication.Interface;
 using DecorGearDomain.Data.Entities;
 using DecorGearDomain.Enum;
 using DecorGearInfrastructure.Database.AppDbContext;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DecorGearInfrastructure.Implement
 {
@@ -76,7 +68,7 @@ namespace DecorGearInfrastructure.Implement
             return _mapper.Map<KeyBoardDetailsDto>(keyBoardIds);
         }
 
-        public async Task<ErrorMessage> UpdateKeyBoard(int id,UpdateKeyBoardDetails request, CancellationToken cancellationToken)
+        public async Task<ErrorMessage> UpdateKeyBoard(int id, UpdateKeyBoardDetails request, CancellationToken cancellationToken)
         {
             // Kiểm Tra Tính Hợp Lệ của Dữ Liệu
             if (request == null)

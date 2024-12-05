@@ -12,15 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DecorGearInfrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241105095714_aaa")]
-    partial class aaa
+    [Migration("20241128074752_zzz")]
+    partial class zzz
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -140,6 +140,12 @@ namespace DecorGearInfrastructure.Migrations
                     b.Property<DateTimeOffset>("ModifiedTime")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<double>("TotalAmount")
+                        .HasColumnType("float");
+
+                    b.Property<int>("TotalQuantity")
+                        .HasColumnType("int");
+
                     b.Property<int>("UserID")
                         .HasColumnType("int");
 
@@ -158,6 +164,8 @@ namespace DecorGearInfrastructure.Migrations
                             Deleted = false,
                             DeletedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             ModifiedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            TotalAmount = 0.0,
+                            TotalQuantity = 0,
                             UserID = 1
                         },
                         new
@@ -167,6 +175,8 @@ namespace DecorGearInfrastructure.Migrations
                             Deleted = false,
                             DeletedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             ModifiedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            TotalAmount = 0.0,
+                            TotalQuantity = 0,
                             UserID = 2
                         });
                 });
@@ -209,21 +219,10 @@ namespace DecorGearInfrastructure.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("Size")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
                     b.Property<double>("TotalPrice")
                         .HasColumnType("float");
 
                     b.Property<double>("UnitPrice")
-                        .HasColumnType("float");
-
-                    b.Property<int?>("VoucherID")
-                        .HasColumnType("int");
-
-                    b.Property<double>("Weight")
                         .HasColumnType("float");
 
                     b.HasKey("CartDetailID");
@@ -232,9 +231,48 @@ namespace DecorGearInfrastructure.Migrations
 
                     b.HasIndex("ProductID");
 
-                    b.HasIndex("VoucherID");
-
                     b.ToTable("CartDetail", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            CartDetailID = 9,
+                            CartID = 1,
+                            CreatedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Deleted = false,
+                            DeletedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            ModifiedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            ProductID = 1,
+                            Quantity = 2,
+                            TotalPrice = 0.0,
+                            UnitPrice = 50.0
+                        },
+                        new
+                        {
+                            CartDetailID = 10,
+                            CartID = 2,
+                            CreatedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Deleted = false,
+                            DeletedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            ModifiedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            ProductID = 2,
+                            Quantity = 3,
+                            TotalPrice = 0.0,
+                            UnitPrice = 40.0
+                        },
+                        new
+                        {
+                            CartDetailID = 11,
+                            CartID = 2,
+                            CreatedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Deleted = false,
+                            DeletedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            ModifiedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            ProductID = 2,
+                            Quantity = 1,
+                            TotalPrice = 0.0,
+                            UnitPrice = 75.0
+                        });
                 });
 
             modelBuilder.Entity("DecorGearDomain.Data.Entities.Category", b =>
@@ -719,7 +757,7 @@ namespace DecorGearInfrastructure.Migrations
                             CreatedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Deleted = false,
                             DeletedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            ExpiryDate = new DateTime(2025, 3, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExpiryDate = new DateTime(2025, 3, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ModifiedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Points = 200,
                             UserID = 2
@@ -888,11 +926,18 @@ namespace DecorGearInfrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("size")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("totalPrice")
                         .HasColumnType("float");
 
                     b.Property<int>("totalQuantity")
                         .HasColumnType("int");
+
+                    b.Property<float>("weight")
+                        .HasColumnType("real");
 
                     b.HasKey("OrderID");
 
@@ -910,13 +955,15 @@ namespace DecorGearInfrastructure.Migrations
                             Deleted = false,
                             DeletedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             ModifiedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            OrderDate = new DateTime(2024, 9, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = 2,
+                            OrderDate = new DateTime(2024, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 6,
                             UserID = 1,
                             VoucherID = 1,
                             paymentMethod = "Credit Card",
-                            totalPrice = 500.0,
-                            totalQuantity = 5
+                            size = "L",
+                            totalPrice = 0.0,
+                            totalQuantity = 5,
+                            weight = 1.5f
                         },
                         new
                         {
@@ -925,22 +972,24 @@ namespace DecorGearInfrastructure.Migrations
                             Deleted = false,
                             DeletedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             ModifiedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            OrderDate = new DateTime(2024, 9, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Status = 1,
+                            OrderDate = new DateTime(2024, 9, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Status = 6,
                             UserID = 2,
                             paymentMethod = "Cash",
-                            totalPrice = 300.0,
-                            totalQuantity = 3
+                            size = "LF",
+                            totalPrice = 0.0,
+                            totalQuantity = 3,
+                            weight = 2f
                         });
                 });
 
             modelBuilder.Entity("DecorGearDomain.Data.Entities.OrderDetail", b =>
                 {
-                    b.Property<int>("OrderDetailID")
+                    b.Property<int>("OrderDetailId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderDetailID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderDetailId"));
 
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
@@ -972,18 +1021,10 @@ namespace DecorGearInfrastructure.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("Size")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
                     b.Property<double>("UnitPrice")
                         .HasColumnType("float");
 
-                    b.Property<double>("Weight")
-                        .HasColumnType("float");
-
-                    b.HasKey("OrderDetailID");
+                    b.HasKey("OrderDetailId");
 
                     b.HasIndex("OrderID");
 
@@ -994,7 +1035,7 @@ namespace DecorGearInfrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            OrderDetailID = 1,
+                            OrderDetailId = 1,
                             CreatedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Deleted = false,
                             DeletedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -1002,13 +1043,11 @@ namespace DecorGearInfrastructure.Migrations
                             OrderID = 1,
                             ProductID = 3,
                             Quantity = 10,
-                            Size = "M",
-                            UnitPrice = 10000000.0,
-                            Weight = 4000.0
+                            UnitPrice = 10000000.0
                         },
                         new
                         {
-                            OrderDetailID = 2,
+                            OrderDetailId = 2,
                             CreatedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Deleted = false,
                             DeletedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -1016,13 +1055,11 @@ namespace DecorGearInfrastructure.Migrations
                             OrderID = 1,
                             ProductID = 3,
                             Quantity = 1,
-                            Size = "S",
-                            UnitPrice = 1000000.0,
-                            Weight = 400.0
+                            UnitPrice = 1000000.0
                         },
                         new
                         {
-                            OrderDetailID = 3,
+                            OrderDetailId = 3,
                             CreatedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Deleted = false,
                             DeletedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
@@ -1030,9 +1067,7 @@ namespace DecorGearInfrastructure.Migrations
                             OrderID = 2,
                             ProductID = 1,
                             Quantity = 1000,
-                            Size = "L",
-                            UnitPrice = 1000000000.0,
-                            Weight = 400000.0
+                            UnitPrice = 1000000000.0
                         });
                 });
 
@@ -1223,7 +1258,7 @@ namespace DecorGearInfrastructure.Migrations
                             Deleted = false,
                             DeletedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             ModifiedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            RoleName = "Admin"
+                            RoleName = "User"
                         });
                 });
 
@@ -1569,6 +1604,9 @@ namespace DecorGearInfrastructure.Migrations
                     b.Property<int>("VoucherPercent")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("expiry")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("VoucherID");
 
                     b.ToTable("Voucher", (string)null);
@@ -1583,7 +1621,8 @@ namespace DecorGearInfrastructure.Migrations
                             ModifiedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Status = 1,
                             VoucherName = "Giảm giá 30%",
-                            VoucherPercent = 30
+                            VoucherPercent = 30,
+                            expiry = new DateTime(2024, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
@@ -1594,8 +1633,35 @@ namespace DecorGearInfrastructure.Migrations
                             ModifiedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Status = 2,
                             VoucherName = "Giảm giá 50%",
-                            VoucherPercent = 50
+                            VoucherPercent = 50,
+                            expiry = new DateTime(2024, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
+                });
+
+            modelBuilder.Entity("DecorGearDomain.Data.Entities.VoucherUser", b =>
+                {
+                    b.Property<int>("VoucherUserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VoucherUserId"));
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VoucherID")
+                        .HasColumnType("int");
+
+                    b.HasKey("VoucherUserId");
+
+                    b.HasIndex("UserID");
+
+                    b.HasIndex("VoucherID");
+
+                    b.ToTable("VoucherUser", (string)null);
                 });
 
             modelBuilder.Entity("DecorGearDomain.Data.Entities.Cart", b =>
@@ -1622,10 +1688,6 @@ namespace DecorGearInfrastructure.Migrations
                         .HasForeignKey("ProductID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.HasOne("DecorGearDomain.Data.Entities.Voucher", null)
-                        .WithMany("CartDetails")
-                        .HasForeignKey("VoucherID");
 
                     b.Navigation("Cart");
 
@@ -1799,6 +1861,25 @@ namespace DecorGearInfrastructure.Migrations
                     b.Navigation("Role");
                 });
 
+            modelBuilder.Entity("DecorGearDomain.Data.Entities.VoucherUser", b =>
+                {
+                    b.HasOne("DecorGearDomain.Data.Entities.User", "User")
+                        .WithMany("VoucherUsers")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("DecorGearDomain.Data.Entities.Voucher", "Voucher")
+                        .WithMany("VoucherUsers")
+                        .HasForeignKey("VoucherID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("User");
+
+                    b.Navigation("Voucher");
+                });
+
             modelBuilder.Entity("DecorGearDomain.Data.Entities.Brand", b =>
                 {
                     b.Navigation("Products");
@@ -1864,13 +1945,15 @@ namespace DecorGearInfrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Orders");
+
+                    b.Navigation("VoucherUsers");
                 });
 
             modelBuilder.Entity("DecorGearDomain.Data.Entities.Voucher", b =>
                 {
-                    b.Navigation("CartDetails");
-
                     b.Navigation("Orders");
+
+                    b.Navigation("VoucherUsers");
                 });
 #pragma warning restore 612, 618
         }

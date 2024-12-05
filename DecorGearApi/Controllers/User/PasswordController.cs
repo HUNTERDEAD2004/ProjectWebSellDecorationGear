@@ -9,7 +9,7 @@ namespace DecorGearApi.Controllers.User
 {
     [ApiController]
     [Route("api/user/[controller]")]
-   
+
     public class PasswordController : ControllerBase
     {
         private readonly IPasswordServices _passwordService;

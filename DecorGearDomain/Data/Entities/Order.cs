@@ -1,8 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.CompilerServices;
-using DecorGearDomain.Data.Base;
+﻿using DecorGearDomain.Data.Base;
 using DecorGearDomain.Enum;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DecorGearDomain.Data.Entities
 {
@@ -31,6 +30,8 @@ namespace DecorGearDomain.Data.Entities
         [Required(ErrorMessage = "Không được để trống")]
         [StringLength(100, ErrorMessage = "Không được vượt quá 100 ký tự")]
         public string paymentMethod { get; set; }
+        public string size { get; set; }
+        public float weight { get; set; }
 
         [Required(ErrorMessage = "Không được để trống")]
         public DateTime OrderDate { get; set; } // ngày giao hàng
@@ -38,7 +39,7 @@ namespace DecorGearDomain.Data.Entities
         // Khóa ngoại
 
         // 1 - n
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
+        public virtual ICollection<OrderDetail>? OrderDetails { get; set; } = new List<OrderDetail>();
 
         // n - 1
         public virtual Voucher Voucher { get; set; }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DecorGearApplication.DataTransferObj.CartDetail;
 
 namespace DecorGearApplication.DataTransferObj
 {
@@ -13,8 +8,9 @@ namespace DecorGearApplication.DataTransferObj
 
         public int UserID { get; set; }
 
-        public int TotalQuantity { get; set; }
+        public List<CartDetailDto> cartDetails { get; set; } = new List<CartDetailDto> { };
+        public int TotalQuantity => cartDetails.Sum(x => x.Quantity);
 
-        public decimal TotalAmount { get; set; }
+        public decimal TotalPrice => cartDetails.Sum(x => x.UnitPrice * x.TotalPrice);
     }
 }

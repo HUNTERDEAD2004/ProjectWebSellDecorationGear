@@ -33,13 +33,14 @@ namespace DecorGearDomain.Data.Entities
 
         [Range(1, 3, ErrorMessage = "Vui lòng lựa chọn từ 1 - 3 <(Hoạt động:1) (Không hoạt động:2) (Khóa:3)> ")]
         public UserStatus Status { get; set; }
-       
+
         // Khóa ngoại
 
         // 1 - n
         public virtual ICollection<Favorite>? Favorites { get; set; }
         public virtual ICollection<FeedBack>? FeedBacks { get; set; }
         public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+        public virtual ICollection<VoucherUser>? VoucherUsers { get; set; } = new List<VoucherUser>();
 
         // 1 - 1
         public virtual Cart Cart { get; set; }
@@ -48,6 +49,6 @@ namespace DecorGearDomain.Data.Entities
         // n - 1
         public virtual Role Role { get; set; }
 
-       
+
     }
 }

@@ -1,16 +1,12 @@
 ﻿using DecorGearApplication.DataTransferObj.FeedBack;
-using DecorGearApplication.DataTransferObj.User;
 using DecorGearApplication.IServices;
-using DecorGearApplication.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace DecorGearApi.Controllers.User
 {
     [ApiController]
     [Route("api/user/[controller]")]
-  
+
     public class FeedBackController : ControllerBase
     {
         private readonly IFeedbackServices _feedbackServices;

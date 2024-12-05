@@ -47,7 +47,7 @@ namespace DecorGearApi.Controllers
 
         // PUT api/<ProductController>/5
         [HttpPut("update")]
-        public async Task<IActionResult> UpdateBrand(int id,UpdateBrandRequest request, CancellationToken cancellationToken)
+        public async Task<IActionResult> UpdateBrand(int id, UpdateBrandRequest request, CancellationToken cancellationToken)
         {
             // Kiểm tra nếu ModelState không hợp lệ
             if (!ModelState.IsValid)
@@ -63,7 +63,7 @@ namespace DecorGearApi.Controllers
             }
 
             // Gọi phương thức Update để lưu các thay đổi
-            var result = await _res.UpdateBrand(id,request, cancellationToken);
+            var result = await _res.UpdateBrand(id, request, cancellationToken);
 
             // Trả về kết quả thành công với sản phẩm đã cập nhật
             return Ok(result);

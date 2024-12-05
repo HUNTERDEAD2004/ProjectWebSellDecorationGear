@@ -1,11 +1,6 @@
 ﻿using DecorGearDomain.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DecorGearInfrastructure.Database.Configuration
 {
@@ -23,6 +18,7 @@ namespace DecorGearInfrastructure.Database.Configuration
                         .WithMany(p => p.Orders)
                         .HasForeignKey(a => a.UserID)
                         .OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 }

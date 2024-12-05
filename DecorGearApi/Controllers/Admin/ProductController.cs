@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using DecorGearApplication.DataTransferObj.Product;
 using DecorGearApplication.Interface;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DecorGearApi.Controllers
@@ -64,7 +63,7 @@ namespace DecorGearApi.Controllers
             }
 
             // Gọi phương thức Update để lưu các thay đổi
-            var result = await _res.UpdateProduct(id,request, cancellationToken);
+            var result = await _res.UpdateProduct(id, request, cancellationToken);
 
             // Trả về kết quả thành công với sản phẩm đã cập nhật
             return Ok(result);

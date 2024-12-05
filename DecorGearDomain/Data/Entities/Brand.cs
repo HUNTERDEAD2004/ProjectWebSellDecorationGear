@@ -1,10 +1,5 @@
 ﻿using DecorGearDomain.Data.Base;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DecorGearDomain.Data.Entities
 {
@@ -21,6 +16,6 @@ namespace DecorGearDomain.Data.Entities
 
         // Khóa ngoại
 
-        public virtual ICollection<Product> Products { get; set; } = new List<Product>(); 
+        public virtual ICollection<Product> Products { get; set; } = new List<Product>();
     }
 }

@@ -7,13 +7,6 @@ using DecorGearDomain.Enum;
 using DecorGearInfrastructure.Database.AppDbContext;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Pipelines.Sockets.Unofficial;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace DecorGearInfrastructure.implement
 {
@@ -29,11 +22,11 @@ namespace DecorGearInfrastructure.implement
         public async Task<ResponseDto<ErrorMessage>> CreateMemberAsync(CreateMemberRequest request, CancellationToken cancellation)
         {
             var createmember = _mapper.Map<Member>(request);
-            await _db.Members.AddAsync(createmember);         
+            await _db.Members.AddAsync(createmember);
 
             await _db.SaveChangesAsync(cancellation);
 
-            return new ResponseDto<ErrorMessage>(StatusCodes.Status201Created,"Tạo member thành công");
+            return new ResponseDto<ErrorMessage>(StatusCodes.Status201Created, "Tạo member thành công");
         }
 
         public async Task<ResponseDto<bool>> DeleteMemberAsync(DeleteMemberRequest request, CancellationToken cancellation)
@@ -41,7 +34,7 @@ namespace DecorGearInfrastructure.implement
             var member = await _db.Members.FindAsync(request.MemberID, cancellation);
             if (member == null)
                 return new ResponseDto<bool>(StatusCodes.Status404NotFound, "Member không tồn tại.");
-            
+
             _db.Members.Remove(member);
             await _db.SaveChangesAsync(cancellation);
 
@@ -51,13 +44,13 @@ namespace DecorGearInfrastructure.implement
         public async Task<List<MemberDto>> GetAllMembersAsync(CancellationToken cancellation)
         {
             return await _db.Members
-                .Include(m => m.User) 
+                .Include(m => m.User)
                 .Select(m => new MemberDto
                 {
                     MemberID = m.MemberID,
                     UserID = m.UserID,
                     Points = m.Points,
-                    ExpiryDate = m.ExpiryDate,                
+                    ExpiryDate = m.ExpiryDate,
                 })
                 .ToListAsync(cancellation);
         }
@@ -65,7 +58,7 @@ namespace DecorGearInfrastructure.implement
         public async Task<MemberDto> GetMemberByIdAsync(int memberId, CancellationToken cancellation)
         {
             var member = await _db.Members
-               .Include(m => m.User) 
+               .Include(m => m.User)
                .FirstOrDefaultAsync(m => m.MemberID == memberId, cancellation);
 
             if (member == null)

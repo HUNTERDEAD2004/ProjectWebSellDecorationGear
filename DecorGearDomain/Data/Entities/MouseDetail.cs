@@ -1,12 +1,5 @@
 ﻿using DecorGearDomain.Data.Base;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DecorGearDomain.Data.Entities
 {
@@ -21,7 +14,7 @@ namespace DecorGearDomain.Data.Entities
 
         // thuộc tính
         [Required(ErrorMessage = "Không được để trống.")]
-        [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]      
+        [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
         public string Color { get; set; } // Màu sắc
 
         // thuộc tính
@@ -44,7 +37,7 @@ namespace DecorGearDomain.Data.Entities
         [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
         public string? EyeReading { get; set; }   //(tần số quét )
 
-        [Range(0,20, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
+        [Range(0, 20, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
         public int? Button { get; set; } // số nút bấm
 
         [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]

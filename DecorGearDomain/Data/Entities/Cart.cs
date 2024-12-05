@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using DecorGearDomain.Data.Base;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DecorGearDomain.Data.Base;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DecorGearDomain.Data.Entities
 {
@@ -16,6 +11,10 @@ namespace DecorGearDomain.Data.Entities
 
         [Required(ErrorMessage = "Vui lòng không được để trống")]
         public int UserID { get; set; }
+
+        public int TotalQuantity { get; set; }
+
+        public double TotalAmount { get; set; }
 
         // Khóa ngoại
 

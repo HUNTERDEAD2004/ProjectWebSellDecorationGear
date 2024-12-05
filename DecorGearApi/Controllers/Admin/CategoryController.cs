@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
-using DecorGearApplication.DataTransferObj.Brand;
 using DecorGearApplication.DataTransferObj.Category;
 using DecorGearApplication.Interface;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DecorGearApi.Controllers

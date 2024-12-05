@@ -1,15 +1,12 @@
 ﻿using DecorGearDomain.Data.Base;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DecorGearDomain.Data.Entities
 {
     public class Category : EntityBase
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Required(ErrorMessage = "Vui lòng không được để trống")]
         public int CategoryID { get; set; }
 
