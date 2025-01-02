@@ -1,4 +1,6 @@
-﻿namespace DecorGearApplication.DataTransferObj.SubCategory
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DecorGearApplication.DataTransferObj.SubCategory
 {
     public class SubCategoryDto
     {

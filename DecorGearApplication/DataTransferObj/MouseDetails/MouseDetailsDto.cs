@@ -6,26 +6,42 @@
 
         public int ProductID { get; set; }
 
-        public string Color { get; set; }
+        // thuộc tính
 
-        public int DPI { get; set; }
+        public string Color { get; set; } // Màu sắc
 
-        public string Connectivity { get; set; }
+        public int DPI { get; set; } // Độ nhận diện mặt phẳng
 
-        public string Dimensions { get; set; }
+        public string Connectivity { get; set; } // Kết nối (ví dụ: USB, Bluetooth)
 
-        public string Material { get; set; } 
+        public string Dimensions { get; set; } // Kích thước
 
-        public string? EyeReading { get; set; }
+        public string Material { get; set; } // vật liệu
 
-        public int? Button { get; set; }
+        public string? EyeReading { get; set; }   //(tần số quét )
 
-        public string? LED { get; set; }
+        public int? Button { get; set; } // số nút bấm
 
-        public string? SS { get; set; }
+        public string? LED { get; set; } // Đèn led
+
+        public string? SS { get; set; } // (software support) phần mềm hỗ trợ
+
+        public int? BatteryCapacity { get; set; } // dung lượng pin
+
+        public double Price { get; set; } // giá tiền
+
+        public int View { get; set; } // lượt xem
+
+        // Hỗ trợ cho api giao hàng
+
+        public string Size { get; set; } // kích cỡ hàng hóa
+
+        public int Quantity { get; set; } // số lượng
+
+        public double Weight { get; set; } // cân nặng
 
         // Sửa thuộc tính ImageProduct thành List<string>
 
-        public List<string> ImageProduct { get; set; }
+        public List<string> ImageProduct { get; set; } // list ảnh
     }
 }

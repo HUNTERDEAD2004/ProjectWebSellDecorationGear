@@ -7,14 +7,14 @@ namespace DecorGearDomain.Data.Entities
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OrderDetailId { get; set; }
-        [Required]
+        //[Required]
         public int OrderID { get; set; }
 
-        [Required(ErrorMessage = "Không được để trống")]
+        //[Required(ErrorMessage = "Không được để trống")]
         public int ProductID { get; set; }
 
-        [Required(ErrorMessage = "vui lòng không được để trống")]
-        [Range(1, int.MaxValue, ErrorMessage = "Số lượng phải lớn hơn 0")]
+        //[Required(ErrorMessage = "vui lòng không được để trống")]
+        //[Range(1, int.MaxValue, ErrorMessage = "Số lượng phải lớn hơn 0")]
         public int Quantity { get; set; }
         public double UnitPrice { get; set; }
         public virtual Order Order { get; set; }
