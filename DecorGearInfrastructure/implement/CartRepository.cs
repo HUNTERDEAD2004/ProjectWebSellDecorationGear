@@ -43,7 +43,7 @@ namespace DecorGearInfrastructure.Implement
             return ErrorMessage.Successfull;
         }
 
-        public Task<bool> DeleteCart(DeleteCartRequest request, CancellationToken cancellationToken)
+        public Task<bool> DeleteCart(int id, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

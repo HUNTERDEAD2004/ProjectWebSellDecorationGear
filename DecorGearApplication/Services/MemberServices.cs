@@ -19,9 +19,9 @@ namespace DecorGearApplication.Services
             return await _repo.CreateMemberAsync(request, cancellation);
         }
 
-        public async Task<ResponseDto<bool>> DeleteMemberAsync(DeleteMemberRequest request, CancellationToken cancellation)
+        public async Task<ResponseDto<bool>> DeleteMemberAsync(int id, CancellationToken cancellation)
         {
-            return await _repo.DeleteMemberAsync(request, cancellation);
+            return await _repo.DeleteMemberAsync(id, cancellation);
         }
 
         public async Task<List<MemberDto>> GetAllMembersAsync(CancellationToken cancellation)

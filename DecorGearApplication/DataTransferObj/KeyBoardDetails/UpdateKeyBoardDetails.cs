@@ -23,7 +23,7 @@ namespace DecorGearApplication.DataTransferObj.KeyBoardDetails
         public string Switch { get; set; } // trục phím
 
         [Range(0, 10000000, ErrorMessage = "Tuổi thọ không được vượt quá 10000000 lần nhấn")]
-        public int? SwitchLife { get; set; } // tuổi thọ trục (số lần nhấn)
+        public int SwitchLife { get; set; } // tuổi thọ trục (số lần nhấn)
 
         [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]
         public string? Led { get; set; }

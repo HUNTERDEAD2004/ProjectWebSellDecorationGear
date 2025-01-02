@@ -61,7 +61,7 @@ namespace DecorGearApi.Controllers.Admin
         [HttpDelete("delete/{id}")]
         public async Task<ActionResult> DeleteMember(int id, CancellationToken cancellationToken)
         {
-            var result = await _memberServices.DeleteMemberAsync(new DeleteMemberRequest { MemberID = id }, cancellationToken);
+            var result = await _memberServices.DeleteMemberAsync(id, cancellationToken);
             return StatusCode(result.Status, result.Message);
         }
 

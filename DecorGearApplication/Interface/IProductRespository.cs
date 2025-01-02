@@ -13,13 +13,10 @@ namespace DecorGearApplication.Interface
 {
     public interface IProductRespository
     {
-        Task<List<ProductDto>> GetAllProduct(ViewProductRequest? request,CancellationToken cancellationToken);
-        Task<List<ProductDto>> GetAllMouseDetail(ViewMouseDetailRequest? request, CancellationToken cancellationToken);
-        Task<List<ProductDto>> GetAllKeyBoardDetail(ViewKeyBoardsDetailRequest? request, CancellationToken cancellationToken);
-        Task<ProductDto> GetKeyProductById(int id, CancellationToken cancellationToken);
-        Task<ResponseDto<ProductDto>> CreateProduct(CreateProductRequest request, CancellationToken cancellationToken);
-        Task<ResponseDto<ProductDto>> UpdateProduct(int id,UpdateProductRequest request, CancellationToken cancellationToken);
-        Task<ResponseDto<bool>> DeleteProduct(int id, CancellationToken cancellationToken);
-        public bool IsValidImageFormat(string imagePaths);
+        //Task<List<ProductDto>> GetAllProduct(ViewProductRequest? request,CancellationToken cancellationToken);
+        //Task<ProductDto> GetKeyProductById(int id, CancellationToken cancellationToken);
+        //Task<ResponseDto<ProductDto>> CreateProduct(CreateProductRequest request, CancellationToken cancellationToken);
+        //Task<ResponseDto<ProductDto>> UpdateProduct(int id,UpdateProductRequest request, CancellationToken cancellationToken);
+        //Task<ResponseDto<bool>> DeleteProduct(int id, CancellationToken cancellationToken);
     }
 }

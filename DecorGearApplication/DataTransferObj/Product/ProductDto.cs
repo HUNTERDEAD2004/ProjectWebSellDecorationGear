@@ -14,15 +14,15 @@ namespace DecorGearApplication.DataTransferObj.Product
     {
         public int ProductID { get; set; }
 
-        public string SubCategoryName { get; set; }
+        public int? SaleID { get; set; }
 
-        public string BrandName { get; set; }
-
-        public string SaleCode { get; set; }
+        public int BrandID { get; set; }
 
         public string ProductName { get; set; }
 
-        public string Description { get; set; }
+        public string ProductCode { get; set; }
+
+        public string? Description { get; set; }
 
         public string AvatarProduct { get; set; }
     }

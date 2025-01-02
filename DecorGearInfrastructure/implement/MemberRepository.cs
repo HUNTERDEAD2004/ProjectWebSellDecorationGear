@@ -29,9 +29,9 @@ namespace DecorGearInfrastructure.implement
             return new ResponseDto<ErrorMessage>(StatusCodes.Status201Created, "Tạo member thành công");
         }
 
-        public async Task<ResponseDto<bool>> DeleteMemberAsync(DeleteMemberRequest request, CancellationToken cancellation)
+        public async Task<ResponseDto<bool>> DeleteMemberAsync(int id, CancellationToken cancellation)
         {
-            var member = await _db.Members.FindAsync(request.MemberID, cancellation);
+            var member = await _db.Members.FindAsync(id, cancellation);
             if (member == null)
                 return new ResponseDto<bool>(StatusCodes.Status404NotFound, "Member không tồn tại.");
 

@@ -7,11 +7,13 @@ namespace DecorGearDomain.Data.Entities
     {
         public int ProductID { get; set; }
 
-        public int? SaleID { get; set; }  // có thể có hoặc không
+        public int? SaleID { get; set; } 
 
         public int BrandID { get; set; }
 
         public string ProductName { get; set; }
+
+        public string ProductCode { get; set; }
 
         public string? Description { get; set; }
 
@@ -32,7 +34,5 @@ namespace DecorGearDomain.Data.Entities
         public virtual Sale Sale { get; set; }
 
         public virtual Brand Brand { get; set; }
-
-        public virtual SubCategory SubCategory { get; set; }
     }
 }

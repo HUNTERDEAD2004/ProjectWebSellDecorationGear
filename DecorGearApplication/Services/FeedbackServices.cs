@@ -18,9 +18,9 @@ namespace DecorGearApplication.Services
             return await _feedBackRespository.CreateFeedBack(request, cancellationToken);
         }
 
-        public async Task<ResponseDto<bool>> DeleteFeedBack(DeleteFeedBackRequest request, CancellationToken cancellationToken)
+        public async Task<ResponseDto<bool>> DeleteFeedBack(int id, CancellationToken cancellationToken)
         {
-            return await _feedBackRespository.DeleteFeedBack(request, cancellationToken);
+            return await _feedBackRespository.DeleteFeedBack(id, cancellationToken);
         }
 
         public async Task<List<FeedBackDto>> GetAllFeedBack(CancellationToken cancellationToken)
