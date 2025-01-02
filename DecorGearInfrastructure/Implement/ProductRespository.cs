@@ -1,5 +1,6 @@
 ﻿ using AutoMapper;
 using DecorGearApplication.DataTransferObj.ImageList;
+using DecorGearApplication.DataTransferObj.KeyBoardDetails;
 using DecorGearApplication.DataTransferObj.MouseDetails;
 using DecorGearApplication.DataTransferObj.Product;
 using DecorGearApplication.Interface;
@@ -15,6 +16,7 @@ using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace DecorGearInfrastructure.Implement
 {
@@ -120,56 +122,21 @@ namespace DecorGearInfrastructure.Implement
 
         public bool IsValidImageFormat(string imagePath)
         {
-            // Thư mục chứa ảnh trong server
-            var rootDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
-
-            // Kiểm tra nếu đường dẫn nằm trong thư mục "wwwroot/images"
-            var fullImagePath = Path.GetFullPath(imagePath);
-
-            if (!fullImagePath.StartsWith(rootDirectory))
-            {
-                return false; // Đường dẫn không hợp lệ
-            }
-
             // Các định dạng hợp lệ
             var validExtensions = new List<string> { ".jpg", ".jpeg" };
 
             // Lấy phần mở rộng của tệp
             var extension = Path.GetExtension(imagePath)?.ToLower();
 
-            // Kiểm tra phần mở rộng
+            // Nếu phần mở rộng không hợp lệ, trả về false
             if (!validExtensions.Contains(extension))
             {
-                return false; // Phần mở rộng không hợp lệ
+                return false;
             }
 
-            // Kiểm tra file có tồn tại không
-            if (!File.Exists(fullImagePath))
-            {
-                return false; // Tệp không tồn tại
-            }
-
-            return true; // Tệp hợp lệ
+            // Tất cả các tệp đều hợp lệ
+            return true;
         }
-
-
-        //public bool IsValidImageFormat(string imagePath)
-        //{
-        //    // Các định dạng hợp lệ
-        //    var validExtensions = new List<string> { ".jpg", ".jpeg" };
-
-        //    // Lấy phần mở rộng của tệp
-        //    var extension = Path.GetExtension(imagePath)?.ToLower();
-
-        //    // Nếu phần mở rộng không hợp lệ, trả về false
-        //    if (!validExtensions.Contains(extension))
-        //    {
-        //        return false;
-        //    }
-
-        //    // Tất cả các tệp đều hợp lệ
-        //    return true;
-        //}
 
         public async Task<List<ProductDto>> GetAllProduct(ViewProductRequest? request, CancellationToken cancellationToken)
         {
@@ -178,7 +145,6 @@ namespace DecorGearInfrastructure.Implement
                         join s in _appDbContext.Sales on p.SaleID equals s.SaleID into saleJoin
                         from s in saleJoin.DefaultIfEmpty() // Left join để Sale có thể null
                         join sc in _appDbContext.SubCategories on p.SubCategoryID equals sc.SubCategoryID
-                        //join i in _appDbContext.ImageLists on p.ProductID equals i.ProductID
                         select new ProductDto
                         {
                             ProductID = p.ProductID,
@@ -196,10 +162,6 @@ namespace DecorGearInfrastructure.Implement
                             Description = p.Description,
                             Size = p.Size,
                             BatteryCapacity = p.BatteryCapacity,
-                            //ImageProduct = _appDbContext.ImageLists
-                            //        .Where(img => img.ProductID == p.ProductID)
-                            //        .Select(img => img.ImagePath)
-                            //        .ToList()
                         }).AsNoTracking().AsQueryable();
 
             // Lọc sản phẩm 
@@ -330,6 +292,90 @@ namespace DecorGearInfrastructure.Implement
                     Message = "Lỗi không xác định: " + ex.Message + "."
                 };
             }
+        }
+
+        public async Task<List<ProductDto>> GetAllMouseDetail(ViewMouseDetailRequest? request, CancellationToken cancellationToken)
+        {
+            var productDtos = await _appDbContext.Products
+                        .Include(p => p.MouseDetails) // Tải thông tin chuột
+                            .ThenInclude(md => md.ImageLists) // Tải hình ảnh chuột
+                        .Select(p => new ProductDto
+                        {
+                            ProductID = p.ProductID,
+                            SaleID = p.SaleID,
+                            SubCategoryID = p.SubCategoryID,
+                            ProductName = p.ProductName,
+                            Price = p.Price,
+                            View = p.View,
+                            Quantity = p.Quantity,
+                            Weight = p.Weight,
+                            Description = p.Description,
+                            Size = p.Size,
+                            BatteryCapacity = p.BatteryCapacity,
+                            AvatarProduct = p.AvatarProduct,
+                            // Ánh xạ MouseDetails
+                            MouseDetails = p.MouseDetails.Select(md => new MouseDetailsDto
+                            {
+                                MouseDetailID = md.MouseDetailID,
+                                ProductID = md.ProductID,
+                                Color = md.Color,
+                                DPI = md.DPI,
+                                Connectivity = md.Connectivity,
+                                Dimensions = md.Dimensions,
+                                Material = md.Material,
+                                EyeReading = md.EyeReading,
+                                Button = md.Button,
+                                LED = md.LED,
+                                SS = md.SS,
+                                ImageProduct = md.ImageLists.Select(img => img.ImagePath).ToList()
+                            }).ToList(),
+                        })
+                        .ToListAsync(cancellationToken);
+
+            return productDtos;
+        }
+
+        public async Task<List<ProductDto>> GetAllKeyBoardDetail(ViewKeyBoardsDetailRequest? request, CancellationToken cancellationToken)
+        {
+            var productDtos = await _appDbContext.Products
+                        .Include(p => p.KeyboardDetails) // Tải thông tin bàn phím
+                            .ThenInclude(kd => kd.ImageLists) // Tải hình ảnh bàn phím
+                        .Select(p => new ProductDto
+                        {
+                            ProductID = p.ProductID,
+                            SaleID = p.SaleID,
+                            SubCategoryID = p.SubCategoryID,
+                            ProductName = p.ProductName,
+                            Price = p.Price,
+                            View = p.View,
+                            Quantity = p.Quantity,
+                            Weight = p.Weight,
+                            Description = p.Description,
+                            Size = p.Size,
+                            BatteryCapacity = p.BatteryCapacity,
+                            AvatarProduct = p.AvatarProduct,
+                            // Ánh xạ KeyboardDetails
+                            KeyboardDetails = p.KeyboardDetails.Select(kd => new KeyBoardDetailsDto
+                            {
+                                KeyboardDetailID = kd.KeyboardDetailID,
+                                ProductID = kd.ProductID,
+                                Color = kd.Color,
+                                Layout = kd.Layout,
+                                Case = kd.Case,
+                                Switch = kd.Switch,
+                                SwitchLife = kd.SwitchLife,
+                                Led = kd.Led,
+                                KeycapMaterial = kd.KeycapMaterial,
+                                SwitchMaterial = kd.SwitchMaterial,
+                                SS = kd.SS,
+                                Stabilizes = kd.Stabilizes,
+                                PCB = kd.PCB,
+                                ImageProduct = kd.ImageLists.Select(img => img.ImagePath).ToList()
+                            }).ToList()
+                        })
+                        .ToListAsync(cancellationToken);
+
+            return productDtos;
         }
     }
 }

@@ -2,10 +2,6 @@
 {
     public class ViewKeyBoardsRequest
     {
-        public int? KeyboardDetailID { get; set; }
-
-        public int? ProductID { get; set; }
-
         public string? Color { get; set; }
 
         public string? Layout { get; set; }
@@ -27,5 +23,15 @@
         public string? Stabilizes { get; set; }
 
         public string? PCB { get; set; }
+
+        public double? Price { get; set; } 
+
+        public int? View { get; set; } 
+
+        public string? Size { get; set; } 
+
+        public int? Quantity { get; set; } 
+
+        public double? Weight { get; set; } 
     }
 }

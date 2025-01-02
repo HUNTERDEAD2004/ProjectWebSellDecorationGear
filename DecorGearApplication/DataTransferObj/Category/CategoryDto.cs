@@ -1,4 +1,6 @@
-﻿namespace DecorGearApplication.DataTransferObj.Category
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DecorGearApplication.DataTransferObj.Category
 {
     public class CategoryDto
     {

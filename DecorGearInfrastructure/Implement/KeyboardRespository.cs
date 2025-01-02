@@ -110,28 +110,25 @@ namespace DecorGearInfrastructure.Implement
 
         public async Task<List<KeyBoardDetailsDto>> GetAllKeyBoard(ViewKeyBoardsRequest? request, CancellationToken cancellationToken)
         {
-            var query = from kd in _appDbContext.KeyboardDetails
-                        join i in _appDbContext.ImageLists on kd.KeyboardDetailID equals i.KeyboardDetailID
-                        select new KeyBoardDetailsDto
-                        {
-                            KeyboardDetailID = kd.KeyboardDetailID,
-                            ProductID = kd.ProductID,
-                            Color = kd.Color,
-                            Layout = kd.Layout,
-                            Case = kd.Case,
-                            Switch = kd.Switch,
-                            SwitchLife = kd.SwitchLife,
-                            Led = kd.Led,
-                            KeycapMaterial = kd.KeycapMaterial,
-                            SwitchMaterial = kd.SwitchMaterial,
-                            SS = kd.SS,
-                            Stabilizes = kd.Stabilizes,
-                            PCB = kd.PCB,
-                            ImageProduct = _appDbContext.ImageLists
-                                    .Where(img => img.KeyboardDetailID == kd.KeyboardDetailID)
-                                    .Select(img => img.ImagePath)
-                                    .ToList()
-                        };
+            var query = (from kd in _appDbContext.KeyboardDetails
+                         join i in _appDbContext.ImageLists on kd.KeyboardDetailID equals i.KeyboardDetailID into images
+                         select new KeyBoardDetailsDto
+                         {
+                             KeyboardDetailID = kd.KeyboardDetailID,
+                             ProductID = kd.ProductID,
+                             Color = kd.Color,
+                             Layout = kd.Layout,
+                             Case = kd.Case,
+                             Switch = kd.Switch,
+                             SwitchLife = kd.SwitchLife,
+                             Led = kd.Led,
+                             KeycapMaterial = kd.KeycapMaterial,
+                             SwitchMaterial = kd.SwitchMaterial,
+                             SS = kd.SS,
+                             Stabilizes = kd.Stabilizes,
+                             PCB = kd.PCB,
+                             ImageProduct = images.Select(img => img.ImagePath).ToList() // Tập hợp hình ảnh
+                         }).AsNoTracking().AsQueryable();
 
             // Áp dụng các điều kiện lọc
             if (request.KeyboardDetailID.HasValue)
@@ -190,10 +187,6 @@ namespace DecorGearInfrastructure.Implement
             // Thực hiện truy vấn
             var result = await query.ToListAsync();
             return result;
-
-            //var keyBoards = await _appDbContext.KeyboardDetails.ToListAsync(cancellationToken);
-
-            //return _mapper.Map<List<KeyBoardDetailsDto>>(keyBoards);
         }
 
         public async Task<KeyBoardDetailsDto> GetKeyBoardById(int id, CancellationToken cancellationToken)

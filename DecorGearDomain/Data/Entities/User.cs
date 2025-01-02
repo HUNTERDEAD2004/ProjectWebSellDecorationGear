@@ -10,28 +10,28 @@ namespace DecorGearDomain.Data.Entities
     {
         public int UserID { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng không được để trống")]
+        //[Required(ErrorMessage = "Vui lòng không được để trống")]
         public int RoleID { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng nhập tên")]
-        [StringLength(255, ErrorMessage = "Không được vượt quá 255 ký tự")]
+        //[Required(ErrorMessage = "Vui lòng nhập tên")]
+        //[StringLength(255, ErrorMessage = "Không được vượt quá 255 ký tự")]
         public string Name { get; set; }
 
-        [Phone(ErrorMessage = "Vui lòng nhập đúng chuẩn SĐT bắt đầu bằng 0 có tối đa 10 hoặc 11")]
+        //[Phone(ErrorMessage = "Vui lòng nhập đúng chuẩn SĐT bắt đầu bằng 0 có tối đa 10 hoặc 11")]
         public string PhoneNumber { get; set; }
 
-        [EmailAddress(ErrorMessage = "Vui lòng nhập đúng chuẩn email <a-zA-Z0-9+@gmail.com>")]
+        //[EmailAddress(ErrorMessage = "Vui lòng nhập đúng chuẩn email <a-zA-Z0-9+@gmail.com>")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng nhập tên tài khoản")]
+        //[Required(ErrorMessage = "Vui lòng nhập tên tài khoản")]
         public string UserName { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng nhập mật khẩu")]
+        //[Required(ErrorMessage = "Vui lòng nhập mật khẩu")]
         public string Password { get; set; }
 
         public string? RefreshToken { get; set; }
 
-        [Range(1, 3, ErrorMessage = "Vui lòng lựa chọn từ 1 - 3 <(Hoạt động:1) (Không hoạt động:2) (Khóa:3)> ")]
+        //[Range(1, 3, ErrorMessage = "Vui lòng lựa chọn từ 1 - 3 <(Hoạt động:1) (Không hoạt động:2) (Khóa:3)> ")]
         public UserStatus Status { get; set; }
 
         // Khóa ngoại

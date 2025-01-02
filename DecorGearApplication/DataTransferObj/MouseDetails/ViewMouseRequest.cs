@@ -14,8 +14,6 @@
 
         public string? Dimensions { get; set; }
 
-        public string? Weight { get; set; }
-
         public string? Material { get; set; }
 
         public string? EyeReading { get; set; }
@@ -25,5 +23,17 @@
         public string? LED { get; set; }
 
         public string? SS { get; set; }
+
+        public int? BatteryCapacity { get; set; } 
+
+        public double? Price { get; set; } 
+
+        public int? View { get; set; } 
+
+        public string? Size { get; set; } 
+
+        public int? Quantity { get; set; }
+
+        public double? Weight { get; set; }
     }
 }
