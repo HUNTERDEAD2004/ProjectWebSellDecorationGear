@@ -35,16 +35,16 @@ namespace DecorGearApi.Controllers.Admin
             return Ok(Member);
         }
 
-        [HttpPut("update")]
-        public async Task<ActionResult> UpdateMember(int id, [FromBody] UpdateMemberRequest request, CancellationToken cancellation)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            var result = await _memberServices.UpdateMemberAsync(id, request, cancellation);
-            return StatusCode(result.Status, result.Message);
-        }
+        //[HttpPut("update")]
+        //public async Task<ActionResult> UpdateMember(int id, [FromBody] UpdateMemberRequest request, CancellationToken cancellation)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+        //    var result = await _memberServices.UpdateMemberAsync(id, request, cancellation);
+        //    return StatusCode(result.Status, result.Message);
+        //}
 
         [HttpGet("get-by-id/{id}")]
         public async Task<ActionResult> GetMemberbyid(int id, CancellationToken cancellationToken)

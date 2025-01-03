@@ -1,4 +1,5 @@
 ﻿using DecorGearDomain.Data.Base;
+using DecorGearDomain.Enum;
 using System.ComponentModel.DataAnnotations;
 
 namespace DecorGearDomain.Data.Entities
@@ -12,6 +13,8 @@ namespace DecorGearDomain.Data.Entities
         public int Points { get; set; }
 
         public DateTime ExpiryDate { get; set; }
+
+        public EntityStatus Status { get; set; }
 
         // Khóa ngoại
 

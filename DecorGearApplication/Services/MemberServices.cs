@@ -34,9 +34,9 @@ namespace DecorGearApplication.Services
             return await _repo.GetMemberByIdAsync(memberId, cancellation);
         }
 
-        public async Task<ResponseDto<ErrorMessage>> UpdateMemberAsync(int id, UpdateMemberRequest request, CancellationToken cancellation)
-        {
-            return await _repo.UpdateMemberAsync(id, request, cancellation);
-        }
+        //public async Task<ResponseDto<ErrorMessage>> UpdateMemberAsync(int id, UpdateMemberRequest request, CancellationToken cancellation)
+        //{
+        //    return await _repo.UpdateMemberAsync(id, request, cancellation);
+        //}
     }
 }

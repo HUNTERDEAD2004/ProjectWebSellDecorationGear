@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DecorGearDomain.Enum;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DecorGearDomain.Data.Entities
@@ -16,8 +17,13 @@ namespace DecorGearDomain.Data.Entities
         //[Required(ErrorMessage = "vui lòng không được để trống")]
         //[Range(1, int.MaxValue, ErrorMessage = "Số lượng phải lớn hơn 0")]
         public int Quantity { get; set; }
+
         public double UnitPrice { get; set; }
+
+        public EntityStatus Status { get; set; }
+
         public virtual Order Order { get; set; }
+
         public virtual Product Product { get; set; }
     }
 }

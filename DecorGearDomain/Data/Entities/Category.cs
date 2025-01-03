@@ -1,4 +1,5 @@
 ﻿using DecorGearDomain.Data.Base;
+using DecorGearDomain.Enum;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,6 +11,8 @@ namespace DecorGearDomain.Data.Entities
         public int CategoryID { get; set; }
 
         public string CategoryName { get; set; }
+
+        public EntityStatus Status { get; set; }
 
         //Khóa ngoại
 

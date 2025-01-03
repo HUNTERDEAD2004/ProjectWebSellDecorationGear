@@ -73,26 +73,26 @@ namespace DecorGearInfrastructure.implement
             };
         }
 
-        public async Task<ResponseDto<ErrorMessage>> UpdateMemberAsync(int id, UpdateMemberRequest request, CancellationToken cancellation)
-        {
-            var existingMember = await _db.Members.FirstOrDefaultAsync(m => m.MemberID == id, cancellation);
+        //public async Task<ResponseDto<ErrorMessage>> UpdateMemberAsync(UpdateMemberRequest request, CancellationToken cancellation)
+        //{
+        //    var existingMember = await _db.Members.FirstOrDefaultAsync(m => m.MemberID == request.MemberID, cancellation);
 
-            if (existingMember == null)
-                return new ResponseDto<ErrorMessage>(StatusCodes.Status404NotFound, "Member không tồn tại");
+        //    if (existingMember == null)
+        //        return new ResponseDto<ErrorMessage>(StatusCodes.Status404NotFound, "Member không tồn tại");
 
-            existingMember.Points = request.Points;
-            existingMember.ExpiryDate = request.ExpiryDate;
+        //    existingMember.Points = request.Points;
+        //    existingMember.ExpiryDate = request.ExpiryDate;
 
-            if (request.UserID.HasValue)
-            {
-                existingMember.UserID = request.UserID.Value;
-            }
+        //    if (request.UserID.HasValue)
+        //    {
+        //        existingMember.UserID = request.UserID.Value;
+        //    }
 
-            _db.Members.Update(existingMember);
-            await _db.SaveChangesAsync(cancellation);
+        //    _db.Members.Update(existingMember);
+        //    await _db.SaveChangesAsync(cancellation);
 
-            return new ResponseDto<ErrorMessage>(StatusCodes.Status200OK, "Cập nhật thành công");
-        }
+        //    return new ResponseDto<ErrorMessage>(StatusCodes.Status200OK, "Cập nhật thành công");
+        //}
 
     }
 }

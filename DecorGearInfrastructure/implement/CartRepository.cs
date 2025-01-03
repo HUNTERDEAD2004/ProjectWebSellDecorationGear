@@ -16,32 +16,32 @@ namespace DecorGearInfrastructure.Implement
         {
             _dbcontext = appDbContext;
         }
-        public async Task<ErrorMessage> AddProductToCart(CreateCartDetailRequest request, CancellationToken cancellationToken)
-        {
-            var cart = await _dbcontext.Carts.Include(c => c.CartDetails).FirstOrDefaultAsync(c => c.UserID == request.UserID, cancellationToken);
-            if (cart == null)
-            {
-                cart = new Cart { UserID = request.UserID, CartDetails = new List<CartDetail>() };
-                _dbcontext.Carts.Add(cart);
-            }
-            var existingCart = cart.CartDetails.FirstOrDefault(item => item.ProductID == request.ProductID);
-            if (existingCart != null)
-            {
-                existingCart.Quantity += request.Quantity;
-            }
-            else
-            {
-                var newCartDetail = new CartDetail
-                {
-                    ProductID = request.ProductID,
-                    Quantity = request.Quantity,
-                    UnitPrice = (double)request.UnitPrice,
-                };
-                cart.CartDetails.Add(newCartDetail);
-            }
-            await _dbcontext.SaveChangesAsync(cancellationToken);
-            return ErrorMessage.Successfull;
-        }
+        //public async Task<ErrorMessage> AddProductToCart(CreateCartDetailRequest request, CancellationToken cancellationToken)
+        //{
+        //    //var cart = await _dbcontext.Carts.Include(c => c.CartDetails).FirstOrDefaultAsync(c => c.UserID == request.UserID, cancellationToken);
+        //    //if (cart == null)
+        //    //{
+        //    //    cart = new Cart { UserID = request.UserID, CartDetails = new List<CartDetail>() };
+        //    //    _dbcontext.Carts.Add(cart);
+        //    //}
+        //    //var existingCart = cart.CartDetails.FirstOrDefault(item => item.ProductID == request.ProductID);
+        //    //if (existingCart != null)
+        //    //{
+        //    //    existingCart.Quantity += request.Quantity;
+        //    //}
+        //    //else
+        //    //{
+        //    //    var newCartDetail = new CartDetail
+        //    //    {
+        //    //        ProductID = request.ProductID,
+        //    //        Quantity = request.Quantity,
+        //    //        UnitPrice = (double)request.UnitPrice,
+        //    //    };
+        //    //    cart.CartDetails.Add(newCartDetail);
+        //    //}
+        //    //await _dbcontext.SaveChangesAsync(cancellationToken);
+        //    //return ErrorMessage.Successfull;
+        //}
 
         public Task<bool> DeleteCart(int id, CancellationToken cancellationToken)
         {

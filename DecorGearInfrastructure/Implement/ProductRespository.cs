@@ -111,102 +111,115 @@ namespace DecorGearInfrastructure.Implement
             };
         }
 
-        //public async Task<List<ProductDto>> GetAllProduct(ViewProductRequest? request, CancellationToken cancellationToken)
-        //{
-        //    //var query = _appDbContext.Products.AsQueryable();
-        //    //    .AsQueryable();
+        public async Task<List<ProductDto>> GetAllProduct(ViewProductRequest? request, CancellationToken cancellationToken)
+        {
+            var query = _appDbContext.Products.AsQueryable();
 
-        //    //// Lọc sản phẩm 
+            // Lọc sản phẩm 
 
-        //    //if (!string.IsNullOrEmpty(request.ProductName))
-        //    //{
-        //    //    query = query.Where(x => x.ProductName == request.ProductName);
-        //    //}
-        //    //if (!string.IsNullOrEmpty(request.ProductCode))
-        //    //{
-        //    //    query = query.Where(x => x.ProductCode == request.ProductCode);
-        //    //}
+            if (!string.IsNullOrEmpty(request.ProductName))
+            {
+                query = query.Where(x => x.ProductName == request.ProductName);
+            }
+            if (!string.IsNullOrEmpty(request.ProductCode))
+            {
+                query = query.Where(x => x.ProductCode == request.ProductCode);
+            }
 
-        //    //var resultProduct = await query.ToListAsync();
-        //    //return resultProduct;
-        //}
+            var filteredProducts = await query.ToListAsync(cancellationToken); 
+            
+            // Kiểm tra xem có kết quả lọc không
+            if (filteredProducts == null || !filteredProducts.Any()) 
+            { 
+                // Nếu không có kết quả lọc, trả về danh sách sản phẩm ban đầu
+                filteredProducts = await _appDbContext.Products.ToListAsync(cancellationToken);
+            }
 
-        //public async Task<ProductDto> GetKeyProductById(int id, CancellationToken cancellationToken)
-        //{
-        //    var productIds = await _appDbContext.Products.FindAsync(id, cancellationToken);
+            // Chuyển đổi danh sách sản phẩm thành DTO
+            var products = filteredProducts.Select(p => new ProductDto 
+            { 
+                ProductID = p.ProductID, 
+                ProductName = p.ProductName, 
+                ProductCode = p.ProductCode, 
+                AvatarProduct = p.AvatarProduct,
+                BrandID = p.BrandID,
+                SaleID = p.SaleID,
+                Description = p.Description,
+            }).ToList();
 
-        //    return _mapper.Map<ProductDto>(productIds);
-        //}
+            return products;
+        }
 
-        //public async Task<ResponseDto<ProductDto>> UpdateProduct(int id,UpdateProductRequest request, CancellationToken cancellationToken)
-        //{
-        //    // Kiểm Tra Tính Hợp Lệ của Dữ Liệu
-        //    if (request == null)
-        //    {
-        //        return new ResponseDto<ProductDto>
-        //        {
-        //            DataResponse = null,
-        //            Status = StatusCodes.Status400BadRequest,
-        //            Message = "Chưa có request."
-        //        };
-        //    }
+        public async Task<ProductDto> GetKeyProductById(int id, CancellationToken cancellationToken)
+        {
+            var productIds = await _appDbContext.Products.FindAsync(id, cancellationToken);
 
-        //    // Cập Nhật Sản Phẩm 
-        //    try
-        //    {
-        //        var product = await _appDbContext.Products.FindAsync(id,cancellationToken);
+            return _mapper.Map<ProductDto>(productIds);
+        }
 
-        //        product.ProductName = request.ProductName;
-        //        product.Price = request.Price;
-        //        product.View = request.View;
-        //        product.Quantity = request.Quantity;
-        //        product.Weight = request.Weight;
-        //        product.Description = request.Description;
-        //        product.Size = request.Size;
-        //        product.BatteryCapacity = request.BatteryCapacity;
-        //        product.SaleID = request.SaleID;
-        //        product.BrandID = request.BrandID;
-        //        product.SubCategoryID = request.SubCategoryID;
-        //        product.AvatarProduct = request.AvatarProduct;
+        public async Task<ResponseDto<ProductDto>> UpdateProduct(int id, UpdateProductRequest request, CancellationToken cancellationToken)
+        {
+            // Kiểm Tra Tính Hợp Lệ của Dữ Liệu
+            if (request == null)
+            {
+                return new ResponseDto<ProductDto>
+                {
+                    DataResponse = null,
+                    Status = StatusCodes.Status400BadRequest,
+                    Message = "Chưa có request."
+                };
+            }
 
-        //        _appDbContext.Products.Update(product);
+            // Cập Nhật Sản Phẩm 
+            try
+            {
+                var product = await _appDbContext.Products.FindAsync(id, cancellationToken);
 
-        //        await _appDbContext.SaveChangesAsync(cancellationToken);
+                product.ProductName = request.ProductName;
+                product.ProductCode = request.ProductCode;
+                product.Description = request.Description;
+                product.SaleID = request.SaleID;
+                product.BrandID = request.BrandID;
+                product.AvatarProduct = request.AvatarProduct;
 
-        //        return new ResponseDto<ProductDto>
-        //        {
-        //            DataResponse = null,
-        //            Status = StatusCodes.Status400BadRequest,
-        //            Message = "Chưa có request."
-        //        };
-        //    }
-        //    catch (DbUpdateException)
-        //    {
-        //        return new ResponseDto<ProductDto>
-        //        {
-        //            DataResponse = null,
-        //            Status = StatusCodes.Status500InternalServerError,
-        //            Message = "Lỗi khi cập nhật cơ sở dữ liệu."
-        //        };
-        //    }
-        //    catch (ArgumentException)
-        //    {
-        //        return new ResponseDto<ProductDto>
-        //        {
-        //            DataResponse = null,
-        //            Status = StatusCodes.Status400BadRequest,
-        //            Message = "Tham số không hợp lệ."
-        //        };
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return new ResponseDto<ProductDto>
-        //        {
-        //            DataResponse = null,
-        //            Status = StatusCodes.Status400BadRequest,
-        //            Message = "Lỗi không xác định: " + ex.Message + "."
-        //        };
-        //    }
-        //} 
+                _appDbContext.Products.Update(product);
+
+                await _appDbContext.SaveChangesAsync(cancellationToken);
+
+                return new ResponseDto<ProductDto>
+                {
+                    DataResponse = null,
+                    Status = StatusCodes.Status400BadRequest,
+                    Message = "Chưa có request."
+                };
+            }
+            catch (DbUpdateException)
+            {
+                return new ResponseDto<ProductDto>
+                {
+                    DataResponse = null,
+                    Status = StatusCodes.Status500InternalServerError,
+                    Message = "Lỗi khi cập nhật cơ sở dữ liệu."
+                };
+            }
+            catch (ArgumentException)
+            {
+                return new ResponseDto<ProductDto>
+                {
+                    DataResponse = null,
+                    Status = StatusCodes.Status400BadRequest,
+                    Message = "Tham số không hợp lệ."
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ResponseDto<ProductDto>
+                {
+                    DataResponse = null,
+                    Status = StatusCodes.Status400BadRequest,
+                    Message = "Lỗi không xác định: " + ex.Message + "."
+                };
+            }
+        }
     }
 }

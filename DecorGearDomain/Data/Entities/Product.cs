@@ -1,4 +1,5 @@
 ﻿using DecorGearDomain.Data.Base;
+using DecorGearDomain.Enum;
 using System.ComponentModel.DataAnnotations;
 
 namespace DecorGearDomain.Data.Entities
@@ -18,6 +19,8 @@ namespace DecorGearDomain.Data.Entities
         public string? Description { get; set; }
 
         public string AvatarProduct { get; set; }
+
+        public EntityStatus Status { get; set; }
 
         // Khóa ngoại 
 

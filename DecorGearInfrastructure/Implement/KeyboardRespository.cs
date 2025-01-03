@@ -131,14 +131,6 @@ namespace DecorGearInfrastructure.Implement
                          }).AsNoTracking().AsQueryable();
 
             // Áp dụng các điều kiện lọc
-            if (request.KeyboardDetailID.HasValue)
-            {
-                query = query.Where(x => x.KeyboardDetailID == request.KeyboardDetailID);
-            }
-            if (request.ProductID.HasValue)
-            {
-                query = query.Where(x => x.ProductID == request.ProductID);
-            }
             if (!string.IsNullOrEmpty(request.Color))
             {
                 query = query.Where(x => x.Color == request.Color);
