@@ -1,4 +1,7 @@
-﻿namespace DecorGearApplication.DataTransferObj.CartDetail
+﻿using DecorGearDomain.Enum;
+using System.ComponentModel.DataAnnotations;
+
+namespace DecorGearApplication.DataTransferObj.CartDetail
 {
     public class UpdateCartDetailRequest
     {
@@ -11,5 +14,8 @@
         public double UnitPrice { get; set; }
 
         public double TotalPrice { get; set; }
+
+        [Range(1, 8, ErrorMessage = "Hãy thiết lập trạng thái")]
+        public EntityStatus Status { get; set; }
     }
 }

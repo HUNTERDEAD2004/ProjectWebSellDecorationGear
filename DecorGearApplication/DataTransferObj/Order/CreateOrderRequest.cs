@@ -1,4 +1,6 @@
-﻿namespace DecorGearApplication.DataTransferObj.Order
+﻿using DecorGearDomain.Enum;
+
+namespace DecorGearApplication.DataTransferObj.Order
 {
     public class CreateOrderRequest
     {
@@ -17,5 +19,7 @@
         public float weight { get; set; }
 
         public DateTime OrderDate { get; set; }
+
+        public EntityStatus Status { get; set; } = EntityStatus.Active;
     }
 }

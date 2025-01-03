@@ -1,4 +1,5 @@
 ﻿using DecorGearDomain.Enum;
+using System.ComponentModel.DataAnnotations;
 
 namespace DecorGearApplication.DataTransferObj.Order
 {
@@ -17,7 +18,12 @@ namespace DecorGearApplication.DataTransferObj.Order
         public float weight { get; set; }
 
         public DateTime OrderDate { get; set; }
+
         public int? VoucherID { get; set; }
-        public OrderStatus Status { get; set; }
+
+        public OrderStatus OrderStatus { get; set; }
+
+        [Range(1, 8, ErrorMessage = "Hãy thiết lập trạng thái")]
+        public EntityStatus Status { get; set; }
     }
 }

@@ -12,10 +12,6 @@ namespace DecorGearDomain.Data.Entities
 
         public int UserID { get; set; }
 
-        public int TotalQuantity { get; set; }
-
-        public double TotalAmount { get; set; }
-
         public EntityStatus Status { get; set; }
 
         // Khóa ngoại

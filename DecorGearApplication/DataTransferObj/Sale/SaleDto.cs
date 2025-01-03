@@ -1,4 +1,7 @@
-﻿namespace DecorGearApplication.DataTransferObj.Sale
+﻿using DecorGearDomain.Enum;
+using System.ComponentModel.DataAnnotations;
+
+namespace DecorGearApplication.DataTransferObj.Sale
 {
     public class SaleDto
     {
@@ -7,5 +10,7 @@
         public string SaleName { get; set; }
 
         public int SalePercent { get; set; }
+
+        public EntityStatus Status { get; set; }
     }
 }

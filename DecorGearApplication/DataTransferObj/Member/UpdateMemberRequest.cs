@@ -15,5 +15,8 @@ namespace DecorGearApplication.DataTransferObj.Member
 
         [Required(ErrorMessage = "Không được để trống.")]
         public DateTime ExpiryDate { get; set; }
+
+        [Range(1, 8, ErrorMessage = "Hãy thiết lập trạng thái")]
+        public EntityStatus Status { get; set; }
     }
 }

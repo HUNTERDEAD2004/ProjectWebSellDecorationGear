@@ -1,4 +1,6 @@
-﻿namespace DecorGearApplication.DataTransferObj.MouseDetails
+﻿using DecorGearDomain.Enum;
+
+namespace DecorGearApplication.DataTransferObj.MouseDetails
 {
     public class MouseDetailsDto
     {
@@ -39,6 +41,8 @@
         public int Quantity { get; set; } // số lượng
 
         public double Weight { get; set; } // cân nặng
+
+        public EntityStatus Status { get; set; }
 
         // Sửa thuộc tính ImageProduct thành List<string>
 

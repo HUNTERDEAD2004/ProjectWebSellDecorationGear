@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DecorGearDomain.Enum;
+using System.ComponentModel.DataAnnotations;
 
 namespace DecorGearApplication.DataTransferObj.SubCategory
 {
@@ -9,5 +10,8 @@ namespace DecorGearApplication.DataTransferObj.SubCategory
         public string SubCategoryName { get; set; }
 
         public int CategoryID { get; set; }
+
+        [Range(1, 8, ErrorMessage = "Hãy thiết lập trạng thái")]
+        public EntityStatus Status { get; set; }
     }
 }

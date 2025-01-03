@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DecorGearDomain.Enum;
+using System.ComponentModel.DataAnnotations;
 
 namespace DecorGearApplication.DataTransferObj.Product
 {
@@ -21,5 +22,7 @@ namespace DecorGearApplication.DataTransferObj.Product
         [Required(ErrorMessage = "Không được để trống.")]
         [StringLength(200, ErrorMessage = "Chuỗi không được vượt quá 100 ký tự")]
         public string AvatarProduct { get; set; }
+
+        public EntityStatus Status { get; set; } = EntityStatus.Active;
     }
 }

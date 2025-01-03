@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DecorGearDomain.Enum;
+using System.ComponentModel.DataAnnotations;
 
 namespace DecorGearApplication.DataTransferObj.OrderDetail
 {
@@ -15,5 +16,7 @@ namespace DecorGearApplication.DataTransferObj.OrderDetail
         {
             return (decimal)(Quantity * UnitPrice);
         }
+
+        public EntityStatus Status { get; set; }
     }
 }

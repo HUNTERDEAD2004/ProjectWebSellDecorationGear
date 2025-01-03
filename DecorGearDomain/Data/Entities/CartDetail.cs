@@ -18,8 +18,6 @@ namespace DecorGearDomain.Data.Entities
 
         public double UnitPrice { get; set; }
 
-        public double TotalPrice { get; set; }
-
         public EntityStatus Status { get; set; }
 
         // Khóa ngoại

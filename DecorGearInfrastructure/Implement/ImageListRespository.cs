@@ -163,7 +163,7 @@ namespace DecorGearInfrastructure.Implement
                 imageList.ImagePath = request.ImagePath;
                 imageList.MouseDetailID = request.MouseDetailID;
                 imageList.KeyboardDetailID = request.KeyboardDetailID;
-                imageList.Description = request.Description;
+                imageList.Status = request.Status;
 
                 if (!IsValidImageFormat(request.ImagePath))
                 {

@@ -43,7 +43,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=DESKTOPD-DELLIN\\SQLEXPRESS;Database=DecorationGearReborn1;Trusted_Connection=True;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("Data Source=DESKTOPD-DELLIN\\SQLEXPRESS;Database=DecorationGearReborn2;Trusted_Connection=True;TrustServerCertificate=True;");
 
             //optionsBuilder.UseSqlServer("Data Source=PHUC\\SQLEXPRESS;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True;");
         }
@@ -100,6 +100,70 @@ namespace DecorGearInfrastructure.Database.AppDbContext
             };
 
             modelBuilder.Entity<User>().HasData(userData);
+
+            //Seed OrderData
+            var OrderData = new List<Order>
+            {
+            new Order
+            {
+                OrderID=1,
+                UserID=1,
+                VoucherID=1,
+                totalQuantity=5,
+                size="L",
+                weight= (float)1.5,
+                Status = EntityStatus.Active,
+                OrderStatus=OrderStatus.Delivered,
+                paymentMethod="Credit Card",
+                OrderDate=DateTime.Parse("09/09/2024")
+            },
+            new Order
+            {
+                OrderID=2,
+                UserID=2,
+                VoucherID=null,
+                totalQuantity=3,
+                size="LF",
+                weight=(float)2.0,
+                Status = EntityStatus.Active,
+                OrderStatus=OrderStatus.Delivered,
+                paymentMethod="Cash",
+                OrderDate=DateTime.Parse("09/09/2024")
+            }
+            };
+
+            modelBuilder.Entity<Order>().HasData(OrderData);
+
+            //Seed OrderDetailData
+            var orderDetailData = new List<OrderDetail>
+            {
+            new OrderDetail
+            {
+                OrderDetailId = 1,
+                OrderID=1,
+                ProductID=3,
+                Quantity=10,
+                UnitPrice=10000000,
+            },
+            new OrderDetail
+            {
+                OrderDetailId = 2,
+                OrderID=1,
+                ProductID=3,
+                Quantity=1,
+                UnitPrice=1000000,
+            },
+            new OrderDetail
+            {
+                OrderDetailId = 3,
+                OrderID=2,
+                ProductID=1,
+                Quantity=1000,
+                UnitPrice=1000000000,
+            }
+            };
+
+            modelBuilder.Entity<OrderDetail>().HasData(orderDetailData);
 
             base.OnModelCreating(modelBuilder);
         }

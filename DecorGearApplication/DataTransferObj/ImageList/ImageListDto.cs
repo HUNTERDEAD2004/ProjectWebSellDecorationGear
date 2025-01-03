@@ -1,4 +1,6 @@
-﻿namespace DecorGearApplication.DataTransferObj.ImageList
+﻿using DecorGearDomain.Enum;
+
+namespace DecorGearApplication.DataTransferObj.ImageList
 {
     public class ImageListDto
     {
@@ -10,6 +12,6 @@
 
         public string ImagePath { get; set; }
 
-        public string Description { get; set; }
+        public EntityStatus Status { get; set; }
     }
 }

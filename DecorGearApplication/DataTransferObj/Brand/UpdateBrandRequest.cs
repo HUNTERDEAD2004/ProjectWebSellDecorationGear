@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DecorGearDomain.Enum;
+using System.ComponentModel.DataAnnotations;
 
 namespace DecorGearApplication.DataTransferObj.Brand
 {
@@ -12,5 +13,8 @@ namespace DecorGearApplication.DataTransferObj.Brand
 
         [StringLength(100, ErrorMessage = "Không được vượt quá 100 ký tự")]
         public string Description { get; set; }
+
+        [Range(1,8, ErrorMessage = "Hãy thiết lập trạng thái")]
+        public EntityStatus Status { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using DecorGearApplication.DataTransferObj.ImageList;
 using DecorGearApplication.DataTransferObj.KeyBoardDetails;
 using DecorGearApplication.DataTransferObj.MouseDetails;
+using DecorGearDomain.Enum;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -25,5 +26,7 @@ namespace DecorGearApplication.DataTransferObj.Product
         public string? Description { get; set; }
 
         public string AvatarProduct { get; set; }
+
+        public EntityStatus Status { get; set; }
     }
 }
