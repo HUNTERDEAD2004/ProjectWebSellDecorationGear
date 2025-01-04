@@ -50,7 +50,7 @@ namespace DecorGearApi.Controllers.Admin
         [HttpDelete("delete/{id}")]
         public async Task<ActionResult<ResponseDto<bool>>> DeleteFeedBack(int id, CancellationToken cancellationToken)
         {
-            var result = await _feedbackServices.DeleteFeedBack(new DeleteFeedBackRequest { FeedBackID = id }, cancellationToken);
+            var result = await _feedbackServices.DeleteFeedBack(id, cancellationToken);
             return StatusCode(result.Status, result.Message);
         }
     }

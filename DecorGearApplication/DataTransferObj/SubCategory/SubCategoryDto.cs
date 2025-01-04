@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DecorGearDomain.Enum;
+using System.ComponentModel.DataAnnotations;
 
 namespace DecorGearApplication.DataTransferObj.SubCategory
 {
@@ -9,5 +10,7 @@ namespace DecorGearApplication.DataTransferObj.SubCategory
         public string SubCategoryName { get; set; }
 
         public int CategoryID { get; set; }
+
+        public EntityStatus Status { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DecorGearDomain.Enum;
+using System.ComponentModel.DataAnnotations;
 
 namespace DecorGearApplication.DataTransferObj.Member
 {
@@ -12,5 +13,7 @@ namespace DecorGearApplication.DataTransferObj.Member
 
         [Required(ErrorMessage = "Không được để trống.")]
         public DateTime ExpiryDate { get; set; }
+
+        public EntityStatus Status { get; set; } = EntityStatus.Active;
     }
 }

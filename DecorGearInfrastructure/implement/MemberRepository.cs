@@ -29,9 +29,9 @@ namespace DecorGearInfrastructure.implement
             return new ResponseDto<ErrorMessage>(StatusCodes.Status201Created, "Tạo member thành công");
         }
 
-        public async Task<ResponseDto<bool>> DeleteMemberAsync(DeleteMemberRequest request, CancellationToken cancellation)
+        public async Task<ResponseDto<bool>> DeleteMemberAsync(int id, CancellationToken cancellation)
         {
-            var member = await _db.Members.FindAsync(request.MemberID, cancellation);
+            var member = await _db.Members.FindAsync(id, cancellation);
             if (member == null)
                 return new ResponseDto<bool>(StatusCodes.Status404NotFound, "Member không tồn tại.");
 
@@ -73,26 +73,26 @@ namespace DecorGearInfrastructure.implement
             };
         }
 
-        public async Task<ResponseDto<ErrorMessage>> UpdateMemberAsync(int id, UpdateMemberRequest request, CancellationToken cancellation)
-        {
-            var existingMember = await _db.Members.FirstOrDefaultAsync(m => m.MemberID == id, cancellation);
+        //public async Task<ResponseDto<ErrorMessage>> UpdateMemberAsync(UpdateMemberRequest request, CancellationToken cancellation)
+        //{
+        //    var existingMember = await _db.Members.FirstOrDefaultAsync(m => m.MemberID == request.MemberID, cancellation);
 
-            if (existingMember == null)
-                return new ResponseDto<ErrorMessage>(StatusCodes.Status404NotFound, "Member không tồn tại");
+        //    if (existingMember == null)
+        //        return new ResponseDto<ErrorMessage>(StatusCodes.Status404NotFound, "Member không tồn tại");
 
-            existingMember.Points = request.Points;
-            existingMember.ExpiryDate = request.ExpiryDate;
+        //    existingMember.Points = request.Points;
+        //    existingMember.ExpiryDate = request.ExpiryDate;
 
-            if (request.UserID.HasValue)
-            {
-                existingMember.UserID = request.UserID.Value;
-            }
+        //    if (request.UserID.HasValue)
+        //    {
+        //        existingMember.UserID = request.UserID.Value;
+        //    }
 
-            _db.Members.Update(existingMember);
-            await _db.SaveChangesAsync(cancellation);
+        //    _db.Members.Update(existingMember);
+        //    await _db.SaveChangesAsync(cancellation);
 
-            return new ResponseDto<ErrorMessage>(StatusCodes.Status200OK, "Cập nhật thành công");
-        }
+        //    return new ResponseDto<ErrorMessage>(StatusCodes.Status200OK, "Cập nhật thành công");
+        //}
 
     }
 }

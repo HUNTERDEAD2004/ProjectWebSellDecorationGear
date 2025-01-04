@@ -1,4 +1,5 @@
 ﻿using DecorGearApplication.DataTransferObj.CartDetail;
+using DecorGearDomain.Enum;
 
 namespace DecorGearApplication.DataTransferObj
 {
@@ -13,5 +14,7 @@ namespace DecorGearApplication.DataTransferObj
         public int TotalQuantity => cartDetails.Sum(x => x.Quantity);
 
         public decimal TotalPrice => cartDetails.Sum(x => x.UnitPrice * x.TotalPrice);
+
+        public EntityStatus Status { get; set; } 
     }
 }

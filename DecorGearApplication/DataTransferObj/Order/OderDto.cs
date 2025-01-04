@@ -8,6 +8,7 @@ namespace DecorGearApplication.DataTransferObj.Order
         public int OderID { get; set; }
 
         public int UserID { get; set; }
+
         public string UserName { get; set; }
 
         public int? VoucherID { get; set; }
@@ -23,7 +24,10 @@ namespace DecorGearApplication.DataTransferObj.Order
         public float weight { get; set; }
 
         public DateTime OrderDate { get; set; }
-        public OrderStatus Status { get; set; }
+
+        public EntityStatus Status { get; set; }
+
+        public OrderStatus OrderStatus { get; set; }
 
         public List<OrderDetailDTO> orderDetailDTOs { get; set; } = new List<OrderDetailDTO>();
     }

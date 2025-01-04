@@ -48,6 +48,8 @@ namespace DecorGearApplication.DataTransferObj.MouseDetails
         [Range(0, int.MaxValue, ErrorMessage = "Lượt xem phải là số dương")]
         public int View { get; set; } // lượt xem
 
+        public EntityStatus Status { get; set; } = EntityStatus.Active;
+
         // Hỗ trợ cho api giao hàng
 
         [StringLength(100, ErrorMessage = "Mô tả không được vượt quá 100 ký tự")]

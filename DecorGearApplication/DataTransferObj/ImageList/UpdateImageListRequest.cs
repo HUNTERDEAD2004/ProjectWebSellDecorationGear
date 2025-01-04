@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DecorGearDomain.Enum;
+using System.ComponentModel.DataAnnotations;
 
 namespace DecorGearApplication.DataTransferObj.ImageList
 {
@@ -11,7 +12,7 @@ namespace DecorGearApplication.DataTransferObj.ImageList
         [Required(ErrorMessage = "Không được để trống")]
         public string ImagePath { get; set; }
 
-        [StringLength(500, ErrorMessage = "Không được vượt quá 500 ký tự")]
-        public string? Description { get; set; }
+        [Range(1, 8, ErrorMessage = "Hãy thiết lập trạng thái")]
+        public EntityStatus Status { get; set; }
     }
 }

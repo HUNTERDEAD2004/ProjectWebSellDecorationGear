@@ -9,8 +9,7 @@ namespace DecorGearInfrastructure.Extention.AutoMapperProfile
     {
         public CartProfile()
         {
-            CreateMap<CartDto, Brand>().ReverseMap();
-            CreateMap<DeleteCartRequest, Brand>();
+            CreateMap<CartDto, Cart>().ReverseMap();
         }
     }
 }
