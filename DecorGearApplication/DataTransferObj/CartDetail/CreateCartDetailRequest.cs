@@ -1,4 +1,6 @@
-﻿namespace DecorGearApplication.DataTransferObj.CartDetail
+﻿using DecorGearDomain.Enum;
+
+namespace DecorGearApplication.DataTransferObj.CartDetail
 {
     public class CreateCartDetailRequest
     {
@@ -11,5 +13,7 @@
         public double UnitPrice { get; set; }
 
         public double TotalPrice { get; set; }
+
+        public EntityStatus Status { get; set; } = EntityStatus.Active;
     }
 }

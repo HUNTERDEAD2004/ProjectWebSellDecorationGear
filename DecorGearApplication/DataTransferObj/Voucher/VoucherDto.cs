@@ -1,12 +1,14 @@
-﻿namespace DecorGearApplication.DataTransferObj.Voucher
+﻿using DecorGearDomain.Enum;
+
+namespace DecorGearApplication.DataTransferObj.Voucher
 {
     public class VoucherDto
     {
         public int VoucherID { get; set; }
-
         public string VoucherName { get; set; }
-
-        public int VoucherPercent { get; set; }
-        public string expiry { get; set; }
+        public double VoucherPercent { get; set; }
+        public DateTime expiry { get; set; }
+        public DateTimeOffset? CreatedTime { get; set; }
+        public EntityStatus Status { get; set; }
     }
 }

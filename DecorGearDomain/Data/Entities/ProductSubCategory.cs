@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DecorGearDomain.Data.Entities
 {
-    public class ProductSubCategory : EntityBase
+    public class ProductSubCategory 
     {
         public int ProductID { get; set; } // Khóa ngoại
 

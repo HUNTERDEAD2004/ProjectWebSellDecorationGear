@@ -1,4 +1,6 @@
-﻿namespace DecorGearApplication.DataTransferObj.KeyBoardDetails
+﻿using DecorGearDomain.Enum;
+
+namespace DecorGearApplication.DataTransferObj.KeyBoardDetails
 {
     public class KeyBoardDetailsDto
     {
@@ -43,6 +45,8 @@
         public int Quantity { get; set; } // số lượng
 
         public double Weight { get; set; } // cân nặng
+
+        public EntityStatus Status { get; set; }
 
         // Sửa thuộc tính ImageProduct thành List<string>
 

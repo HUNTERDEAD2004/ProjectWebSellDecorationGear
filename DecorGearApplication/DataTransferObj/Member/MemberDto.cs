@@ -1,4 +1,6 @@
-﻿namespace DecorGearApplication.DataTransferObj.Member
+﻿using DecorGearDomain.Enum;
+
+namespace DecorGearApplication.DataTransferObj.Member
 {
     public class MemberDto
     {
@@ -9,5 +11,7 @@
         public int Points { get; set; }
 
         public DateTime ExpiryDate { get; set; }
+
+        public EntityStatus Status { get; set; }
     }
 }

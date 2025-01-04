@@ -1,4 +1,6 @@
-﻿namespace DecorGearApplication.DataTransferObj.FeedBack
+﻿using DecorGearDomain.Enum;
+
+namespace DecorGearApplication.DataTransferObj.FeedBack
 {
     public class FeedBackDto
     {
@@ -9,5 +11,7 @@
         public int ProductID { get; set; }
 
         public string Comment { get; set; }
+
+        public EntityStatus Status { get; set; }
     }
 }

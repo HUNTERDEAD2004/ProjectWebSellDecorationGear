@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cilent", "Cilent", "{9AD59139-5195-4EC6-BCF5-BED97A1BDD5D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DecorGearMVC", "DecorGearMVC\DecorGearMVC.csproj", "{C31E84F9-D3C4-4FE9-B73B-90396B7F6C81}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{E1ECA553-D96B-4E33-A271-6577BA52F01F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DecorGearInfrastructure", "DecorGearInfrastructure\DecorGearInfrastructure.csproj", "{F6807CDB-5CB1-44DE-88BA-1F079F205E48}"
@@ -15,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DecorGearApplication", "Dec
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DecorGearDomain", "DecorGearDomain\DecorGearDomain.csproj", "{FBF68363-343C-45BC-8018-83D8FEBA31C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecorGearApi", "DecorGearApi\DecorGearApi.csproj", "{B3488989-3DC6-4EE1-A610-9CD040380809}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DecorGearApi", "DecorGearApi\DecorGearApi.csproj", "{B3488989-3DC6-4EE1-A610-9CD040380809}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C31E84F9-D3C4-4FE9-B73B-90396B7F6C81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C31E84F9-D3C4-4FE9-B73B-90396B7F6C81}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C31E84F9-D3C4-4FE9-B73B-90396B7F6C81}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C31E84F9-D3C4-4FE9-B73B-90396B7F6C81}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F6807CDB-5CB1-44DE-88BA-1F079F205E48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F6807CDB-5CB1-44DE-88BA-1F079F205E48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6807CDB-5CB1-44DE-88BA-1F079F205E48}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -48,7 +40,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{C31E84F9-D3C4-4FE9-B73B-90396B7F6C81} = {9AD59139-5195-4EC6-BCF5-BED97A1BDD5D}
 		{F6807CDB-5CB1-44DE-88BA-1F079F205E48} = {E1ECA553-D96B-4E33-A271-6577BA52F01F}
 		{40CE902D-21BF-41A3-8226-6C70FD978E76} = {E1ECA553-D96B-4E33-A271-6577BA52F01F}
 		{FBF68363-343C-45BC-8018-83D8FEBA31C7} = {E1ECA553-D96B-4E33-A271-6577BA52F01F}

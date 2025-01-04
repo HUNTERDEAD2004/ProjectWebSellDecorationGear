@@ -29,10 +29,10 @@ namespace DecorGearInfrastructure.Implement
             return new ResponseDto<ErrorMessage>(StatusCodes.Status201Created, "Feedback được tạo thành công");
         }
 
-        public async Task<ResponseDto<bool>> DeleteFeedBack(DeleteFeedBackRequest request, CancellationToken cancellationToken)
+        public async Task<ResponseDto<bool>> DeleteFeedBack(int id, CancellationToken cancellationToken)
         {
 
-            var feedback = await _db.FeedBacks.FindAsync(request.FeedBackID, cancellationToken);
+            var feedback = await _db.FeedBacks.FindAsync(id, cancellationToken);
             if (feedback == null)
             {
                 return new ResponseDto<bool>(StatusCodes.Status404NotFound, "Feedback không tồn tại.");

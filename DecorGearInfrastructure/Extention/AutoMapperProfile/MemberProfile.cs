@@ -10,7 +10,6 @@ namespace DecorGearInfrastructure.Extention.AutoMapperProfile
         {
             CreateMap<UpdateMemberRequest, Member>().ReverseMap();
             CreateMap<CreateMemberRequest, Member>().ReverseMap();
-            CreateMap<DeleteMemberRequest, Member>().ReverseMap();
             CreateMap<Member, MemberDto>().ReverseMap();
             // Cấu hình AutoMapper
             var config = new MapperConfiguration(cfg =>

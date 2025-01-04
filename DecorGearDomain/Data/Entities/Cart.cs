@@ -1,4 +1,5 @@
 ﻿using DecorGearDomain.Data.Base;
+using DecorGearDomain.Enum;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,9 +12,7 @@ namespace DecorGearDomain.Data.Entities
 
         public int UserID { get; set; }
 
-        public int TotalQuantity { get; set; }
-
-        public double TotalAmount { get; set; }
+        public EntityStatus Status { get; set; }
 
         // Khóa ngoại
 

@@ -150,6 +150,7 @@ namespace DecorGearInfrastructure.implement
                 updateOrder.weight = request.weight;
                 updateOrder.OrderDate = request.OrderDate;
                 updateOrder.Status = request.Status;
+                updateOrder.OrderStatus = request.OrderStatus;
                 await _dbcontext.SaveChangesAsync(cancellationToken);
                 return ErrorMessage.Successfull;
             }
