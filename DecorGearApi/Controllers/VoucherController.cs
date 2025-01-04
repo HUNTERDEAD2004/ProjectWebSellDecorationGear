@@ -14,59 +14,35 @@ namespace DecorGearApi.Controllers
         {
             _voucherRepo = voucherRespository;
         }
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<VoucherDto>>> GetAllVoucher(CancellationToken cancellationToken)
+        [HttpGet("get-all-voucher")]
+        public async Task<ActionResult<IEnumerable<VoucherDto>>> GetAllVoucher([FromQuery] VoucherSearch? voucherSearch, CancellationToken cancellationToken)
         {
-            {
-                var voucher = await _voucherRepo.GetAllVoucher(cancellationToken);
-                return Ok(voucher);
-            }
+            var voucher = await _voucherRepo.GetAllVoucher(voucherSearch, cancellationToken);
+            return Ok(voucher);
         }
         [HttpGet("{id}")]
         public async Task<ActionResult<VoucherDto>> GetByIdVoucher(int id, CancellationToken cancellationToken)
         {
-            var request = new ViewVoucherRequest { VoucherID = id };
-            var voucher = await _voucherRepo.GetKeyVoucherById(request, cancellationToken);
-
-            if (voucher == null)
-            {
-                return NotFound();
-            }
-
+            var voucher = await _voucherRepo.GetKeyVoucherById(new ViewVoucherRequest { VoucherID = id }, cancellationToken);
             return Ok(voucher);
         }
         [HttpPut]
-        public async Task<IActionResult> PutVoucher([FromBody] UpdateVoucherRequest request, int id, CancellationToken cancellationToken)
+        public async Task<ActionResult> PutVoucher([FromBody] UpdateVoucherRequest request, int id, CancellationToken cancellationToken)
         {
-            if (request == null)
-            {
-                return BadRequest("Invalid order request.");
-            }
-            else
-            {
-                var existingVoucher = await _voucherRepo.GetKeyVoucherById(new ViewVoucherRequest { VoucherID = id }, cancellationToken);
-
-                if (existingVoucher == null)
-                {
-                    return NotFound("Order not found.");
-                }
-                else
-                {
-                    existingVoucher.VoucherName = request.VoucherName;
-                    existingVoucher.VoucherPercent = request.VoucherPercent;
-                    existingVoucher.expiry = request.expiry;
-                    var result = await _voucherRepo.UpdateVoucher(existingVoucher, cancellationToken);
-
-                    if (result == ErrorMessage.Successfull)
-                    {
-                        return NoContent();
-                    }
-                    else
-                    {
-                        return BadRequest("Failed to update order.");
-                    }
-                }
-            }
+            var voucher = await _voucherRepo.UpdateVoucher(id, request, cancellationToken);
+            return Ok(voucher);
+        }
+        [HttpPost]
+        public async Task<ActionResult> PostVoucher([FromBody] CreateVoucherRequest request, CancellationToken cancellationToken)
+        {
+            var voucher = await _voucherRepo.CreateVoucher(request, cancellationToken);
+            return Ok(voucher);
+        }
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteVoucher(int id, CancellationToken cancellationToken)
+        {
+            var voucher = await _voucherRepo.DeleteVoucher(new DeleteVoucherRequest { VoucherID = id }, cancellationToken);
+            return Ok(voucher);
         }
     }
 }

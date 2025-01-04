@@ -1,10 +1,11 @@
-﻿using DecorGearDomain.Enum;
+﻿using DecorGearDomain.Data.Base;
+using DecorGearDomain.Enum;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DecorGearDomain.Data.Entities
 {
-    public class OrderDetail
+    public class OrderDetail : EntityBase
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OrderDetailId { get; set; }
