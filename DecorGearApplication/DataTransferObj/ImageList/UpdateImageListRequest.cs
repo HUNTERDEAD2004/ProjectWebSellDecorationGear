@@ -5,9 +5,11 @@ namespace DecorGearApplication.DataTransferObj.ImageList
 {
     public class UpdateImageListRequest
     {
-        public int? MouseDetailID { get; set; }
+        //public int? MouseDetailID { get; set; }
 
-        public int? KeyboardDetailID { get; set; }
+        //public int? KeyboardDetailID { get; set; }
+
+        public int ProductID { get; set; }
 
         [Required(ErrorMessage = "Không được để trống")]
         public string ImagePath { get; set; }

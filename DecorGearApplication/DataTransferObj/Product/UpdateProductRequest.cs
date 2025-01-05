@@ -27,5 +27,7 @@ namespace DecorGearApplication.DataTransferObj.Product
 
         [Range(1, 8, ErrorMessage = "Hãy thiết lập trạng thái")]
         public EntityStatus Status { get; set; }
+
+        public List<int> SubCategoryIDs { get; set; }
     }
 }

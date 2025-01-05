@@ -87,7 +87,7 @@ namespace DecorGearInfrastructure.Implement
         public async Task<ResponseDto<bool>> DeleteMouse(int id, CancellationToken cancellationToken)
         {
             var keyResult = await _appDbContext.MouseDetails.FindAsync(id, cancellationToken);
-            if (keyResult != null) 
+            if (keyResult != null)
             {
                 _appDbContext.MouseDetails.Remove(keyResult);
                 _appDbContext.SaveChanges();
@@ -108,12 +108,11 @@ namespace DecorGearInfrastructure.Implement
 
         public async Task<List<MouseDetailsDto>> GetAllMouse(ViewMouseRequest? request, CancellationToken cancellationToken)
         {
-            var query = (from md in _appDbContext.MouseDetails
-                         join i in _appDbContext.ImageLists on md.MouseDetailID equals i.MouseDetailID into images
-                         select new MouseDetailsDto
+            var query = from md in _appDbContext.MouseDetails
+                        select new MouseDetailsDto
                         {
                             MouseDetailID = md.MouseDetailID,
-                            ProductID = md.ProductID,
+                            //ProductID = md.ProductID,
                             Color = md.Color,
                             DPI = md.DPI,
                             Connectivity = md.Connectivity,
@@ -122,19 +121,18 @@ namespace DecorGearInfrastructure.Implement
                             EyeReading = md.EyeReading,
                             Button = md.Button,
                             LED = md.LED,
-                            SS = md.SS,
-                            ImageProduct = images.Select(img => img.ImagePath).ToList() // Tập hợp hình ảnh
-                        }).AsNoTracking().AsQueryable();
+                            SS = md.SS
+                        };
 
             // Áp dụng các điều kiện lọc
             if (request.MouseDetailID.HasValue)
             {
                 query = query.Where(x => x.MouseDetailID == request.MouseDetailID);
             }
-            if (request.ProductID.HasValue)
-            {
-                query = query.Where(x => x.ProductID == request.ProductID);
-            }
+            //if (request.ProductID.HasValue)
+            //{
+            //    query = query.Where(x => x.ProductID == request.ProductID);
+            //}
             if (!string.IsNullOrEmpty(request.Color))
             {
                 query = query.Where(x => x.Color == request.Color);
@@ -175,16 +173,21 @@ namespace DecorGearInfrastructure.Implement
             // Thực hiện truy vấn
             var result = await query.ToListAsync();
             return result;
+
+
+            //var result = await _appDbContext.MouseDetails.ToListAsync(cancellationToken);
+
+            //return _mapper.Map<List<MouseDetailsDto>>(result);
         }
 
         public async Task<MouseDetailsDto> GetMouseById(int id, CancellationToken cancellationToken)
         {
-            var keyResult = await _appDbContext.MouseDetails.FindAsync(id,cancellationToken);
+            var keyResult = await _appDbContext.MouseDetails.FindAsync(id, cancellationToken);
 
             return _mapper.Map<MouseDetailsDto>(keyResult);
         }
 
-        public async Task<ResponseDto<MouseDetailsDto>> UpdateMouse(int id,UpdateMouseRequest request, CancellationToken cancellationToken)
+        public async Task<ResponseDto<MouseDetailsDto>> UpdateMouse(int id, UpdateMouseRequest request, CancellationToken cancellationToken)
         {
             if (request == null)
             {
