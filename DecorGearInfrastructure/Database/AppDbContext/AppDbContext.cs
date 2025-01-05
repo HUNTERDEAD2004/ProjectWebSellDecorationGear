@@ -56,6 +56,68 @@ namespace DecorGearInfrastructure.Database.AppDbContext
         }
         public void SeedingData(ModelBuilder modelBuilder)
         {
+            // Seed Brand data
+            var brandData = new List<Brand>
+            {
+                new Brand
+                {
+                    BrandID = 1,
+                    BrandName = "Razer",
+                    Description = "Thương hiệu gaming gear được tin dùng các proplayer",
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                },
+                new Brand
+                {
+                    BrandID = 2,
+                    BrandName = "Aula",
+                    Description = "Một thương hiệu bàn phím đã quá quen thuộc với một số ae",
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                },
+                new Brand
+                {
+                    BrandID = 3,
+                    BrandName = "Rainy",
+                    Description = "Thương hiệu bàn phím  với một số ae",
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                },
+                new Brand
+                {
+                    BrandID = 4,
+                    BrandName = "Logitech",
+                    Description = "Một thương gaming gear quá quen thuộc với các proplayer",
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                }
+            };
+            modelBuilder.Entity<Brand>().HasData(brandData);
+
             // Seed Role data
             var roleData = new List<Role>
             {
@@ -84,7 +146,14 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     UserName = "admin",
                     Password = Hash.HashPassword("Admin@123"),  // Băm mật khẩu một cách an toàn
                     RoleID = 1,  // Vai trò Admin
-                    Status = UserStatus.Active
+                    Status = UserStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
                 },
                 new User
                 {
@@ -95,113 +164,276 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     UserName = "user2",
                     Password = Hash.HashPassword("UserPassword123"),  // Băm mật khẩu một cách an toàn
                     RoleID = 2,  // Vai trò User
-                    Status = UserStatus.Active
+                    Status = UserStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
                 }
             };
-
             modelBuilder.Entity<User>().HasData(userData);
 
-            //Seed OrderData
-            var OrderData = new List<Order>
+            // Seed cart
+            var cartData = new List<Cart>
             {
-            new Order
-            {
-                OrderID=1,
-                UserID=1,
-                VoucherID=null,
-                totalQuantity=5,
-                size="L",
-                weight= (float)1.5,
-                Status = EntityStatus.Active,
-                OrderStatus=OrderStatus.Delivered,
-                paymentMethod="Credit Card",
-                OrderDate=DateTime.Parse("09/09/2024"),
-                CreatedBy = 1,
-                CreatedTime =DateTime.Parse("09/09/2024"),
-                ModifiedBy = 1,
-                ModifiedTime =DateTime.Parse("09/09/2024"),
-                Deleted = false,
-                DeletedBy = null,
-                DeletedTime = null,
-            },
-            new Order
-            {
-                OrderID=2,
-                UserID=2,
-                VoucherID=null,
-                totalQuantity=3,
-                size="LF",
-                weight=(float)2.0,
-                Status = EntityStatus.Active,
-                OrderStatus=OrderStatus.Delivered,
-                paymentMethod="Cash",
-                OrderDate=DateTime.Parse("09/09/2024"),
-                CreatedBy = 1,
-                CreatedTime =DateTime.Parse("09/09/2024"),
-                ModifiedBy = 1,
-                ModifiedTime =DateTime.Parse("09/09/2024"),
-                Deleted = false,
-                DeletedBy = null,
-                DeletedTime = null,
-            }
+                new Cart
+                {
+                    CartID= 1, 
+                    UserID = 1,
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                },
+                new Cart
+                {
+                   CartID = 2, 
+                    UserID = 2,
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                },
             };
+            modelBuilder.Entity<Cart>().HasData(cartData);
 
-            modelBuilder.Entity<Order>().HasData(OrderData);
-
-            //Seed OrderDetailData
-            var orderDetailData = new List<OrderDetail>
+            // Seed cartDetail
+            var cartDetailData = new List<CartDetail>
             {
-            new OrderDetail
-            {
-                OrderDetailId = 1,
-                OrderID=1,
-                ProductID=3,
-                Quantity=10,
-                UnitPrice=10000000,
-                Status = EntityStatus.Active,
-                CreatedBy = 1,
-                CreatedTime =DateTime.Parse("09/09/2024"),
-                ModifiedBy = 1,
-                ModifiedTime =DateTime.Parse("09/09/2024"),
-                Deleted = false,
-                DeletedBy = null,
-                DeletedTime = null,
-            },
-            new OrderDetail
-            {
-                OrderDetailId = 2,
-                OrderID=1,
-                ProductID=3,
-                Quantity=1,
-                UnitPrice=1000000,
-                Status = EntityStatus.Active,
-                CreatedBy = 1,
-                CreatedTime =DateTime.Parse("09/09/2024"),
-                ModifiedBy = 1,
-                ModifiedTime =DateTime.Parse("09/09/2024"),
-                Deleted = false,
-                DeletedBy = null,
-                DeletedTime = null,
-            },
-            new OrderDetail
-            {
-                OrderDetailId = 3,
-                OrderID=2,
-                ProductID=1,
-                Quantity=1000,
-                UnitPrice=1000000000,
-                Status = EntityStatus.Active,
-                CreatedBy = 1,
-                CreatedTime =DateTime.Parse("09/09/2024"),
-                ModifiedBy = 1,
-                ModifiedTime =DateTime.Parse("09/09/2024"),
-                Deleted = false,
-                DeletedBy = null,
-                DeletedTime = null,
-            }
+                new CartDetail
+                {
+                    CartDetailID = 9,
+                    ProductID = 1,
+                    CartID = 1,
+                    Quantity = 2,
+                    UnitPrice = 50,
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                },
+                new CartDetail
+                {
+                    CartDetailID = 10,
+                    ProductID = 2,
+                    CartID = 2,
+                    Quantity = 3,
+                    UnitPrice = 40,
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                },
+                new CartDetail
+                {
+                   CartDetailID = 11,
+                   ProductID = 2,
+                   CartID = 2,
+                   Quantity = 1,
+                   UnitPrice = 75,
+                   Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                }
             };
+            modelBuilder.Entity<CartDetail>().HasData(cartDetailData);
 
-            modelBuilder.Entity<OrderDetail>().HasData(orderDetailData);
+            // Seed category
+            var categoryData = new List<Category>
+            {
+                new Category
+                {
+                   CategoryID = 1, 
+                   CategoryName = "Chuột",
+                   Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                },
+                new Category
+                {
+                   CategoryID = 2, 
+                   CategoryName = "Bàn Phím",
+                   Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                }
+            };
+            modelBuilder.Entity<Category>().HasData(categoryData);
+
+            // Seed Subcategory
+            var subCategoryData = new List<SubCategory>
+            {
+                new SubCategory
+                {
+                   SubCategoryID = 1,
+                   SubCategoryName = "Chuột Razer",
+                   CategoryID = 1,
+                   Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                },
+                new SubCategory
+                {
+                   SubCategoryID = 2,
+                   SubCategoryName = "Chuột logitech",
+                   CategoryID = 1,
+                   Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                },
+                new SubCategory
+                {
+                   SubCategoryID = 3,
+                   SubCategoryName = "Bàn Phím Cơ",
+                   CategoryID = 2,
+                   Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                },
+                new SubCategory
+                {
+                   SubCategoryID = 4,
+                   SubCategoryName = "Bàn Không Phím Dây",
+                   CategoryID = 2,
+                   Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                },
+                new SubCategory
+                {
+                   SubCategoryID = 5,
+                   SubCategoryName = "Chuột không dây",
+                   CategoryID = 1,
+                   Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                },
+                new SubCategory
+                {
+                   SubCategoryID = 6,
+                   SubCategoryName = "Chuột gaming",
+                   CategoryID = 1,
+                   Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                },
+                new SubCategory
+                {
+                   SubCategoryID = 7,
+                   SubCategoryName = "Chuột DAREU",
+                   CategoryID = 1,
+                   Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                },
+            };
+            modelBuilder.Entity<SubCategory>().HasData(subCategoryData);
+
+            // Seed ProductSubcategory
+            var productSubCategoryData = new List<ProductSubCategory>
+            {
+                new ProductSubCategory
+                {
+                    ProductID = 1,
+                    SubCategoryID = 1
+                },
+                new ProductSubCategory
+                {
+                    ProductID = 1,
+                    SubCategoryID = 6
+                },
+                new ProductSubCategory
+                {
+                    ProductID = 2,
+                    SubCategoryID = 7
+                },
+                new ProductSubCategory
+                {
+                    ProductID = 2,
+                    SubCategoryID = 5
+                },
+                new ProductSubCategory
+                {
+                    ProductID = 2,
+                    SubCategoryID = 6
+                },
+                new ProductSubCategory
+                {
+                    ProductID = 3,
+                    SubCategoryID = 3
+                }
+
+            };
+            modelBuilder.Entity<ProductSubCategory>().HasData(productSubCategoryData);
 
             // Seed Product
             var ProductData = new List<Product>
@@ -209,8 +441,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 new Product
                 {
                     ProductID = 1,
-                    ProductName = "CHUỘT RAZER DEATHADDER ESSENTIAL",
-                    ProductCode = "SP01",
+                    ProductName = "Chuột gaming Razer death adder v3",
                     Description = "chiếc chuột siêu bổ rẻ ",
                     SaleID = 1,
                     BrandID = 1,
@@ -261,10 +492,108 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     DeletedTime = null,
                 }
             };
-
             modelBuilder.Entity<Product>().HasData(ProductData);
 
-            //Seed Keyboard Detail
+            // Seed Favorite
+            var favoriteData = new List<Favorite>
+            {
+                new Favorite
+                {
+                    FavoriteID = 1,
+                    UserID = 1,
+                    ProductID = 1,
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                },
+                new Favorite
+                {
+                    FavoriteID = 2,
+                    UserID = 2,
+                    ProductID = 1,
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                },
+                new Favorite
+                {
+                    FavoriteID = 3,
+                    UserID = 1,
+                    ProductID = 2,
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                }
+            };
+            modelBuilder.Entity<Favorite>().HasData(favoriteData);
+
+            // Seed FeedBack
+            var feedbackData = new List<FeedBack>
+            {
+                new FeedBack
+                {
+                    FeedBackID = 1,
+                    UserID = 1,
+                    ProductID = 1,
+                    Comment = "Sản phẩm rất tốt!",
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                },
+                new FeedBack
+                {
+                    FeedBackID = 2,
+                    UserID = 1,
+                    ProductID = 2,
+                    Comment = "Chất lượng bình thường.",
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                },
+                new FeedBack
+                {
+                    FeedBackID = 3,
+                    UserID = 2,
+                    ProductID = 3,
+                    Comment = "Giao hàng nhanh, sản phẩm đẹp.",
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                }
+            };
+            modelBuilder.Entity<FeedBack>().HasData(feedbackData);
+
+            //Seed Keyboard Detail 
             var keyboardData = new List<KeyboardDetail>
             {
                 new KeyboardDetail
@@ -354,7 +683,6 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     DeletedTime = null,
                 }
             };
-
             modelBuilder.Entity<KeyboardDetail>().HasData(keyboardData);
 
             //Seed MouseData
@@ -521,7 +849,6 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     DeletedTime = null,
                 }
             };
-
             modelBuilder.Entity<MouseDetail>().HasData(mice);
 
             //Seed ImgData
@@ -530,86 +857,353 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 new ImageList
                 {
                     ImageListID = 1,
-                    MouseDetailID = 1,
-                    KeyboardDetailID = null,
+                    ProductID = 1,
                     ImagePath= "/media/product/250-73-vien-.jpg",
-                    Status = EntityStatus.Active
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+
                 },
                 new ImageList
                 {
                     ImageListID= 2,
-                    MouseDetailID = 1,
-                    KeyboardDetailID = null,
+                    ProductID = 1,
                     ImagePath= "/media/product/250-73-1089_chu___t_ch__i_game_razer_deathaddder_essential_2_min.jpg",
-                    Status = EntityStatus.Active
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+
                 },
                 new ImageList
                 {
                     ImageListID= 3,
-                    MouseDetailID = 1,
-                    KeyboardDetailID = null,
+                    ProductID = 1,
                     ImagePath= "/media/product/250-73-untitled-3.jpg",
-                    Status = EntityStatus.Active
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
                 },
                 new ImageList
                 {
                     ImageListID= 4,
-                    MouseDetailID = null,
-                    KeyboardDetailID = 2,
+                    ProductID = 2,
                     ImagePath= "/media/product/250-88-d1470721f92bc58866c35b39f7e83f5f.jpg",
-                    Status = EntityStatus.Active
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
                 },
                 new ImageList
                 {
                     ImageListID= 5,
-                    MouseDetailID = null,
-                    KeyboardDetailID = 3,
+                    ProductID = 2,
                     ImagePath= "/media/product/250-89-69a7ff353e943ca00e99246f76d3222c.jpg",
-                    Status = EntityStatus.Active
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
                 },
                 new ImageList
                 {
                     ImageListID= 6,
-                    MouseDetailID = 3,
-                    KeyboardDetailID = null,
+                    ProductID = 2,
                     ImagePath= "/media/product/250-90-b865462f9328e9130f5c420e14e492c5.jpg",
-                    Status = EntityStatus.Active
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
                 },
                 new ImageList
                 {
                     ImageListID= 7,
-                    MouseDetailID = 1,
-                    KeyboardDetailID = null,
+                    ProductID = 3,
                     ImagePath= "/media/product/250-4027-vien1.jpg",
-                    Status = EntityStatus.Active
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
                 },
                 new ImageList
                 {
                     ImageListID= 8,
-                    MouseDetailID = 3,
-                    KeyboardDetailID = null,
+                    ProductID = 3,
                     ImagePath= "/media/product/250-4027-xanh-la-6.jpg",
-                    Status = EntityStatus.Active
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
                 },
                 new ImageList
                 {
                     ImageListID= 9,
-                    MouseDetailID = 4,
-                    KeyboardDetailID = null,
+                    ProductID = 3,
                     ImagePath= "/media/product/250-4026-vein3.jpg",
-                    Status = EntityStatus.Active
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
                 },
                 new ImageList
                 {
                     ImageListID= 10,
-                    MouseDetailID = 6,
-                    KeyboardDetailID = null,
+                    ProductID = 3,
                     ImagePath= "/media/product/250-4029-vien4.jpg",
-                    Status = EntityStatus.Active
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
                 }
             };
-
             modelBuilder.Entity<ImageList>().HasData(ImgList);
+
+            //Seed Member
+            var MemData = new List<Member>
+            {
+                new Member
+                {
+                    MemberID= 1,
+                    UserID= 1,
+                    Points=100,
+                    ExpiryDate=DateTime.Parse("11/12/2024"),
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                },
+                new Member
+                {
+                    MemberID= 2,
+                    UserID= 2,
+                    Points=200,
+                    ExpiryDate=DateTime.Parse("10/3/2025"),
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                }
+            };
+            modelBuilder.Entity<Member>().HasData(MemData);
+
+            //Seed SaleData
+            var SaleData = new List<Sale>
+            {
+                new Sale
+                {
+                    SaleID=1,
+                    SaleName="Giảm giá mùa hè",
+                    SalePercent=100,
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                },
+                new Sale
+                {
+                    SaleID=2,
+                    SaleName="Giảm giá cuối năm",
+                    SalePercent=200,
+                    Status = EntityStatus.Inactive,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                }
+            };
+            modelBuilder.Entity<Sale>().HasData(SaleData);
+
+            //Seed voucherData
+            var VoucherData = new List<Voucher>
+            {
+                new Voucher
+                {
+                    VoucherID=1,
+                    VoucherName="Giảm giá 30%",
+                    VoucherPercent=30,
+                    expiry = DateTime.ParseExact("05-11-2024", "dd-MM-yyyy", null),
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                },
+                new Voucher
+                {
+                    VoucherID=2,
+                    VoucherName="Giảm giá 50%",
+                    VoucherPercent=50,
+                    expiry = DateTime.ParseExact("05-11-2024", "dd-MM-yyyy", null),
+                    Status = EntityStatus.Inactive,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                }
+            };
+            modelBuilder.Entity<Voucher>().HasData(VoucherData);
+
+            //Seed OrderData
+            var OrderData = new List<Order>
+            {
+                new Order
+                {
+                    OrderID=1,
+                    UserID=1,
+                    VoucherID=1,
+                    totalQuantity=5,
+                    size="L",
+                    weight= (float)1.5,
+                    OrderStatus=OrderStatus.Delivered,
+                    paymentMethod="Credit Card",
+                    OrderDate=DateTime.Parse("09/09/2024"),
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                },
+                new Order
+                {
+                    OrderID=2,
+                    UserID=2,
+                    VoucherID=null,
+                    totalQuantity=3,
+                    size="LF",
+                    weight=(float)2.0,
+                    OrderStatus=OrderStatus.Delivered,
+                    paymentMethod="Cash",
+                    OrderDate=DateTime.Parse("09/09/2024"),
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                }
+            };
+            modelBuilder.Entity<Order>().HasData(OrderData);
+
+            //Seed OrderDetailData
+            var orderDetailData = new List<OrderDetail>
+            {
+                new OrderDetail
+                {
+                    OrderDetailId = 1,
+                    OrderID=1,
+                    ProductID=3,
+                    Quantity=10,
+                    UnitPrice=10000000,
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                },
+                new OrderDetail
+                {
+                    OrderDetailId = 2,
+                    OrderID=1,
+                    ProductID=3,
+                    Quantity=1,
+                    UnitPrice=1000000,
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                },
+                new OrderDetail
+                {
+                    OrderDetailId = 3,
+                    OrderID=2,
+                    ProductID=1,
+                    Quantity=1000,
+                    UnitPrice=1000000000,
+                    Status = EntityStatus.Active,
+                    CreatedBy = 1,
+                    CreatedTime =DateTime.Parse("09/09/2024"),
+                    ModifiedBy = 1,
+                    ModifiedTime =DateTime.Parse("09/09/2024"),
+                    Deleted = false,
+                    DeletedBy = null,
+                    DeletedTime = null,
+                }
+            };
+            modelBuilder.Entity<OrderDetail>().HasData(orderDetailData);
 
             base.OnModelCreating(modelBuilder);
         }

@@ -29,6 +29,7 @@ namespace DecorGearInfrastructure.Implement
             _appDbContext = appDbContext;
             _mapper = mapper;
         }
+
         public async Task<ResponseDto<KeyBoardDetailsDto>> CreateKeyBoard(CreateKeyBoardsRequest request, CancellationToken cancellationToken)
         {
             // Kiểm Tra Tính Hợp Lệ của Dữ Liệu
@@ -110,25 +111,22 @@ namespace DecorGearInfrastructure.Implement
 
         public async Task<List<KeyBoardDetailsDto>> GetAllKeyBoard(ViewKeyBoardsRequest? request, CancellationToken cancellationToken)
         {
-            var query = (from kd in _appDbContext.KeyboardDetails
-                         join i in _appDbContext.ImageLists on kd.KeyboardDetailID equals i.KeyboardDetailID into images
-                         select new KeyBoardDetailsDto
-                         {
-                             KeyboardDetailID = kd.KeyboardDetailID,
-                             ProductID = kd.ProductID,
-                             Color = kd.Color,
-                             Layout = kd.Layout,
-                             Case = kd.Case,
-                             Switch = kd.Switch,
-                             SwitchLife = kd.SwitchLife,
-                             Led = kd.Led,
-                             KeycapMaterial = kd.KeycapMaterial,
-                             SwitchMaterial = kd.SwitchMaterial,
-                             SS = kd.SS,
-                             Stabilizes = kd.Stabilizes,
-                             PCB = kd.PCB,
-                             ImageProduct = images.Select(img => img.ImagePath).ToList() // Tập hợp hình ảnh
-                         }).AsNoTracking().AsQueryable();
+            var query = from kd in _appDbContext.KeyboardDetails
+                        select new KeyBoardDetailsDto
+                        {
+                            KeyboardDetailID = kd.KeyboardDetailID,
+                            Color = kd.Color,
+                            Layout = kd.Layout,
+                            Case = kd.Case,
+                            Switch = kd.Switch,
+                            SwitchLife = kd.SwitchLife,
+                            Led = kd.Led,
+                            KeycapMaterial = kd.KeycapMaterial,
+                            SwitchMaterial = kd.SwitchMaterial,
+                            SS = kd.SS,
+                            Stabilizes = kd.Stabilizes,
+                            PCB = kd.PCB
+                        };
 
             // Áp dụng các điều kiện lọc
             if (!string.IsNullOrEmpty(request.Color))
@@ -179,6 +177,10 @@ namespace DecorGearInfrastructure.Implement
             // Thực hiện truy vấn
             var result = await query.ToListAsync();
             return result;
+
+            //var keyBoards = await _appDbContext.KeyboardDetails.ToListAsync(cancellationToken);
+
+            //return _mapper.Map<List<KeyBoardDetailsDto>>(keyBoards);
         }
 
         public async Task<KeyBoardDetailsDto> GetKeyBoardById(int id, CancellationToken cancellationToken)
@@ -188,7 +190,7 @@ namespace DecorGearInfrastructure.Implement
             return _mapper.Map<KeyBoardDetailsDto>(keyBoardIds);
         }
 
-        public async Task<ResponseDto<KeyBoardDetailsDto>> UpdateKeyBoard(int id,UpdateKeyBoardDetails request, CancellationToken cancellationToken)
+        public async Task<ResponseDto<KeyBoardDetailsDto>> UpdateKeyBoard(int id, UpdateKeyBoardDetails request, CancellationToken cancellationToken)
         {
             // Kiểm Tra Tính Hợp Lệ của Dữ Liệu
             if (request == null)

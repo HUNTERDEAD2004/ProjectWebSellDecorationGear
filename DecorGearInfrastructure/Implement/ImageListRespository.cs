@@ -161,8 +161,9 @@ namespace DecorGearInfrastructure.Implement
                 var imageList = await _appDbContext.ImageLists.FindAsync(id);
 
                 imageList.ImagePath = request.ImagePath;
-                imageList.MouseDetailID = request.MouseDetailID;
-                imageList.KeyboardDetailID = request.KeyboardDetailID;
+                //imageList.MouseDetailID = request.MouseDetailID;
+                //imageList.KeyboardDetailID = request.KeyboardDetailID;
+                imageList.ProductID = request.ProductID;
                 imageList.Status = request.Status;
 
                 if (!IsValidImageFormat(request.ImagePath))

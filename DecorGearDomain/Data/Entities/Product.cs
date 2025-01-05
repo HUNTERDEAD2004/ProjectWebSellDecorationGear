@@ -32,6 +32,7 @@ namespace DecorGearDomain.Data.Entities
         public virtual ICollection<MouseDetail> MouseDetails { get; set; } = new List<MouseDetail>();
         public virtual ICollection<KeyboardDetail> KeyboardDetails { get; set; } = new List<KeyboardDetail>();
         public virtual ICollection<ProductSubCategory> ProductSubCategories { get; set; } = new List<ProductSubCategory>();
+        public virtual ICollection<ImageList>? ImageLists { get; set; } = new List<ImageList>();
 
         // n - 1
         public virtual Sale Sale { get; set; }

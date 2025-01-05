@@ -28,5 +28,25 @@ namespace DecorGearApplication.DataTransferObj.Product
         public string AvatarProduct { get; set; }
 
         public EntityStatus Status { get; set; }
+
+        public List<string> SubCategories { get; set; }
+
+        public List<string>? ImageProduct { get; set; }
+
+        public object? ProductDetail { get; set; }
+
+        public string? CategoryName { get; set; }
+
+        public int? CategoryID { get; set; }
+
+        public string? BrandName { get; set; }
+
+        public int? SalePercent { get; set; }
+
+        public double? Price { get; set; }
+
+        public int? View { get; set; }
+
+        public int? Quantity { get; set; }
     }
 }
