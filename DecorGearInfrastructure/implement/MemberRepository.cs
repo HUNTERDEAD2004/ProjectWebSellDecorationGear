@@ -35,7 +35,13 @@ namespace DecorGearInfrastructure.implement
             if (member == null)
                 return new ResponseDto<bool>(StatusCodes.Status404NotFound, "Member không tồn tại.");
 
-            _db.Members.Remove(member);
+            //_db.Members.Remove(member);
+            //await _db.SaveChangesAsync(cancellation);
+            // Cập nhật trạng thái xóa
+            member.Deleted = true;
+            member.DeletedTime = DateTime.UtcNow;
+            member.Status = EntityStatus.Deleted;
+            _db.Members.Update(member); 
             await _db.SaveChangesAsync(cancellation);
 
             return new ResponseDto<bool>(StatusCodes.Status200OK, "Xóa Member Thành Công");

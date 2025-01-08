@@ -43,7 +43,9 @@ namespace DecorGearInfrastructure.Database.AppDbContext
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=DESKTOPD-DELLIN\\SQLEXPRESS;Database=DecorationGearReborn3;Trusted_Connection=True;TrustServerCertificate=True;");
+            //optionsBuilder.UseSqlServer("Data Source=DESKTOP-64M86CN;Database=DecorationGearReborn3;Trusted_Connection=True;TrustServerCertificate=True;");
+
+            //optionsBuilder.UseSqlServer("Data Source=DESKTOPD-DELLIN\\SQLEXPRESS;Database=DecorationGearReborn3;Trusted_Connection=True;TrustServerCertificate=True;");
 
             //optionsBuilder.UseSqlServer("Data Source=PHUC\\SQLEXPRESS;Database=DecorationGear;Trusted_Connection=True;TrustServerCertificate=True;");
         }
@@ -441,6 +443,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                 new Product
                 {
                     ProductID = 1,
+                    ProductCode = "SP01",
                     ProductName = "Chuột gaming Razer death adder v3",
                     Description = "chiếc chuột siêu bổ rẻ ",
                     SaleID = 1,
@@ -653,6 +656,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Deleted = false,
                     DeletedBy = null,
                     DeletedTime = null,
+                    Size = "Kích thước bàn phím : 388*139*37 (mm)",
                 },
                 new KeyboardDetail
                 {
@@ -681,6 +685,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Deleted = false,
                     DeletedBy = null,
                     DeletedTime = null,
+                    Size = "Kích thước bàn phím : 388*139*37 (mm)",
                 }
             };
             modelBuilder.Entity<KeyboardDetail>().HasData(keyboardData);
@@ -714,6 +719,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Deleted = false,
                     DeletedBy = null,
                     DeletedTime = null,
+                    Size = "m",
                 },
                 new MouseDetail
                 {
@@ -740,6 +746,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Deleted = false,
                     DeletedBy = null,
                     DeletedTime = null,
+                    Size = "m",
                 },
                 new MouseDetail
                 {
@@ -766,6 +773,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Deleted = false,
                     DeletedBy = null,
                     DeletedTime = null,
+                    Size = "m",
                 },
                  new MouseDetail
                 {
@@ -780,7 +788,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Button = 5,
                     LED = null,
                     SS = "Razer Synapse REP",
-                    Size = "125.5*68.6*39.6mm",
+                    
                     BatteryCapacity = 930,
                     Weight = 105,
                     Price = 790000,
@@ -793,6 +801,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Deleted = false,
                     DeletedBy = null,
                     DeletedTime = null,
+                    Size = "m",
                 },
                  new MouseDetail
                 {
@@ -807,7 +816,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Button = 5,
                     LED = "LED RGB",
                     SS = "Chuột DareU EM901X RGB Superlight Wireless",
-                    Size = "125.5*68.6*39.6mm",
+                   
                     BatteryCapacity = 930,
                     Weight = 105,
                     Price = 790000,
@@ -820,6 +829,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Deleted = false,
                     DeletedBy = null,
                     DeletedTime = null,
+                    Size = "m",
                 },
                   new MouseDetail
                 {
@@ -834,7 +844,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Button = 5,
                     LED = null,
                     SS = "Chuột DareU EM901X RGB Superlight Wireless",
-                    Size = "125.5*68.6*39.6mm",
+                    
                     BatteryCapacity = 930,
                     Weight = 105,
                     Price = 590000,
@@ -847,6 +857,7 @@ namespace DecorGearInfrastructure.Database.AppDbContext
                     Deleted = false,
                     DeletedBy = null,
                     DeletedTime = null,
+                    Size = "m",
                 }
             };
             modelBuilder.Entity<MouseDetail>().HasData(mice);

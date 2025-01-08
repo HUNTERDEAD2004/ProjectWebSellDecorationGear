@@ -91,8 +91,15 @@ namespace DecorGearInfrastructure.Implement
             var deleteBrand = await _appDbContext.Brands.FindAsync(id, cancellationToken);
             if (deleteBrand != null)
             {
-                _appDbContext.Brands.Remove(deleteBrand);
-                _appDbContext.SaveChanges();
+                //_appDbContext.Brands.Remove(deleteBrand);
+                //_appDbContext.SaveChanges();
+
+                deleteBrand.Deleted = true;
+                deleteBrand.DeletedTime = DateTime.UtcNow; 
+                deleteBrand.Status = EntityStatus.Deleted;
+                _appDbContext.Brands.Update(deleteBrand); 
+                await _appDbContext.SaveChangesAsync(cancellationToken);
+
                 return new ResponseDto<bool>
                 {
                     DataResponse = true,

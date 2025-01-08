@@ -92,8 +92,13 @@ namespace DecorGearInfrastructure.Implement
             var deleteKeyBoard = await _appDbContext.KeyboardDetails.FindAsync(id, cancellationToken);
             if (deleteKeyBoard != null)
             {
-                _appDbContext.KeyboardDetails.Remove(deleteKeyBoard);
-                _appDbContext.SaveChanges();
+                //_appDbContext.KeyboardDetails.Remove(deleteKeyBoard);
+                //_appDbContext.SaveChanges();
+                deleteKeyBoard.Deleted = true;
+                deleteKeyBoard.DeletedTime = DateTime.UtcNow;
+                deleteKeyBoard.Status = EntityStatus.Deleted;
+                _appDbContext.KeyboardDetails.Update(deleteKeyBoard);  
+                await _appDbContext.SaveChangesAsync(cancellationToken);
                 return new ResponseDto<bool>
                 {
                     DataResponse = true,

@@ -89,8 +89,14 @@ namespace DecorGearInfrastructure.Implement
             var keyResult = await _appDbContext.MouseDetails.FindAsync(id, cancellationToken);
             if (keyResult != null)
             {
-                _appDbContext.MouseDetails.Remove(keyResult);
-                _appDbContext.SaveChanges();
+                //_appDbContext.MouseDetails.Remove(keyResult);
+                //_appDbContext.SaveChanges();
+                keyResult.Deleted = true;
+                keyResult.DeletedTime = DateTime.UtcNow;
+                keyResult.Status = EntityStatus.Deleted;
+                _appDbContext.MouseDetails.Update(keyResult);
+                await _appDbContext.SaveChangesAsync(cancellationToken);
+
                 return new ResponseDto<bool>
                 {
                     DataResponse = true,

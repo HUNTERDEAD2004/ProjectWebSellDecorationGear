@@ -90,8 +90,13 @@ namespace DecorGearInfrastructure.Implement
             var deleteSubCategory = await _appDbContext.SubCategories.FindAsync(id, cancellationToken);
             if (deleteSubCategory != null)
             {
-                _appDbContext.SubCategories.Remove(deleteSubCategory);
-                _appDbContext.SaveChanges();
+                //_appDbContext.SubCategories.Remove(deleteSubCategory);
+                //_appDbContext.SaveChanges();
+                deleteSubCategory.Deleted = true;
+                deleteSubCategory.DeletedTime = DateTime.UtcNow;
+                deleteSubCategory.Status = EntityStatus.Deleted;
+                _appDbContext.SubCategories.Update(deleteSubCategory);
+                await _appDbContext.SaveChangesAsync(cancellationToken);
                 return new ResponseDto<bool>
                 {
                     DataResponse = true,
