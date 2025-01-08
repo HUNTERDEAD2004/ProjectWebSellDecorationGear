@@ -83,8 +83,13 @@ namespace DecorGearInfrastructure.Implement
             var keyResult = await _appDbContext.Categories.FindAsync(id, cancellationToken);
             if (keyResult != null)
             {
-                _appDbContext.Categories.Remove(keyResult);
-                _appDbContext.SaveChangesAsync();
+                //_appDbContext.Categories.Remove(keyResult);
+                //_appDbContext.SaveChangesAsync();
+                keyResult.Deleted = true;
+                keyResult.DeletedTime = DateTime.UtcNow;
+                keyResult.Status = EntityStatus.Deleted;
+                _appDbContext.Categories.Update(keyResult);
+                await _appDbContext.SaveChangesAsync(cancellationToken); 
                 return new ResponseDto<bool>
                 {
                     DataResponse = true,

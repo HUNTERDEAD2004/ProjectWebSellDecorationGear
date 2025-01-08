@@ -93,8 +93,14 @@ namespace DecorGearInfrastructure.Implement
             var deleteImageList = await _appDbContext.ImageLists.FindAsync(id, cancellationToken);
             if (deleteImageList != null)
             {
-                _appDbContext.ImageLists.Remove(deleteImageList);
-                _appDbContext.SaveChanges();
+                //_appDbContext.ImageLists.Remove(deleteImageList);
+                //_appDbContext.SaveChanges();
+                deleteImageList.Deleted = true;
+                deleteImageList.DeletedTime = DateTime.UtcNow;
+                deleteImageList.Status = EntityStatus.Deleted;
+                _appDbContext.ImageLists.Update(deleteImageList); 
+                await _appDbContext.SaveChangesAsync(cancellationToken);
+
                 return new ResponseDto<bool>
                 {
                     DataResponse = true,

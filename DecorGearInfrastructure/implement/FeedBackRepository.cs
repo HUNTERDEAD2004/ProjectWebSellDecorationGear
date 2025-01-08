@@ -37,7 +37,11 @@ namespace DecorGearInfrastructure.Implement
             {
                 return new ResponseDto<bool>(StatusCodes.Status404NotFound, "Feedback không tồn tại.");
             }
-            _db.FeedBacks.Remove(feedback);
+            //_db.FeedBacks.Remove(feedback);
+            feedback.Deleted = true;
+            feedback.DeletedTime = DateTime.UtcNow;
+            feedback.Status = EntityStatus.Deleted;
+            _db.FeedBacks.Update(feedback);
             await _db.SaveChangesAsync(cancellationToken);
 
             return new ResponseDto<bool>(StatusCodes.Status200OK, "Xóa FeedBack Thành Công");

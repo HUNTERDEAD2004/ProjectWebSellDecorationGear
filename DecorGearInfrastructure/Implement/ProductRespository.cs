@@ -115,8 +115,13 @@ namespace DecorGearInfrastructure.Implement
             var deleteProducts = await _appDbContext.Products.FindAsync(id, cancellationToken);
             if (deleteProducts != null)
             {
-                _appDbContext.Products.Remove(deleteProducts);
-                _appDbContext.SaveChanges();
+                //_appDbContext.Products.Remove(deleteProducts);
+                //_appDbContext.SaveChanges();
+                deleteProducts.Deleted = true;
+                deleteProducts.DeletedTime = DateTime.UtcNow;
+                deleteProducts.Status = EntityStatus.Deleted;
+                _appDbContext.Products.Update(deleteProducts);
+                await _appDbContext.SaveChangesAsync(cancellationToken);
                 return new ResponseDto<bool>
                 {
                     DataResponse = true,
